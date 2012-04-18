@@ -272,15 +272,10 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
         glm::mat2x3 secondmat(e1, e2);
         glm::mat2x3 result = secondmat*glm::inverse(firstmat);
         glm::vec3 t = result[0];
-        glm::vec3 b = result[1];
 
         tangents[vertexnr] += t;
         tangents[vertexnr+1] += t;
         tangents[vertexnr+2] += t;
-
-        binormals[vertexnr] += b;
-        binormals[vertexnr+1] += b;
-        binormals[vertexnr+2] += b;
 
         //Debug output for first vertex
         if(vertexnr == 15)
@@ -308,14 +303,12 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
             std::cout << "result: " << std::endl << result[0][0] << " " << result[0][1] << " " << result[0][2] << std::endl << result[1][0] << " " << result[1][1] << " " << result[1][2] << std::endl;
 
             std::cout << "t: " << t.x << " " << t.y << " " << t.z << std::endl;
-            std::cout << "b: " << b.x << " " << b.y << " " << b.z << std::endl;
             std::cout << std::flush;
         }
     }
 
     for (int vertexnr = 0; vertexnr < meshData.indices.size(); vertexnr++) {
         tangents[vertexnr] = glm::normalize(tangents[vertexnr]);
-        binormals[vertexnr] = glm::normalize(binormals[vertexnr]);
     }
   
   // TODO: iterator over faces (given by index triplets) and calculate tangents for each incident vertex //
