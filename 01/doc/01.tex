@@ -3,9 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+
 \title{Echtzeit-Computergrafik SS 2012}
 \subtitle{Lösungen von Aufgabe 1}
-\author{Marc Kassubeck (...), Sebastian Morr (4109354)} 
+\author{Marc Kassubeck (4054946), Sebastian Morr (4109354)} 
 \date{\today} 
 
 \begin{document} 
@@ -14,8 +18,101 @@
 
 \section*{1.1}
 
+\[
+	v_0 \circ v_1 = \Vert a\Vert \cdot \Vert b\Vert \cdot \cos \alpha
+	\Rightarrow \cos \alpha = \frac{v_0 \circ v_1}{\Vert a\Vert \cdot \Vert b\Vert}
+	\Rightarrow \alpha = \arccos \left(\frac{v_0 \circ v_1}{\Vert a\Vert \cdot \Vert b\Vert}\right)
+\]
+
+\[
+	\alpha = \arccos \left( \frac{4 + 4 + 1}{9 \cdot 20.25} \right) \arccos \frac{4}{81} \approx 87.1694^\circ
+\]
+
 \section*{1.2}
 
+
+\[
+	v_2 = \begin{pmatrix}
+	1 \\ 2 \\ -1
+	\end{pmatrix}, v_r = \begin{pmatrix}
+	0 \\ 0 \\ 1
+	\end{pmatrix}, v_3 = v_2 \times v_r = \begin{pmatrix}
+	2 \\ -1 \\ 0
+	\end{pmatrix},
+	v_4 = v_2 \times v_3 = \begin{pmatrix}
+	-1 \\ -2 \\ -5
+	\end{pmatrix}
+\]
+
+Es gibt vier Möglichkeiten, wenn $v_3$ in der $xy$-Ebene liegen soll:\\
+\[
+	v_3 = \begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix}, v_4 = \begin{pmatrix} -1 \\ -2 \\ -5 \end{pmatrix};\ 
+	v_3 = \begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix}, v_4 = \begin{pmatrix} 1 \\ 2 \\ 5 \end{pmatrix}\]
+\[
+	v_3 = \begin{pmatrix} -2 \\ 1 \\ 0 \end{pmatrix}, v_4 = \begin{pmatrix} -1 \\ -2 \\ -5 \end{pmatrix};\ 
+	v_3 = \begin{pmatrix} -2 \\ 1 \\ 0 \end{pmatrix}, v_4 = \begin{pmatrix} 1 \\ 2 \\ 5 \end{pmatrix}
+\]
+
 \section*{1.3}
+\[
+	\begin{pmatrix}
+	-1 & 0 & 0\\
+	0 & 1 & 0 \\
+	0 & 0 & 1
+	\end{pmatrix} \cdot
+	\begin{pmatrix}
+	1 \\ 2 \\ 3
+	\end{pmatrix}=
+	\begin{pmatrix}
+	-1 \\ 2 \\ 3
+	\end{pmatrix}
+\]
+Diese Matrixmultiplikation bewirkt eine Spiegelung an der $yz$-Ebene.
+
+\[
+	\begin{pmatrix}
+	1 & 0 & 0\\
+	0 & 0 & 1 \\
+	0 & -1 & 0
+	\end{pmatrix}\cdot
+	\begin{pmatrix}
+	1 \\ 2 \\ 3 
+	\end{pmatrix}=
+	\begin{pmatrix}
+	1 \\ 3 \\ -2
+	\end{pmatrix}
+\]
+
+Dies bewirkt eine Drehung des Vektors um $90^\circ$ um die $x$-Achse (gegen den Uhrzeigersinn).
+
+\[
+	\begin{pmatrix}
+	2 & 0 & 0\\
+	0 & 2 & 0\\
+	0 & 0 & 2
+	\end{pmatrix}\cdot
+	\begin{pmatrix}
+	1 \\ 2 \\ 3 
+	\end{pmatrix}=
+	\begin{pmatrix}
+	2 \\ 4 \\ 6
+	\end{pmatrix}
+\]
+Diese Matrix verursacht eine Skalierung des Vektors in der Länge mit dem Faktor 2.
+
+\[
+	\begin{pmatrix}
+	1 & 0 & 0 & 5\\
+	0 & 1 & 0 & 0\\
+	0 & 0 & 1 & 3\\
+	0 & 0 & 0 & 1
+	\end{pmatrix}\cdot
+	\begin{pmatrix}
+	1 \\ 2 \\ 3 \\ 1
+	\end{pmatrix}=
+	\begin{pmatrix}
+	6 \\ 2 \\ 6 \\ 1
+	\end{pmatrix}
+\]
 
 \end{document}
