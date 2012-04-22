@@ -36,13 +36,19 @@ uniform sampler2D def_texCoordMap;
 out vec4 color;
 
 void main() {
-  // TODO: get position in camera space //
+  // TODO?: get position in camera space //
+  vec3 def_vertex = texture2D(def_vertexMap, io_texCoord).xyz;
   
-  // TODO: get texture coordinates //
+  // TODO?: get texture coordinates //
+  vec2 textureCoord = texture2D(def_texCoordMap, io_texCoord).xy;
   
   // TODO: eye vector //
+  // Ist der fest? Oder muessen wir ihn durchschleifen wie im 
+normal_mapping shader?
+  vec3 E = vec3(0,0,1);
   
-  // TODO: normal in camera space normal //
+  // TODO?: normal in camera space normal //
+  vec3 N = texture2D(def_normalMap, io_texCoord).xyz;
   
   // light computation //
   int lightCount = max(min(usedLightCount, maxLightCount), 0);
@@ -64,8 +70,9 @@ void main() {
   diffuseTerm *= material.diffuse_color;
   specularTerm *= material.specular_color;
   
-  // TODO: get diffuse texture color //
+  // TODO?: get diffuse texture color //
+  vec3 diffuse = texture2D(diffuseTexture, textureCoord).xyz;
   
-  // TODO: assign the final color to the fragment output variable //
-  
+  // TODO?: assign the final color to the fragment output variable //
+  color = vec4(diffuse, 1) * vec4(ambientTerm + diffuseTerm + specularTerm, 1);
 }

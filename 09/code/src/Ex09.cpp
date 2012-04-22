@@ -630,9 +630,10 @@ void initFBO() {
 	createEmptyTexture("texcoord", windowWidth, windowHeight);
 
 	// TODO?: get uniforms locations in shader (pass 0) //
-	uniformLocations["def_vertexMap"] = glGetUniformLocation(shaderPass[1], "def_vertexMap");
-	uniformLocations["def_normalMap"] = glGetUniformLocation(shaderPass[1], "def_normalMap");
-	uniformLocations["def_texCoordMap"] = glGetUniformLocation(shaderPass[1], "def_texCoordMap");
+    textures["position"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_vertexMap");
+
+	textures["normal"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_normalMap");
+	textures["texcoord"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_texCoordMap");
 
 	// TODO?: attach textures to FBO for output VERTEX, NORMAL, TEXCOORD //
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textures["position"].uniformLocation, 0);
