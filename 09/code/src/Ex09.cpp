@@ -344,14 +344,14 @@ void initShader() {
 		shaderPass[0] = createShader("../shader/deferred_pass1.vert", "../shader/deferred_pass1.frag");
 		// check if operation failed //
 		if (shaderPass[0] == 0) {
-			std::cout << "(initShader) - Failed creating shader program." << std::endl;
+			std::cout << "(initShader) - Failed creating shader program 1." << std::endl;
 			return;
 		}
 		// second pass //
 		shaderPass[1] = createShader("../shader/deferred_pass2.vert", "../shader/deferred_pass2.frag");
 		// check if operation failed //
 		if (shaderPass[1] == 0) {
-			std::cout << "(initShader) - Failed creating shader program." << std::endl;
+			std::cout << "(initShader) - Failed creating shader program 2." << std::endl;
 			return;
 		}
 
@@ -766,7 +766,7 @@ void renderScene() {
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
 		// TODO?: select correct draw buffers //
-        Glenum buffers[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+        GLenum buffers[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
         glDrawBuffers(2, buffers);
 
 		// upload normal textures //
@@ -808,7 +808,7 @@ void renderScene() {
 		glUniformMatrix4fv(uniformLocations["projection_p1"], 1, false, glm::value_ptr(pass1_proj));
 		glUniformMatrix4fv(uniformLocations["modelview_p1"], 1, false, glm::value_ptr(pass1_modelview));
 		// TODO?: upload the light modelview transformation as 'view' //
-		glUniformMatrix4fv(uniformLocations["view_p1"], 1, false, glm_ModelViewMatrix.top()));
+		glUniformMatrix4fv(uniformLocations["view_p1"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
 
 		// setup light and material in shader //
 		setupLightAndMaterial();

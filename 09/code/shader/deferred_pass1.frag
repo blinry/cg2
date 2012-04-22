@@ -21,9 +21,9 @@ void main() {
 	// TODO: compute modified surface normal //
 	vec3 n = texture2D(normalMap, io_texCoord).xyz * 2 - vec3(1);
 
-	mat3 Tangent2CamSpace = inverse(mat3(tangent.x, binormal.x, normal.x,
-			tangent.y, binormal.y, normal.y,
-			tangent.z, binormal.z, normal.z));
+	mat3 Tangent2CamSpace = inverse(mat3(io_tangent.x, io_binormal.x, io_normal.x,
+			io_tangent.y, io_binormal.y, io_normal.y,
+			io_tangent.z, io_binormal.z, io_normal.z));
 
 	n = (Tangent2CamSpace * n).xyz;
 
