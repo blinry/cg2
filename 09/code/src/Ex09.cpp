@@ -618,36 +618,36 @@ void initScene() {
 	lightCount = lights.size();
 }
 
-// TODO: initialize your FBO here //
+// TODO?: initialize your FBO here //
 void initFBO() {
-	// TODO :generate FBO and depthBuffer //
+	// TODO? :generate FBO and depthBuffer //
 	glGenFramebuffers(1, &fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-	// TODO: generate texture objects to hold the data //
+	// TODO?: generate texture objects to hold the data //
 	createEmptyTexture("position", windowWidth, windowHeight);
 	createEmptyTexture("normal", windowWidth, windowHeight);
 	createEmptyTexture("texcoord", windowWidth, windowHeight);
 
-	// TODO: get uniforms locations in shader (pass 0) //
-	textures["position"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_vertexMap");
-	textures["normal"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_normalMap");
-	textures["texcoord"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_texCoordMap");
+	// TODO?: get uniforms locations in shader (pass 0) //
+	uniformLocations["def_vertexMap"] = glGetUniformLocation(shaderPass[1], "def_vertexMap");
+	uniformLocations["def_normalMap"] = glGetUniformLocation(shaderPass[1], "def_normalMap");
+	uniformLocations["def_texCoordMap"] = glGetUniformLocation(shaderPass[1], "def_texCoordMap");
 
-	// TODO: attach textures to FBO for output VERTEX, NORMAL, TEXCOORD //
+	// TODO?: attach textures to FBO for output VERTEX, NORMAL, TEXCOORD //
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textures["position"].uniformLocation, 0);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, textures["normal"].uniformLocation, 0);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, textures["texcoord"].uniformLocation, 0);
 
-	// TODO: generate renderbuffer for depth data //
+	// TODO?: generate renderbuffer for depth data //
 	glGenRenderbuffers(1, &rb);
 	glBindRenderbuffer(GL_RENDERBUFFER, rb);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT32F, windowWidth, windowHeight);
 
-	// TODO: attach depth renderbuffer //
+	// TODO?: attach depth renderbuffer //
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rb);
 
-	// TODO: unbind FBO until it's needed //
+	// TODO?: unbind FBO until it's needed //
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 }
@@ -722,7 +722,7 @@ void initScreenFillingQuad(void) {
 	screenQuad->setData(mesh);
 }
 
-// TODO: complete the code of the deferred shading  pipeline //
+// TODO?: complete the code of the deferred shading  pipeline //
 void renderScene() {
 	if (!useDeferredShading) {
 		glUseProgram(shaderProgram);
@@ -756,15 +756,18 @@ void renderScene() {
 			}
 		}
 	} else {
-		// TODO: pass 0 -> render scene to FBO //
+		// TODO?: pass 0 -> render scene to FBO //
 		// - enable pass 0 shader   //
 		// - bind FBO render target //
 		// - render without lights  //
 
 		glUseProgram(shaderPass[0]);
-		// TODO: bind FBO for off screen rendering //
+		// TODO?: bind FBO for off screen rendering //
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-		// TODO: select correct draw buffers //
+		// TODO?: select correct draw buffers //
+        Glenum buffers[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+        glDrawBuffers(2, buffers);
 
 		// upload normal textures //
 		glActiveTexture(GL_TEXTURE0);
@@ -791,9 +794,11 @@ void renderScene() {
 			}
 		}
 
-		// TODO: pass 1 : -> render quad to screen //
+		// TODO?: pass 1 : -> render quad to screen //
 		// - enable pass 1 shader            //
+		glUseProgram(shaderPass[1]);
 		// - bind standard frame buffer -> 0 //
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		// create simple projection and view matrices //
 		glm::mat4 pass1_proj = glm::ortho(0.0f, 1.0f, 0.0f, 1.0f);
@@ -802,7 +807,8 @@ void renderScene() {
 		// upload transformation matrices matrix //
 		glUniformMatrix4fv(uniformLocations["projection_p1"], 1, false, glm::value_ptr(pass1_proj));
 		glUniformMatrix4fv(uniformLocations["modelview_p1"], 1, false, glm::value_ptr(pass1_modelview));
-		// TODO: upload the light modelview transformation as 'view' //
+		// TODO?: upload the light modelview transformation as 'view' //
+		glUniformMatrix4fv(uniformLocations["view_p1"], 1, false, glm_ModelViewMatrix.top()));
 
 		// setup light and material in shader //
 		setupLightAndMaterial();
@@ -811,7 +817,20 @@ void renderScene() {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textures["diffuse"].glTextureLocation);
 		glUniform1i(textures["diffuse"].uniformLocation, 0);
-		// TODO: upload textures created in previous render pass //
+
+		// TODO?: upload textures created in previous render pass //
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, textures["position"].glTextureLocation);
+		glUniform1i(textures["position"].uniformLocation, 1);
+
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, textures["normal"].glTextureLocation);
+		glUniform1i(textures["normal"].uniformLocation, 2);
+
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, textures["texcoord"].glTextureLocation);
+		glUniform1i(textures["texcoord"].uniformLocation, 3);
 
 		// render screen filling quad //
 		if (!screenQuad) initScreenFillingQuad();
