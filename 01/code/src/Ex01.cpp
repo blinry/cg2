@@ -11,7 +11,7 @@ void triangleSolution(void) {
     vec3 v(1,1,-3);
 
     // Normale in Richtung des Betrachters (in einem rechtshändigen Koordinatensystem)
-    vec3 n = normalize(cross(b-a, c-a)); 
+    vec3 n = normalize(cross(b-a, c-a));
 
     // Hierfür scheint in glm keine dedizierte Funktion zu existieren:
     float angle = acos(dot(n,v)/(length(n)*length(v)));
