@@ -18,6 +18,7 @@ void idle();
 void keyboardEvent(unsigned char key, int x, int y);
 
 // geometry //
+GLuint bunnyVAO;
 GLuint bunnyVBO;
 GLuint bunnyIBO;
 void initScene();
@@ -32,23 +33,24 @@ glm::mat4 modelViewMatrix = glm::mat4(0.707107, -0.408248, 0.577350, 0.000000, 0
 int main (int argc, char **argv) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+  glutInitContextVersion(3,3);
+  glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
+  glutInitContextProfile(GLUT_CORE_PROFILE);
+
   glutInitWindowSize (512, 512);
   glutInitWindowPosition (100, 100);
-  glutCreateWindow("Exercise 02 - Bunny");
+  glutCreateWindow("Exercise 02 - More Bunnies!");
   
   glutDisplayFunc(updateGL);
   glutIdleFunc(idle);
   glutKeyboardFunc(keyboardEvent);
   
+  glewExperimental = GL_TRUE;
   GLenum err = glewInit();
   if (GLEW_OK != err) {
     std::cout << "(glewInit) - Error: " << glewGetErrorString(err) << std::endl;
   }
   std::cout << "(glewInit) - Using GLEW " << glewGetString(GLEW_VERSION) << std::endl;
-  if (!glewIsSupported("GL_VERSION_3_3")) {
-    std::cout << "(glewInit) - OpenGL 3.3 not supported." << std::endl;
-    exit(1);
-  }
   
   // init stuff //
   initGL();
@@ -191,6 +193,8 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 void initScene() {  
   // TODO: import data from bunny.h and concatenate vertex and normal data //
   
+  // TODO: init and bind a VAO (vertex array object) //
+  
   // TODO: init and bind a VBO (vertex buffer object) //
   
   // TODO: copy data into the VBO //
@@ -199,27 +203,26 @@ void initScene() {
   
   // TODO: copy data into the IBO //
   
-  // unbind buffers //
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  // unbind active buffers //
+  glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void deleteScene() {
   if (bunnyIBO != 0) glDeleteBuffers(1, &bunnyIBO);
   if (bunnyVBO != 0) glDeleteBuffers(1, &bunnyVBO);
+  if (bunnyVAO != 0) glDeleteVertexArrays(1, &bunnyVAO);
 }
 
 void renderScene() {
-  if (bunnyVBO != 0) {
-    // TODO: bind VBO and set data pointers of used vertex attributes //
+  if (bunnyVAO != 0) {
+    // TODO: bind VAO //
     
-    // TODO: bind the index buffer object here //
+    // TODO: render data as triangles //
     
-    // TODO: render VBO as triangles, indexed by IBO //
-    
-    // unbind buffers //
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    // unbind active buffers //
+    glBindVertexArray(0);
   }
 }
 
