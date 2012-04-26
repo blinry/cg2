@@ -191,22 +191,36 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 }
 
 void initScene() {  
-  // TODO: import data from bunny.h and concatenate vertex and normal data //
+    // include data and merge bunny and normals arrays
+    #include "../include/bunny.h"
+    GLfloat* data = (GLfloat*)malloc(NUM_POINTS*2*3*sizeof(GLfloat));
+    memcpy(data, &bunny, NUM_POINTS*3*sizeof(GLfloat));
+    memcpy(data+NUM_POINTS*3*sizeof(GLfloat), &normals, NUM_POINTS*3*sizeof(GLfloat));
+
+    // create a VBO, bind it and load previously created data
+    glGenBuffers(1, &bunnyVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
+    glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*2*3*sizeof(GLfloat), data, GL_STATIC_DRAW);
+
+    // create VAO, bind it and define both AttribPointers
+    glGenVertexArrays(1, &bunnyVAO);
+    glBindVertexArray(bunnyVAO);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)(NUM_POINTS*3*sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
+
+    // create IBO, bind it, load contents of triangles
+    glGenBuffers(1, &bunnyIBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bunnyIBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, NUM_TRIANGLES*3*sizeof(GLint), &triangles, GL_STATIC_DRAW);
   
-  // TODO: init and bind a VAO (vertex array object) //
-  
-  // TODO: init and bind a VBO (vertex buffer object) //
-  
-  // TODO: copy data into the VBO //
-  
-  // TODO: init and bind a IBO (index buffer object) //
-  
-  // TODO: copy data into the IBO //
-  
-  // unbind active buffers //
-  glBindVertexArray(0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    // unbind active buffers
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void deleteScene() {
@@ -217,9 +231,8 @@ void deleteScene() {
 
 void renderScene() {
   if (bunnyVAO != 0) {
-    // TODO: bind VAO //
-    
-    // TODO: render data as triangles //
+    glBindVertexArray(bunnyVAO);
+    glDrawElements(GL_TRIANGLES, NUM_POINTS, GL_UNSIGNED_INT, 0);
     
     // unbind active buffers //
     glBindVertexArray(0);
