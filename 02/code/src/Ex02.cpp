@@ -191,7 +191,7 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 	// TODO: pass source code to new shader object //
 	int len = strlen(source);
-	ShaderSource(shader, 1, (const GLchar**)&source, &len);
+	glShaderSource(shader, 1, (const GLchar**)&source, &len);
 
 	// TODO: compile shader //
 	glCompileShader(shader);
