@@ -87,7 +87,7 @@ void initShader() {
 
 
 	// TODO: create new shader program "shaderProgram" //
-	GLuint shaderProgram = glCreateProgram();		
+	shaderProgram = glCreateProgram();		
 
 	// check if operation failed //
 	if (shaderProgram == 0) {
@@ -190,7 +190,7 @@ char* loadShaderSource(const char* fileName) {
 		printf("This shouldn't be happening, less characters read than counted before");
 	}
 	fclose(shaderFile);
-
+	
 	return shaderSource;
 }
 
