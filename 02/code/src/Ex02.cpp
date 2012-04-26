@@ -153,43 +153,16 @@ char* loadShaderSource(const char* fileName) {
 	//  - open file
 	//  - read in file into char array
 	//  - close file and return array
-
-	FILE* shaderFile;	
-	shaderFile = fopen(fileName, "r");
-
-	if(shaderFile == NULL)
-	{
-		printf("Couldn't open file %s", fileName);
-	}	
 	
-	size_t char_count = 0;
-	int ch;
-	while(1)
-	{
-		ch = fgetc(shaderFile);
-		if(ch == EOF)
-			break;
-		++char_count;
-	}
-	char_count++;
-	fseek(shaderFile, 0, SEEK_SET);
-	shaderSource = (char*) malloc(char_count * sizeof(char));
-	size_t readcnt = 0;
-	while(1)
-	{
-		ch = fgetc(shaderFile);
-		if(ch == EOF)
-			break;
-		shaderSource[readcnt] = ch;
-		readcnt++;	
-	}	
-	shaderSource[readcnt] = 0;
-	readcnt++;
-	if(readcnt != char_count)
-	{
-		printf("This shouldn't be happening, less characters read than counted before");
-	}
-	fclose(shaderFile);
+	using namespace std;
+	fstream fstr;
+	fstr.open(fileName, fstream::in | fstream::out | fstream::app);
+	fstr.seekg(0, ios::end);
+	int length = fstr.tellg();
+	shaderSource = (char*)malloc(length * sizeof(char));
+	fstr.seekg(0, ios::beg);
+	fstr.read(shaderSource, length);
+	fstr.close();
 	
 	return shaderSource;
 }
@@ -207,7 +180,6 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 	GLuint shader = 0;
 	// TODO: create new shader of type "shaderType" //
 	shader = glCreateShader(shaderType);
-
 	// check if operation failed //
 	if (shader == 0) {
 		std::cout << "(loadShaderFile) - Could not create shader." << std::endl;
@@ -215,15 +187,16 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 	}
 
 	// TODO: load source code from file //
-	char* source = loadShaderSource(fileName);	
+	char* source = loadShaderSource(fileName);
 
 	// TODO: pass source code to new shader object //
-	int length[1] = {-1};
-	glShaderSource(shader, 1, (const GLchar**)&source, length);
+	int len = strlen(source);
+	ShaderSource(shader, 1, (const GLchar**)&source, &len);
 
 	// TODO: compile shader //
 	glCompileShader(shader);
-
+	free(source);
+	
 	// log compile messages, if any //
 	int logMaxLength;
 	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logMaxLength);
@@ -263,7 +236,7 @@ void initScene() {
     // create IBO, bind it, load contents of triangles
     glGenBuffers(1, &bunnyIBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bunnyIBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, NUM_TRIANGLES*3*sizeof(GLint), &triangles, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, NUM_TRIANGLES*3*sizeof(GLint), triangles, GL_STATIC_DRAW);
   
     // unbind active buffers
     glBindVertexArray(0);
