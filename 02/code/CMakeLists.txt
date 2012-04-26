@@ -6,7 +6,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.0)
 
 # set the compiler flags
 SET(CMAKE_BUILD_TYPE debug)
-SET(CMAKE_CXX_FLAGS "-Wall")
+SET(CMAKE_CXX_FLAGS "-Wall -lGL")
 
 # Add path to additional packages (makes it easier to include common libraries)
 set(CMAKE_MODULE_PATH ${Exercise02_SOURCE_DIR}/CMakeModules/)
