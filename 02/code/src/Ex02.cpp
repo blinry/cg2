@@ -218,24 +218,12 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 }
 
 void initScene() {  
-    // include data and merge bunny and normals arrays
-    GLfloat* data = (GLfloat*)malloc(NUM_POINTS*2*3*sizeof(GLfloat));
-    //memcpy(data, bunny, NUM_POINTS*3*sizeof(GLfloat));
-    //memcpy(data+NUM_POINTS*3*sizeof(GLfloat), normals, NUM_POINTS*3*sizeof(GLfloat));
-    for(int i = 0; i < NUM_POINTS; i++){
-	data[i + 0] = bunny[i + 0];
-	data[i + 1] = bunny[i + 1];
-	data[i + 2] = bunny[i + 2];
-	data[i + 3] = normals[i + 0];	
-	data[i + 4] = normals[i + 1];	
-	data[i + 5] = normals[i + 2];	
-    }
-
-    // create a VBO, bind it and load previously created data
+    // create a VBO, bind it and load vertex data
     glGenBuffers(1, &bunnyVBO);
     glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
     glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*3*sizeof(GLfloat), bunny, GL_STATIC_DRAW);
 
+    // same with normals
     glGenBuffers(1, &normalVBO);
     glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
     glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*3*sizeof(GLfloat), normals, GL_STATIC_DRAW);
@@ -252,8 +240,8 @@ void initScene() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
     glEnableVertexAttribArray(1);
 
-    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
     // create IBO, bind it, load contents of triangles
+    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
     glGenBuffers(1, &bunnyIBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bunnyIBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, NUM_TRIANGLES*3*sizeof(GLint), triangles, GL_STATIC_DRAW);
@@ -272,8 +260,9 @@ void deleteScene() {
 
 void renderScene() {
   if (bunnyVAO != 0) {
+    // bind bunnyVAO and draw it ;-)
     glBindVertexArray(bunnyVAO);
-    glDrawElements(GL_TRIANGLES, NUM_POINTS, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, NUM_TRIANGLES*3, GL_UNSIGNED_INT, 0);
     
     // unbind active buffers //
     glBindVertexArray(0);
