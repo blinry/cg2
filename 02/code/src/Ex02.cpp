@@ -218,15 +218,8 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 void initScene() { 
 	GLfloat data[NUM_POINTS * 3 * 2];
-	for(int i = 0; i < NUM_POINTS; i++)
-	{
-		data[i * 3 + 0] = bunny[i * 3 + 0];
-		data[i * 3 + 1] = bunny[i * 3 + 1];
-		data[i * 3 + 2] = bunny[i * 3 + 2];
-		data[NUM_POINTS * 3 + i * 3 + 0] = normals[i * 3 + 0];
-		data[NUM_POINTS * 3 + i * 3 + 1] = normals[i * 3 + 1];;
-		data[NUM_POINTS * 3 + i * 3 + 2] = normals[i * 3 + 2];
-	}
+	memcpy(data, bunny, NUM_POINTS * 3 * sizeof(GLfloat));
+	memcpy(data+NUM_POINTS*3, normals, NUM_POINTS*3*sizeof(GLfloat));
 
 	// create a VBO, bind it and load vertex data
 	glGenBuffers(1, &bunnyVBO);
