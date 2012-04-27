@@ -20,6 +20,7 @@ void keyboardEvent(unsigned char key, int x, int y);
 // geometry //
 GLuint bunnyVAO;
 GLuint bunnyVBO;
+GLuint normalVBO;
 GLuint bunnyIBO;
 void initScene();
 void deleteScene();
@@ -159,10 +160,11 @@ char* loadShaderSource(const char* fileName) {
 	fstr.open(fileName, fstream::in | fstream::out | fstream::app);
 	fstr.seekg(0, ios::end);
 	int length = fstr.tellg();
-	shaderSource = (char*)malloc(length * sizeof(char));
+	shaderSource = (char*)malloc((length + 1) * sizeof(char));
 	fstr.seekg(0, ios::beg);
 	fstr.read(shaderSource, length);
 	fstr.close();
+	shaderSource[length] = '\0';
 	
 	return shaderSource;
 }
@@ -195,7 +197,6 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 	// TODO: compile shader //
 	glCompileShader(shader);
-	free(source);
 	
 	// log compile messages, if any //
 	int logMaxLength;
@@ -205,6 +206,11 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 	glGetShaderInfoLog(shader, logMaxLength, &logLength, log);
 	if (logLength > 0) {
 		std::cout << "(loadShaderFile) - Compiler log:\n------------------\n" << log << "\n------------------" << std::endl;
+		std::cout << "In File: " << fileName << " "<< std::endl;
+		std::cout << "Code: " << source << std::endl;
+	}
+	else{
+		std::cout << "File: " << fileName << " successfully compiled" << std::endl;
 	}
 
 	// return compiled shader (may have compiled WITH errors) //
@@ -213,26 +219,40 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 void initScene() {  
     // include data and merge bunny and normals arrays
-    #include "../include/bunny.h"
     GLfloat* data = (GLfloat*)malloc(NUM_POINTS*2*3*sizeof(GLfloat));
-    memcpy(data, &bunny, NUM_POINTS*3*sizeof(GLfloat));
-    memcpy(data+NUM_POINTS*3*sizeof(GLfloat), &normals, NUM_POINTS*3*sizeof(GLfloat));
+    //memcpy(data, bunny, NUM_POINTS*3*sizeof(GLfloat));
+    //memcpy(data+NUM_POINTS*3*sizeof(GLfloat), normals, NUM_POINTS*3*sizeof(GLfloat));
+    for(int i = 0; i < NUM_POINTS; i++){
+	data[i + 0] = bunny[i + 0];
+	data[i + 1] = bunny[i + 1];
+	data[i + 2] = bunny[i + 2];
+	data[i + 3] = normals[i + 0];	
+	data[i + 4] = normals[i + 1];	
+	data[i + 5] = normals[i + 2];	
+    }
 
     // create a VBO, bind it and load previously created data
     glGenBuffers(1, &bunnyVBO);
     glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
-    glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*2*3*sizeof(GLfloat), data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*3*sizeof(GLfloat), bunny, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &normalVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
+    glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*3*sizeof(GLfloat), normals, GL_STATIC_DRAW);
 
     // create VAO, bind it and define both AttribPointers
     glGenVertexArrays(1, &bunnyVAO);
     glBindVertexArray(bunnyVAO);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	
+    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,3 * sizeof(GLfloat), 0);
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)(NUM_POINTS*3*sizeof(GLfloat)));
+    glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
     glEnableVertexAttribArray(1);
 
+    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
     // create IBO, bind it, load contents of triangles
     glGenBuffers(1, &bunnyIBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bunnyIBO);
