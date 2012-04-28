@@ -20,7 +20,6 @@ void keyboardEvent(unsigned char key, int x, int y);
 // geometry //
 GLuint bunnyVAO;
 GLuint bunnyVBO;
-GLuint normalVBO;
 GLuint bunnyIBO;
 void initScene();
 void deleteScene();
@@ -154,7 +153,7 @@ char* loadShaderSource(const char* fileName) {
 	//  - open file
 	//  - read in file into char array
 	//  - close file and return array
-	
+
 	using namespace std;
 	fstream fstr;
 	fstr.open(fileName, fstream::in | fstream::out | fstream::app);
@@ -165,7 +164,7 @@ char* loadShaderSource(const char* fileName) {
 	fstr.read(shaderSource, length);
 	fstr.close();
 	shaderSource[length] = '\0';
-	
+
 	return shaderSource;
 }
 
@@ -197,7 +196,7 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 	// TODO: compile shader //
 	glCompileShader(shader);
-	
+
 	// log compile messages, if any //
 	int logMaxLength;
 	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logMaxLength);
@@ -217,39 +216,39 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 	return shader;
 }
 
-void initScene() {  
-    // create a VBO, bind it and load vertex data
-    glGenBuffers(1, &bunnyVBO);
-    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
-    glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*3*sizeof(GLfloat), bunny, GL_STATIC_DRAW);
+void initScene() { 
+	GLfloat data[NUM_POINTS * 3 * 2];
+	memcpy(data, bunny, NUM_POINTS * 3 * sizeof(GLfloat));
+	memcpy(data+NUM_POINTS*3, normals, NUM_POINTS*3*sizeof(GLfloat));
 
-    // same with normals
-    glGenBuffers(1, &normalVBO);
-    glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
-    glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*3*sizeof(GLfloat), normals, GL_STATIC_DRAW);
+	// create a VBO, bind it and load vertex data
+	glGenBuffers(1, &bunnyVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
+	glBufferData(GL_ARRAY_BUFFER, NUM_POINTS*3*2*sizeof(GLfloat), data, GL_STATIC_DRAW);
 
-    // create VAO, bind it and define both AttribPointers
-    glGenVertexArrays(1, &bunnyVAO);
-    glBindVertexArray(bunnyVAO);
-	
-    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,3 * sizeof(GLfloat), 0);
-    glEnableVertexAttribArray(0);
+	// create VAO, bind it and define both AttribPointers
+	glGenVertexArrays(1, &bunnyVAO);
+	glBindVertexArray(bunnyVAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
-    glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
 
-    // create IBO, bind it, load contents of triangles
-    glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
-    glGenBuffers(1, &bunnyIBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bunnyIBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, NUM_TRIANGLES*3*sizeof(GLint), triangles, GL_STATIC_DRAW);
-  
-    // unbind active buffers
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
+	size_t offset = NUM_POINTS * 3 * sizeof(GLfloat);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0,(const GLvoid*) offset);
+	glEnableVertexAttribArray(1);
+
+	// create IBO, bind it, load contents of triangles
+	glBindBuffer(GL_ARRAY_BUFFER, bunnyVBO);
+	glGenBuffers(1, &bunnyIBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bunnyIBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, NUM_TRIANGLES*3*sizeof(GLint), triangles, GL_STATIC_DRAW);
+
+	// unbind active buffers
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void deleteScene() {
@@ -259,14 +258,14 @@ void deleteScene() {
 }
 
 void renderScene() {
-  if (bunnyVAO != 0) {
-    // bind bunnyVAO and draw it ;-)
-    glBindVertexArray(bunnyVAO);
-    glDrawElements(GL_TRIANGLES, NUM_TRIANGLES*3, GL_UNSIGNED_INT, 0);
-    
-    // unbind active buffers //
-    glBindVertexArray(0);
-  }
+	if (bunnyVAO != 0) {
+		// bind bunnyVAO and draw it ;-)
+		glBindVertexArray(bunnyVAO);
+		glDrawElements(GL_TRIANGLES, NUM_TRIANGLES*3, GL_UNSIGNED_INT, 0);
+
+		// unbind active buffers //
+		glBindVertexArray(0);
+	}
 }
 
 GLfloat rotAngle = 0;
