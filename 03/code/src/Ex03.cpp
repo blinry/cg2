@@ -83,13 +83,13 @@ void initShader() {
     return;
   }
   
-  GLuint vertexShader = loadShaderFile("../../shader/simple.vert", GL_VERTEX_SHADER);
+  GLuint vertexShader = loadShaderFile("../shader/simple.vert", GL_VERTEX_SHADER);
   if (vertexShader == 0) {
     std::cout << "(initShader) - Could not create vertex shader." << std::endl;
     deleteShader();
     return;
   }
-  GLuint fragmentShader = loadShaderFile("../../shader/simple.frag", GL_FRAGMENT_SHADER);
+  GLuint fragmentShader = loadShaderFile("../shader/simple.frag", GL_FRAGMENT_SHADER);
   if (fragmentShader == 0) {
     std::cout << "(initShader) - Could not create vertex shader." << std::endl;
     deleteShader();
@@ -184,7 +184,7 @@ ObjLoader objLoader;
 
 void initScene() {
   // load scene.obj from disk and create renderable MeshObj //
-  objLoader.loadObjFile("../../meshes/scene.obj", "scene");
+  objLoader.loadObjFile("../meshes/scene.obj", "scene");
   
   // import data from bunny.h and create VAO //
   if (bunnyVAO == 0) {
