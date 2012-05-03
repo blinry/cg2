@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <string.h>
 
 ObjLoader::ObjLoader() {
 }
@@ -34,7 +35,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
   MeshData meshData;
   
   std::fstream file ;//(fileName, std::fstream::in);
-  file.open(fileName , std::fstream::in );
+  file.open(fileName.c_str() , std::fstream::in );
   char temp[50];
   GLfloat x,y,z;
   while(file.getline(temp,50) && !file.eof()){
