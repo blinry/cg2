@@ -34,7 +34,6 @@ install_manifest.txt
 *.mtc1
 *.nav
 *.out
-*.pdf
 *.snm
 *.synctex.gz
 *.toc
