@@ -263,7 +263,19 @@ void updateGL() {
   //  - right before rendering an object, upload the current state of the modelView matrix stack:
   //    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   
-  
+  // Verschieben gemäß des Grids
+  for(float x=0; x<5; x++) {
+      for(float z=0; z<5; x++) {
+          float factor = 1;
+
+          glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
+          glm_ModelViewMatrix.top() *= glm::translate(factor*x,0,factor*z);
+
+          renderScene();
+          glm_ModelViewMatrix.pop();
+      }
+  }
+
   // restore scene graph to previous state //
   glm_ModelViewMatrix.pop();
   
