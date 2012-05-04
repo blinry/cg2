@@ -265,7 +265,7 @@ void updateGL() {
   
   bool bunny = true;
 
-  glm_ModelViewMatrix.top() *= glm::rotate(rotAngle, 0.f, 1.0f, 0.f);
+  glm_ModelViewMatrix.top() *= glm::rotate(-rotAngle, 0.f, 1.0f, 0.f);
   
   // Verschieben gemäß des Grids
   for(float x=-2.0f; x<3.0f; x+=1.0f) {
@@ -277,7 +277,7 @@ void updateGL() {
           glm_ModelViewMatrix.top() *= glm::translate(factor*x,0.0f, factor * z);
 
           if (bunny) {
-              glm_ModelViewMatrix.top() *= glm::rotate(-rotAngle, 0.f, 1.0f, 0.f);
+              glm_ModelViewMatrix.top() *= glm::rotate(rotAngle, 0.f, 1.0f, 0.f);
           glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
               renderScene();
           } else {
