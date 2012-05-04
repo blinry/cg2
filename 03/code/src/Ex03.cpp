@@ -265,24 +265,25 @@ void updateGL() {
   
   bool bunny = true;
 
-  glm_ModelViewMatrix.top() *= glm::rotate(rotAngle, 0f, 1.0f, 0f);
+  glm_ModelViewMatrix.top() *= glm::rotate(rotAngle, 0.f, 1.0f, 0.f);
   
   // Verschieben gemäß des Grids
   for(float x=-2.0f; x<3.0f; x+=1.0f) {
       for(float z=-2.0f; z<3.0f; z+=1.0f) {
-          float factor = 0.5f;
+          float factor = 0.25f;
 
           glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
 
           glm_ModelViewMatrix.top() *= glm::translate(factor*x,0.0f, factor * z);
-          glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
 
           if (bunny) {
-              glm_ModelViewMatrix.top() *= glm::rotate(-rotAngle, 0f, 1.0f, 0f);
+              glm_ModelViewMatrix.top() *= glm::rotate(-rotAngle, 0.f, 1.0f, 0.f);
+          glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
               renderScene();
           } else {
-              glm_ModelViewMatrix.top() *= glm::scale(1/20.0f,1/20.0f,1/20.0f);
-              objLoader.getMeshObj()->render();
+              glm_ModelViewMatrix.top() *= glm::scale(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f);
+          glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+              objLoader.getMeshObj("scene")->render();
           }
 
           bunny = !bunny;
