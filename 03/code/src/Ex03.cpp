@@ -83,13 +83,13 @@ void initShader() {
     return;
   }
   
-  GLuint vertexShader = loadShaderFile("shader/simple.vert", GL_VERTEX_SHADER);
+  GLuint vertexShader = loadShaderFile("../shader/simple.vert", GL_VERTEX_SHADER);
   if (vertexShader == 0) {
     std::cout << "(initShader) - Could not create vertex shader." << std::endl;
     deleteShader();
     return;
   }
-  GLuint fragmentShader = loadShaderFile("shader/simple.frag", GL_FRAGMENT_SHADER);
+  GLuint fragmentShader = loadShaderFile("../shader/simple.frag", GL_FRAGMENT_SHADER);
   if (fragmentShader == 0) {
     std::cout << "(initShader) - Could not create vertex shader." << std::endl;
     deleteShader();
@@ -184,7 +184,7 @@ ObjLoader objLoader;
 
 void initScene() {
   // load scene.obj from disk and create renderable MeshObj //
-  objLoader.loadObjFile("meshes/scene.obj", "scene");
+  objLoader.loadObjFile("../meshes/scene.obj", "scene");
   
   // import data from bunny.h and create VAO //
   if (bunnyVAO == 0) {
@@ -265,11 +265,11 @@ void updateGL() {
   
   // Verschieben gemäß des Grids
   for(float x=-2.0f; x<3.0f; x+=1.0f) {
-      for(float y=-2.0f; y<3.0f; y+=1.0f) {
+      for(float z=-2.0f; z<3.0f; z+=1.0f) {
           float factor = 0.5f;
 
           glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
-          glm_ModelViewMatrix.top() *= glm::translate(factor*x,factor * y, 0.0f);
+          glm_ModelViewMatrix.top() *= glm::translate(factor*x,0.0f, factor * z);
 	  glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
 	
 	  renderScene();
