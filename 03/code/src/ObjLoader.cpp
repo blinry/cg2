@@ -30,39 +30,39 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
   }
   // ID is not known yet -> try to load mesh from file //
   
-  // TODO: import mesh from given file //
+  // import mesh from given file //
+
   // setup temporary data container //
   MeshData meshData;
   
-  std::fstream file ;//(fileName, std::fstream::in);
+  // Öffne die angeforderte Datei
+  std::fstream file ;
   file.open(fileName.c_str() , std::fstream::in );
+
+  // Lies die Zeilen einzeln ein, entscheide je nach Anfang der Zeile, ob sie
+  // eine Position eine Normale oder ein Index ist. Hänge die Werte ans richtige
+  // Array an.
   char temp[50];
   GLfloat x,y,z;
   while(file.getline(temp,50) && !file.eof()){
-	  
-	  
 	  if(strncmp(temp,"v ",2) == 0){
 	    sscanf(temp,"v %f %f %f", &x,&y,&z);
 		meshData.vertex_position.push_back(x);
 		meshData.vertex_position.push_back(y);
 		meshData.vertex_position.push_back(z);
 	  }
-
 	  if(strncmp(temp,"vn ",3) == 0){
 	    sscanf(temp,"vn %f %f %f", &x, &y, &z);
 		meshData.vertex_normal.push_back(x);
 		meshData.vertex_normal.push_back(y);
 		meshData.vertex_normal.push_back(z);
 	  }
-
 	  if(strncmp(temp,"f ",2) == 0 ){
 	    sscanf(temp,"f %f %f %f", &x,&y,&z);
 		meshData.indices.push_back(x);
 		meshData.indices.push_back(y);
 		meshData.indices.push_back(z);
-	  
 	  }
-
   }
   
   // setup variables used for parsing //
