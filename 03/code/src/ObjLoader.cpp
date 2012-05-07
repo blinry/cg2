@@ -38,6 +38,11 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
   // Öffne die angeforderte Datei
   std::fstream file ;
   file.open(fileName.c_str() , std::fstream::in );
+  // Prüfe, ob das Öffnen erfolgreich war
+  if (! file.is_open()) {
+      std::cerr << fileName << " konnte nicht geöffnet werden.";
+      return NULL;
+  }
 
   // Lies die Zeilen einzeln ein, entscheide je nach Anfang der Zeile, ob sie
   // eine Position eine Normale oder ein Index ist. Hänge die Werte ans richtige
