@@ -21,7 +21,7 @@ MeshObj::~MeshObj() {
 void MeshObj::setData(const MeshData &meshData) {
 	mIndexCount = meshData.indices.size();
 
-	// TODO: create local storage arrays for vertices, normals and indices //
+	// create local storage arrays for vertices, normals and indices //
 	GLfloat* vert;
 	GLfloat* norms;
 	GLuint*  ind;
@@ -30,16 +30,16 @@ void MeshObj::setData(const MeshData &meshData) {
 	norms = (GLfloat*) malloc(sizeof(GLfloat) * meshData.vertex_normal.size());
 	ind = (GLuint*) malloc(sizeof(GLuint) * mIndexCount);
 	
-	// TODO: copy data into local arrays //
+	// copy data into local arrays //
 	memcpy(vert, meshData.vertex_position.data(), sizeof(GLfloat) * meshData.vertex_position.size());
 	memcpy(norms, meshData.vertex_normal.data(), sizeof(GLfloat) * meshData.vertex_normal.size());
 	memcpy(ind, meshData.indices.data(), sizeof(GLuint) * meshData.indices.size());
 
-	// TODO: create VAO //
+	// create VAO //
 	glGenVertexArrays(1, &mVAO);
 	glBindVertexArray(mVAO);
 
-	// TODO: create and bind VBOs and upload data (one VBO per vertex attribute -> position, normal) //
+	// create and bind VBOs and upload data (one VBO per vertex attribute -> position, normal) //
 	glGenBuffers(1, &mVBO_position);
 	glBindBuffer(GL_ARRAY_BUFFER, mVBO_position);
 	glBufferData(GL_ARRAY_BUFFER, meshData.vertex_position.size() * sizeof(GLfloat), vert, GL_STATIC_DRAW);
@@ -52,7 +52,7 @@ void MeshObj::setData(const MeshData &meshData) {
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(1);
 
-	// TODO: init and bind a IBO //
+	// init and bind a IBO //
 	glGenBuffers(1, &mIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexCount * sizeof(GLuint), ind, GL_STATIC_DRAW);
@@ -62,7 +62,7 @@ void MeshObj::setData(const MeshData &meshData) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	// TODO: make sure to clean up temporarily allocated data, if neccessary //
+	// make sure to clean up temporarily allocated data, if neccessary //
 	free(vert);
 	free(norms);
 	free(ind);
@@ -70,7 +70,7 @@ void MeshObj::setData(const MeshData &meshData) {
 
 void MeshObj::render(void) {
 	if (mVAO != 0) {
-		// TODO: render your VAO //
+		// render your VAO //
 		glBindVertexArray(mVAO);
 		glDrawElements(GL_TRIANGLES, mIndexCount ,GL_UNSIGNED_INT, 0);
 

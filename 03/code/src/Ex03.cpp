@@ -263,31 +263,45 @@ void updateGL() {
   //  - right before rendering an object, upload the current state of the modelView matrix stack:
   //    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   
+  // Variable sorgt für abwechselndes Zeichnen des Hasen und der Ringe
   bool bunny = true;
 
+  // Wir wollen das gesamte Grid im Uhrzeigersinn um die z-Achse drehen. Diese
+  // Transformation wird als "letztes" ausgeführt.
   glm_ModelViewMatrix.top() *= glm::rotate(-rotAngle, 0.f, 1.0f, 0.f);
-  
-  // Verschieben gemäß des Grids
+
+  // Bestimmt den Abstand zwischen den Objekten
+  float factor = 0.25f;
+
+  // Zwei Schleifen, die ein 5x5-Grid erzeugen
   for(float x=-2.0f; x<3.0f; x+=1.0f) {
       for(float z=-2.0f; z<3.0f; z+=1.0f) {
-          float factor = 0.25f;
 
+          // Ab jetzt bekommt jedes Objekt eine eikene Matrix
           glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
 
-          glm_ModelViewMatrix.top() *= glm::translate(factor*x,0.0f, factor * z);
+          // Verschieben gemäß Position im Grid
+          glm_ModelViewMatrix.top() *= glm::translate(factor*x, 0.0f, factor * z);
 
           if (bunny) {
+              // Die Bunnys sollen sich GEGEN den Uhrzeigersinn um die y-Achse drehen
               glm_ModelViewMatrix.top() *= glm::rotate(rotAngle, 0.f, 1.0f, 0.f);
-          glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+              // Die aktuell oberste Matrix möchten wir zur Transformation nutzen
+              glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+              // Bunny zeichnen
               renderScene();
           } else {
+              // Soll das andere Objekt gezeichnet werden, skaliere um Faktor 20 runter ...
               glm_ModelViewMatrix.top() *= glm::scale(1.0f/20.0f,1.0f/20.0f,1.0f/20.0f);
-          glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+              glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+              // ... und zeichne das "scene"-Objekt
               objLoader.getMeshObj("scene")->render();
           }
 
+          // Hase und Ringe wechseln sich ab
           bunny = !bunny;
 
+          // Geh wieder einen Schritt im Szenegraph nach oben
           glm_ModelViewMatrix.pop();
       }
   }
