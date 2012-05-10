@@ -81,13 +81,21 @@ void CameraController::move(Motion motion) {
 glm::mat4 CameraController::getProjectionMat(void) {
   // TODO: return perspective matrix describing the camera intrinsics //
   glm::mat4 projectionMat;
+  projectionMat = glm::perspective(mOpenAngle, mAspect, mNear, mFar);
   return projectionMat;
 }
 
 glm::mat4 CameraController::getModelViewMat(void) {
   // TODO: return the modelview matrix describing the position and orientation of the camera //
   //       compute a simple lookAt position relative to the camera's position                //
+
+  glm::mat4 rot = glm::rotate(mTheta, 1.0f, 0.0f, 0.0f);
+  rot *= glm::rotate(mPhi, 0.0f, 1.0f, 0.0f);
+  glm::vec4 lookDir(0.0f, 0.0f, -1.0f, 0.0f);
+  lookDir = rot * lookDir;
+
   glm::mat4 modelViewMat;
+  modelViewMat = glm::lookAt(mCameraPosition, glm::vec3(lookDir), glm::vec3(0.0f, 1.0f, 0.0f));
   return modelViewMat;
 }
 
