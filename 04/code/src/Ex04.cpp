@@ -280,7 +280,8 @@ void renderScene() {
   // upload modelview matrix to shader //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   
-  // TODO: render 'scene.obj' //
+  // render 'scene.obj' //
+  objLoader.getMeshObj("scene")->render();
   
   // restore scene graph to previous state //
   glm_ModelViewMatrix.pop();
@@ -305,64 +306,77 @@ void updateGL() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
   // render left viewport -> camera view //
-  // TODO: set viewport to left half of the window //
+  // set viewport to left half of the window //
+  glViewport(0,0,512,512);
   
   // disable custom color in shader //
   glUniform1i(glGetUniformLocation(shaderProgram, "use_override_color"), 0);
   
-  // TODO: get projection mat from camera controller (cameraView) and set it as top value of glm_ProjectionMatrix //
+  // get projection mat from camera controller (cameraView) and set it as top value of glm_ProjectionMatrix //
+  glm_ProjectionMatrix.top() = cameraView.getProjectionMat();
   
   // upload projection matrix to shader //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, false, glm::value_ptr(glm_ProjectionMatrix.top()));
   
-  // TODO: get modelview mat from camera controller and set it as top value of glm_ModelViewMatrix //
+  // get modelview mat from camera controller and set it as top value of glm_ModelViewMatrix //
+  glm_ModelViewMatrix.top() = cameraView.getModelViewMat();
   
   // render scene //
   renderScene();
   
   // render right viewport -> scene view //
-  // TODO: set viewport to right half of the window //
+  // set viewport to right half of the window //
+  glViewport(512,0,512,512);
   
   // projection matrix stays the same //
-  // TODO: get projection mat from camera controller (this time it's 'sceneView') //
+  // get projection mat from camera controller (this time it's 'sceneView') //
+  glm_ProjectionMatrix.top() = sceneView.getProjectionMat();
   
   // upload projection matrix to shader //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, false, glm::value_ptr(glm_ProjectionMatrix.top()));
   
-  // TODO: get modelview mat from camera controller //
+  // get modelview mat from camera controller //
+  glm_ModelViewMatrix.top() = sceneView.getModelViewMat();
   
-  // TODO: render original scene //
+  // render original scene //
   renderScene();
   
-  // TODO: compute matrix inverse 'cameraView's matrices           //
+  // compute matrix inverse 'cameraView's matrices           //
   //       you need to invert both modelview and projection matrix //
   //       note: glm can only invert affine matrices               //
+  glm::mat4 inversedModelViewMat = glm::inverse(cameraView.getModelViewMat());
+  glm::mat4 inversedProjectionMat = invertProjectionMat(cameraView.getProjectionMat());
   
   // render 'camera.obj' at the 'cameraView' camera position //
   glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
-  // TODO: transform the camera origin the the camera position of 'cameraView' //
+  // FIXME: transform the camera origin the the camera position of 'cameraView' //
+  glm_ModelViewMatrix.top() *= inversedModelViewMat;
+  glm_ModelViewMatrix.top() *= inversedProjectionMat;
   
   // upload modelview matrix configuration to shader just before rendering //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   // use custom color for camera object //
   glUniform1i(glGetUniformLocation(shaderProgram, "use_override_color"), 1);
   glUniform3f(glGetUniformLocation(shaderProgram, "override_color"), 1, 0, 1);
-  // TODO: render the camera object //
+  // render the camera object //
+  objLoader.getMeshObj("camera")->render();
   
   // restore modelview matrix //
   glm_ModelViewMatrix.pop();
   
-  
   // render camera frustum of 'cameraView' //
   glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
-  // TODO: transform position and shape of the unit-cube in normalized device space to world coordinates //
+  // FIXME: transform position and shape of the unit-cube in normalized device space to world coordinates //
+  glm_ModelViewMatrix.top() *= cameraView.getProjectionMat();
   
   // upload modelview matrix configuration to shader just before rendering //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   // use custom color for camera object //
   glUniform1i(glGetUniformLocation(shaderProgram, "use_override_color"), 1);
   glUniform3f(glGetUniformLocation(shaderProgram, "override_color"), 1, 0, 0);
-  // TODO: render the frustum unit-cube 'cubeVAO' consisting of 12 edges (draw mode: GL_LINES) //
+  // render the frustum unit-cube 'cubeVAO' consisting of 12 edges (draw mode: GL_LINES) //
+  glBindVertexArray(cubeVAO);
+  glDrawElements(GL_LINES, 12, GL_UNSIGNED_INT, 0);
   
   // restore modelview matrix //
   glm_ModelViewMatrix.pop();
