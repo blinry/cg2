@@ -351,7 +351,6 @@ void updateGL() {
   glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
   // FIXME: transform the camera origin the the camera position of 'cameraView' //
   glm_ModelViewMatrix.top() *= inversedModelViewMat;
-  glm_ModelViewMatrix.top() *= inversedProjectionMat;
   
   // upload modelview matrix configuration to shader just before rendering //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
@@ -367,7 +366,8 @@ void updateGL() {
   // render camera frustum of 'cameraView' //
   glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
   // FIXME: transform position and shape of the unit-cube in normalized device space to world coordinates //
-  glm_ModelViewMatrix.top() *= cameraView.getProjectionMat();
+  glm_ModelViewMatrix.top() *= inversedModelViewMat;
+  glm_ModelViewMatrix.top() *= inversedProjectionMat;
   
   // upload modelview matrix configuration to shader just before rendering //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "modelview"), 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
@@ -376,7 +376,7 @@ void updateGL() {
   glUniform3f(glGetUniformLocation(shaderProgram, "override_color"), 1, 0, 0);
   // render the frustum unit-cube 'cubeVAO' consisting of 12 edges (draw mode: GL_LINES) //
   glBindVertexArray(cubeVAO);
-  glDrawElements(GL_LINES, 12, GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
   
   // restore modelview matrix //
   glm_ModelViewMatrix.pop();
