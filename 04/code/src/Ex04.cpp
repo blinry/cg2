@@ -313,13 +313,15 @@ void updateGL() {
   glUniform1i(glGetUniformLocation(shaderProgram, "use_override_color"), 0);
   
   // get projection mat from camera controller (cameraView) and set it as top value of glm_ProjectionMatrix //
-  glm_ProjectionMatrix.top() = cameraView.getProjectionMat();
+  glm_ProjectionMatrix.push(cameraView.getProjectionMat());
   
   // upload projection matrix to shader //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, false, glm::value_ptr(glm_ProjectionMatrix.top()));
+
+  glm_ProjectionMatrix.pop();
   
   // get modelview mat from camera controller and set it as top value of glm_ModelViewMatrix //
-  glm_ModelViewMatrix.top() = cameraView.getModelViewMat();
+  glm_ModelViewMatrix.push(cameraView.getModelViewMat());
   
   // render scene //
   renderScene();
