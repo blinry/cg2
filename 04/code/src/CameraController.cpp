@@ -12,9 +12,11 @@ void CameraController::updateMousePos(int x, int y) {
       // TODO: left button pressed -> compute position difference to click-point and compute new angles
       int xdiff = x - mX;
       int ydiff = y - mY;
+      mX = x;
+      mY = y;
 
-      mTheta = mLastTheta + atanf(ydiff / mNear);
-      mPhi = mLastPhi + atanf(xdiff / mNear);
+      mTheta = mTheta + atanf(ydiff / mNear);
+      mPhi = mPhi + atanf(xdiff / mNear);
       break;
     }
     case RIGHT_BTN : {
