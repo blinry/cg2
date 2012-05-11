@@ -330,7 +330,7 @@ void updateGL() {
   // set viewport to right half of the window //
   glViewport(512,0,512,512);
   
-  // projection matrix stays the same //
+  // model view? matrix stays the same //
   // get projection mat from camera controller (this time it's 'sceneView') //
   glm_ProjectionMatrix.top() = sceneView.getProjectionMat();
   
@@ -344,14 +344,15 @@ void updateGL() {
   renderScene();
   
   // compute matrix inverse 'cameraView's matrices           //
-  //       you need to invert both modelview and projection matrix //
-  //       note: glm can only invert affine matrices               //
+  // you need to invert both modelview and projection matrix //
+  // note: glm can only invert affine matrices               //
   glm::mat4 inversedModelViewMat = glm::inverse(cameraView.getModelViewMat());
+  // we found a convenient function for this ;-)
   glm::mat4 inversedProjectionMat = invertProjectionMat(cameraView.getProjectionMat());
   
   // render 'camera.obj' at the 'cameraView' camera position //
   glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
-  // FIXME: transform the camera origin the the camera position of 'cameraView' //
+  // transform the camera origin the the camera position of 'cameraView' //
   glm_ModelViewMatrix.top() *= inversedModelViewMat;
   
   // upload modelview matrix configuration to shader just before rendering //
@@ -367,7 +368,8 @@ void updateGL() {
   
   // render camera frustum of 'cameraView' //
   glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
-  // FIXME: transform position and shape of the unit-cube in normalized device space to world coordinates //
+  // transform position and shape of the unit-cube in normalized device space to world coordinates //
+  // we inverse the transformations from world to clipping space
   glm_ModelViewMatrix.top() *= inversedModelViewMat;
   glm_ModelViewMatrix.top() *= inversedProjectionMat;
   
@@ -376,7 +378,7 @@ void updateGL() {
   // use custom color for camera object //
   glUniform1i(glGetUniformLocation(shaderProgram, "use_override_color"), 1);
   glUniform3f(glGetUniformLocation(shaderProgram, "override_color"), 1, 0, 0);
-  // render the frustum unit-cube 'cubeVAO' consisting of 12 edges (draw mode: GL_LINES) //
+  // render the frustum unit-cube 'cubeVAO' consisting of 12 edges each with two vertices (draw mode: GL_LINES) //
   glBindVertexArray(cubeVAO);
   glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
   

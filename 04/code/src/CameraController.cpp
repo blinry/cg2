@@ -9,12 +9,15 @@ CameraController::~CameraController() {}
 void CameraController::updateMousePos(int x, int y) {
   switch (mState) {
     case LEFT_BTN : {
-      // TODO: left button pressed -> compute position difference to click-point and compute new angles
+      // left button pressed -> compute position difference to click-point and compute new angles
       int xdiff = x - mX;
       int ydiff = y - mY;
+
+      // remember new mouse position
       mX = x;
       mY = y;
 
+      // update camera angles
       mTheta = mTheta - atanf(xdiff / mNear) * STEP_DISTANCE;
       mPhi = mPhi + atanf(ydiff / mNear) * STEP_DISTANCE;
 
@@ -32,20 +35,21 @@ void CameraController::updateMousePos(int x, int y) {
 void CameraController::updateMouseBtn(MouseState state, int x, int y) {
   switch (state) {
     case NO_BTN : {
-      // TODO: button release -> save current angles for later rotations //
+      // button release -> save current angles for later rotations //
       mLastTheta = mTheta;
       mLastPhi = mPhi;
+      // we don’t use this.
 
       break;
     }
     case LEFT_BTN : {
-      // TODO: left button has been pressed -> start new rotation -> save initial point //
+      // left button has been pressed -> start new rotation -> save initial point //
       mX = x;
       mY = y;
       break;
     }
     case RIGHT_BTN : {
-      // not used yet //
+      // not used! //
       break;
     }
     default : break;
@@ -55,7 +59,9 @@ void CameraController::updateMouseBtn(MouseState state, int x, int y) {
 
 void CameraController::move(Motion motion) {
   // init direction multiplicator (forward/backward, left/right are SYMMETRIC!) //
-  int dir = 1;
+  int dir = 1; // not used :-) 
+
+  // compute look and right direction of the camera
   glm::vec3 lookDir(-sin(mTheta) * cos(mPhi),
 		    -sin(mPhi),
 		    -cos(mTheta) * cos(mPhi));
@@ -65,8 +71,8 @@ void CameraController::move(Motion motion) {
   glm::vec3 rightDir = glm::cross(lookDir, otherVec);
 
   switch (motion) {
-    // TODO: move camera along or perpendicular to its viewing direction according to motion state //
-    //       motion state is one of: (MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT)
+    // move camera along or perpendicular to its viewing direction according to motion state //
+    // motion state is one of: (MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT)
     case MOVE_FORWARD:
     mCameraPosition += lookDir * STEP_DISTANCE;
     break;
@@ -84,15 +90,16 @@ void CameraController::move(Motion motion) {
 }
 
 glm::mat4 CameraController::getProjectionMat(void) {
-  // TODO: return perspective matrix describing the camera intrinsics //
+  // return perspective matrix describing the camera intrinsics //
   glm::mat4 projectionMat;
+  // see slides!
   projectionMat = glm::perspective(mOpenAngle, mAspect, mNear, mFar);
   return projectionMat;
 }
 
 glm::mat4 CameraController::getModelViewMat(void) {
-  // TODO: return the modelview matrix describing the position and orientation of the camera //
-  //       compute a simple lookAt position relative to the camera's position                //
+  // return the modelview matrix describing the position and orientation of the camera //
+  // compute a simple lookAt position relative to the camera's position                //
 
   glm::vec3 lookDir(-sin(mTheta) * cos(mPhi),
 		    -sin(mPhi),
