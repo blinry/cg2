@@ -15,8 +15,8 @@ void CameraController::updateMousePos(int x, int y) {
       mX = x;
       mY = y;
 
-      mTheta = mTheta + atanf(ydiff / mNear);
-      mPhi = mPhi + atanf(xdiff / mNear);
+      mTheta = mTheta + atan2f(ydiff , mNear);
+      mPhi = mPhi + atan2f(xdiff , mNear);
       break;
     }
     case RIGHT_BTN : {
@@ -53,9 +53,13 @@ void CameraController::updateMouseBtn(MouseState state, int x, int y) {
 
 void CameraController::move(Motion motion) {
   // init direction multiplicator (forward/backward, left/right are SYMMETRIC!) //
-  glm::mat4 rot = glm::rotate(mTheta, 1.0f, 0.0f, 0.0f);
-  rot *= glm::rotate(mPhi, 0.0f, 1.0f, 0.0f);
+ 
+	
+  glm::mat4 rot = glm::rotate(mLastTheta, 1.0f, 0.0f, 0.0f);
+  rot *= glm::rotate(mLastPhi, 0.0f, 1.0f, 0.0f);
   int dir = 1;
+
+
   glm::vec4 lookDir(0.0f, 0.0f, -1.0f, 0.0f);
   lookDir = rot * lookDir;
   glm::vec4 rightDir(1.0f, 0.0f, 0.0f, 0.0f);
@@ -65,7 +69,7 @@ void CameraController::move(Motion motion) {
     // TODO: move camera along or perpendicular to its viewing direction according to motion state //
     //       motion state is one of: (MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT)
     case MOVE_FORWARD:
-    mCameraPosition += (glm::vec3)lookDir * STEP_DISTANCE;
+		mCameraPosition  += (glm::vec3)lookDir * STEP_DISTANCE;
     break;
     case MOVE_BACKWARD:
     mCameraPosition -= (glm::vec3)lookDir * STEP_DISTANCE;
@@ -85,6 +89,7 @@ glm::mat4 CameraController::getProjectionMat(void) {
   glm::mat4 projectionMat;
   projectionMat = glm::perspective(mOpenAngle, mAspect, mNear, mFar);
   return projectionMat;
+  
 }
 
 glm::mat4 CameraController::getModelViewMat(void) {
@@ -93,11 +98,17 @@ glm::mat4 CameraController::getModelViewMat(void) {
 
   glm::mat4 rot = glm::rotate(mTheta, 1.0f, 0.0f, 0.0f);
   rot *= glm::rotate(mPhi, 0.0f, 1.0f, 0.0f);
+
   glm::vec4 lookDir(0.0f, 0.0f, -1.0f, 0.0f);
   lookDir = rot * lookDir;
 
+  glm::vec4 rightDir(1.0f, 0.0f, 0.0f, 0.0f);
+  rightDir = rot * rightDir;
+
+  glm::vec3 upDir = glm::cross((glm::vec3)rightDir,(glm::vec3)lookDir);
+
   glm::mat4 modelViewMat;
-  modelViewMat = glm::lookAt(mCameraPosition, glm::vec3(lookDir), glm::vec3(0.0f, 1.0f, 0.0f));
+  modelViewMat = glm::lookAt(mCameraPosition , mCameraPosition + (glm::vec3)lookDir, upDir);
   return modelViewMat;
 }
 
