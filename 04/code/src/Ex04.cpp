@@ -363,14 +363,10 @@ void updateGL() {
   // render the camera object //
   objLoader.getMeshObj("camera")->render();
   
-  // restore modelview matrix //
-  glm_ModelViewMatrix.pop();
-  
   // render camera frustum of 'cameraView' //
-  glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
+
   // transform position and shape of the unit-cube in normalized device space to world coordinates //
   // we inverse the transformations from world to clipping space
-  glm_ModelViewMatrix.top() *= inversedModelViewMat;
   glm_ModelViewMatrix.top() *= inversedProjectionMat;
   
   // upload modelview matrix configuration to shader just before rendering //
