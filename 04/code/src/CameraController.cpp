@@ -15,8 +15,8 @@ void CameraController::updateMousePos(int x, int y) {
       mX = x;
       mY = y;
 
-      mTheta = mTheta + atanf(ydiff / mNear) * STEP_DISTANCE;
-      mPhi = mPhi + atanf(xdiff / mNear) * STEP_DISTANCE;
+      mTheta = mTheta - atanf(xdiff / mNear) * STEP_DISTANCE;
+      mPhi = mPhi + atanf(ydiff / mNear) * STEP_DISTANCE;
 
       printf("\rmTheta = %f, mPhi = %f", mTheta, mPhi);
       break;
