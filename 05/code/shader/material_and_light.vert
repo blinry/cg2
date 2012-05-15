@@ -27,12 +27,12 @@ uniform Material material;
 
 // modelview and projection matrix //
 
-out vec3 vertNorm;
-out vec3 vecToCam;
-out vec3 vecToLight;
-out float ambColor;
-out float diffColor;
-out float specColor;
+out vec3 VertNorm;
+out vec3 VecToCam;
+out vec3 VecToLight;
+out vec3 AmbColor;
+out vec3 DiffColor;
+out vec3 SpecColor;
 out float shiniExpo;
 
 uniform mat4 modelview;
@@ -43,9 +43,9 @@ void main() {
   // - as presented in the lecture, you just need to combine light and material color here
   // - assign the final values to your defined out-variables
   
-diffColor = material.diffuse_color * lightSource.diffuse_color;
-specColor = material.specular_color * lightSource.specular_color;
-ambColor  = material.ambient_color * lightSource.ambient_color;
+DiffColor = material.diffuse_color * lightSource.diffuse_color;
+SpecColor = material.specular_color * lightSource.specular_color;
+AmbColor  = material.ambient_color * lightSource.ambient_color;
 
 shiniExpo = material.specular_shininess
 
@@ -59,13 +59,13 @@ mat4 normalMat = transpose(inverse(modelview));
   
 vec4 v = (vertex,1.0)
 gl_Position = projection * modelview * v;
-vertNorm = (normalMat * n).xyz;  
+VertNorm = (normalMat * n).xyz;  
 
   // TODO: compute the vectors from the current vertex towards the camera and towards the light source //
 
 vec4 lp = (LightSource.position,0.0);
 vec4 P = (modelview * v); 
-vecToLight = ((modelview * lp) - P).xyz;
-vecToCam   = -P.xyz;
+VecToLight = ((modelview * lp) - P).xyz;
+VecToCam   = -P.xyz;
   
 }
