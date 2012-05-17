@@ -168,6 +168,15 @@ void initShader() {
   //     uniform MyStruct MyStructUniform;
   //   you can get the location of MyVector by passing the string "MyStructUniform.MyVector" to
   //   glGetUniformLocation(...)
+  uniformLocations["lightSource.ambient_color"] = glGetUniformLocation(shaderProgram, "lightSource.ambient_color");
+  uniformLocations["lightSource.diffuse_color"] = glGetUniformLocation(shaderProgram, "lightSource.diffuse_color");
+  uniformLocations["lightSource.specular_color"] = glGetUniformLocation(shaderProgram, "lightSource.specular_color");
+  uniformLocations["lightSource.position"] = glGetUniformLocation(shaderProgram, "lightSource.position");
+
+  uniformLocations["material.ambient_color"] = glGetUniformLocation(shaderProgram, "material.ambient_color");
+  uniformLocations["material.diffuse_color"] = glGetUniformLocation(shaderProgram, "material.diffuse_color");
+  uniformLocations["material.specular_color"] = glGetUniformLocation(shaderProgram, "material.specular_color");
+  uniformLocations["material.specular_shininess"] = glGetUniformLocation(shaderProgram, "material.specular_shininess");
 }
 
 bool enableShader() {
