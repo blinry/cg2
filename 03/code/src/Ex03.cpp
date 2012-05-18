@@ -274,10 +274,10 @@ void updateGL() {
   float factor = 0.25f;
 
   // Zwei Schleifen, die ein 5x5-Grid erzeugen
-  for(float x=-2.0f; x<3.0f; x+=1.0f) {
-      for(float z=-2.0f; z<3.0f; z+=1.0f) {
+  for(float x=-20.0f; x<30.0f; x+=1.0f) {
+      for(float z=-20.0f; z<30.0f; z+=1.0f) {
 
-          // Ab jetzt bekommt jedes Objekt eine eikene Matrix
+          // Ab jetzt bekommt jedes Objekt eine eigene Matrix
           glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
 
           // Verschieben gemäß Position im Grid
