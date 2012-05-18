@@ -1,5 +1,6 @@
 #ifndef __EX03__
 #define __EX03__
+#define _USE_MATH_DEFINES
 
 #include <GL/glew.h>
 #include <GL/freeglut.h>
@@ -19,6 +20,10 @@
 
 #include "ObjLoader.h"
 #include "CameraController.h"
+
+
+
+//const float M_PI =
 
 std::stack<glm::mat4> glm_ProjectionMatrix; 
 std::stack<glm::mat4> glm_ModelViewMatrix; 
