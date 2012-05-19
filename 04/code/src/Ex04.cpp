@@ -11,6 +11,7 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType);
 GLuint shaderProgram = 0;
 GLint uniform_projectionMatrix;
 GLint uniform_modelViewMatrix;
+const float M_PI = 3.141592653;
 
 // window controls //
 void updateGL();
@@ -128,14 +129,14 @@ void initShader() {
   glLinkProgram(shaderProgram);
   
   // get log //
-  int logMaxLength;
+ /* int logMaxLength;
   glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetShaderInfoLog(shaderProgram, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(initShader) - Linker log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }
+  }*/
   
   // set address of fragment color output //
   glBindFragDataLocation(shaderProgram, 0, "color");
@@ -203,14 +204,14 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
   glCompileShader(shader);
   
   // log compile messages, if any //
-  int logMaxLength;
+  /*int logMaxLength;
   glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetShaderInfoLog(shader, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(loadShaderFile) - Compiler log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }
+  }*/
   
   // return compiled shader (may have compiled WITH errors) //
   return shader;
@@ -333,12 +334,14 @@ void updateGL() {
   // model view? matrix stays the same //
   // get projection mat from camera controller (this time it's 'sceneView') //
   glm_ProjectionMatrix.top() = sceneView.getProjectionMat();
+  //glm_ProjectionMatrix.top() = cameraView.getProjectionMat();
   
   // upload projection matrix to shader //
   glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, false, glm::value_ptr(glm_ProjectionMatrix.top()));
   
   // get modelview mat from camera controller //
   glm_ModelViewMatrix.top() = sceneView.getModelViewMat();
+  
   
   // render original scene //
   renderScene();
@@ -480,5 +483,6 @@ void mouseMoveEvent(int x, int y) {
   }
   camera->updateMousePos(x, y);
   glutPostRedisplay();
+  
 }
 

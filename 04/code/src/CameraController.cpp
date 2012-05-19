@@ -17,11 +17,13 @@ void CameraController::updateMousePos(int x, int y) {
       mX = x;
       mY = y;
 
+
       // update camera angles
       mTheta = mTheta - atanf(xdiff / mNear) * STEP_DISTANCE;
       mPhi = mPhi + atanf(ydiff / mNear) * STEP_DISTANCE;
 
       printf("\rmTheta = %f, mPhi = %f", mTheta, mPhi);
+
       break;
     }
     case RIGHT_BTN : {
@@ -59,6 +61,7 @@ void CameraController::updateMouseBtn(MouseState state, int x, int y) {
 
 void CameraController::move(Motion motion) {
   // init direction multiplicator (forward/backward, left/right are SYMMETRIC!) //
+
   int dir = 1; // not used :-) 
 
   // compute look and right direction of the camera
@@ -70,11 +73,14 @@ void CameraController::move(Motion motion) {
 
   glm::vec3 rightDir = glm::cross(lookDir, otherVec);
 
+
   switch (motion) {
     // move camera along or perpendicular to its viewing direction according to motion state //
     // motion state is one of: (MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT)
     case MOVE_FORWARD:
+
     mCameraPosition += lookDir * STEP_DISTANCE;
+
     break;
     case MOVE_BACKWARD:
     mCameraPosition -= lookDir * STEP_DISTANCE;
@@ -95,19 +101,30 @@ glm::mat4 CameraController::getProjectionMat(void) {
   // see slides!
   projectionMat = glm::perspective(mOpenAngle, mAspect, mNear, mFar);
   return projectionMat;
+  
 }
 
 glm::mat4 CameraController::getModelViewMat(void) {
   // return the modelview matrix describing the position and orientation of the camera //
   // compute a simple lookAt position relative to the camera's position                //
 
+
   glm::vec3 lookDir(-sin(mTheta) * cos(mPhi),
 		    -sin(mPhi),
 		    -cos(mTheta) * cos(mPhi));
 
+   glm::vec3 otherVec = glm::normalize(lookDir + glm::vec3(0.0f, 1.0f, 0.0f));
+
+  glm::vec3 rightDir = glm::cross(lookDir, otherVec);
+
+ 
+
+  glm::vec3 upDir = glm::cross((glm::vec3)rightDir,(glm::vec3)lookDir);
 
   glm::mat4 modelViewMat;
+
   modelViewMat = glm::lookAt(mCameraPosition, mCameraPosition + lookDir, glm::vec3(0.0f, 1.0f, 0.0f));
+
   return modelViewMat;
 }
 
