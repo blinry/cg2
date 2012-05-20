@@ -47,7 +47,7 @@ DiffColor = material.diffuse_color * lightSource.diffuse_color;
 SpecColor = material.specular_color * lightSource.specular_color;
 AmbColor  = material.ambient_color * lightSource.ambient_color;
 
-shiniExpo = material.specular_shininess
+shiniExpo = material.specular_shininess;
 
   // TODO: create a normal matrix by inverting and transposing the modelview matrix //
 
@@ -57,13 +57,13 @@ mat4 normalMat = transpose(inverse(modelview));
   // - assign the transformed vertex position (modelview & projection) to 'gl_Position'
   // - assign the transformed vertex normal (normal matrix) to your out-variable as defined above
   
-vec4 v = (vertex,1.0)
+vec4 v = vec4(vertex,1.0f);
 gl_Position = projection * modelview * v;
-VertNorm = (normalMat * n).xyz;  
+VertNorm = (normalMat * vec4(vertex_normal, 0.0f)).xyz;  
 
   // TODO: compute the vectors from the current vertex towards the camera and towards the light source //
 
-vec4 lp = (LightSource.position,0.0);
+vec4 lp = vec4(lightSource.position,0.0f);
 vec4 P = (modelview * v); 
 VecToLight = ((modelview * lp) - P).xyz;
 VecToCam   = -P.xyz;
