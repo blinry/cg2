@@ -168,6 +168,15 @@ void initShader() {
   //     uniform MyStruct MyStructUniform;
   //   you can get the location of MyVector by passing the string "MyStructUniform.MyVector" to
   //   glGetUniformLocation(...)
+  uniformLocations["lightSource.ambient_color"] = glGetUniformLocation(shaderProgram, "lightSource.ambient_color");
+  uniformLocations["lightSource.diffuse_color"] = glGetUniformLocation(shaderProgram, "lightSource.diffuse_color");
+  uniformLocations["lightSource.specular_color"] = glGetUniformLocation(shaderProgram, "lightSource.specular_color");
+  uniformLocations["lightSource.position"] = glGetUniformLocation(shaderProgram, "lightSource.position");
+
+  uniformLocations["material.ambient_color"] = glGetUniformLocation(shaderProgram, "material.ambient_color");
+  uniformLocations["material.diffuse_color"] = glGetUniformLocation(shaderProgram, "material.diffuse_color");
+  uniformLocations["material.specular_color"] = glGetUniformLocation(shaderProgram, "material.specular_color");
+  uniformLocations["material.specular_shininess"] = glGetUniformLocation(shaderProgram, "material.specular_shininess");
 }
 
 bool enableShader() {
@@ -254,6 +263,37 @@ void initScene() {
   // - create a new Material and insert it into the 'materials' vector
   // - set material properties for ambient, diffuse and specular color as glm::vec3
   // - set shininess exponent as float
+
+  Material mat1;
+  Material mat2;
+  Material mat3;
+  Material mat4;
+  
+  mat1.ambient_color = glm::vec3(1, 0, 0);
+  mat1.diffuse_color = glm::vec3(1, 0, 0);
+  mat1.specular_color = glm::vec3(1, 1, 1);
+  mat1.specular_shininess = 15.0f;
+
+
+  mat2.ambient_color = glm::vec3(0, 1, 0);
+  mat2.diffuse_color = glm::vec3(0, 1, 0);
+  mat2.specular_color = glm::vec3(1, 1, 1);
+  mat2.specular_shininess = 25.0f;
+
+  mat3.ambient_color = glm::vec3(0, 0, 1);
+  mat3.diffuse_color = glm::vec3(0, 0, 1);
+  mat3.specular_color = glm::vec3(1, 1, 1);
+  mat3.specular_shininess = 75.0f;
+  
+  mat4.ambient_color = glm::vec3(1, 1, 0);
+  mat4.diffuse_color = glm::vec3(1, 1, 0);
+  mat4.specular_color = glm::vec3(1, 1, 1);
+  mat4.specular_shininess = 5.0f;
+
+  materials.push_back(mat1);
+  materials.push_back(mat2);
+  materials.push_back(mat3);
+  materials.push_back(mat4);
   
   // save material count for later and select first material //
   materialCount = materials.size();
@@ -263,6 +303,22 @@ void initScene() {
   // TODO: initialize your light sources here //
   // - set the color properties of the light source as glm::vec3
   // - set the lights position as glm::vec3
+
+  LightSource l1;
+  LightSource l2;
+
+  l1.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  l1.diffuse_color = glm::vec3(1, 1, 1);
+  l1.specular_color = glm::vec3(1, 1, 1);
+  l1.position = glm::vec3(4, 4, 4);
+ 
+  l2.ambient_color = glm::vec3(0.0f, 0.0f, 0.1f);
+  l2.diffuse_color = glm::vec3(0, 0, 1);
+  l2.specular_color = glm::vec3(0, 0, 1);
+  l2.position = glm::vec3(0, 2, 0);
+
+  lights.push_back(l1);
+  lights.push_back(l2);
   
   // save light source count for later and select first light source //
   lightCount = lights.size();
@@ -279,10 +335,19 @@ void renderScene() {
   // - ambient, diffuse and specular color
   // - position
   // - use glm::value_ptr() to get a proper reference when uploading the values as a data vector //
+  glUniform3fv(uniformLocations["lightSource.ambient_color"], 1, glm::value_ptr(lights[lightIndex].ambient_color));
+  glUniform3fv(uniformLocations["lightSource.diffuse_color"], 1, glm::value_ptr(lights[lightIndex].diffuse_color));
+  glUniform3fv(uniformLocations["lightSource.specular_color"], 1, glm::value_ptr(lights[lightIndex].specular_color));
+  glUniform3fv(uniformLocations["lightSource.position"], 1, glm::value_ptr(lights[lightIndex].position));
   
   // TODO: upload the chosen material properties here //
   // - upload ambient, diffuse and specular color as 3d-vector
   // - upload shininess exponent as simple float value
+  
+  glUniform3fv(uniformLocations["material.ambient_color"], 1, glm::value_ptr(materials[materialIndex].ambient_color));
+  glUniform3fv(uniformLocations["material.diffuse_color"], 1, glm::value_ptr(materials[materialIndex].diffuse_color));
+  glUniform3fv(uniformLocations["material.specular_color"], 1, glm::value_ptr(materials[materialIndex].specular_color));
+  glUniform1f(uniformLocations["material.specular_shininess"], materials[materialIndex].specular_shininess);
   
   // render the actual object //
   objLoader.getMeshObj("bunny")->render();
