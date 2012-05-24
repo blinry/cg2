@@ -1,0 +1,112 @@
+# 
+# Try to find GLEW library  
+# Once run this will define: 
+# 
+# GLEW_FOUND
+# GLEW_INCLUDE_DIR
+# GLEW_DEFINITIONS
+# GLEW_LIBRARIES
+# GLEW_STATIC_LIBRARY
+# GLEW_SHARED_LIBRARY
+#
+#  (GLEW_LINK_DIRECTORIES: not yet...)
+#
+# Jan Woetzel 09/2003. 
+# www.mip.informatik.uni-kiel.de/~jw
+# --------------------------------
+
+FIND_PATH(GLEW_INCLUDE_DIR GL/glew.h
+  ${GLEW_DIR}/include
+  $ENV{GLEW_DIR}/include
+  ${GLEW_HOME}/include
+  $ENV{GLEW_HOME}/include
+  $ENV{EXTRA}/include
+  $ENV{EXTRA}
+  $ENV{SOURCE_DIR}/glew/include
+  $ENV{SOURCE_DIR}/glew/
+  $ENV{ProgramFiles}/glew/include
+  C:/source/glew/include
+  D:/source/glew/include
+  /usr/include
+  /usr/local/include
+  /opt/net/gcc41/glew/include
+  /opt/net/gcc33/glew/include  
+  )
+#MESSAGE("DBG GLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}")  
+
+SET(GLEW_POSSIBLE_LIBPATHS
+  ${GLEW_DIR}/lib
+  $ENV{GLEW_DIR}/lib
+  ${GLEW_HOME}/lib
+  $ENV{GLEW_HOME}/lib
+  $ENV{EXTRA}/lib
+  $ENV{EXTRA}
+  $ENV{SOURCE_DIR}/glew/lib
+  $ENV{SOURCE_DIR}/glew
+  $ENV{ProgramFiles}/glew/include
+  C:/source/glew/lib
+  D:/source/glew/lib
+  /usr/lib
+  /usr/local/lib
+  /opt/net/gcc41/glew/lib
+  /opt/net/gcc33/glew/lib  
+  )
+
+FIND_LIBRARY(GLEW_STATIC_LIBRARY
+  NAMES glew32s glews GLEW 
+  PATHS ${GLEW_POSSIBLE_LIBPATHS}
+  )
+#MESSAGE("DBG GLEW_STATIC_LIBRARY=${GLEW_LIBRARY}")
+
+FIND_LIBRARY(GLEW_SHARED_LIBRARY
+  NAMES glew32 glew
+  PATHS ${GLEW_POSSIBLE_LIBPATHS}
+  )
+#MESSAGE("DBG GLEW_SHARED_LIBRARY=${GLEW_LIBRARY}")
+
+
+# --------------------------------
+
+IF(NOT GLEW_INCLUDE_DIR)
+  MESSAGE(SEND_ERROR "GLEW include dir not found.")
+ENDIF(NOT GLEW_INCLUDE_DIR)
+
+#IF   (GLEW_SHARED_LIBRARY AND BUILD_SHARED_LIBS)
+#  SET(GLEW_LIBRARIES ${GLEW_SHARED_LIBRARY})
+#ENDIF(GLEW_SHARED_LIBRARY AND BUILD_SHARED_LIBS)
+
+IF   (GLEW_STATIC_LIBRARY)
+  #IF   (GLEW_STATIC_LIBRARY AND NOT BUILD_SHARED_LIBS)
+  SET(GLEW_LIBRARIES ${GLEW_STATIC_LIBRARY})
+  #ENDIF(GLEW_STATIC_LIBRARY AND NOT BUILD_SHARED_LIBS)
+ENDIF(GLEW_STATIC_LIBRARY)
+
+
+
+
+IF(GLEW_LIBRARIES AND GLEW_INCLUDE_DIR)
+  SET(GLEW_FOUND TRUE)
+  #IF   (BUILD_SHARED_LIBS)
+  #  SET (GLEW_DEFINITIONS "-DGLEW_BUILD")
+  #ELSE (BUILD_SHARED_LIBS)
+  
+  # we use only static glew for now    
+  SET (GLEW_DEFINITIONS "-DGLEW_STATIC")
+  
+  #ENDIF(BUILD_SHARED_LIBS)
+
+  # get the link directory for rpath to be used with LINK_DIRECTORIES: 	 
+  GET_FILENAME_COMPONENT(GLEW_LINK_DIRECTORIES ${GLEW_LIBRARIES} PATH)  
+  
+ELSE(GLEW_LIBRARIES AND GLEW_INCLUDE_DIR)
+  SET(GLEW_FOUND FALSE)
+ENDIF(GLEW_LIBRARIES AND GLEW_INCLUDE_DIR)
+
+
+MARK_AS_ADVANCED(
+  GLEW_INCLUDE_DIR
+  GLEW_LIBRARIES
+  GLEW_LIBRARY
+  GLEW_SHARED_LIBRARY
+  GLEW_STATIC_LIBRARY
+  )

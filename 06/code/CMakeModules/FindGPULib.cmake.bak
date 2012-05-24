@@ -1,0 +1,59 @@
+# -Try to find CG-TUBS GPU library
+# see http://elara/cgwiki/Our_GPU_Lib
+#
+# The follwoing variables are optionally searched for defaults
+# GPULib_MAJOR_VERSION : Use this version instead of the latest
+#
+# The following are set after configuration is done: 
+#  GPULib_FOUND
+#  GPULib_INCLUDE_DIR
+#  GPULib_LIBRARY
+#
+
+MACRO(DBG_MSG _MSG)
+#  MESSAGE(STATUS "${CMAKE_CURRENT_LIST_FILE}(${CMAKE_CURRENT_LIST_LINE}):\n${_MSG}")
+ENDMACRO(DBG_MSG)
+
+# Figure out all available major versions and use the latest or use the one specified as optional input
+IF (NOT GPULib_MAJOR_VERSION)
+   # Search all available major versions of the GPU lib
+   EXEC_PROGRAM(find 
+		  ARGS "/afs/cg.cs.tu-bs.de/lib/linux/c++/" "-name gpulib-*" 
+		  OUTPUT_VARIABLE GPULib_POSSIBLE_DIRS)
+
+   DBG_MSG(${GPULib_POSSIBLE_DIRS})
+
+   STRING(REGEX MATCHALL "[0-9]+" GPULib_AVAILABLE_VERSIONS "${GPULib_POSSIBLE_DIRS}")
+
+   LIST(SORT GPULib_AVAILABLE_VERSIONS)
+
+   LIST(GET GPULib_AVAILABLE_VERSIONS -1 GPULib_MAJOR_VERSION)
+ENDIF (NOT GPULib_MAJOR_VERSION)
+
+
+# Now that we definetly have the desired major version we can build the root directory
+SET( GPULib_ROOT_DIR "/afs/cg.cs.tu-bs.de/lib/linux/c++/gpulib-${GPULib_MAJOR_VERSION}/")
+
+DBG_MSG(${GPULib_ROOT_DIR})
+
+# Usual stuff to setup the library
+
+FIND_PATH(GPULib_INCLUDE_DIR OpenGLState.h "${GPULib_ROOT_DIR}/include/")
+FIND_LIBRARY(GPULib_LIBRARY gpu "${GPULib_ROOT_DIR}/lib/") 
+
+DBG_MSG(${GPULib_INCLUDE_DIR})
+DBG_MSG(${GPULib_LIBRARY})
+
+IF (GPULib_INCLUDE_DIR AND GPULib_LIBRARY)
+   SET(GPULib_FOUND TRUE)
+ENDIF (GPULib_INCLUDE_DIR AND GPULib_LIBRARY)
+
+IF (GPULib_FOUND)
+   IF (NOT GPULib_FIND_QUIETLY)
+      MESSAGE(STATUS "Found GPULib: ${GPULib_ROOT_DIR}")
+   ENDIF (NOT GPULib_FIND_QUIETLY)
+ELSE (GPULib_FOUND)
+   IF (GPULib_FIND_REQUIRED)
+      MESSAGE(FATAL_ERROR "Could not find GPULib")
+   ENDIF (GPULib_FIND_REQUIRED)
+ENDIF (GPULib_FOUND)
