@@ -1,5 +1,6 @@
 #ifndef __EX03__
 #define __EX03__
+#define _USE_MATH_DEFINES
 
 #include <GL/glew.h>
 #include <GL/freeglut.h>

@@ -18,6 +18,7 @@ struct Material {
 
 // uniform for the used material //
 uniform Material material;
+uniform LightSource lightsource;
 
 // fragment normal //
 in vec3 vertexNormal;

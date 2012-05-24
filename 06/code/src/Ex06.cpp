@@ -165,14 +165,14 @@ void initShader() {
   glLinkProgram(shaderProgram);
   
   // get log //
-  int logMaxLength;
+ /* int logMaxLength;
   glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetProgramInfoLog(shaderProgram, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(initShader) - Linker log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }
+  }*/
   
   // set address of fragment color output //
   glBindFragDataLocation(shaderProgram, 0, "color");
@@ -180,7 +180,6 @@ void initShader() {
   // get uniform locations for common variables //
   uniformLocations["projection"] = glGetUniformLocation(shaderProgram, "projection");
   uniformLocations["modelview"] = glGetUniformLocation(shaderProgram, "modelview");
-  
   // material unform locations //
   uniformLocations["material.ambient"] = glGetUniformLocation(shaderProgram, "material.ambient_color");
   uniformLocations["material.diffuse"] = glGetUniformLocation(shaderProgram, "material.diffuse_color");
@@ -190,8 +189,13 @@ void initShader() {
   // TODO: store the uniform locations for all light source properties
   // - create a 'UniformLocation_Light' struct to store the light source parameter uniforms 
   // - insert this strut into the provided map 'uniformLocations_Lights' and give it a proper name
+  UniformLocation_Light ul;
+  ul.ambient_color = glGetUniformLocation(shaderProgram,"lightsource.ambient_color");
+  ul.diffuse_color = glGetUniformLocation(shaderProgram,"lightsource.diffuse_color");
+  ul.specular_color = glGetUniformLocation(shaderProgram,"lightsource.specular_color");
+  ul.position = glGetUniformLocation(shaderProgram,"lightsource.position");
   
-  
+  uniformLocations_Lights["ul"] = ul;
   
 }
 
@@ -257,14 +261,14 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
   glCompileShader(shader);
   
   // log compile messages, if any //
-  int logMaxLength;
+  /*int logMaxLength;
   glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetShaderInfoLog(shader, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(loadShaderFile) - Compiler log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }
+  }*/
   
   // return compiled shader (may have compiled WITH errors) //
   return shader;
@@ -312,7 +316,66 @@ void initScene() {
   // - set the color properties of the light source as glm::vec3
   // - set the lights position as glm::vec3
   // - create up to 10 light sources (you may toggle them later on using the keys '0' through '9')
+  LightSource ls;
+  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.diffuse_color = glm::vec3(1,1,1);
+  ls.specular_color =glm::vec3(1,1,1);
+  ls.position = glm::vec3(4,4,4);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.diffuse_color = glm::vec3(0,0,1);
+  ls.specular_color =glm::vec3(0,0,1);
+  ls.position = glm::vec3(0,2,0);
+  lights.push_back(ls);
   
+  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.diffuse_color = glm::vec3(0,1,0);
+  ls.specular_color =glm::vec3(0,1,0);
+  ls.position = glm::vec3(0,2,0);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.diffuse_color = glm::vec3(1,0,0);
+  ls.specular_color =glm::vec3(1,0,0);
+  ls.position = glm::vec3(0,2,0);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.2f, 0.4f, 0.2f);
+  ls.diffuse_color = glm::vec3(0,1,0);
+  ls.specular_color =glm::vec3(1,0,1);
+  ls.position = glm::vec3(2,2,2);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.4f, 0.2f, 0.4f);
+  ls.diffuse_color = glm::vec3(1,0,1);
+  ls.specular_color =glm::vec3(0,1,0);
+  ls.position = glm::vec3(2,2,2);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.diffuse_color = glm::vec3(1,1,1);
+  ls.specular_color =glm::vec3(0,0,0);
+  ls.position = glm::vec3(0,2,0);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.diffuse_color = glm::vec3(0,0,0);
+  ls.specular_color =glm::vec3(1,1,1);
+  ls.position = glm::vec3(5,2,5);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.1f, 0.2f, 0.3f);
+  ls.diffuse_color = glm::vec3(1,0,1);
+  ls.specular_color =glm::vec3(1,0,1);
+  ls.position = glm::vec3(5,2,5);
+  lights.push_back(ls);
+
+  ls.ambient_color = glm::vec3(0.5f, 0.5f, 0.5f);
+  ls.diffuse_color = glm::vec3(1,1,1);
+  ls.specular_color =glm::vec3(1,1,1);
+  ls.position = glm::vec3(-4,-4,-4);
+  lights.push_back(ls);
   
   // save light source count for later and select first light source //
   lightCount = lights.size();
@@ -324,7 +387,7 @@ void renderScene() {
   
   glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   
-  // TODO: upload the properties of the currently active light sources here //
+  // ToDo: upload the properties of the currently active light sources here //
   // - ambient, diffuse and specular color
   // - position
   // - use glm::value_ptr() to get a proper reference when uploading the values as a data vector //
