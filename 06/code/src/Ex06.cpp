@@ -165,14 +165,14 @@ void initShader() {
   glLinkProgram(shaderProgram);
   
   // get log //
- /* int logMaxLength;
+  int logMaxLength;
   glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetProgramInfoLog(shaderProgram, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(initShader) - Linker log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }*/
+  }
   
   // set address of fragment color output //
   glBindFragDataLocation(shaderProgram, 0, "color");
@@ -185,18 +185,26 @@ void initShader() {
   uniformLocations["material.diffuse"] = glGetUniformLocation(shaderProgram, "material.diffuse_color");
   uniformLocations["material.specular"] = glGetUniformLocation(shaderProgram, "material.specular_color");
   uniformLocations["material.shininess"] = glGetUniformLocation(shaderProgram, "material.specular_shininess");
+
+  //save location of count of active lightsources:
+  uniformLocations["activeLightSources"] = glGetUniformLocation(shaderProgram, "activeLightSources");
   
   // TODO: store the uniform locations for all light source properties
   // - create a 'UniformLocation_Light' struct to store the light source parameter uniforms 
   // - insert this strut into the provided map 'uniformLocations_Lights' and give it a proper name
-  UniformLocation_Light ul;
-  ul.ambient_color = glGetUniformLocation(shaderProgram,"lightsource.ambient_color");
-  ul.diffuse_color = glGetUniformLocation(shaderProgram,"lightsource.diffuse_color");
-  ul.specular_color = glGetUniformLocation(shaderProgram,"lightsource.specular_color");
-  ul.position = glGetUniformLocation(shaderProgram,"lightsource.position");
-  
-  uniformLocations_Lights["ul"] = ul;
-  
+  for(int i = 0; i < 10; i++)
+  {
+	  std::stringstream ident("light");
+	  ident << i;
+	  
+	  UniformLocation_Light ul;
+	  ul.ambient_color = glGetUniformLocation(shaderProgram, getUniformStructLocStr("ls", "ambient_color", i).c_str());
+	  ul.diffuse_color = glGetUniformLocation(shaderProgram, getUniformStructLocStr("ls", "diffuse_color", i).c_str());
+	  ul.specular_color = glGetUniformLocation(shaderProgram, getUniformStructLocStr("ls", "specular_color", i).c_str());
+	  ul.position = glGetUniformLocation(shaderProgram, getUniformStructLocStr("ls", "position", i).c_str());
+
+	  uniformLocations_Lights[ident.str()] = ul;
+  }
 }
 
 bool enableShader() {
@@ -261,14 +269,14 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
   glCompileShader(shader);
   
   // log compile messages, if any //
-  /*int logMaxLength;
+  int logMaxLength;
   glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetShaderInfoLog(shader, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(loadShaderFile) - Compiler log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }*/
+  }
   
   // return compiled shader (may have compiled WITH errors) //
   return shader;
@@ -387,10 +395,26 @@ void renderScene() {
   
   glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   
-  // ToDo: upload the properties of the currently active light sources here //
+  // TODO: upload the properties of the currently active light sources here //
   // - ambient, diffuse and specular color
   // - position
   // - use glm::value_ptr() to get a proper reference when uploading the values as a data vector //
+  LightSource ls;
+  int lightCnt  = 0;
+  for(int i = 0; i < (lightCount < 10 ? lightCount : 10); i++)
+  {
+	  if(lights[i].enabled)
+	  {
+		  std::stringstream id("light");
+		  id << lightCnt;
+
+		  glUniform3fv(uniformLocations_Lights[id.str()].ambient_color, 1, glm::value_ptr(lights[i].ambient_color));
+		  glUniform3fv(uniformLocations_Lights[id.str()].diffuse_color, 1, glm::value_ptr(lights[i].diffuse_color));
+		  glUniform3fv(uniformLocations_Lights[id.str()].specular_color, 1, glm::value_ptr(lights[i].specular_color));
+		  glUniform3fv(uniformLocations_Lights[id.str()].position, 1, glm::value_ptr(lights[i].position));
+		  lightCnt++;
+	  }
+  }
   
   
   // upload the chosen material properties here //

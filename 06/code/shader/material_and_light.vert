@@ -11,7 +11,8 @@ struct LightSource {
 };
 
 // TODO: set up uniforms for multiple light sources //
-
+uniform LightSource ls[10];
+uniform int activeLightSources;
 
 // vertex normal //
 out vec3 vertexNormal;
@@ -19,6 +20,7 @@ out vec3 vertexNormal;
 out vec3 eyeDir;
 
 // TODO: vector from fragment to light per light source //
+out vec3 lightVec[10];
 
 // modelview and projection matrix //
 uniform mat4 modelview;
@@ -37,4 +39,6 @@ void main() {
   eyeDir = -vertexInCamSpace;
   
   // TODO: compute the vectors from the current vertex towards every light source //
+  for(int i = 0; i < activeLightSources; i++)
+	  lightVec[i] = ls[i].position - vertexInCamSpace;
 }
