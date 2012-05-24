@@ -415,6 +415,8 @@ void renderScene() {
 		  lightCnt++;
 	  }
   }
+
+  glUniform1i(uniformLocations["activeLightSources"], lightCnt);
   
   
   // upload the chosen material properties here //
