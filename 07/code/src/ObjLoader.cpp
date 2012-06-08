@@ -70,11 +70,11 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
       }
       if (!key.compare("vt")) {
         // read in vertex normal //
-	sttr >> x >> y >> z;
-	localVertexTexcoord.push_back(glm::vec3(x, y, z));
+	sstr >> x >> y;
+	localVertexTexcoord.push_back(glm::vec2(x, y));
         
       }
-      // TODO: implement parsing of a face definition //
+      // implement parsing of a face definition //
       // note: faces using normals and tex-coords are defines as "f vi0/ti0/ni0 ... viN/tiN/niN"
       //       vi0 .. viN : vertex index of vertex 0..N
       //       ti0 .. tiN : texture coordinate index of vertex 0..N
@@ -86,9 +86,41 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
       // put every face definition into the 'localFace' vector
       // -> a face is represented as set of index triplets (vertexId, normalId, texCoordId)
       //    thus is can be stored in a std::vector<glm::vec3>
+
+      // NOTE: We use -1 for "not defined"
       if (!key.compare("f")) {
-	// read in vertex indices for a face //
-	
+          unsigned int vi0, vi1, vi2, vi3, ti0, ti1, ti2, ti3, ni0, ni1, ni2, ni3;
+          vi0 = vi1 = vi2 = vi3 = ti0 = ti1 = ti2 = ti3 = ni0 = ni1 = ni2 = ni3 = -1;
+          // read in vertex indices for a face //
+          if (sscanf(sstr.str().c_str(), "f %d %d %d", &vi0, &vi1, &vi2) == 3
+                  || sscanf(sstr.str().c_str(), "f %d// %d// %d//", &vi0, &vi1, &vi2) == 3
+                  || sscanf(sstr.str().c_str(), "f %d//%d %d//%d %d//%d", &vi0, &ni0, &vi1, &ni1, &vi2, &ni2) == 6
+                  || sscanf(sstr.str().c_str(), "f %d/%d/ %d/%d/ %d/%d/", &vi0, &ti0, &vi1, &ti1, &vi2, &ti2) == 6
+                  || sscanf(sstr.str().c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d", &vi0, &ti0, &ni0, &vi1, &ti1, &ni1, &vi2, &ti2, &ni2) == 9
+                      ) {
+              std::vector<glm::vec3> face;
+              face.push_back(glm::vec3(vi0, vi1, vi2));
+              face.push_back(glm::vec3(ti0, ti1, ti2));
+              face.push_back(glm::vec3(ni0, ni1, ni2));
+              localFace.push_back(face);
+          } else if (sscanf(sstr.str().c_str(), "f %d %d %d %d", &vi0, &vi1, &vi2, &vi3) == 4
+                  || sscanf(sstr.str().c_str(), "f %d// %d// %d// %d//", &vi0, &vi1, &vi2, &vi3) == 4
+                  || sscanf(sstr.str().c_str(), "f %d//%d %d//%d %d//%d %d//%d", &vi0, &ni0, &vi1, &ni1, &vi2, &ni2, &vi3, &ni3) == 9
+                  || sscanf(sstr.str().c_str(), "f %d/%d/ %d/%d/ %d/%d/ %d/%d/", &vi0, &ti0, &vi1, &ti1, &vi2, &ti2, &vi3, &ti3) == 9
+                  || sscanf(sstr.str().c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d %d/%d/%d", &vi0, &ti0, &ni0, &vi1, &ti1, &ni1, &vi2, &ti2, &ni2, &vi3, &ti3, &ni3) == 12
+                  ) {
+              std::vector<glm::vec3> face;
+              face.push_back(glm::vec3(vi0, vi1, vi2));
+              face.push_back(glm::vec3(ti0, ti1, ti2));
+              face.push_back(glm::vec3(ni0, ni1, ni2));
+              localFace.push_back(face);
+
+              std::vector<glm::vec3> face2;
+              face2.push_back(glm::vec3(vi0, vi2, vi3));
+              face2.push_back(glm::vec3(ti0, ti2, ti3));
+              face2.push_back(glm::vec3(ni0, ni2, ni3));
+              localFace.push_back(face2);
+          }
         
       }
       ++lineNumber;
