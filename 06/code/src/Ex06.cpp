@@ -34,7 +34,7 @@ struct Material {
 };
 
 struct LightSource {
-  LightSource() : enabled(true) {};
+  LightSource() : enabled(false) {};
   bool enabled;
   glm::vec3 ambient_color;
   glm::vec3 diffuse_color;
@@ -115,6 +115,13 @@ int main (int argc, char **argv) {
   }
   
   return 0;
+}
+
+// toggles a light source on or off //
+void toggleLightSource(unsigned int i) {
+  if (i < lightCount) {
+    lights[i].enabled = !lights[i].enabled;
+  }
 }
 
 void initGL() {
@@ -334,52 +341,52 @@ void initScene() {
   ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
   ls.diffuse_color = glm::vec3(0,0,1);
   ls.specular_color =glm::vec3(0,0,1);
-  ls.position = glm::vec3(0,2,0);
+  ls.position = glm::vec3(3,5,0);
   lights.push_back(ls);
   
   ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
   ls.diffuse_color = glm::vec3(0,1,0);
   ls.specular_color =glm::vec3(0,1,0);
-  ls.position = glm::vec3(0,2,0);
+  ls.position = glm::vec3(-1,-2,0);
   lights.push_back(ls);
 
-  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.ambient_color = glm::vec3(0.1f, 1.0f, 0.1f);
   ls.diffuse_color = glm::vec3(1,0,0);
   ls.specular_color =glm::vec3(1,0,0);
-  ls.position = glm::vec3(0,2,0);
+  ls.position = glm::vec3(-2,2,2);
   lights.push_back(ls);
 
   ls.ambient_color = glm::vec3(0.2f, 0.4f, 0.2f);
   ls.diffuse_color = glm::vec3(0,1,0);
   ls.specular_color =glm::vec3(1,0,1);
-  ls.position = glm::vec3(2,2,2);
+  ls.position = glm::vec3(-2,0,2);
   lights.push_back(ls);
 
-  ls.ambient_color = glm::vec3(0.4f, 0.2f, 0.4f);
+  ls.ambient_color = glm::vec3(0.4f, 0.2f, 1.0f);
   ls.diffuse_color = glm::vec3(1,0,1);
   ls.specular_color =glm::vec3(0,1,0);
-  ls.position = glm::vec3(2,2,2);
+  ls.position = glm::vec3(0,2,2);
   lights.push_back(ls);
 
-  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.ambient_color = glm::vec3(1.0f, 0.1f, 0.1f);
   ls.diffuse_color = glm::vec3(1,1,1);
   ls.specular_color =glm::vec3(0,0,0);
-  ls.position = glm::vec3(0,2,0);
+  ls.position = glm::vec3(1,2,0);
   lights.push_back(ls);
 
-  ls.ambient_color = glm::vec3(0.1f, 0.1f, 0.1f);
+  ls.ambient_color = glm::vec3(0.1f, 0.1f, 1.0f);
   ls.diffuse_color = glm::vec3(0,0,0);
   ls.specular_color =glm::vec3(1,1,1);
-  ls.position = glm::vec3(5,2,5);
+  ls.position = glm::vec3(1,2,5);
   lights.push_back(ls);
 
-  ls.ambient_color = glm::vec3(0.1f, 0.2f, 0.3f);
+  ls.ambient_color = glm::vec3(0.1f, 1.0f, 0.3f);
   ls.diffuse_color = glm::vec3(1,0,1);
   ls.specular_color =glm::vec3(1,0,1);
-  ls.position = glm::vec3(5,2,5);
+  ls.position = glm::vec3(-2,2,5);
   lights.push_back(ls);
 
-  ls.ambient_color = glm::vec3(0.5f, 0.5f, 0.5f);
+  ls.ambient_color = glm::vec3(1.0f, 0.5f, 0.5f);
   ls.diffuse_color = glm::vec3(1,1,1);
   ls.specular_color =glm::vec3(1,1,1);
   ls.position = glm::vec3(-4,-4,-4);
@@ -387,6 +394,8 @@ void initScene() {
   
   // save light source count for later and select first light source //
   lightCount = lights.size();
+
+  toggleLightSource(0);
 }
 
 void renderScene() {
@@ -415,6 +424,8 @@ void renderScene() {
 		  lightCnt++;
 	  }
   }
+
+  glUniform1i(uniformLocations["activeLightSources"], lightCnt);
   
   glUniform1i(uniformLocations["activeLightSources"],lightCnt);
   // upload the chosen material properties here //
@@ -456,13 +467,6 @@ void updateGL() {
 
 void idle() {
   glutPostRedisplay();
-}
-
-// toggles a light source on or off //
-void toggleLightSource(unsigned int i) {
-  if (i < lightCount) {
-    lights[i].enabled = !lights[i].enabled;
-  }
 }
 
 void keyboardEvent(unsigned char key, int x, int y) {
