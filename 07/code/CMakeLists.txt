@@ -6,7 +6,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 # set the compiler flags
 SET(CMAKE_BUILD_TYPE debug)
-SET(CMAKE_CXX_FLAGS "-Wall")
+SET(CMAKE_CXX_FLAGS "-Wall -lopencv_core -lopencv_highgui")
 
 # Add path to additional packages (makes it easier to include common libraries)
 set(CMAKE_MODULE_PATH ${Exercise07_SOURCE_DIR}/CMakeModules/)
@@ -18,7 +18,7 @@ set(EXECUTABLE_OUTPUT_PATH ${Exercise07_BINARY_DIR})
 FIND_PACKAGE(OpenGL 3.3 REQUIRED)
 FIND_PACKAGE(GLEW REQUIRED)
 FIND_PACKAGE(GLUT REQUIRED)
-FIND_PACKAGE(OpenCV REQUIRED)
+#FIND_PACKAGE(OpenCV REQUIRED)
 
 # Set include directories containing used header files
 INCLUDE_DIRECTORIES(

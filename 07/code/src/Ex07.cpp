@@ -323,7 +323,7 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 void initTextures (void) {
     // generate a new OpenGL texture
     int texName;
-    glGenTextures(1, *texName);
+    glGenTextures(1, &texName);
 
     // initialize the texture properly (filtering, wrapping style, etc.)
     glBindTexture(GL_TEXTURE_2D, texName);
@@ -348,7 +348,7 @@ TextureData loadTextureData(const char *textureFile) {
     texture_cv = cv::imread(textureFile);
 
     TextureData texture;
-    texture.width = texture_cv.columns;
+    texture.width = texture_cv.cols;
     texture.height = texture_cv.rows;
     texture.data = texture_cv.data;
     return texture;
