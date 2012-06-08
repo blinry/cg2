@@ -320,24 +320,39 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
   return shader;
 }
 
-// TODO: initialize an OpenGL texture object //
-// - load the image data from a file
-// - generate a new OpenGL texture
-// - initialize the texture properly (filtering, wrapping style, etc.)
-// - upload the imported image data to the OpenGL texture
-// - don't forget to clean up
 void initTextures (void) {
-  // TODO: load the proper texture:
-  // - for the trashin object load "../textures/trashbin.png"
-  // - OR load "../textures/ball.jpg" for the soccer ball object
-  
+    // generate a new OpenGL texture
+    GLuint texName;
+    glGenTextures(1, &texName);
+
+    // initialize the texture properly (filtering, wrapping style, etc.)
+    glBindTexture(GL_TEXTURE_2D, texName);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // "../textures/trashbin.png" OR "../textures/ball.jpg"
+    TextureData texture = loadTextureData("../textures/trashbin.png");
+
+    // upload the imported image data to the OpenGL texture
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_FLOAT, texture.data);
+
+    // TODO: don't forget to clean up
+    // clean up what??
 }
 
-// TODO: load texture data from disk //
 // - return imported data as 'TextureData' container
 // - hint: use opencv to import a image file
 TextureData loadTextureData(const char *textureFile) {
+    cv::Mat texture_cv;
+    texture_cv = cv::imread(textureFile);
 
+    TextureData texture;
+    texture.width = texture_cv.cols;
+    texture.height = texture_cv.rows;
+    texture.data = texture_cv.data;
+    return texture;
 }
 
 void initScene() {

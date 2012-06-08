@@ -21,6 +21,7 @@ FIND_PACKAGE(GLUT REQUIRED)
 set (OpenCV_DIR /usr/share/opencv)
 FIND_PACKAGE(OpenCV REQUIRED)
 
+
 # Set include directories containing used header files
 INCLUDE_DIRECTORIES(
   ${Exercise07_SOURCE_DIR}/include
