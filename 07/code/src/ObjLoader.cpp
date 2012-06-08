@@ -64,10 +64,14 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
       // TODO: implement parsing of vertex normal and texture coordinate //
       if (!key.compare("vn")) {
         // read in vertex normal //
+	sstr >> x >> y >> z;
+	localVertexNormal.push_back(glm::vec3(x, y, z));
         
       }
       if (!key.compare("vt")) {
         // read in vertex normal //
+	sttr >> x >> y >> z;
+	localVertexTexcoord.push_back(glm::vec3(x, y, z));
         
       }
       // TODO: implement parsing of a face definition //
@@ -84,6 +88,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
       //    thus is can be stored in a std::vector<glm::vec3>
       if (!key.compare("f")) {
 	// read in vertex indices for a face //
+	
         
       }
       ++lineNumber;
