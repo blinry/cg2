@@ -22,7 +22,7 @@ MeshObj::~MeshObj() {
 void MeshObj::setData(const MeshData &meshData) {
   mIndexCount = meshData.indices.size();
   
-  // TODO: extend this method to upload texture coordinates as another VBO //
+  // extend this method to upload texture coordinates as another VBO //
   // - texture coordinates are at location 2 within the shader code
   unsigned int vertexTexcoordSize = meshData.vertex_texcoord.size();
 

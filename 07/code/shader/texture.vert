@@ -1,8 +1,8 @@
 #version 330
 layout(location = 0) in vec3 vertex;
 layout(location = 1) in vec3 vertex_normal;
-// TODO: add texture coordinates to your available vertex attributes //
-
+// add texture coordinates to your available vertex attributes //
+layout(location = 2) in vec2 vertex_texcoord;
 
 const int maxLightCount = 10;
 
@@ -21,8 +21,8 @@ uniform int usedLightCount;
 out vec3 vertexNormal;
 out vec3 eyeDir;
 out vec3 lightDir[maxLightCount];
-// TODO: add the texture coordinate as in/out variable to be passed to the fragment program //
-
+// add the texture coordinate as in/out variable to be passed to the fragment program //
+out vec2 texCoord;
 
 // modelview and projection matrix //
 uniform mat4 modelview;
@@ -50,5 +50,6 @@ void main() {
     lightDir[i] = lightInCamSpace - vertexInCamSpace;
   }
   
-  // TODO: write texcoord //
+  // write texcoord //
+  texCoord = vertex_texcoord;
 }

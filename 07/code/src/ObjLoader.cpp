@@ -75,7 +75,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
         sstr >> x >> y >> z;
 	localVertexPosition.push_back(glm::vec3(x, y, z));
       }
-      // TODO: implement parsing of vertex normal and texture coordinate //
+      // implement parsing of vertex normal and texture coordinate //
       if (!key.compare("vn")) {
         // read in vertex normal //
 	sstr >> x >> y >> z;
@@ -143,7 +143,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     
     std::cout << "Imported " << localFace.size() << " faces from \"" << fileName << "\"" << std::endl;
     
-    // TODO: create an indexed vertex for every triplet of vertexId, normalId and texCoordId //
+    //  create an indexed vertex for every triplet of vertexId, normalId and texCoordId //
     //  every face is able to use a different set of vertex normals and texture coordinates
     //  when using a single vertex for multiple faces, however, this conflicts multiple normals
     //  rearrange and complete the imported data in the following way:

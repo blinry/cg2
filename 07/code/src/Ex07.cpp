@@ -241,8 +241,8 @@ void initShader() {
   }
   uniformLocations["usedLightCount"] = glGetUniformLocation(shaderProgram, "usedLightCount");
   
-  // TODO: get texture uniform location //
-  
+  // get texture uniform location //
+  glUniform1i(glGetUniformLocation(shaderProgram,"tex"),0);
 }
 
 bool enableShader() {
@@ -322,21 +322,20 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 void initTextures (void) {
     // generate a new OpenGL texture
-    GLuint texName;
-    glGenTextures(1, &texName);
+    glGenTextures(1, &texture);
 
     // initialize the texture properly (filtering, wrapping style, etc.)
-    glBindTexture(GL_TEXTURE_2D, texName);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // "../textures/trashbin.png" OR "../textures/ball.jpg"
-    TextureData texture = loadTextureData("../textures/trashbin.png");
+    TextureData texturedata = loadTextureData("../textures/trashbin.png");
 
     // upload the imported image data to the OpenGL texture
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_FLOAT, texture.data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texturedata.width, texturedata.height, 0, GL_RGB, GL_FLOAT, texturedata.data);
 
     // TODO: don't forget to clean up
     // clean up what??
@@ -357,7 +356,7 @@ TextureData loadTextureData(const char *textureFile) {
 
 void initScene() {
   // load scene.obj from disk and create renderable MeshObj //
-  // TODO: you may switch between the following mesh files //
+  // you may switch between the following mesh files //
   // - make sure to use the correct texture file for each mesh object //
   objLoader.loadObjFile("../meshes/trashbin.obj", "sceneObject");
   //objLoader.loadObjFile("../meshes/ball.obj", "sceneObject");
@@ -431,9 +430,14 @@ void renderScene() {
   glUniform3fv(uniformLocations["material.specular"], 1, glm::value_ptr(materials[materialIndex].specular_color));
   glUniform1f(uniformLocations["material.shininess"], materials[materialIndex].specular_shininess);
   
-  // TODO: upload texture to first texture unit //
-  // - bind the texture after activating the first texture unit
-  // - assign the currently active texture unit to the texture uniform of your shader
+  // upload texture to first texture unit //
+
+  // bind the texture after activating the first texture unit
+  glActiveTexture(0);
+  glBindTexture(GL_TEXTURE_2D, 0);
+
+  // assign the currently active texture unit to the texture uniform of your shader
+  glUniform1f(uniformLocations["tex"], texture);
   
   // render the actual object //
   objLoader.getMeshObj("sceneObject")->render();
