@@ -345,7 +345,7 @@ void initTextures (void) {
 // - hint: use opencv to import a image file
 TextureData loadTextureData(const char *textureFile) {
     cv::Mat texture_cv;
-    texture_cv = imread(textureFile);
+    texture_cv = cv::imread(textureFile);
 
     TextureData texture;
     texture.width = texture_cv.columns;
