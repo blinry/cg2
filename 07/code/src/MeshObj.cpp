@@ -28,10 +28,12 @@ void MeshObj::setData(const MeshData &meshData) {
   // create local storage arrays for vertices, normals and indices //
   unsigned int vertexDataSize = meshData.vertex_position.size();
   unsigned int vertexNormalSize = meshData.vertex_normal.size();
+  unsigned int vertexTexcoordSize = meshData.vertex_texcoord.size();
   
   GLfloat *vertex_position = new GLfloat[vertexDataSize]();
   std::copy(meshData.vertex_position.begin(), meshData.vertex_position.end(), vertex_position);
   GLfloat *vertex_normal = NULL;
+  GLfloat *vertex_texcoord = NULL;
   if (vertexNormalSize > 0) {
     vertex_normal = new GLfloat[vertexNormalSize]();
     std::copy(meshData.vertex_normal.begin(), meshData.vertex_normal.end(), vertex_normal);

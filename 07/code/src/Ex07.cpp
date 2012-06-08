@@ -1,7 +1,7 @@
 #include "Ex07.h"
 #include <sstream>
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
+#include <opencv\cv.h>
+#include <opencv\highgui.h>
 
 // OpenGL and GLSL stuff //
 void initGL();
@@ -205,14 +205,14 @@ void initShader() {
   glLinkProgram(shaderProgram);
   
   // get log //
-  int logMaxLength;
+  /*int logMaxLength;
   glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetProgramInfoLog(shaderProgram, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(initShader) - Linker log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }
+  }*/
   
   // set address of fragment color output //
   glBindFragDataLocation(shaderProgram, 0, "color");
@@ -307,14 +307,14 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
   glCompileShader(shader);
   
   // log compile messages, if any //
-  int logMaxLength;
+ /* int logMaxLength;
   glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logMaxLength);
   char log[logMaxLength];
   int logLength = 0;
   glGetShaderInfoLog(shader, logMaxLength, &logLength, log);
   if (logLength > 0) {
     std::cout << "(loadShaderFile) - Compiler log:\n------------------\n" << log << "\n------------------" << std::endl;
-  }
+  }*/
   
   // return compiled shader (may have compiled WITH errors) //
   return shader;
@@ -337,7 +337,6 @@ void initTextures (void) {
 // - return imported data as 'TextureData' container
 // - hint: use opencv to import a image file
 TextureData loadTextureData(const char *textureFile) {
-
 }
 
 void initScene() {
