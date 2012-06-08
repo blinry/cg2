@@ -5,6 +5,20 @@
 #include <sstream>
 #include <cmath>
 
+class Vec3Comparator {
+    public:
+        bool operator()(const glm::vec3 a,const glm::vec3 b) {
+            if (a[0] < b[0])
+                return true;
+            else if (a[0] == b[0])
+                if (a[1] < b[1])
+                    return true;
+                else if (a[1] == b[1])
+                    return a[2] < b[2];
+            return false;
+        }
+};
+
 ObjLoader::ObjLoader() {
 }
 
@@ -145,7 +159,29 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     // when reuisng a vertex definition of an already known triplet, reuse the index for that triplet and put it into meshData.indices
     // hint: you might want to use a std::map to remember already known id-triplets and their indices
     MeshData meshData;
+
+    std::map<glm::vec3, int, Vec3Comparator> used;
     
+    unsigned int index = 0;
+
+    for(int i=0; i<localFace.size(); i++) {
+        for (int j=0; j<=2; j++) {
+            glm::vec3 vertex_triple = glm::vec3(localFace[i][0][j], localFace[i][1][j], localFace[i][2][j]);
+            if (used[vertex_triple] == NULL) {
+                meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][0]);
+                meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][1]);
+                meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][2]);
+                meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][0]);
+                meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][1]);
+                meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][2]);
+                meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][0]);
+                meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][1]);
+                used[vertex_triple] = index;
+                index++;
+            }
+            meshData.indices.push_back(used[vertex_triple]);
+        }
+    }
     
     // create new MeshObj and set imported geoemtry data //
     meshObj = new MeshObj();
