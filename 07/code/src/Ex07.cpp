@@ -322,14 +322,15 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 void initTextures (void) {
     // generate a new OpenGL texture
-    int texName;
+    GLuint texName;
     glGenTextures(1, &texName);
 
     // initialize the texture properly (filtering, wrapping style, etc.)
     glBindTexture(GL_TEXTURE_2D, texName);
-    glTexParameteri(GL_TEXTURE2D, GL_TEXTURE_WRAP, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE2D, GL_TEXTURE_MAX_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // "../textures/trashbin.png" OR "../textures/ball.jpg"
     TextureData texture = loadTextureData("../textures/trashbin.png");
