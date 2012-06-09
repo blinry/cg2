@@ -23,7 +23,7 @@ uniform Material material;
 in vec3 vertexNormal;
 in vec3 eyeDir;
 in vec3 lightDir[maxLightCount];
-in vec2 texcoord;
+in vec2 texCoord;
 
 // texture //
 // set up a texture uniform //
@@ -34,7 +34,7 @@ out vec4 color;
 
 void main() {
   // get the texel value from your texture at the position of the passed texture coordinate //
-  vec3 texture_color = texture2D(tex, texcoord).rgb;
+  vec3 texture_color = texture2D(tex, texCoord).xyz;
 
   int lightCount = max(min(usedLightCount, maxLightCount), 0);
   // normalize the vectors passed from your vertex program //
@@ -60,5 +60,6 @@ void main() {
   // assign the final color to the fragment output variable //
   // combine the light/material color and the texture color properly //
   
-  color = vec4((ambientTerm+diffuseTerm+specularTerm)*texture_color,1);
+  //color = vec4((ambientTerm+diffuseTerm+specularTerm)*texture_color,1);
+  color = vec4(ambientTerm+diffuseTerm+specularTerm, 1);
 }

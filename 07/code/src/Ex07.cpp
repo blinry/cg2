@@ -242,7 +242,7 @@ void initShader() {
 	uniformLocations["usedLightCount"] = glGetUniformLocation(shaderProgram, "usedLightCount");
 
 	// get texture uniform location //
-	glUniform1i(glGetUniformLocation(shaderProgram,"tex"),0);
+	uniformLocations["tex"] = glGetUniformLocation(shaderProgram,"tex");
 }
 
 bool enableShader() {
@@ -333,12 +333,13 @@ void initTextures (void) {
 
 	// "../textures/trashbin.png" OR "../textures/ball.jpg"
 	TextureData texturedata = loadTextureData("../textures/trashbin.png");
+	//TextureData texturedata = loadTextureData("../textures/ball.png");
 
 	// upload the imported image data to the OpenGL texture
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texturedata.width, texturedata.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texturedata.data);
 
-	// TODO: don't forget to clean up
-	// clean up what??
+	// don't forget to clean up
+	glBindTexture(GL_TEXTURE_2D, 0);
 	free(texturedata.data);
 }
 
@@ -435,11 +436,11 @@ void renderScene() {
 	// upload texture to first texture unit //
 
 	// bind the texture after activating the first texture unit
-	glActiveTexture(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	// assign the currently active texture unit to the texture uniform of your shader
-	glUniform1f(uniformLocations["tex"], texture);
+	glUniform1i(uniformLocations["tex"], 0);
 
 	// render the actual object //
 	objLoader.getMeshObj("sceneObject")->render();

@@ -24,26 +24,12 @@ void MeshObj::setData(const MeshData &meshData) {
   
   // extend this method to upload texture coordinates as another VBO //
   // - texture coordinates are at location 2 within the shader code
-  unsigned int vertexTexcoordSize = meshData.vertex_texcoord.size();
-
-  GLfloat *vertex_texcoord = NULL;
-  if(vertexTexcoordSize > 0)
-  {
-  	vertex_texcoord = new GLfloat[vertexTexcoordSize];
-  	std::copy(meshData.vertex_texcoord.begin(), meshData.vertex_texcoord.end(), vertex_texcoord);
-	if(mVBO_texcoord == 0)
-	{
-		glGenBuffers(1, &mVBO_texcoord);
-	}
-	glBindBuffer(GL_ARRAY_BUFFER, mVBO_texcoord);
-	glBufferData(GL_ARRAY_BUFFER, vertexTexcoordSize * sizeof(GLfloat), &vertex_texcoord[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	glEnableVertexAttribArray(1);
-  }
   
   // create local storage arrays for vertices, normals and indices //
   unsigned int vertexDataSize = meshData.vertex_position.size();
   unsigned int vertexNormalSize = meshData.vertex_normal.size();
+  unsigned int vertexTexcoordSize = meshData.vertex_texcoord.size();
+
   
   GLfloat *vertex_position = new GLfloat[vertexDataSize]();
   std::copy(meshData.vertex_position.begin(), meshData.vertex_position.end(), vertex_position);
@@ -51,6 +37,12 @@ void MeshObj::setData(const MeshData &meshData) {
   if (vertexNormalSize > 0) {
     vertex_normal = new GLfloat[vertexNormalSize]();
     std::copy(meshData.vertex_normal.begin(), meshData.vertex_normal.end(), vertex_normal);
+  }
+  GLfloat *vertex_texcoord = NULL;
+  if(vertexTexcoordSize > 0)
+  {
+  	vertex_texcoord = new GLfloat[vertexTexcoordSize];
+  	std::copy(meshData.vertex_texcoord.begin(), meshData.vertex_texcoord.end(), vertex_texcoord);
   }
   GLuint *indices = new GLuint[mIndexCount]();
   std::copy(meshData.indices.begin(), meshData.indices.end(), indices);
@@ -80,6 +72,17 @@ void MeshObj::setData(const MeshData &meshData) {
     glEnableVertexAttribArray(1);
   }
   
+  if(vertexTexcoordSize > 0)
+  {
+	if(mVBO_texcoord == 0)
+	{
+		glGenBuffers(1, &mVBO_texcoord);
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, mVBO_texcoord);
+	glBufferData(GL_ARRAY_BUFFER, vertexTexcoordSize * sizeof(GLfloat), &vertex_texcoord[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glEnableVertexAttribArray(1);
+  }
   
   // init and bind a IBO //
   if (mIBO == 0) {

@@ -103,7 +103,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
 
       // NOTE: We use -1 for "not defined"
       if (!key.compare("f")) {
-          unsigned int vi0, vi1, vi2, vi3, ti0, ti1, ti2, ti3, ni0, ni1, ni2, ni3;
+          int vi0, vi1, vi2, vi3, ti0, ti1, ti2, ti3, ni0, ni1, ni2, ni3;
           vi0 = vi1 = vi2 = vi3 = ti0 = ti1 = ti2 = ti3 = ni0 = ni1 = ni2 = ni3 = -1;
           // read in vertex indices for a face //
           if (sscanf(sstr.str().c_str(), "f %d %d %d", &vi0, &vi1, &vi2) == 3
@@ -164,10 +164,13 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     
     unsigned int index = 0;
 
-    for(int i=0; i<localFace.size(); i++) {
-        for (int j=0; j<=2; j++) {
+    for(int i=0; i<localFace.size(); i++) 
+    {
+        for (int j=0; j<=2; j++) 
+	{
             glm::vec3 vertex_triple = glm::vec3(localFace[i][0][j], localFace[i][1][j], localFace[i][2][j]);
-            if (used[vertex_triple] == NULL) {
+            if (used.find(vertex_triple) == used.end()) 
+	    {
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][0]);
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][1]);
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][2]);
