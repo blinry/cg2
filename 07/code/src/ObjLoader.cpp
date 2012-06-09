@@ -9,12 +9,20 @@ class Vec3Comparator {
     public:
         bool operator()(const glm::vec3 a,const glm::vec3 b) {
             if (a[0] < b[0])
+	    {
                 return true;
+	    }
             else if (a[0] == b[0])
+	    {
                 if (a[1] < b[1])
+		{
                     return true;
+		}
                 else if (a[1] == b[1])
+		{
                     return a[2] < b[2];
+		}
+	    }
             return false;
         }
 };
@@ -83,7 +91,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
         
       }
       if (!key.compare("vt")) {
-        // read in vertex normal //
+        // read in vertex texcoord //
 	sstr >> x >> y;
 	localVertexTexcoord.push_back(glm::vec2(x, y));
         
@@ -164,7 +172,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     
     unsigned int index = 0;
 
-    for(int i=0; i<localFace.size(); i++) 
+    for(unsigned int i=0; i<localFace.size(); i++) 
     {
         for (int j=0; j<=2; j++) 
 	{
@@ -185,7 +193,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
                 	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][0]);
                 	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][1]);
 		}
-                used[vertex_triple] = index;
+		used.insert(std::make_pair(vertex_triple, index));
                 index++;
             }
             meshData.indices.push_back(used[vertex_triple]);

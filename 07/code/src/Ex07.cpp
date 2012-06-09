@@ -340,7 +340,7 @@ void initTextures (void) {
 
 	// don't forget to clean up
 	glBindTexture(GL_TEXTURE_2D, 0);
-	delete [] texturedata.data;
+	delete[] texturedata.data;
 }
 
 // - return imported data as 'TextureData' container
