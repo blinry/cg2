@@ -113,9 +113,9 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
                   || sscanf(sstr.str().c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d", &vi0, &ti0, &ni0, &vi1, &ti1, &ni1, &vi2, &ti2, &ni2) == 9
                       ) {
               std::vector<glm::vec3> face;
-              face.push_back(glm::vec3(vi0, vi1, vi2));
-              face.push_back(glm::vec3(ti0, ti1, ti2));
-              face.push_back(glm::vec3(ni0, ni1, ni2));
+              face.push_back(glm::vec3(vi0-1, vi1-1, vi2-1));
+              face.push_back(glm::vec3(ti0-1, ti1-1, ti2-1));
+              face.push_back(glm::vec3(ni0-1, ni1-1, ni2-1));
               localFace.push_back(face);
           } else if (sscanf(sstr.str().c_str(), "f %d %d %d %d", &vi0, &vi1, &vi2, &vi3) == 4
                   || sscanf(sstr.str().c_str(), "f %d// %d// %d// %d//", &vi0, &vi1, &vi2, &vi3) == 4
@@ -124,15 +124,15 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
                   || sscanf(sstr.str().c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d %d/%d/%d", &vi0, &ti0, &ni0, &vi1, &ti1, &ni1, &vi2, &ti2, &ni2, &vi3, &ti3, &ni3) == 12
                   ) {
               std::vector<glm::vec3> face;
-              face.push_back(glm::vec3(vi0, vi1, vi2));
-              face.push_back(glm::vec3(ti0, ti1, ti2));
-              face.push_back(glm::vec3(ni0, ni1, ni2));
+              face.push_back(glm::vec3(vi0-1, vi1-1, vi2-1));
+              face.push_back(glm::vec3(ti0-1, ti1-1, ti2-1));
+              face.push_back(glm::vec3(ni0-1, ni1-1, ni2-1));
               localFace.push_back(face);
 
               std::vector<glm::vec3> face2;
-              face2.push_back(glm::vec3(vi0, vi2, vi3));
-              face2.push_back(glm::vec3(ti0, ti2, ti3));
-              face2.push_back(glm::vec3(ni0, ni2, ni3));
+              face2.push_back(glm::vec3(vi0-1, vi2-1, vi3-1));
+              face2.push_back(glm::vec3(ti0-1, ti2-1, ti3-1));
+              face2.push_back(glm::vec3(ni0-1, ni2-1, ni3-1));
               localFace.push_back(face2);
           }
         
@@ -174,11 +174,17 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][0]);
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][1]);
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][2]);
-                meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][0]);
-                meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][1]);
-                meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][2]);
-                meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][0]);
-                meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][1]);
+		if(vertex_triple[1] >= 0)
+		{
+                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][0]);
+                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][1]);
+                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][2]);
+		}
+		if(vertex_triple[2] >= 0)
+		{
+                	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][0]);
+                	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][1]);
+		}
                 used[vertex_triple] = index;
                 index++;
             }

@@ -60,6 +60,6 @@ void main() {
   // assign the final color to the fragment output variable //
   // combine the light/material color and the texture color properly //
   
-  //color = vec4((ambientTerm+diffuseTerm+specularTerm)*texture_color,1);
-  color = vec4(ambientTerm+diffuseTerm+specularTerm, 1);
+  color = vec4((ambientTerm+diffuseTerm+specularTerm)*texture_color,1);
+  //color = vec4(ambientTerm+diffuseTerm+specularTerm, 1);
 }
