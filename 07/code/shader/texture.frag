@@ -34,7 +34,7 @@ out vec4 color;
 
 void main() {
   // get the texel value from your texture at the position of the passed texture coordinate //
-  vec3 texture_color = texture2D(tex, texcoord);
+  vec3 texture_color = texture2D(tex, texcoord).rgb;
 
   int lightCount = max(min(usedLightCount, maxLightCount), 0);
   // normalize the vectors passed from your vertex program //
@@ -60,5 +60,5 @@ void main() {
   // assign the final color to the fragment output variable //
   // combine the light/material color and the texture color properly //
   
-  color = (ambientTerm+diffuseTerm+specularTerm)*texture_color;
+  color = vec4((ambientTerm+diffuseTerm+specularTerm)*texture_color,1);
 }
