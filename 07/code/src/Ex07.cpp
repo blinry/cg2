@@ -333,14 +333,14 @@ void initTextures (void) {
 
 	// "../textures/trashbin.png" OR "../textures/ball.jpg"
 	TextureData texturedata = loadTextureData("../textures/trashbin.png");
-	//TextureData texturedata = loadTextureData("../textures/ball.png");
+	//TextureData texturedata = loadTextureData("../textures/ball.jpg");
 
 	// upload the imported image data to the OpenGL texture
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texturedata.width, texturedata.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texturedata.data);
 
 	// don't forget to clean up
 	glBindTexture(GL_TEXTURE_2D, 0);
-	free(texturedata.data);
+	delete [] texturedata.data;
 }
 
 // - return imported data as 'TextureData' container

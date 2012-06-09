@@ -41,7 +41,7 @@ void MeshObj::setData(const MeshData &meshData) {
   GLfloat *vertex_texcoord = NULL;
   if(vertexTexcoordSize > 0)
   {
-  	vertex_texcoord = new GLfloat[vertexTexcoordSize];
+  	vertex_texcoord = new GLfloat[vertexTexcoordSize]();
   	std::copy(meshData.vertex_texcoord.begin(), meshData.vertex_texcoord.end(), vertex_texcoord);
   }
   GLuint *indices = new GLuint[mIndexCount]();
@@ -81,7 +81,7 @@ void MeshObj::setData(const MeshData &meshData) {
 	glBindBuffer(GL_ARRAY_BUFFER, mVBO_texcoord);
 	glBufferData(GL_ARRAY_BUFFER, vertexTexcoordSize * sizeof(GLfloat), &vertex_texcoord[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
   }
   
   // init and bind a IBO //
