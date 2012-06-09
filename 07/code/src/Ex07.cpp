@@ -1,7 +1,7 @@
 #include "Ex07.h"
 #include <sstream>
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
+#include <opencv\cv.h>
+#include <opencv\highgui.h>
 
 // OpenGL and GLSL stuff //
 void initGL();
@@ -173,6 +173,7 @@ std::string getUniformStructLocStr(const std::string &structName, const std::str
 }
 
 void initShader() {
+<<<<<<< HEAD
 	shaderProgram = glCreateProgram();
 	// check if operation failed //
 	if (shaderProgram == 0) {
@@ -243,6 +244,78 @@ void initShader() {
 
 	// get texture uniform location //
 	uniformLocations["tex"] = glGetUniformLocation(shaderProgram,"tex");
+=======
+  shaderProgram = glCreateProgram();
+  // check if operation failed //
+  if (shaderProgram == 0) {
+    std::cout << "(initShader) - Failed creating shader program." << std::endl;
+    return;
+  }
+  
+  GLuint vertexShader = loadShaderFile("../shader/texture.vert", GL_VERTEX_SHADER);
+  if (vertexShader == 0) {
+    std::cout << "(initShader) - Could not create vertex shader." << std::endl;
+    deleteShader();
+    return;
+  }
+  GLuint fragmentShader = loadShaderFile("../shader/texture.frag", GL_FRAGMENT_SHADER);
+  if (fragmentShader == 0) {
+    std::cout << "(initShader) - Could not create vertex shader." << std::endl;
+    deleteShader();
+    return;
+  }
+  
+  // successfully loaded and compiled shaders -> attach them to program //
+  glAttachShader(shaderProgram, vertexShader);
+  glAttachShader(shaderProgram, fragmentShader);
+  
+  // mark shaders for deletion after clean up (they will be deleted, when detached from all shader programs) //
+  glDeleteShader(vertexShader);
+  glDeleteShader(fragmentShader);
+  
+  // link shader program //
+  glLinkProgram(shaderProgram);
+  
+  // get log //
+  /*int logMaxLength;
+  glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &logMaxLength);
+  char log[logMaxLength];
+  int logLength = 0;
+  glGetProgramInfoLog(shaderProgram, logMaxLength, &logLength, log);
+  if (logLength > 0) {
+    std::cout << "(initShader) - Linker log:\n------------------\n" << log << "\n------------------" << std::endl;
+  }*/
+  
+  // set address of fragment color output //
+  glBindFragDataLocation(shaderProgram, 0, "color");
+  
+  // get uniform locations for common variables //
+  uniformLocations["projection"] = glGetUniformLocation(shaderProgram, "projection");
+  uniformLocations["modelview"] = glGetUniformLocation(shaderProgram, "modelview");
+  
+  // material unform locations //
+  uniformLocations["material.ambient"] = glGetUniformLocation(shaderProgram, "material.ambient_color");
+  uniformLocations["material.diffuse"] = glGetUniformLocation(shaderProgram, "material.diffuse_color");
+  uniformLocations["material.specular"] = glGetUniformLocation(shaderProgram, "material.specular_color");
+  uniformLocations["material.shininess"] = glGetUniformLocation(shaderProgram, "material.specular_shininess");
+  
+  // store the uniform locations for all light source properties
+  for (int i = 0; i < 10; ++i) {
+    UniformLocation_Light lightLocation;
+    lightLocation.ambient_color = glGetUniformLocation(shaderProgram, getUniformStructLocStr("lightSource", "ambient_color", i).c_str());
+    lightLocation.diffuse_color = glGetUniformLocation(shaderProgram, getUniformStructLocStr("lightSource", "diffuse_color", i).c_str());
+    lightLocation.specular_color = glGetUniformLocation(shaderProgram, getUniformStructLocStr("lightSource", "specular_color", i).c_str());
+    lightLocation.position = glGetUniformLocation(shaderProgram, getUniformStructLocStr("lightSource", "position", i).c_str());
+    
+    std::stringstream sstr("");
+    sstr << "light_" << i;
+    uniformLocations_Lights[sstr.str()] = lightLocation;
+  }
+  uniformLocations["usedLightCount"] = glGetUniformLocation(shaderProgram, "usedLightCount");
+  
+  // TODO: get texture uniform location //
+  
+>>>>>>> 89f46d119caac1df6008433f00db399425852039
 }
 
 bool enableShader() {
@@ -290,6 +363,7 @@ char* loadShaderSource(const char* fileName) {
 
 // loads a source file and directly compiles it to a shader of 'shaderType' //
 GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
+<<<<<<< HEAD
 	GLuint shader = glCreateShader(shaderType);
 	// check if operation failed //
 	if (shader == 0) {
@@ -318,6 +392,36 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 
 	// return compiled shader (may have compiled WITH errors) //
 	return shader;
+=======
+  GLuint shader = glCreateShader(shaderType);
+  // check if operation failed //
+  if (shader == 0) {
+    std::cout << "(loadShaderFile) - Could not create shader." << std::endl;
+    return 0;
+  }
+  
+  // load source code from file //
+  const char* shaderSrc = loadShaderSource(fileName);
+  if (shaderSrc == NULL) return 0;
+  // pass source code to new shader object //
+  glShaderSource(shader, 1, (const char**)&shaderSrc, NULL);
+  delete[] shaderSrc;
+  // compile shader //
+  glCompileShader(shader);
+  
+  // log compile messages, if any //
+ /* int logMaxLength;
+  glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logMaxLength);
+  char log[logMaxLength];
+  int logLength = 0;
+  glGetShaderInfoLog(shader, logMaxLength, &logLength, log);
+  if (logLength > 0) {
+    std::cout << "(loadShaderFile) - Compiler log:\n------------------\n" << log << "\n------------------" << std::endl;
+  }*/
+  
+  // return compiled shader (may have compiled WITH errors) //
+  return shader;
+>>>>>>> 89f46d119caac1df6008433f00db399425852039
 }
 
 void initTextures (void) {
@@ -346,6 +450,7 @@ void initTextures (void) {
 // - return imported data as 'TextureData' container
 // - hint: use opencv to import a image file
 TextureData loadTextureData(const char *textureFile) {
+<<<<<<< HEAD
 	cv::Mat texture_cv;
 	texture_cv = cv::imread(textureFile);
 
@@ -355,6 +460,17 @@ TextureData loadTextureData(const char *textureFile) {
 	texture.data = new unsigned char[texture_cv.cols*texture_cv.rows*texture_cv.channels()];
 	memcpy(texture.data, texture_cv.data, texture_cv.cols*texture_cv.rows*texture_cv.channels()*sizeof(unsigned char));
 	return texture;
+=======
+
+    cv::Mat texture_cv;
+    texture_cv = cv::imread(textureFile);
+
+    TextureData texture;
+    texture.width = texture_cv.cols;
+    texture.height = texture_cv.rows;
+    texture.data = texture_cv.data;
+    return texture;
+>>>>>>> 89f46d119caac1df6008433f00db399425852039
 }
 
 void initScene() {
