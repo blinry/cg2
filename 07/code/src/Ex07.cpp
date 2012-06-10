@@ -326,8 +326,8 @@ void initTextures (void) {
 
 	// initialize the texture properly (filtering, wrapping style, etc.)
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -348,6 +348,7 @@ void initTextures (void) {
 TextureData loadTextureData(const char *textureFile) {
 	cv::Mat texture_cv;
 	texture_cv = cv::imread(textureFile);
+	cv::flip(texture_cv, texture_cv, 0);
 
 	TextureData texture;
 	texture.width = texture_cv.cols;

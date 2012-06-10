@@ -8,23 +8,19 @@
 class Vec3Comparator {
     public:
         bool operator()(const glm::vec3 a,const glm::vec3 b) {
-            if (a[0] < b[0])
+            if (a[0] != b[0])
 	    {
-                return true;
+                return a[0] < b[0];
 	    }
-            else if (a[0] == b[0])
+            else if (a[1] != b[1])
 	    {
-                if (a[1] < b[1])
-		{
-                    return true;
-		}
-                else if (a[1] == b[1])
-		{
-                    return a[2] < b[2];
-		}
+		return a[1] < b[1];
 	    }
-            return false;
-        }
+	    else
+	    {
+		    return a[2] < b[2];
+	    }
+	}
 };
 
 ObjLoader::ObjLoader() {

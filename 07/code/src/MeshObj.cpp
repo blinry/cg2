@@ -80,7 +80,7 @@ void MeshObj::setData(const MeshData &meshData) {
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, mVBO_texcoord);
 	glBufferData(GL_ARRAY_BUFFER, vertexTexcoordSize * sizeof(GLfloat), &vertex_texcoord[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_TRUE, 0, (void*)0);
 	glEnableVertexAttribArray(2);
   }
   
