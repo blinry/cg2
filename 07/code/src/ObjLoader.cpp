@@ -178,16 +178,16 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][0]);
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][1]);
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][2]);
-		if(vertex_triple[1] >= 0)
-		{
-                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][0]);
-                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][1]);
-                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[1]][2]);
-		}
 		if(vertex_triple[2] >= 0)
 		{
-                	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][0]);
-                	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[2]][1]);
+                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[2]][0]);
+                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[2]][1]);
+                	meshData.vertex_normal.push_back(localVertexNormal[vertex_triple[2]][2]);
+		}
+		if(vertex_triple[1] >= 0)
+		{
+                	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[1]][0]);
+                	meshData.vertex_texcoord.push_back(localVertexTexcoord[vertex_triple[1]][1]);
 		}
 		used.insert(std::make_pair(vertex_triple, index));
                 index++;
