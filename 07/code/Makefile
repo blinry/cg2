@@ -1,2 +1,3 @@
 default:
-	cd bin && cmake .. &&  make && ./ex07
+	gcc src/*cpp -lGL -lglut -lopencv_core -lopencv_highgui -lstdc++ -lGLEW -Iinclude -o bin/ex07
+	cd bin && ./ex07
