@@ -681,7 +681,7 @@ void mouseEvent(int button, int state, int x, int y) {
   CameraController::MouseState mouseState;
   if (state == GLUT_DOWN) {
     switch (button) {
-      case GLUT_LEFT_BUTTON : {
+        case GLUT_LEFT_BUTTON : {
         mouseState = CameraController::LEFT_BTN;
         break;
       }

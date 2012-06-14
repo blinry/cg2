@@ -3,6 +3,8 @@ layout(location = 0) in vec3 vertex;
 layout(location = 1) in vec3 vertex_normal;
 layout(location = 2) in vec2 vertex_texcoord;
 // TODO: add vertex attribute locations for tangent and binormal
+layout(location = 3) in vec3 vertex_tangent;
+layout(location = 4) in vec3 vertex_binormal;
 
 const int maxLightCount = 10;
 

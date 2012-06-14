@@ -36,6 +36,8 @@ void MeshObj::setData(const MeshData &meshData) {
   unsigned int vertexDataSize = meshData.vertex_position.size();
   unsigned int vertexNormalSize = meshData.vertex_normal.size();
   unsigned int vertexTexcoordSize = meshData.vertex_texcoord.size();
+  unsigned int vertexTangentSize = meshData.vertex_tangent.size();
+  unsigned int vertexBinormal = meshData.vertex_binormal.size();
   
   GLfloat *vertex_position = new GLfloat[vertexDataSize]();
   std::copy(meshData.vertex_position.begin(), meshData.vertex_position.end(), vertex_position);
@@ -43,6 +45,16 @@ void MeshObj::setData(const MeshData &meshData) {
   if (vertexNormalSize > 0) {
     vertex_normal = new GLfloat[vertexNormalSize]();
     std::copy(meshData.vertex_normal.begin(), meshData.vertex_normal.end(), vertex_normal);
+  }
+  GLfloat *vertex_tangent = NULL;
+  if (vertexTangentSize > 0) {
+    vertex_tangent = new GLfloat[vertexTangentSize]();
+    std::copy(meshData.vertex_tangent.begin(), meshData.vertex_tangent.end(), vertex_tangent);
+  }
+  GLfloat *vertex_binormal = NULL;
+  if (vertexBinormalSize > 0) {
+    vertex_binormal = new GLfloat[vertexBinormalSize]();
+    std::copy(meshData.vertex_binormal.begin(), meshData.vertex_binormal.end(), vertex_binormal);
   }
   GLfloat *vertex_texcoord = NULL;
   if (vertexTexcoordSize > 0) {
@@ -87,6 +99,26 @@ void MeshObj::setData(const MeshData &meshData) {
     glEnableVertexAttribArray(2);
   }
     
+  if (vertexTangentSize > 0) {
+    if (mVBO_tangent == 0) {
+      glGenBuffers(1, &mVBO_tangent);
+    }
+    glBindBuffer(GL_ARRAY_BUFFER, mVBO_tangent);
+    glBufferData(GL_ARRAY_BUFFER, vertexTangentSize * sizeof(GLfloat), &vertex_tangent[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glEnableVertexAttribArray(3);
+  }
+  
+  if (vertexBinormalSize > 0) {
+    if (mVBO_binormal == 0) {
+      glGenBuffers(1, &mVBO_binormal);
+    }
+    glBindBuffer(GL_ARRAY_BUFFER, mVBO_binormal);
+    glBufferData(GL_ARRAY_BUFFER, vertexBinormalSize * sizeof(GLfloat), &vertex_binormal[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glEnableVertexAttribArray(4);
+  }
+  
   // init and bind a IBO //
   if (mIBO == 0) {
     glGenBuffers(1, &mIBO);
@@ -104,6 +136,12 @@ void MeshObj::setData(const MeshData &meshData) {
   }
   if (vertexTexcoordSize > 0) {
     delete[] vertex_texcoord;
+  }
+  if (vertexTangentSize > 0) {
+    delete[] vertex_tangent;
+  }
+  if (vertexBinormalSize > 0) {
+    delete[] vertex_binormal;
   }
   delete[] indices;
 }
