@@ -61,7 +61,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
         sstr >> x >> y >> z;
 	localVertexPosition.push_back(glm::vec3(x, y, z));
       }
-      // TODO: implement parsing of vertex normal and tecture coordinate //
+      // implement parsing of vertex normal and tecture coordinate //
       if (!key.compare("vn")) {
         // read in vertex normal //
         sstr >> x >> y >> z;
@@ -72,7 +72,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
         sstr >> x >> y;
 	localVertexTexcoord.push_back(glm::vec2(x, y));
       }
-      // TODO: implement parsing of a face definition //
+      // implement parsing of a face definition //
       // note: faces using normals and tex-coords are defines as "f vi0/ti0/ni0 ... viN/tiN/niN"
       //       vi0 .. viN : vertex index of vertex 0..N
       //       ti0 .. tiN : texture coordinate index of vertex 0..N
