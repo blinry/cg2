@@ -297,8 +297,12 @@ void initShader() {
   
   // TODO: get texture uniform locations and store them in the texture containers //
   if (task == 0) {
-    // TODO: Task 8.1
-    // TODO: get the texture uniform locations of the textures defined in 'multi_texture.frag' //
+    // TODO?: Task 8.1
+    // TODO?: get the texture uniform locations of the textures defined in 'multi_texture.frag' //
+	texture[DIFFUSE].uniformLocation = glGetUniformLocation(shaderProgram, "diffuse_tex");
+	texture[EMISSIVE].uniformLocation = glGetUniformLocation(shaderProgram, "emissive_tex");
+	texture[SKY_ALPHA].uniformLocation = glGetUniformLocation(shaderProgram, "sky_alpha");
+	texture[SKY_COLOR].uniformLocation = glGetUniformLocation(shaderProgram, "sky_tex");
   } else {
     // TODO: Task 8.2
     // TODO: get the texture uniform locations of the textures defined in 'normal_mapping.frag' //
@@ -389,6 +393,10 @@ void initTextures (void) {
     //       - earthlights1k.jpg
     //       - earthcloudmaptrans.jpg
     //       - earthcloudmap.jpg
+    loadTextureData("../textures/earthmap1k.jpg", texture[DIFFUSE]);
+    loadTextureData("../textures/earthlights1k.jpg", texture[EMISSIVE]);
+    loadTextureData("../textures/earthcloudmaptrans.jpg", texture[SKY_ALPHA]);
+    loadTextureData("../textures/earthcloudmap.jpg", texture[SKY_COLOR]);
   } else if (task == 1) {
     // TODO: Task 8.2
     // TODO: Load moon textures and assign them to the proper texture containers
@@ -509,7 +517,20 @@ void renderEarth() {
   glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
   
   // TODO: upload textures to individual texture units //
-  
+ glActiveTexture(GL_TEXTURE0);
+ glBindTexture(GL_TEXTURE_2D, texture[DIFFUSE].glTextureLocation); 
+ glActiveTexture(GL_TEXTURE1); 
+ glBindTexture(GL_TEXTURE_2D, texture[EMISSIVE].glTextureLocation); 
+ glActiveTexture(GL_TEXTURE2); 
+ glBindTexture(GL_TEXTURE_2D, texture[SKY_ALPHA].glTextureLocation); 
+ glActiveTexture(GL_TEXTURE3); 
+ glBindTexture(GL_TEXTURE_2D, texture[SKY_COLOR].glTextureLocation);
+ 
+ //assign the currently active texture units to the texture uniforms of our shader
+ glUniform1i(texture[DIFFUSE].uniformLocation, 0); 
+ glUniform1i(texture[EMISSIVE].uniformLocation, 1); 
+ glUniform1i(texture[SKY_ALPHA].uniformLocation, 2); 
+ glUniform1i(texture[SKY_COLOR].uniformLocation, 3); 
   
   // render the actual object //
   MeshObj *mesh = objLoader.getMeshObj("sceneObject");
