@@ -267,8 +267,8 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
         float dv2 = t2[1] - t0[1];
 
         glm::mat2x2 firstmat(dv2, -du2, -dv1, du1);
-        glm::vec2x3 secondmat(e1, e2);
-        glm::vec2x3 result = glm::invert(firstmat)*secondmat;
+        glm::mat2x3 secondmat(e1, e2);
+        glm::mat2x3 result = glm::inverse(firstmat)*secondmat;
         glm::vec3 t = result[0];
         glm::vec3 b = result[1];
 
@@ -299,13 +299,13 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
                 meshData.vertex_normal[index+1],
                 meshData.vertex_normal[index+2]);
         tangents[vertexnr] = tangents[vertexnr] - glm::dot(normal,tangents[vertexnr])*normal;
-        binormal[vertexnr] = glm::cross(tangents[vertexnr],normal); 
+        binormals[vertexnr] = glm::cross(tangents[vertexnr],normal); 
 
         meshData.vertex_tangent.push_back(tangents[vertexnr][0]);
         meshData.vertex_tangent.push_back(tangents[vertexnr][1]);
         meshData.vertex_tangent.push_back(tangents[vertexnr][2]);
-        meshData.vertex_binormal.push_back(binormal[vertexnr][0]);
-        meshData.vertex_binormal.push_back(binormal[vertexnr][1]);
-        meshData.vertex_binormal.push_back(binormal[vertexnr][2]);
+        meshData.vertex_binormal.push_back(binormals[vertexnr][0]);
+        meshData.vertex_binormal.push_back(binormals[vertexnr][1]);
+        meshData.vertex_binormal.push_back(binormals[vertexnr][2]);
     }
 }

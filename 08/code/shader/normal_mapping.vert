@@ -38,16 +38,24 @@ void main() {
   gl_Position = projection * modelview * vec4(vertex, 1.0);
   
   // TODO: compute tangent space conversion matrix //
+  // transpose of matrix (tx, bx, nx, 0)
+  //			 (ty, by, ny, 0)
+  //			 (tz, bz, nz, 0)
+  //			 ( 0,  0,  0, 1)
+  // using column major notation:
+  mat4 worldToTangent = transpose(mat4(normalize(normalMatrix*vec4(vertex_tangent, 0)), normalize(normalMatrix*vec4(vertex_binormal, 0)), normalize(normalMatrix*vec4(vertex_normal, 0)), normalize(normalMatrix*vec4(0, 0, 0, 1))));
   
   // compute per vertex camera direction //
   vec3 vertexInCamSpace = (modelview * vec4(vertex, 1.0)).xyz;
   
   // TODO: vector from vertex to camera in *tangent space* //
+  eyeDir = (worldToTangent * (-vertexInCamSpace)).xyz;
   
   // vertex to light for every light source! //
   for (int i = 0; i < lightCount; ++i) {
     vec3 lightInCamSpace = (modelview * vec4(lightSource[i].position, 1.0)).xyz;
     // TODO: vector from vertex to light in *tangent space* //
+    lightDir[i] = (worldToTangent * (lightInCamSpace - vertexInCamSpace)).xyz;
   }
   
   // write texcoord //

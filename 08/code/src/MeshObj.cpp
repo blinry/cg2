@@ -37,7 +37,7 @@ void MeshObj::setData(const MeshData &meshData) {
   unsigned int vertexNormalSize = meshData.vertex_normal.size();
   unsigned int vertexTexcoordSize = meshData.vertex_texcoord.size();
   unsigned int vertexTangentSize = meshData.vertex_tangent.size();
-  unsigned int vertexBinormal = meshData.vertex_binormal.size();
+  unsigned int vertexBinormalSize = meshData.vertex_binormal.size();
   
   GLfloat *vertex_position = new GLfloat[vertexDataSize]();
   std::copy(meshData.vertex_position.begin(), meshData.vertex_position.end(), vertex_position);

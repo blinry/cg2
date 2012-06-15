@@ -26,6 +26,8 @@ in vec3 lightDir[maxLightCount];
 in vec2 textureCoord;
 
 // TODO: textures for color and normals //
+uniform sampler2D diffuse_tex;
+uniform sampler2D normal_tex;
 
 // this defines the fragment output //
 out vec4 color;
@@ -33,6 +35,7 @@ out vec4 color;
 void main() {
   // TODO: import color for current texture coordinate //
   vec3 diffuse;
+  diffuse = texture2D(diffuse_tex, textureCoord).xyz;
   
   // light computation //
   int lightCount = max(min(usedLightCount, maxLightCount), 0);
@@ -40,6 +43,8 @@ void main() {
   vec3 E = normalize(eyeDir); // eye dir is already in tangent space //
   // TODO: import normal in tangent space from normal map//
   vec3 N;
+  N = texture2D(normal_tex, textureCoord);
+  N = (2 * N) - vec3(1); 
   
   // compute lighting uwing ambient, diffuse and specular color terms //
   vec3 ambientTerm = vec3(0);
