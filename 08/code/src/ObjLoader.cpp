@@ -268,7 +268,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
 
         glm::mat2x2 firstmat(dv2, -du2, -dv1, du1);
         glm::mat2x3 secondmat(e1, e2);
-        glm::mat2x3 result = glm::inverse(firstmat)*secondmat;
+        glm::mat2x3 result = secondmat*glm::inverse(firstmat);
         glm::vec3 t = result[0];
         glm::vec3 b = result[1];
 
@@ -279,6 +279,36 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
         binormals[vertexnr] += b;
         binormals[vertexnr+1] += b;
         binormals[vertexnr+2] += b;
+
+        //Debug output for first vertex
+        if(vertexnr == 0)
+        {
+            std::cout << "v0: " << v0.x << " " << v0.y << " " << v0.z << std::endl;
+            std::cout << "v1: " << v1.x << " " << v1.y << " " << v1.z << std::endl;
+            std::cout << "v2: " << v2.x << " " << v2.y << " " << v2.z << std::endl;
+
+            std::cout << "t0: " << t0.x << " " << t0.y <<  std::endl;
+            std::cout << "t1: " << t1.x << " " << t1.y <<  std::endl;
+            std::cout << "t2: " << t0.x << " " << t0.y <<  std::endl;
+            
+            std::cout << "e1: " << e1.x << " " << e1.y << " " << e1.z << std::endl;
+            std::cout << "e2: " << e2.x << " " << e2.y << " " << e2.z << std::endl;
+
+            std::cout << "du1: " << du1 << std::endl;
+            std::cout << "du2: " << du2 << std::endl;
+            std::cout << "dv1: " << dv1 << std::endl;
+            std::cout << "dv2: " << dv2 << std::endl;
+
+            std::cout << "firstmat: " << std::endl << firstmat[0][0] << " " << firstmat[0][1] << std::endl << firstmat[1][0] << " " << firstmat[1][1] << std::endl;
+            std::cout << "secondmat: " << std::endl << secondmat[0][0] << " " << secondmat[0][1] << " " << secondmat[0][2] << std::endl << secondmat[1][0] << " " << secondmat[1][1] << " " << secondmat[1][2] << std::endl;
+            std::cout << "secondmat: " << std::endl << secondmat[0][0] << " " << secondmat[0][1] << " " << secondmat[0][2] << std::endl << secondmat[1][0] << " " << secondmat[1][1] << " " << secondmat[1][2] << std::endl;
+
+            
+            std::cout << "result: " << std::endl << result[0][0] << " " << result[0][1] << " " << result[0][2] << std::endl << result[1][0] << " " << result[1][1] << " " << result[1][2] << std::endl;
+
+            std::cout << "t: " << t.x << " " << t.y << " " << t.z << std::endl;
+            std::cout << "b: " << b.x << " " << b.y << " " << b.z << std::endl;
+        }
     }
 
     for (int vertexnr = 0; vertexnr < meshData.indices.size(); vertexnr++) {

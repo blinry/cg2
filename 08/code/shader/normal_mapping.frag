@@ -43,7 +43,7 @@ void main() {
   vec3 E = normalize(eyeDir); // eye dir is already in tangent space //
   // TODO: import normal in tangent space from normal map//
   vec3 N;
-  N = texture2D(normal_tex, textureCoord);
+  N = texture2D(normal_tex, textureCoord).rgb;
   N = (2 * N) - vec3(1); 
   
   // compute lighting uwing ambient, diffuse and specular color terms //

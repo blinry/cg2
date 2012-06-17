@@ -49,13 +49,13 @@ void main() {
   vec3 vertexInCamSpace = (modelview * vec4(vertex, 1.0)).xyz;
   
   // TODO: vector from vertex to camera in *tangent space* //
-  eyeDir = (worldToTangent * (-vertexInCamSpace)).xyz;
+  eyeDir = (worldToTangent * vec4(-vertexInCamSpace, 0.0)).xyz;
   
   // vertex to light for every light source! //
   for (int i = 0; i < lightCount; ++i) {
     vec3 lightInCamSpace = (modelview * vec4(lightSource[i].position, 1.0)).xyz;
     // TODO: vector from vertex to light in *tangent space* //
-    lightDir[i] = (worldToTangent * (lightInCamSpace - vertexInCamSpace)).xyz;
+    lightDir[i] = (worldToTangent * vec4(lightInCamSpace - vertexInCamSpace,0.0)).xyz;
   }
   
   // write texcoord //
