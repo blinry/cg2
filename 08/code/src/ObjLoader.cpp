@@ -236,6 +236,8 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
     for(int i=0; i<meshData.indices.size(); i++)
         binormals.push_back(glm::vec3(0,0,0));
 
+    std::cout << "meshData.indices.size(): " << meshData.indices.size() << std::endl;
+
     for (int vertexnr = 0; vertexnr < meshData.indices.size(); vertexnr+=3) {
         int index = meshData.indices[vertexnr];
         glm::vec3 v0(meshData.vertex_position[index],
@@ -259,7 +261,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
                 meshData.vertex_texcoord[index+1]);
 
         glm::vec3 e1 = v1 - v0;
-        glm::vec3 e2 = v1 - v0;
+        glm::vec3 e2 = v2 - v0;
 
         float du1 = t1[0] - t0[0];
         float du2 = t2[0] - t0[0];
@@ -281,7 +283,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
         binormals[vertexnr+2] += b;
 
         //Debug output for first vertex
-        if(vertexnr == 0)
+        if(vertexnr == 15)
         {
             std::cout << "v0: " << v0.x << " " << v0.y << " " << v0.z << std::endl;
             std::cout << "v1: " << v1.x << " " << v1.y << " " << v1.z << std::endl;
@@ -300,14 +302,14 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
             std::cout << "dv2: " << dv2 << std::endl;
 
             std::cout << "firstmat: " << std::endl << firstmat[0][0] << " " << firstmat[0][1] << std::endl << firstmat[1][0] << " " << firstmat[1][1] << std::endl;
+            std::cout << "glm::inverse(firstmat): " << std::endl << glm::inverse(firstmat)[0][0] << " " << glm::inverse(firstmat)[0][1] << std::endl << glm::inverse(firstmat)[1][0] << " " << glm::inverse(firstmat)[1][1] << std::endl;
             std::cout << "secondmat: " << std::endl << secondmat[0][0] << " " << secondmat[0][1] << " " << secondmat[0][2] << std::endl << secondmat[1][0] << " " << secondmat[1][1] << " " << secondmat[1][2] << std::endl;
-            std::cout << "secondmat: " << std::endl << secondmat[0][0] << " " << secondmat[0][1] << " " << secondmat[0][2] << std::endl << secondmat[1][0] << " " << secondmat[1][1] << " " << secondmat[1][2] << std::endl;
-
             
             std::cout << "result: " << std::endl << result[0][0] << " " << result[0][1] << " " << result[0][2] << std::endl << result[1][0] << " " << result[1][1] << " " << result[1][2] << std::endl;
 
             std::cout << "t: " << t.x << " " << t.y << " " << t.z << std::endl;
             std::cout << "b: " << b.x << " " << b.y << " " << b.z << std::endl;
+            std::cout << std::flush;
         }
     }
 
