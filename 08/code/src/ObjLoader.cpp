@@ -268,7 +268,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
         float dv1 = t1[1] - t0[1];
         float dv2 = t2[1] - t0[1];
 
-        glm::mat2x2 firstmat(dv2, -du2, -dv1, du1);
+        glm::mat2x2 firstmat(du1, dv1, du2, dv2);
         glm::mat2x3 secondmat(e1, e2);
         glm::mat2x3 result = secondmat*glm::inverse(firstmat);
         glm::vec3 t = result[0];
