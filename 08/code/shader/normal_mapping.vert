@@ -1,4 +1,5 @@
 #version 330
+#pragma unroll
 layout(location = 0) in vec3 vertex;
 layout(location = 1) in vec3 vertex_normal;
 layout(location = 2) in vec2 vertex_texcoord;
@@ -49,13 +50,13 @@ void main() {
   vec3 vertexInCamSpace = (modelview * vec4(vertex, 1.0)).xyz;
   
   // TODO: vector from vertex to camera in *tangent space* //
-  eyeDir = (worldToTangent * vec4(-vertexInCamSpace, 0.0)).xyz;
+  eyeDir = normalize((worldToTangent * inverse(modelview)  * vec4(-vertexInCamSpace, 1.0)).xyz);
   
   // vertex to light for every light source! //
   for (int i = 0; i < lightCount; ++i) {
     vec3 lightInCamSpace = (modelview * vec4(lightSource[i].position, 1.0)).xyz;
     // TODO: vector from vertex to light in *tangent space* //
-    lightDir[i] = (worldToTangent * vec4(lightInCamSpace - vertexInCamSpace,0.0)).xyz;
+    lightDir[i] = normalize((worldToTangent * inverse(modelview) * vec4(lightInCamSpace - vertexInCamSpace,1.0)).xyz);
   }
   
   // write texcoord //
