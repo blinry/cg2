@@ -278,7 +278,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
         tangents[vertexnr+2] += t;
 
         //Debug output for first vertex
-        if(vertexnr == 15)
+        if(vertexnr == 0)
         {
             std::cout << "v0: " << v0.x << " " << v0.y << " " << v0.z << std::endl;
             std::cout << "v1: " << v1.x << " " << v1.y << " " << v1.z << std::endl;
