@@ -356,6 +356,11 @@ void initShader() {
 		}
 
 		// TODO: set output format for both shaders (hint: glBindFragDataLocation) //
+		glBindFragDataLocation(shaderPass[0], 0, "vertex_pos");
+		glBindFragDataLocation(shaderPass[0], 1, "vertex_normal");
+		glBindFragDataLocation(shaderPass[0], 2, "vertex_texcoord");
+
+		glBindFragDataLocation(shaderPass[1], 0, "color");
 
 		// get uniform locations for each shader //
 		glUseProgram(shaderPass[0]);
@@ -515,13 +520,13 @@ void createEmptyTexture(std::string texID, unsigned int width, unsigned int heig
 
   // TODO?: bind the texture and set wrapping and filtering parameters (use GL_NEAREST for filtering) //
   glBindTexture(GL_TEXTURE_2D, texture.glTextureLocation);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   
   // TODO?: initialize the texture object without uploading data //
   
   texture.isInitialized = true;
-  texture
+  texture.data = NULL;
 }
 
 // #INFO# creates a texture by loading image data from disk //

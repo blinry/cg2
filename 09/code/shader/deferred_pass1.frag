@@ -7,6 +7,9 @@ in vec3 io_normal;
 in vec2 io_texCoord;
 
 // TODO: define your fragment outputs here //
+out vec4 vertex_pos;
+out vec4 vertex_normal;
+out vec2 vertex_texcoord;
 
 // normal map //
 uniform sampler2D normalMap;
