@@ -509,13 +509,19 @@ void createEmptyTexture(std::string texID, unsigned int width, unsigned int heig
   texture.width = width;
   texture.height = height;
   
-  // TODO: generate a texture //
+  // TODO?: generate a texture //
+  glGenTextures( 1, &texture.glTextureLocation);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA32F, GL_FLOAT, NULL);
+
+  // TODO?: bind the texture and set wrapping and filtering parameters (use GL_NEAREST for filtering) //
+  glBindTexture(GL_TEXTURE_2D, texture.glTextureLocation);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   
-  // TODO: bind the texture and set wrapping and filtering parameters (use GL_NEAREST for filtering) //
-  
-  // TODO: initialize the texture object without uploading data //
+  // TODO?: initialize the texture object without uploading data //
   
   texture.isInitialized = true;
+  texture
 }
 
 // #INFO# creates a texture by loading image data from disk //
