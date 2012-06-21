@@ -507,7 +507,7 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 	return shader;
 }
 
-// TODO: complete code to generate empty textures //
+// TODO?: complete code to generate empty textures //
 // hint: use GL_RGBA32F as texture format, GL_RGBA as internal format and GL_FLOAT as internal type
 void createEmptyTexture(std::string texID, unsigned int width, unsigned int height) {
   Texture &texture = textures[texID];
@@ -525,8 +525,8 @@ void createEmptyTexture(std::string texID, unsigned int width, unsigned int heig
   
   // TODO?: initialize the texture object without uploading data //
   
-  texture.isInitialized = true;
   texture.data = NULL;
+  texture.isInitialized = true;
 }
 
 // #INFO# creates a texture by loading image data from disk //
@@ -630,14 +630,14 @@ void initFBO() {
 	createEmptyTexture("texcoord", windowWidth, windowHeight);
 
 	// TODO: get uniforms locations in shader (pass 0) //
-	uniformLocations["def_vertexMap"] = glGetUniformLocation(shader[1], "def_vertexMap");
-	uniformLocations["def_normalMap"] = glGetUniformLocation(shader[1], "def_normalMap");
-	uniformLocations["def_texCoordMap"] = glGetUniformLocation(shader[1], "def_texCoordMap");
+	uniformLocations["def_vertexMap"] = glGetUniformLocation(shaderPass[1], "def_vertexMap");
+	uniformLocations["def_normalMap"] = glGetUniformLocation(shaderPass[1], "def_normalMap");
+	uniformLocations["def_texCoordMap"] = glGetUniformLocation(shaderPass[1], "def_texCoordMap");
 
 	// TODO: attach textures to FBO for output VERTEX, NORMAL, TEXCOORD //
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textures["def_vertexMap"].uniformLocation, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, textures["def_normalMap"].uniformLocation, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, textures["def_texCoordMap"].uniformLocation, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textures["position"].uniformLocation, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, textures["normal"].uniformLocation, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, textures["texcoord"].uniformLocation, 0);
 
 	// TODO: generate renderbuffer for depth data //
 	glGenRenderbuffers(1, &rb);
