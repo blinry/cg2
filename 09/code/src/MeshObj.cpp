@@ -26,7 +26,7 @@ MeshObj::~MeshObj() {
 void MeshObj::setData(const MeshData &meshData) {
   mIndexCount = meshData.indices.size();
   
-  // TODO: extend this method to upload tangent and binormal as VBOs //
+  // extend this method to upload tangent and binormal as VBOs //
   // - tangents are at location 3 within the shader code
   // - binormals are at location 4 within the shader code
   

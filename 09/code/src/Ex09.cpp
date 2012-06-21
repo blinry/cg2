@@ -505,17 +505,23 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 // TODO: complete code to generate empty textures //
 // hint: use GL_RGBA32F as texture format, GL_RGBA as internal format and GL_FLOAT as internal type
 void createEmptyTexture(std::string texID, unsigned int width, unsigned int height) {
-	Texture &texture = textures[texID];
-	texture.width = width;
-	texture.height = height;
+  Texture &texture = textures[texID];
+  texture.width = width;
+  texture.height = height;
+  
+  // TODO?: generate a texture //
+  glGenTextures( 1, &texture.glTextureLocation);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA32F, GL_FLOAT, NULL);
 
-	// TODO: generate a texture //
-
-	// TODO: bind the texture and set wrapping and filtering parameters (use GL_NEAREST for filtering) //
-
-	// TODO: initialize the texture object without uploading data //
-
-	texture.isInitialized = true;
+  // TODO?: bind the texture and set wrapping and filtering parameters (use GL_NEAREST for filtering) //
+  glBindTexture(GL_TEXTURE_2D, texture.glTextureLocation);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+  
+  // TODO?: initialize the texture object without uploading data //
+  
+  texture.isInitialized = true;
+  texture
 }
 
 // #INFO# creates a texture by loading image data from disk //
