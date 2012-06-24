@@ -38,17 +38,19 @@ out vec4 color;
 void main() {
   // TODO?: get position in camera space //
   vec3 def_vertex = texture2D(def_vertexMap, io_texCoord).xyz;
+
+  //discard pixels not covered by any geometry
+  if(length(def_vertex) < 0.000001)
+	  discard;
   
   // TODO?: get texture coordinates //
   vec2 textureCoord = texture2D(def_texCoordMap, io_texCoord).xy;
   
-  // TODO: eye vector //
-  // Ist der fest? Oder muessen wir ihn durchschleifen wie im 
-normal_mapping shader?
-  vec3 E = vec3(0,0,1);
+  // TODO?: eye vector //
+  vec3 E = normalize(-def_vertex);
   
   // TODO?: normal in camera space normal //
-  vec3 N = texture2D(def_normalMap, io_texCoord).xyz;
+  vec3 N = normalize(texture2D(def_normalMap, io_texCoord).xyz);
   
   // light computation //
   int lightCount = max(min(usedLightCount, maxLightCount), 0);

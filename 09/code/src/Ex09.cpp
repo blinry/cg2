@@ -510,23 +510,23 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 // TODO?: complete code to generate empty textures //
 // hint: use GL_RGBA32F as texture format, GL_RGBA as internal format and GL_FLOAT as internal type
 void createEmptyTexture(std::string texID, unsigned int width, unsigned int height) {
-  Texture &texture = textures[texID];
-  texture.width = width;
-  texture.height = height;
-  
-  // TODO?: generate a texture //
-  glGenTextures( 1, &texture.glTextureLocation);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA32F, GL_FLOAT, NULL);
+	Texture &texture = textures[texID];
+	texture.width = width;
+	texture.height = height;
 
-  // TODO?: bind the texture and set wrapping and filtering parameters (use GL_NEAREST for filtering) //
-  glBindTexture(GL_TEXTURE_2D, texture.glTextureLocation);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  
-  // TODO?: initialize the texture object without uploading data //
-  
-  texture.data = NULL;
-  texture.isInitialized = true;
+	// TODO?: generate a texture //
+	glGenTextures( 1, &texture.glTextureLocation);
+
+	// TODO?: bind the texture and set wrapping and filtering parameters (use GL_NEAREST for filtering) //
+	glBindTexture(GL_TEXTURE_2D, texture.glTextureLocation);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+
+	// TODO?: initialize the texture object without uploading data //
+	texture.data = NULL;
+	texture.isInitialized = true;
 }
 
 // #INFO# creates a texture by loading image data from disk //
@@ -625,20 +625,19 @@ void initFBO() {
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
 	// TODO?: generate texture objects to hold the data //
-	createEmptyTexture("position", windowWidth, windowHeight);
-	createEmptyTexture("normal", windowWidth, windowHeight);
-	createEmptyTexture("texcoord", windowWidth, windowHeight);
+	createEmptyTexture("def_vertexMap", windowWidth, windowHeight);
+	createEmptyTexture("def_normalMap", windowWidth, windowHeight);
+	createEmptyTexture("def_texCoordMap", windowWidth, windowHeight);
 
 	// TODO?: get uniforms locations in shader (pass 0) //
-    textures["position"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_vertexMap");
-
-	textures["normal"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_normalMap");
-	textures["texcoord"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_texCoordMap");
+	textures["def_vertexMap"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_vertexMap");
+	textures["def_normalMap"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_normalMap");
+	textures["def_texCoordMap"].uniformLocation = glGetUniformLocation(shaderPass[1], "def_texCoordMap");
 
 	// TODO?: attach textures to FBO for output VERTEX, NORMAL, TEXCOORD //
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textures["position"].uniformLocation, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, textures["normal"].uniformLocation, 0);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, textures["texcoord"].uniformLocation, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textures["def_vertexMap"].glTextureLocation, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, textures["def_normalMap"].glTextureLocation, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, textures["def_texCoordMap"].glTextureLocation, 0);
 
 	// TODO?: generate renderbuffer for depth data //
 	glGenRenderbuffers(1, &rb);
@@ -764,11 +763,11 @@ void renderScene() {
 
 		glUseProgram(shaderPass[0]);
 		// TODO?: bind FBO for off screen rendering //
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
 		// TODO?: select correct draw buffers //
-        GLenum buffers[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
-        glDrawBuffers(2, buffers);
+		GLenum buffers[3] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
+		glDrawBuffers(3, buffers);
 
 		// upload normal textures //
 		glActiveTexture(GL_TEXTURE0);
@@ -799,7 +798,7 @@ void renderScene() {
 		// - enable pass 1 shader            //
 		glUseProgram(shaderPass[1]);
 		// - bind standard frame buffer -> 0 //
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		// create simple projection and view matrices //
 		glm::mat4 pass1_proj = glm::ortho(0.0f, 1.0f, 0.0f, 1.0f);
@@ -822,16 +821,16 @@ void renderScene() {
 		// TODO?: upload textures created in previous render pass //
 
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, textures["position"].glTextureLocation);
-		glUniform1i(textures["position"].uniformLocation, 1);
+		glBindTexture(GL_TEXTURE_2D, textures["def_vertexMap"].glTextureLocation);
+		glUniform1i(textures["def_vertexMap"].uniformLocation, 1);
 
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, textures["normal"].glTextureLocation);
-		glUniform1i(textures["normal"].uniformLocation, 2);
+		glBindTexture(GL_TEXTURE_2D, textures["def_normalMap"].glTextureLocation);
+		glUniform1i(textures["def_normalMap"].uniformLocation, 2);
 
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, textures["texcoord"].glTextureLocation);
-		glUniform1i(textures["texcoord"].uniformLocation, 3);
+		glBindTexture(GL_TEXTURE_2D, textures["def_texCoordMap"].glTextureLocation);
+		glUniform1i(textures["def_texCoordMap"].uniformLocation, 3);
 
 		// render screen filling quad //
 		if (!screenQuad) initScreenFillingQuad();

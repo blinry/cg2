@@ -19,16 +19,21 @@ void main() {
 	vertex_pos = vec4(io_vertex, 1.0);
 
 	// TODO: compute modified surface normal //
-	vec3 n = texture2D(normalMap, io_texCoord).xyz * 2 - vec3(1);
+	vec3 n = normalize(texture2D(normalMap, io_texCoord).xyz * 2 - 1);
 
-	mat3 Tangent2CamSpace = inverse(mat3(io_tangent.x, io_binormal.x, io_normal.x,
-			io_tangent.y, io_binormal.y, io_normal.y,
-			io_tangent.z, io_binormal.z, io_normal.z));
+	vec3 tangent, binormal, normal;
+	tangent = normalize(io_tangent);
+	binormal = normalize(io_binormal);
+	normal = normalize(io_normal);
+
+	mat3 Tangent2CamSpace = inverse(mat3(tangent.x, binormal.x, normal.x,
+			tangent.y, binormal.y, normal.y,
+			tangent.z, binormal.z, normal.z));
 
 	n = (Tangent2CamSpace * n).xyz;
 
 	// TODO: write modified normal in camera space //
-	vertex_normal = vec4(n, 0);
+	vertex_normal = vec4(n, 1);
 
 	// TODO: write texture coordinate //
 	vertex_texcoord = vec4(io_texCoord, 0, 0);
