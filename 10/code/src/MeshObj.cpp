@@ -168,24 +168,93 @@ void MeshObj::render(void) {
 void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   // TODO: create a local storage for your shadow volume vertex data and the indices used for rendering //
   // you might want to use a MeshData container //
-  
+     MeshData shadows;
   // TODO: clone existing vertex data into your local storage //
-  
+     shadows.vertex_position = mMeshData.vertex_position; // öhm ne glaube nicht das das funktioniert
+     shadows.indices = mMeshData.indices;
   // TODO: for every vertex:                         //
   // - project vertex from lightsource to *infinity* //
   // - append vertex to local vertex data storage    //
-  
+     GLfloat farFarAway = 1000000000000000000000000000000000000; // TODO das gibt so probleme
+
+     for (int i=0 ; i < shadows.indices.size() ; i++){
+
+    	GLfloat x,y,z;
+        // TODO normaisieren von dem Vektor hier
+    	x = (lightPos.x - shadows.vertex_position.x) * farFarAway ;
+    	y = (lightPos.y - shadows.vertex_position.y) * farFarAway ;
+    	z = (lightPos.z - shadows.vertex_position.z) * farFarAway ;
+
+    	shadows.vertex_position.push_back(x);
+    	shadows.vertex_position.push_back(y);
+    	shadows.vertex_position.push_back(z);
+     }
+
   // TODO: the vertex data is now stored as two concatenated sets in a single vector //
   // - the first set contains the original vertex data                               //
   // - the second set contains the projected vertex data *in the same order*         //
   // -> you might want to store the size of such a set to easily access              //
   //    corresponding vertices later on                                              //
-  
+    GLuint sizeOfSet = shadows.vertex_position.size();
   // TODO: project 8 (6 sides + 2 caps) shadow triangles for each mesh triangle //
   // - process every geometry face and create 6 (or 8) new faces from it        //
   // - be sure to check the face orientation and flip back facing triangles     //  
-  //   when creating the shadow volume                                          //
-  
+  //   when creating the shadow volume
+  //
+    Vec3f a,b,c,a1,b1,c1;
+    for (int i = 0 ; i < shadows.indices.size() ; i++){
+      a.x = shadows.indices[i*3];
+      a.y = shadows.indices[(i+1)*3];
+      a.z = shadows.indices[(i+2)*3];
+
+      b.x = shadows.indices[i*3+3];
+      b.y = shadows.indices[(i+1)*3+3];
+      b.z = shadows.indices[(i+2)*3+3];
+
+      c.x = shadows.indices[i*3+6];
+      c.y = shadows.indices[(i+1)*3+6];
+      c.z = shadows.indices[(i+1)*3+6];
+
+      a1.x = sizeOfSet + i*3;
+      a1.x = sizeOfSet + (i+1)*3;
+      a1.x = sizeOfSet + (i+2)*3;
+
+      b1.x = sizeOfSet + i*3+3;
+      b1.y = sizeOfSet + (i+1)*3+3;
+      b1.z = sizeOfSet + (i+2)*3+3;
+
+      c1.x = sizeOfSet + i*3+6;
+      c1.y = sizeOfSet + (i+1)*3+6;
+      c1.z = sizeOfSet + (i+2)*3+6;
+      // Unten 1
+      shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
+      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
+      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
+      // Unten 2
+      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
+      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
+      shadows.indices.push_back(c1.x);shadows.indices.push_back(c1.y);shadows.indices.push_back(c1.z);
+      // Vorne 1
+      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
+      shadows.indices.push_back(a.x);shadows.indices.push_back(a.y);shadows.indices.push_back(a.z);
+      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
+      // Vorne 2
+      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
+      shadows.indices.push_back(c1.x);shadows.indices.push_back(c1.y);shadows.indices.push_back(c1.z);
+      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
+      // Hinten 1
+      shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
+      shadows.indices.push_back(a.x);shadows.indices.push_back(a.y);shadows.indices.push_back(a.z);
+      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
+      // Hinten 2
+      shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
+      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
+      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
+      // DECKEL
+      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
+      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
+      shadows.indices.push_back(c1.x);shadows.indices.push_back(c1.y);shadows.indices.push_back(c1.z);
+    }
   // TODO: save the index count of your shadow volume object in 'mIndexCount_shadow' //
   
   // TODO: setup VAO, VBO and IBO for shadow volume //

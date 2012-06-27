@@ -4,7 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/matrix_inverse.hpp>
-#include <glm/gtx/rotate_vector.hpp>
+#includeo <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/string_cast.hpp> 
 
 #include <stdlib.h>
@@ -119,8 +119,8 @@ int CheckGLErrors() {
 
 int main (int argc, char **argv) {
   glutInit(&argc, argv);
-  // TODO: activate stencil buffer //
-  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+  // Done TODO: activate stencil buffer //
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_STENCIL);
   glutInitContextVersion(3,3);
   glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
   glutInitContextProfile(GLUT_CORE_PROFILE);
