@@ -176,7 +176,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   // TODO: for every vertex:                         //
   // - project vertex from lightsource to *infinity* //
   // - append vertex to local vertex data storage    //
-     GLfloat farFarAway = camera.getFar()-1.0f; // TODO das gibt so probleme
+     GLfloat farFarAway = 999.0f; // TODO das gibt so probleme
 
      for (int i=0 ; i < shadows.indices.size() ; i = i+3){
 
