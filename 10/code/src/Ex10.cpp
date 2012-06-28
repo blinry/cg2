@@ -444,6 +444,7 @@ void renderScene() {
   glm_ModelViewMatrix.top() *= glm::scale(glm::vec3(10));
   
   glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+  glUniform1i(uniformLocations["drawShadows"], 0);
   
   // setup light and material in shader //
   setupLightAndMaterial();
@@ -497,6 +498,7 @@ void renderShadow() {
     glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
     glm_ModelViewMatrix.top() *= glm::scale(glm::vec3(10));
     glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+    glUniform1i(uniformLocations["drawShadows"], 1);
 
     MeshObj *mesh = objLoader.getMeshObj("sceneObject");
     mesh->renderShadowVolume();
