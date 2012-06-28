@@ -171,28 +171,28 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
      MeshData shadows;
   // TODO: clone existing vertex data into your local storage //
      shadows.vertex_position = mMeshData.vertex_position; // öhm ne glaube nicht das das funktioniert
-     shadows.indices = 		   mMeshData.indices;
+     shadows.indices 		 = mMeshData.indices;
+     shadows.vertex_normal   = mMeshData.vertex_normal;
   // TODO: for every vertex:                         //
   // - project vertex from lightsource to *infinity* //
   // - append vertex to local vertex data storage    //
      GLfloat farFarAway = 1000000000000000000000000000000000000; // TODO das gibt so probleme
 
-     for (int i=0 ; i < shadows.indices.size() ; i++){
+     for (int i=0 ; i < shadows.indices.size() ; i = i+3){
 
     	GLfloat x,y,z;
     	glm::vec3 lDir;
 
-        // TODO normaisieren von dem Vektor hier
-    	lDir.x = (lightPos.x - shadows.vertex_position.x);
-    	lDir.y = (lightPos.y - shadows.vertex_position.y);
-    	lDir.z = (lightPos.z - shadows.vertex_position.z);
+    	lDir.x = (lightPos.x - shadows.vertex_position[i]);
+    	lDir.y = (lightPos.y - shadows.vertex_position[i+1]);
+    	lDir.z = (lightPos.z - shadows.vertex_position[i+2]);
 
     	lDir = glm::normalize(lDir);
     	lDir = lDir * farFarAway;
 
-    	shadows.vertex_position.push_back(x);
-    	shadows.vertex_position.push_back(y);
-    	shadows.vertex_position.push_back(z);
+    	shadows.vertex_position.push_back(lDir.x);
+    	shadows.vertex_position.push_back(lDir.y);
+    	shadows.vertex_position.push_back(lDir.z);
      }
 
   // TODO: the vertex data is now stored as two concatenated sets in a single vector //
@@ -207,7 +207,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   //   when creating the shadow volume
   //
     glm::vec3 a,b,c,a1,b1,c1;
-    for (int i = 0 ; i < shadows.indices.size() ; i++){
+    for (int i = 0 ; i < shadows.indices.size() ; i = i + 9){
       a.x = shadows.indices[i*3];
       a.y = shadows.indices[(i+1)*3];
       a.z = shadows.indices[(i+2)*3];
