@@ -182,7 +182,9 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   // - append vertex to local vertex data storage    //
      GLfloat farFarAway = 999.0f; // TODO das gibt so probleme
 
-     for (int i=0 ; i < shadows.vertex_position.size() ; i = i+3){
+     unsigned int numVerts = shadows.vertex_position.size();
+
+     for (int i=0 ; i < numVerts; i = i+3){
 
     	glm::vec3 lDir;
 
@@ -197,9 +199,9 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     	shadows.vertex_position.push_back(lDir.y);
     	shadows.vertex_position.push_back(lDir.z);
 
-    	shadows.vertex_normal.push_back(-shadows.vertex_normal[i]);
-    	shadows.vertex_normal.push_back(-shadows.vertex_normal[i+1]);
-    	shadows.vertex_normal.push_back(-shadows.vertex_normal[i+2]);
+    	//shadows.vertex_normal.push_back(-shadows.vertex_normal[i]);
+    	//shadows.vertex_normal.push_back(-shadows.vertex_normal[i+1]);
+    	//shadows.vertex_normal.push_back(-shadows.vertex_normal[i+2]);
 
      }
 
@@ -215,7 +217,8 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   //   when creating the shadow volume
   //
     glm::vec3 a,b,c,a1,b1,c1;
-    for (int i = 0 ; i < shadows.indices.size() ; i = i + 3){
+    unsigned int numIndices = shadows.indices.size(); 
+    for (int i = 0 ; i < numIndices ; i = i + 3){
         int ia = shadows.indices[i];
         int ib = shadows.indices[i+1];
         int ic = shadows.indices[i+2];
