@@ -216,12 +216,12 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   //
     glm::vec3 a,b,c,a1,b1,c1;
     for (int i = 0 ; i < shadows.indices.size() ; i = i + 3){
-        int ia = shadows.indices[i]
-        int ib = shadows.indices[i+1]
-        int ic = shadows.indices[i+2]
-        int ia1 = shadows.indices[sizeOfSet+i]
-        int ib1 = shadows.indices[sizeOfSet+i+1]
-        int ic1 = shadows.indices[sizeOfSet+i+2]
+        int ia = shadows.indices[i];
+        int ib = shadows.indices[i+1];
+        int ic = shadows.indices[i+2];
+        int ia1 = shadows.indices[sizeOfSet+i];
+        int ib1 = shadows.indices[sizeOfSet+i+1];
+        int ic1 = shadows.indices[sizeOfSet+i+2];
 
       shadows.indices.push_back(ic);
       shadows.indices.push_back(ib1);
