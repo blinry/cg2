@@ -171,7 +171,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
      MeshData shadows;
   // TODO: clone existing vertex data into your local storage //
      shadows.vertex_position = mMeshData.vertex_position; // öhm ne glaube nicht das das funktioniert
-     shadows.indices = mMeshData.indices;
+     shadows.indices = 		   mMeshData.indices;
   // TODO: for every vertex:                         //
   // - project vertex from lightsource to *infinity* //
   // - append vertex to local vertex data storage    //
@@ -180,10 +180,15 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
      for (int i=0 ; i < shadows.indices.size() ; i++){
 
     	GLfloat x,y,z;
+    	glm::vec3 lDir;
+
         // TODO normaisieren von dem Vektor hier
-    	x = (lightPos.x - shadows.vertex_position.x) * farFarAway ;
-    	y = (lightPos.y - shadows.vertex_position.y) * farFarAway ;
-    	z = (lightPos.z - shadows.vertex_position.z) * farFarAway ;
+    	lDir.x = (lightPos.x - shadows.vertex_position.x);
+    	lDir.y = (lightPos.y - shadows.vertex_position.y);
+    	lDir.z = (lightPos.z - shadows.vertex_position.z);
+
+    	lDir = glm::normalize(lDir);
+    	lDir = lDir * farFarAway;
 
     	shadows.vertex_position.push_back(x);
     	shadows.vertex_position.push_back(y);
@@ -201,7 +206,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   // - be sure to check the face orientation and flip back facing triangles     //  
   //   when creating the shadow volume
   //
-    Vec3f a,b,c,a1,b1,c1;
+    glm::vec3 a,b,c,a1,b1,c1;
     for (int i = 0 ; i < shadows.indices.size() ; i++){
       a.x = shadows.indices[i*3];
       a.y = shadows.indices[(i+1)*3];
