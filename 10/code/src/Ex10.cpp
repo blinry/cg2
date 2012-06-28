@@ -317,6 +317,7 @@ void initShader() {
   // get uniform locations for common variables //
   uniformLocations["projection"] = glGetUniformLocation(shaderProgram, "projection");
   uniformLocations["modelview"] = glGetUniformLocation(shaderProgram, "modelview");
+  uniformLocations["drawShadows"]= glGetUniformLocation(shaderProgram, "drawShadows");
   
   // material unform locations //
   uniformLocations["material.ambient"] = glGetUniformLocation(shaderProgram, "material.ambient_color");

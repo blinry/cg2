@@ -177,15 +177,15 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   // - append vertex to local vertex data storage    //
      GLfloat farFarAway = 1000000000000000000000000000000000000; // TODO das gibt so probleme
 
-     for (int i=0 ; i < shadows.indices.size() ; i++){
+     for (int i=0 ; i < shadows.indices.size() ; i+=3){
 
     	GLfloat x,y,z;
     	glm::vec3 lDir;
 
         // TODO normaisieren von dem Vektor hier
-    	lDir.x = (lightPos.x - shadows.vertex_position.x);
-    	lDir.y = (lightPos.y - shadows.vertex_position.y);
-    	lDir.z = (lightPos.z - shadows.vertex_position.z);
+    	lDir.x = (lightPos.x - shadows.vertex_position[0]);
+    	lDir.y = (lightPos.y - shadows.vertex_position[1]);
+    	lDir.z = (lightPos.z - shadows.vertex_position[2]);
 
     	lDir = glm::normalize(lDir);
     	lDir = lDir * farFarAway;
