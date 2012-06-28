@@ -176,7 +176,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   // TODO: for every vertex:                         //
   // - project vertex from lightsource to *infinity* //
   // - append vertex to local vertex data storage    //
-     GLfloat farFarAway = 1000000000000000000000000000000000000; // TODO das gibt so probleme
+     GLfloat farFarAway = camera.getFar()-1.0f; // TODO das gibt so probleme
 
      for (int i=0 ; i < shadows.indices.size() ; i = i+3){
 
@@ -193,6 +193,11 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     	shadows.vertex_position.push_back(lDir.x);
     	shadows.vertex_position.push_back(lDir.y);
     	shadows.vertex_position.push_back(lDir.z);
+
+    	shadows.vertex_normal.push_back(-shadows.vertex_normal[i]);
+    	shadows.vertex_normal.push_back(-shadows.vertex_normal[i+1]);
+    	shadows.vertex_normal.push_back(-shadows.vertex_normal[i+2]);
+
      }
 
   // TODO: the vertex data is now stored as two concatenated sets in a single vector //
@@ -231,6 +236,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
       c1.x = sizeOfSet + i*3+6;
       c1.y = sizeOfSet + (i+1)*3+6;
       c1.z = sizeOfSet + (i+2)*3+6;
+
       // Unten 1
       shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
       shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
@@ -255,19 +261,55 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
       shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
       shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
       shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
-      // DECKEL
+      // DECKEL 012 -> 021
       shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
-      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
       shadows.indices.push_back(c1.x);shadows.indices.push_back(c1.y);shadows.indices.push_back(c1.z);
+      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
     }
   // TODO: save the index count of your shadow volume object in 'mIndexCount_shadow' //
-  
+      mIndexCount_shadow = shadows.indices.size();
   // TODO: setup VAO, VBO and IBO for shadow volume //
+
   // - use the predefined class members mVAO_shadow, mVBO_shadow_position and mIBO_shadow //
-  
+      unsigned int vertexDataSize = shadows.vertex_position.size();
+      GLfloat* vertexPosition = new GLfloat[vertexDataSize];
+      std::copy(shadows.vertex_position.begin(),shadows.vertex_position.end(),vertexPosition);
+      GLuint* vertexIndices = new GLuint[mIndexCount_shadow];
+      std::copy(shadows.indices.begin(),shadows.indices.end(),vertexIndices);
+      if(mVAO_shadow == 0 ){
+    	  glGenVertexArrays(1, &mVAO_shadow);
+      }
+      glBindVertexArray(mVAO_shadow);
+
+      if(mVBO_shadow_position ==0){
+    	  glGenBuffers(1,&mVBO_shadow_position);
+      }
+      glBindBuffer(GL_ARRAY_BUFFER, mVBO_shadow_position);
+      glBufferData(GL_ARRAY_BUFFER, vertexDataSize*sizeof(GLfloat),vertexPosition,GL_STATIC_DRAW);
+
+      if(mIBO_shadow == 0){
+         glGenBuffers(1,&mIBO_shadow);
+      }
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO_shadow);
+      glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexCount_shadow*sizeof(GLuint),vertexIndices,GL_STATIC_DRAW);
+
+      glBindVertexArray(0);
+
+      if(mIndexCount_shadow > 0){
+      delete[] vertexIndices;
+      }
+      if(vertexDataSize > 0){
+      delete[] vertexPosition;
+      }
+
 }
 
 // TODO: render the shadow volume by calling the vertex array object //
 void MeshObj::renderShadowVolume() {
+  if(mVAO_shadow != 0 ){
+	 glBindVertexArray(mVAO_shadow);
+	 glDrawElements(GL_TRIANGLES,mIndexCount_shadow,GL_UNSIGNED_INT,(void*)0);
+	 glBindVertexArray(0);
+  }
   
 }

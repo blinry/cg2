@@ -472,6 +472,7 @@ void renderScreenFillingQuad() {
 
 // TODO: render the shadow volume here using the chosen shadow volume rendering technique //
 void renderShadow() {
+
   // #INFO# init shadow volume if light source position has changed //
   if (lightSourcePosUpdate) {
     objLoader.getMeshObj("sceneObject")->initShadowVolume(light.position);
@@ -479,28 +480,52 @@ void renderShadow() {
   }
   
   // TODO: disable drawing to screen (we just want to change the stencil buffer) //
-  
+
   // TODO: enable stencil test and face culling //
   // - we need face culling to separately render front facing and back facing triangles //
   
   // TODO: implement the shadow volume rendering //
-  
-  // TODO: final render pass -> render screen quad with current stencil buffer //
+    glColorMask(GL_FALSE,GL_FALSE,GL_FALSE,GL_FALSE);
+    glDepthMask(GL_FALSE);
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_ALWAYS, 1 , 0xFFFFFFFF);
+    glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+
+    glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
+    glm_ModelViewMatrix.top() *= glm::scale(glm::vec3(10));
+    glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
+
+    MeshObj *mesh = objLoader.getMeshObj("sceneObject");
+    mesh->renderShadowVolume();
+
+    glStencilOp(GL_KEEP,GL_KEEP,GL_DECR);
+    glCullFace(GL_FRONT);
+
+    mesh->renderShadowVolume();
+
+    // restore scene graph to previous state //
+    glm_ModelViewMatrix.pop();
+  //TODO: final render pass -> render screen quad with current stencil buffer //
   // - disable face culling and re-enable writing to color and depth buffer    //
-  
+    glCullFace(GL_BACK);
+    glColorMask(GL_TRUE,GL_TRUE, GL_TRUE,GL_TRUE);
   // - set stencil operation to only execute, when stencil buffer is not equal to zero //
-  
+    glStencilFunc(GL_NOTEQUAL, 0, 0xFFFFFFFF);
   // OPTION: enable blend function to prevent shadows from being pitch black //
   // - uses alpha of color defined when rendering the screen filling quad    //
-  
-  renderScreenFillingQuad();
+
+    renderScreenFillingQuad();
+
   
   // TODO: disable stencil testing for further rendering and restore original rendering state //
+   glDisable(GL_STENCIL_TEST);
 }
 
 void updateGL() {
   // TODO: also clear the stencil buffer before rendering again //
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   
   // set viewport dimensions //
   glViewport(0, 0, windowWidth, windowHeight);
