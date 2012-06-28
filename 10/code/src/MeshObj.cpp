@@ -170,17 +170,20 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   // you might want to use a MeshData container //
      MeshData shadows;
   // TODO: clone existing vertex data into your local storage //
-     shadows.vertex_position = mMeshData.vertex_position; // öhm ne glaube nicht das das funktioniert
-     shadows.indices 		 = mMeshData.indices;
-     shadows.vertex_normal   = mMeshData.vertex_normal;
+  shadows.vertex_position.clear();
+  shadows.vertex_position.assign(mMeshData.vertex_position.begin(), mMeshData.vertex_position.end());
+  shadows.indices.clear();
+  shadows.indices.assign(mMeshData.indices.begin(), mMeshData.indices.end());
+  shadows.vertex_normal.clear();
+  shadows.vertex_normal.assign(mMeshData.vertex_normal.begin(), mMeshData.vertex_normal.end());
+
   // TODO: for every vertex:                         //
   // - project vertex from lightsource to *infinity* //
   // - append vertex to local vertex data storage    //
      GLfloat farFarAway = camera.getFar()-1.0f; // TODO das gibt so probleme
 
-     for (int i=0 ; i < shadows.indices.size() ; i = i+3){
+     for (int i=0 ; i < shadows.vertex_position.size() ; i = i+3){
 
-    	GLfloat x,y,z;
     	glm::vec3 lDir;
 
     	lDir.x = (lightPos.x - shadows.vertex_position[i]);
@@ -212,59 +215,42 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
   //   when creating the shadow volume
   //
     glm::vec3 a,b,c,a1,b1,c1;
-    for (int i = 0 ; i < shadows.indices.size() ; i = i + 9){
-      a.x = shadows.indices[i*3];
-      a.y = shadows.indices[(i+1)*3];
-      a.z = shadows.indices[(i+2)*3];
+    for (int i = 0 ; i < shadows.indices.size() ; i = i + 3){
+        int ia = shadows.indices[i]
+        int ib = shadows.indices[i+1]
+        int ic = shadows.indices[i+2]
+        int ia1 = shadows.indices[sizeOfSet+i]
+        int ib1 = shadows.indices[sizeOfSet+i+1]
+        int ic1 = shadows.indices[sizeOfSet+i+2]
 
-      b.x = shadows.indices[i*3+3];
-      b.y = shadows.indices[(i+1)*3+3];
-      b.z = shadows.indices[(i+2)*3+3];
+      shadows.indices.push_back(ic);
+      shadows.indices.push_back(ib1);
+      shadows.indices.push_back(ic1);
 
-      c.x = shadows.indices[i*3+6];
-      c.y = shadows.indices[(i+1)*3+6];
-      c.z = shadows.indices[(i+1)*3+6];
+      shadows.indices.push_back(ic);
+      shadows.indices.push_back(ib);
+      shadows.indices.push_back(ib1);
 
-      a1.x = sizeOfSet + i*3;
-      a1.x = sizeOfSet + (i+1)*3;
-      a1.x = sizeOfSet + (i+2)*3;
+      shadows.indices.push_back(ib);
+      shadows.indices.push_back(ia);
+      shadows.indices.push_back(ia1);
 
-      b1.x = sizeOfSet + i*3+3;
-      b1.y = sizeOfSet + (i+1)*3+3;
-      b1.z = sizeOfSet + (i+2)*3+3;
+      shadows.indices.push_back(ib);
+      shadows.indices.push_back(ia1);
+      shadows.indices.push_back(ib1);
 
-      c1.x = sizeOfSet + i*3+6;
-      c1.y = sizeOfSet + (i+1)*3+6;
-      c1.z = sizeOfSet + (i+2)*3+6;
+      shadows.indices.push_back(ic);
+      shadows.indices.push_back(ia1);
+      shadows.indices.push_back(ia);
 
-      // Unten 1
-      shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
-      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
-      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
-      // Unten 2
-      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
-      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
-      shadows.indices.push_back(c1.x);shadows.indices.push_back(c1.y);shadows.indices.push_back(c1.z);
-      // Vorne 1
-      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
-      shadows.indices.push_back(a.x);shadows.indices.push_back(a.y);shadows.indices.push_back(a.z);
-      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
-      // Vorne 2
-      shadows.indices.push_back(c.x);shadows.indices.push_back(c.y);shadows.indices.push_back(c.z);
-      shadows.indices.push_back(c1.x);shadows.indices.push_back(c1.y);shadows.indices.push_back(c1.z);
-      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
-      // Hinten 1
-      shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
-      shadows.indices.push_back(a.x);shadows.indices.push_back(a.y);shadows.indices.push_back(a.z);
-      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
-      // Hinten 2
-      shadows.indices.push_back(b.x);shadows.indices.push_back(b.y);shadows.indices.push_back(b.z);
-      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
-      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
-      // DECKEL 012 -> 021
-      shadows.indices.push_back(a1.x);shadows.indices.push_back(a1.y);shadows.indices.push_back(a1.z);
-      shadows.indices.push_back(c1.x);shadows.indices.push_back(c1.y);shadows.indices.push_back(c1.z);
-      shadows.indices.push_back(b1.x);shadows.indices.push_back(b1.y);shadows.indices.push_back(b1.z);
+      shadows.indices.push_back(ic);
+      shadows.indices.push_back(ic1);
+      shadows.indices.push_back(ia1);
+
+      shadows.indices.push_back(ib1);
+      shadows.indices.push_back(ic1);
+      shadows.indices.push_back(ia1);
+
     }
   // TODO: save the index count of your shadow volume object in 'mIndexCount_shadow' //
       mIndexCount_shadow = shadows.indices.size();
