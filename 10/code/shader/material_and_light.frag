@@ -24,8 +24,14 @@ in vec3 lightDir;
 // this defines the fragment output //
 out vec4 color;
 
+uniform int drawShadows;
+
 void main() {
   // TODO: add an option to switch between normal lighting and shadow color (black) rendering //
+  if(drawShadows == 1) {
+      color = vec4(1,0,0,0.5);
+      return;
+  }
   
   vec3 E = normalize(eyeDir);
   vec3 N = normalize(vertexNormal);

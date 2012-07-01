@@ -324,6 +324,8 @@ void initShader() {
   uniformLocations["material.diffuse"] = glGetUniformLocation(shaderProgram, "material.diffuse_color");
   uniformLocations["material.specular"] = glGetUniformLocation(shaderProgram, "material.specular_color");
   uniformLocations["material.shininess"] = glGetUniformLocation(shaderProgram, "material.specular_shininess");
+
+  uniformLocations["drawShadows"] = glGetUniformLocation(shaderProgram, "drawShadows");
   
   // store the uniform locations for all light source properties
   UniformLocation_Light lightLocation;
@@ -439,6 +441,7 @@ void initScreenFillingQuad(void) {
 
 // #INFO#: this renders the scene object usign material and lighting //
 void renderScene() {
+  glUniform1i(uniformLocations["drawShadows"], 0);
   glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
   
   glm_ModelViewMatrix.top() *= glm::scale(glm::vec3(10));
@@ -474,6 +477,7 @@ void renderScreenFillingQuad() {
 
 // TODO: render the shadow volume here using the chosen shadow volume rendering technique //
 void renderShadow() {
+  glUniform1i(uniformLocations["drawShadows"], 1);
 
   // #INFO# init shadow volume if light source position has changed //
   if (lightSourcePosUpdate) {
@@ -494,11 +498,15 @@ void renderShadow() {
     glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
+    glDepthFunc( GL_LEQUAL );
 
     glm_ModelViewMatrix.push(glm_ModelViewMatrix.top());
     glm_ModelViewMatrix.top() *= glm::scale(glm::vec3(10));
     glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
     glUniform1i(uniformLocations["drawShadows"], 1);
+
+    // setup light and material in shader //
+    setupLightAndMaterial();
 
     MeshObj *mesh = objLoader.getMeshObj("sceneObject");
     mesh->renderShadowVolume();
@@ -512,18 +520,26 @@ void renderShadow() {
     glm_ModelViewMatrix.pop();
   //TODO: final render pass -> render screen quad with current stencil buffer //
   // - disable face culling and re-enable writing to color and depth buffer    //
-    glCullFace(GL_BACK);
+    glDisable(GL_CULL_FACE);
     glColorMask(GL_TRUE,GL_TRUE, GL_TRUE,GL_TRUE);
   // - set stencil operation to only execute, when stencil buffer is not equal to zero //
     glStencilFunc(GL_NOTEQUAL, 0, 0xFFFFFFFF);
   // OPTION: enable blend function to prevent shadows from being pitch black //
   // - uses alpha of color defined when rendering the screen filling quad    //
+  glEnable( GL_BLEND );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+
 
     renderScreenFillingQuad();
+  glDisable( GL_BLEND );
 
   
   // TODO: disable stencil testing for further rendering and restore original rendering state //
    glDisable(GL_STENCIL_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glDepthMask(GL_TRUE);
 }
 
 void updateGL() {
