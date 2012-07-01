@@ -178,11 +178,10 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     // TODO: for every vertex:                         //
     // - project vertex from lightsource to *infinity* //
     // - append vertex to local vertex data storage    //
-    GLfloat farFarAway = 1000.0f;
+    GLfloat farFarAway = 100.0f;
 
     unsigned int numVerts = shadows.vertex_position.size();
-
-    for (int i=0 ; i < numVerts; i = i+3){
+    for (unsigned int i=0 ; i < numVerts; i = i+3){
         glm::vec3 vpos(shadows.vertex_position[i],shadows.vertex_position[i+1],shadows.vertex_position[i+2]);
 
         glm::vec3 lDir = vpos - lightPos;
@@ -201,7 +200,8 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     // - the second set contains the projected vertex data *in the same order*         //
     // -> you might want to store the size of such a set to easily access              //
     //    corresponding vertices later on                                              //
-    GLuint sizeOfSet = shadows.vertex_position.size()/2;
+    GLuint sizeOfSet = shadows.vertex_position.size()/(2*3); //because in vertex_position each position vector has 3 elements
+
     // TODO: project 8 (6 sides + 2 caps) shadow triangles for each mesh triangle //
     // - process every geometry face and create 6 (or 8) new faces from it        //
     // - be sure to check the face orientation and flip back facing triangles     //  
@@ -255,8 +255,8 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
         shadows.indices.push_back(ia1);
 
         shadows.indices.push_back(ib1);
-        shadows.indices.push_back(ic1);
         shadows.indices.push_back(ia1);
+        shadows.indices.push_back(ic1);
 
     }
     // TODO: save the index count of your shadow volume object in 'mIndexCount_shadow' //

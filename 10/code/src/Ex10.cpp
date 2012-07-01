@@ -486,7 +486,7 @@ void renderShadow() {
     }
 
     //Done TODO: disable drawing to screen (we just want to change the stencil buffer) //
-    /*glColorMask(GL_FALSE,GL_FALSE,GL_FALSE,GL_FALSE);
+    glColorMask(GL_FALSE,GL_FALSE,GL_FALSE,GL_FALSE);
     glDepthMask(GL_FALSE);
     //Done TODO: enable stencil test and face culling //
     // - we need face culling to separately render front facing and back facing triangles //
@@ -501,20 +501,12 @@ void renderShadow() {
     glm_ModelViewMatrix.top() *= glm::scale(glm::vec3(10));
     glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
     glUniform1i(uniformLocations["drawShadows"], 1);
-
-    // setup light and material in shader //
-    setupLightAndMaterial();*/
+    
 
     MeshObj *mesh = objLoader.getMeshObj("sceneObject");
-    glDisable(GL_CULL_FACE);
-    glUniform1i(uniformLocations["drawShadows"], 1);
-    glEnable( GL_BLEND );
-    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     mesh->renderShadowVolume();
-    glDisable(GL_BLEND);
-    glEnable(GL_CULL_FACE);
 
-    /*glStencilOp(GL_KEEP,GL_KEEP,GL_DECR);
+    glStencilOp(GL_KEEP,GL_KEEP,GL_DECR);
     glCullFace(GL_FRONT);
 
     mesh->renderShadowVolume();
@@ -532,10 +524,8 @@ void renderShadow() {
     glEnable( GL_BLEND );
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
-
-
     renderScreenFillingQuad();
-    glDisable( GL_BLEND );*/
+    glDisable( GL_BLEND );
 
 
     //Done TODO: disable stencil testing for further rendering and restore original rendering state //
