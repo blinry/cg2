@@ -33,7 +33,7 @@ MeshObj::~MeshObj() {
 }
 
 void MeshObj::setData(const MeshData &meshData) {
-    // TODO: copy mesh data into local mMeshData container (only vertex positions and indices needed) // You will need the vertex data to create shadow volumes later on //
+    // Done TODO: copy mesh data into local mMeshData container (only vertex positions and indices needed) // You will need the vertex data to create shadow volumes later on //
     mMeshData.vertex_position.clear();
     mMeshData.vertex_position.assign(meshData.vertex_position.begin(), meshData.vertex_position.end());
     mMeshData.indices.clear();
@@ -183,18 +183,16 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     unsigned int numVerts = shadows.vertex_position.size();
 
     for (int i=0 ; i < numVerts; i = i+3){
-
-
         glm::vec3 vpos(shadows.vertex_position[i],shadows.vertex_position[i+1],shadows.vertex_position[i+2]);
 
         glm::vec3 lDir = vpos - lightPos;
         lDir = glm::normalize(lDir);
 
-        lDir = lDir * farFarAway + vpos;
+        glm::vec3 newPos(farFarAway * lDir + vpos);
 
-        shadows.vertex_position.push_back(lDir.x);
-        shadows.vertex_position.push_back(lDir.y);
-        shadows.vertex_position.push_back(lDir.z);
+        shadows.vertex_position.push_back(newPos.x);
+        shadows.vertex_position.push_back(newPos.y);
+        shadows.vertex_position.push_back(newPos.z);
 
     }
 
@@ -210,11 +208,11 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     //   when creating the shadow volume
     //
     glm::vec3 a,b,c,a1,b1,c1;
-    unsigned int numIndices = shadows.indices.size(); 
-    for (int i = 0 ; i < numIndices ; i = i + 3){
-        int ia = shadows.indices[i];
-        int ib = shadows.indices[i+1];
-        int ic = shadows.indices[i+2];
+    unsigned int numIndices = shadows.indices.size();
+    for (unsigned int i = 0 ; i < numIndices ; i = i + 3){
+        unsigned int ia = shadows.indices[i];
+        unsigned int ib = shadows.indices[i+1];
+        unsigned int ic = shadows.indices[i+2];
 
         glm::vec3 a(shadows.vertex_position[ia*3],shadows.vertex_position[ia*3+1],shadows.vertex_position[ia*3+2]);
         glm::vec3 b(shadows.vertex_position[ib*3],shadows.vertex_position[ib*3+1],shadows.vertex_position[ib*3+2]);
@@ -223,14 +221,14 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
         // if face is facing away from the light, turn it around
         glm::vec3 n = glm::cross((b-a),(c-a));
         if (glm::dot((lightPos-a),n) < 0) {
-            int tmp = ib;
+            unsigned int tmp = ib;
             ib = ic;
             ic = tmp;
         }
 
-        int ia1 = sizeOfSet+ia;
-        int ib1 = sizeOfSet+ib;
-        int ic1 = sizeOfSet+ic;
+        unsigned int ia1 = sizeOfSet+ia;
+        unsigned int ib1 = sizeOfSet+ib;
+        unsigned int ic1 = sizeOfSet+ic;
 
         shadows.indices.push_back(ic);
         shadows.indices.push_back(ib1);
@@ -269,31 +267,29 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     unsigned int vertexDataSize = shadows.vertex_position.size();
     GLfloat* vertexPosition = new GLfloat[vertexDataSize];
     std::copy(shadows.vertex_position.begin(),shadows.vertex_position.end(),vertexPosition);
+    
     GLuint* vertexIndices = new GLuint[mIndexCount_shadow];
     std::copy(shadows.indices.begin(),shadows.indices.end(),vertexIndices);
+    
     if(mVAO_shadow == 0 ){
         glGenVertexArrays(1, &mVAO_shadow);
     }
     glBindVertexArray(mVAO_shadow);
 
-    if(mVBO_shadow_position ==0){
+    if(mVBO_shadow_position == 0){
         glGenBuffers(1,&mVBO_shadow_position);
     }
+    
     glBindBuffer(GL_ARRAY_BUFFER, mVBO_shadow_position);
-    glBufferData(GL_ARRAY_BUFFER, vertexDataSize*sizeof(GLfloat),&vertexPosition[0],GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertexDataSize*sizeof(GLfloat),&vertexPosition[0],GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     glEnableVertexAttribArray(0);
-
-
-    unsigned int vertexNormalSize = shadows.vertex_normal.size();
-    GLfloat* vertexNormal = new GLfloat[vertexDataSize];
-    std::copy(shadows.vertex_position.begin(),shadows.vertex_position.end(),vertexPosition);
 
     if(mIBO_shadow == 0){
         glGenBuffers(1,&mIBO_shadow);
     }
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO_shadow);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexCount_shadow*sizeof(GLuint),&vertexIndices[0],GL_DYNAMIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexCount_shadow*sizeof(GLuint),&vertexIndices[0],GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 

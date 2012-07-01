@@ -29,7 +29,7 @@ uniform int drawShadows;
 void main() {
   // TODO: add an option to switch between normal lighting and shadow color (black) rendering //
   if(drawShadows == 1) {
-      color = vec4(1,0,0,0.5);
+      color = vec4(1,0,0,0.3);
       return;
   }
   
