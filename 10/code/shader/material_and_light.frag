@@ -32,24 +32,24 @@ void main() {
       color = vec4(0,0,0,0.5);
       return;
   }
-  
+
   vec3 E = normalize(eyeDir);
   vec3 N = normalize(vertexNormal);
-    
+
   vec3 ambientTerm = vec3(0);
   vec3 diffuseTerm = vec3(0);
   vec3 specularTerm = vec3(0);
   vec3 L, H;
-    
+
   L = normalize(lightDir);
   H = normalize(E + L);
   ambientTerm += lightSource.ambient_color;
   diffuseTerm += lightSource.diffuse_color * max(dot(L, N), 0);
   specularTerm += lightSource.specular_color * pow(max(dot(H, N), 0), material.specular_shininess);
-  
+
   ambientTerm *= material.ambient_color;
   diffuseTerm *= material.diffuse_color;
   specularTerm *= material.specular_color;
-  
+
   color = vec4(ambientTerm + diffuseTerm + specularTerm, 1);
 }

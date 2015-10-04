@@ -18,18 +18,18 @@ uniform mat4 projection;
 
 void main() {
   gl_Position = projection * modelview * vec4(vertex, 1.0);
-  
+
   // TODO: vertex position in camera space //
   io_vertex = (modelview * vec4(vertex, 1.0)).xyz;
-  
+
   // normal matrix //
   mat4 normalMatrix = transpose(inverse(modelview));
-  
+
   // TODO: tangent, bitangent and normal //
   io_tangent = (normalMatrix * vec4(vertex_tangent, 0.0)).xyz;
   io_binormal = (normalMatrix * vec4(vertex_binormal, 0.0)).xyz;
   io_normal = (normalMatrix * vec4(vertex_normal, 0.0)).xyz;
-  
+
   // TODO: texture coord //
-  io_texCoord = vertex_texcoord; 
+  io_texCoord = vertex_texcoord;
 }

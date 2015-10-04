@@ -1,7 +1,7 @@
 # -Try to find SuperLU
 #
 #
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  SuperLU_FOUND
 #  SuperLU_LIBRARIES
 
@@ -13,8 +13,8 @@ SET(SuperLU_POSSIBLE_LIBPATHS
   /afs/cg.cs.tu-bs.de/lib/linux/c++/superlu/lib
 )
 
-FIND_LIBRARY(SuperLU_LIBRARIES 
-  NAMES superlu 
+FIND_LIBRARY(SuperLU_LIBRARIES
+  NAMES superlu
   PATHS ${SuperLU_POSSIBLE_LIBPATHS}
 )
 

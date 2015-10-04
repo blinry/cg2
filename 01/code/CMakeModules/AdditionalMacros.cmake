@@ -1,7 +1,7 @@
 #
 # additional user defined macros
-# for use with CMake build system. 
-# 
+# for use with CMake build system.
+#
 # Jan Woetzel
 # www.mip.informatik.uni-kiel.de/~jw
 #
@@ -17,11 +17,11 @@ MACRO(CLEAN_LINE VARNAME)
   # replace multi spaces by single space
   STRING(REGEX REPLACE "[ ]+"   " "
     ${VARNAME}  "${${VARNAME}}" )
-  
+
   # remove (multiple) spaces at beginning of line  which may remain
   STRING(REGEX REPLACE "^[ ]+"   ""
-    ${VARNAME}  "${${VARNAME}}" )  
-  
+    ${VARNAME}  "${${VARNAME}}" )
+
   # remove spaces at end of line which may remain
   STRING(REGEX REPLACE "[ ]+$"   ""
     ${VARNAME}  "${${VARNAME}}" )

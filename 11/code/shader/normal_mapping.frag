@@ -39,7 +39,7 @@ out vec4 color;
 void main() {
   // earth color //
   vec3 diffuse = texture2D(diffuseTexture, textureCoord).rgb;
-  
+
   if (isEmissive) {
     color = vec4(diffuse, 1);
   } else {
@@ -48,7 +48,7 @@ void main() {
     // normalize the vectors passed from your vertex program //
     vec3 E = normalize(eyeDir); // eye dir is already in tangent space, when using normal maps //
     vec3 N = normalize(texture2D(normalMap, textureCoord).rgb * 2 - 1); // get the normal from the texture //
-    
+
     // compute the ambient, diffuse and specular color terms //
     vec3 ambientTerm = vec3(0);
     vec3 diffuseTerm = vec3(0);
@@ -66,7 +66,7 @@ void main() {
     ambientTerm *= material.ambient_color;
     diffuseTerm *= material.diffuse_color;
     specularTerm *= material.specular_color;
-    
+
     // assign the final color to the fragment output variable //
     color = vec4(diffuse, 1) * vec4(ambientTerm + diffuseTerm + specularTerm, 1);
   }

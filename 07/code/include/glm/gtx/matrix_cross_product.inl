@@ -9,7 +9,7 @@
 
 namespace glm
 {
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> matrixCross3
 	(
 		detail::tvec3<T> const & x
@@ -25,7 +25,7 @@ namespace glm
 		return Result;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> matrixCross4
 	(
 		detail::tvec3<T> const & x

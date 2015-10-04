@@ -1,12 +1,12 @@
 
-# 
+#
 # This convenience include finds if OpenCV is installed
-# and set the appropriate libs, incdirs, flags etc. 
+# and set the appropriate libs, incdirs, flags etc.
 
 # @author Jan Woetzel <jw -at- mip.informatik.uni-kiel.de> (05/2005)
 ##
 # -----------------------------------------------------
-# USAGE: 
+# USAGE:
 # INCLUDE( ${CMAKE_MODULE_PATH}/Use_OpenCV.cmake)
 ##
 # ... and add the dependecies to your target, e.g.:
@@ -21,11 +21,11 @@
 FIND_PACKAGE( OpenCV )
 
 IF(OPENCV_FOUND)
-  
+
   IF(OPENCV_LIBRARIES)
     LINK_LIBRARIES(${OPENCV_LIBRARIES})
   ENDIF(OPENCV_LIBRARIES)
-  
+
   IF(OPENCV_INCLUDE_DIR)
     INCLUDE_DIRECTORIES(${OPENCV_INCLUDE_DIR})
   ENDIF(OPENCV_INCLUDE_DIR)

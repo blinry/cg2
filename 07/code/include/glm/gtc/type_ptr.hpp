@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,26 +33,26 @@
 /// @ingroup gtc
 ///
 /// @brief Handles the interaction between pointers and vector, matrix types.
-/// 
+///
 /// This extension defines an overloaded function, glm::value_ptr, which
 /// takes any of the \ref core_template "core template types". It returns
 /// a pointer to the memory layout of the object. Matrix types store their values
 /// in column-major order.
-/// 
+///
 /// This is useful for uploading data to matrices or copying data to buffer objects.
 ///
 /// Example:
 /// @code
 /// #include <glm/glm.hpp>
 /// #include <glm/gtc/type_ptr.hpp>
-/// 
+///
 /// glm::vec3 aVector(3);
 /// glm::mat4 someMatrix(1.0);
-/// 
+///
 /// glUniform3fv(uniformLoc, 1, glm::value_ptr(aVector));
 /// glUniformMatrix4fv(uniformMatrixLoc, 1, GL_FALSE, glm::value_ptr(someMatrix));
 /// @endcode
-/// 
+///
 /// <glm/gtc/type_ptr.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -70,10 +70,10 @@
 #endif
 
 namespace glm
-{ 
+{
 	/// @addtogroup gtc_type_ptr
 	/// @{
-    
+
 	/// Return the constant address to the data of the input parameter.
     /// @see gtc_type_ptr
 	template<typename genType>
@@ -98,22 +98,22 @@ namespace glm
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat2x2<T> make_mat2x2(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat2x3<T> make_mat2x3(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat2x4<T> make_mat2x4(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat3x2<T> make_mat3x2(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -123,43 +123,43 @@ namespace glm
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat3x4<T> make_mat3x4(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat4x2<T> make_mat4x2(
         T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat4x3<T> make_mat4x3(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat4x4<T> make_mat4x4(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat2x2<T> make_mat2(T const * const ptr);
-        
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat3x3<T> make_mat3(T const * const ptr);
-		
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tmat4x4<T> make_mat4(T const * const ptr);
- 
+
 	/// Build a quaternion from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
     detail::tquat<T> make_quat(T const * const ptr);
-    
+
 	/// @}
 }//namespace glm
 

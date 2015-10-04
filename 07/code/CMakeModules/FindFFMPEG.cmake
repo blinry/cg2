@@ -1,11 +1,11 @@
 # - Try to find FFMPEG
 # Once done this will define
-#  
+#
 #  FFMPEG_FOUND        - system has FFMPEG
 #  FFMPEG_INCLUDE_DIR  - the include directory
 #  FFMPEG_LIBRARY_DIR  - the directory containing the libraries
 #  FFMPEG_LIBRARIES    - Link these to use FFMPEG
-#   
+#
 
 SET( FFMPEG_HEADERS avformat.h avcodec.h avutil.h avdevice.h swscale.h )
 if( WIN32 )
@@ -21,7 +21,7 @@ else( WIN32 )
     if ( PKG_CONFIG_FOUND )
        pkg_check_modules( AVFORMAT libavformat )
     endif ( PKG_CONFIG_FOUND )
-  
+
     FIND_PATH( AVFORMAT_INCLUDE_DIR avformat.h
                PATHS ${AVFORMAT_INCLUDE_DIRS}
                      /usr/include/
@@ -36,7 +36,7 @@ else( WIN32 )
     if ( PKG_CONFIG_FOUND )
        pkg_check_modules( AVCODEC libavcodec )
     endif ( PKG_CONFIG_FOUND )
-  
+
     FIND_PATH( AVCODEC_INCLUDE_DIR avcodec.h
                PATHS ${AVCODEC_INCLUDE_DIRS}
                      /usr/include/
@@ -75,7 +75,7 @@ else( WIN32 )
 #               PATH_SUFFIXES libavdevice )
 #
 #    FIND_LIBRARY( AVDEVICE_LIBRARY avdevice
-#                  PATHS ${AVDEVICE_LIBRARY_DIRS}        
+#                  PATHS ${AVDEVICE_LIBRARY_DIRS}
 #                        /usr/lib/
 #                        /usr/lib/ffmpeg/ )
 #    #FindSwscale
@@ -102,7 +102,7 @@ IF ( AVFORMAT_INCLUDE_DIR AND AVFORMAT_LIBRARY )
     SET ( AVFORMAT_FOUND TRUE )
 ENDIF ( AVFORMAT_INCLUDE_DIR AND AVFORMAT_LIBRARY )
 
-IF ( AVCODEC_INCLUDE_DIR AND AVCODEC_LIBRARY ) 
+IF ( AVCODEC_INCLUDE_DIR AND AVCODEC_LIBRARY )
     SET ( AVCODEC_FOUND TRUE )
 ENDIF ( AVCODEC_INCLUDE_DIR AND AVCODEC_LIBRARY )
 
@@ -110,7 +110,7 @@ IF ( AVUTIL_INCLUDE_DIR AND AVUTIL_LIBRARY )
     SET ( AVUTIL_FOUND TRUE )
 ENDIF ( AVUTIL_INCLUDE_DIR AND AVUTIL_LIBRARY )
 
-IF ( AVDEVICE_INCLUDE_DIR AND AVDEVICE_LIBRARY ) 
+IF ( AVDEVICE_INCLUDE_DIR AND AVDEVICE_LIBRARY )
     SET ( AVDEVICE_FOUND TRUE )
 ENDIF ( AVDEVICE_INCLUDE_DIR AND AVDEVICE_LIBRARY )
 
@@ -132,15 +132,15 @@ ELSE ( WIN32 )
               ${AVCODEC_INCLUDE_DIR}
               ${AVUTIL_INCLUDE_DIR}
               #${AVDEVICE_INCLUDE_DIR}
-              #${SWSCALE_INCLUDE_DIR} 
+              #${SWSCALE_INCLUDE_DIR}
 	      )
-        
-        SET ( FFMPEG_LIBRARIES 
+
+        SET ( FFMPEG_LIBRARIES
               ${AVFORMAT_LIBRARY}
               ${AVCODEC_LIBRARY}
               ${AVUTIL_LIBRARY}
               #${AVDEVICE_LIBRARY}
-              #${SWSCALE_LIBRARY} 
+              #${SWSCALE_LIBRARY}
 	      )
     ENDIF ( AVFORMAT_INCLUDE_DIR OR AVCODEC_INCLUDE_DIR OR AVUTIL_INCLUDE_DIR OR AVDEVICE_FOUND OR SWSCALE_FOUND )
 ENDIF ( WIN32 )

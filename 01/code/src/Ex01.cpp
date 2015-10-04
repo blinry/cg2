@@ -22,6 +22,6 @@ void triangleSolution(void) {
 
 int main (int argc, char **argv) {
   triangleSolution();
-  
+
   return 0;
 }

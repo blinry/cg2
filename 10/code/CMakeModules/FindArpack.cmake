@@ -1,7 +1,7 @@
 # -Try to find Arpack
 #
 #
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  Arpack_FOUND
 #  Arpack_LIBRARIES
 
@@ -12,8 +12,8 @@ SET(Arpack_POSSIBLE_LIBPATHS
   /usr/local/lib64
 )
 
-FIND_LIBRARY(Arpack_LIBRARIES 
-  NAMES arpack 
+FIND_LIBRARY(Arpack_LIBRARIES
+  NAMES arpack
   PATHS ${Arpack_POSSIBLE_LIBPATHS}
 )
 

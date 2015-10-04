@@ -28,7 +28,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     return meshObj;
   }
   // ID is not known yet -> try to load mesh from file //
-  
+
   // import mesh from given file //
   // setup variables used for parsing //
   std::string key;
@@ -37,7 +37,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
 
   // setup local lists //
   MeshData meshData;
-  
+
   // setup tools for parsing a line correctly //
   std::string line;
   std::stringstream sstr;
@@ -74,17 +74,17 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
       }
     }
     file.close();
-    
+
     std::cout << "Imported " << meshData.indices.size() / 3 << " faces from \"" << fileName << "\"" << std::endl;
-    
+
     // create new MeshObj and set imported geoemtry data //
     meshObj = new MeshObj();
     // assign imported data to this new MeshObj //
     meshObj->setData(meshData);
-    
+
     // insert MeshObj into map //
     mMeshMap.insert(std::make_pair(ID, meshObj));
-    
+
     // return newly created MeshObj //
     return meshObj;
   } else {

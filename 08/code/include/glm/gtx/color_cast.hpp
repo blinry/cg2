@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,7 +32,7 @@
 /// @ingroup gtx
 ///
 /// @brief Conversion between two color types.
-/// 
+///
 /// <glm/gtx/color_cast.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -52,11 +52,11 @@ namespace glm
 	/// @addtogroup gtx_color_cast
 	/// @{
 
-	//! Conversion of a floating value into a 8bit unsigned int value. 
+	//! Conversion of a floating value into a 8bit unsigned int value.
 	/// @see gtx_color_cast
 	template <typename valType> uint8 u8channel_cast(valType a);
 
-	/// Conversion of a floating value into a 16bit unsigned int value. 
+	/// Conversion of a floating value into a 16bit unsigned int value.
 	/// @see gtx_color_cast
 	template <typename valType>	uint16 u16channel_cast(valType a);
 

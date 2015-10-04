@@ -1,8 +1,8 @@
 #
-# Try to find Pont Grey FlyCapture 1394 firewire camera driver library. 
+# Try to find Pont Grey FlyCapture 1394 firewire camera driver library.
 # available from: www.ptgrey.com
 #
-# Once run this will define: 
+# Once run this will define:
 #
 # 1394FlyCapture_FOUND
 # 1394FlyCapture_INCLUDE_DIR
@@ -32,7 +32,7 @@ IF (WIN32)
 
   FIND_LIBRARY(1394FlyCapture_LIBRARY
     NAMES PGRFlyCapture
-    PATHS 
+    PATHS
     "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Point Grey Research, Inc.\\PGRFlyCapture;InstallDir]/lib"
     # "$ENV{ProgramFiles}/Point Grey Research/lib"
     "$ENV{EXTRA}/lib"
@@ -42,14 +42,14 @@ IF (WIN32)
 
   FIND_LIBRARY(1394FlyCapture_GUI_LIBRARY
     NAMES pgrflycapturegui
-    PATHS 
+    PATHS
     "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Point Grey Research, Inc.\\PGRFlyCapture;InstallDir]/lib"
     # "$ENV{ProgramFiles}/Point Grey Research/lib"
     "$ENV{EXTRA}/include"
     )
   #MESSAGE("DBG 1394FlyCapture_GUI_LIBRARY=${1394FlyCapture_GUI_LIBRARY}")
 
-  
+
   # --------------------------------
 
   IF(1394FlyCapture_LIBRARY)
@@ -64,8 +64,8 @@ IF (WIN32)
 
   IF(1394FlyCapture_LIBRARIES AND 1394FlyCapture_INCLUDE_DIR)
     SET(1394FlyCapture_FOUND TRUE)
-    
-    SET( 1394FlyCapture_HEADER 
+
+    SET( 1394FlyCapture_HEADER
       "${1394FlyCapture_INCLUDE_DIR}/PGRFlyCapture.h"
       "${1394FlyCapture_INCLUDE_DIR}/PGRFlyCapturePlus.h"
       "${1394FlyCapture_INCLUDE_DIR}/pgrerror.h"
@@ -73,7 +73,7 @@ IF (WIN32)
       )
     #MESSAGE("DBG 1394FlyCapture_HEADER=${1394FlyCapture_HEADER}")
     SOURCE_GROUP(FlyCapture1394 FILES ${1394FlyCapture_HEADER})
-    
+
   ELSE(1394FlyCapture_LIBRARIES AND 1394FlyCapture_INCLUDE_DIR)
     SET(1394FlyCapture_FOUND FALSE)
   ENDIF(1394FlyCapture_LIBRARIES AND 1394FlyCapture_INCLUDE_DIR)

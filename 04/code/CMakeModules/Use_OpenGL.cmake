@@ -1,13 +1,13 @@
 
-# 
+#
 # This convenience include finds if OpenGL is installed
-# and set the appropriate libs, incdirs, flags etc. 
+# and set the appropriate libs, incdirs, flags etc.
 
 # @author Jan Woetzel <jw -at- mip.informatik.uni-kiel.de> (07/2003)
 ##
 # -----------------------------------------------------
-# USAGE: 
-#   just include Use_wxWindows.cmake 
+# USAGE:
+#   just include Use_wxWindows.cmake
 #   in your projects CMakeLists.txt
 # INCLUDE( ${CMAKE_MODULE_PATH}/Use_OpenGL.cmake)
 ##
@@ -29,11 +29,11 @@
 FIND_PACKAGE( OpenGL )
 
 IF(OPENGL_FOUND)
-  
+
   IF(OPENGL_LIBRARIES)
     LINK_LIBRARIES(${OPENGL_LIBRARIES})
   ENDIF(OPENGL_LIBRARIES)
-  
+
   IF(OPENGL_INCLUDE_DIR)
     INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
   ENDIF(OPENGL_INCLUDE_DIR)

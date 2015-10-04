@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -41,10 +41,10 @@ namespace glm
 		detail::uint32 A((p >>  0) & Mask16);
 		detail::uint32 B((p >> 16) & Mask16);
 		return detail::tvec2<detail::float32>(
-			A * 1.0f / 65535.0f, 
+			A * 1.0f / 65535.0f,
 			B * 1.0f / 65535.0f);
 	}
-	
+
 	GLM_FUNC_QUALIFIER detail::uint32 packSnorm2x16(detail::tvec2<detail::float32> const & v)
 	{
 		union iu
@@ -52,7 +52,7 @@ namespace glm
 			detail::int16 i;
 			detail::uint16 u;
 		} A, B;
-		
+
 		detail::tvec2<detail::float32> Unpack = clamp(v ,-1.0f, 1.0f) * 32767.0f;
 		A.i = detail::int16(round(Unpack.x));
 		B.i = detail::int16(round(Unpack.y));
@@ -67,12 +67,12 @@ namespace glm
 			detail::int16 i;
 			detail::uint16 u;
 		} A, B;
-		
+
 		detail::uint32 Mask16((1 << 16) - 1);
 		A.u = detail::uint16((p >>  0) & Mask16);
 		B.u = detail::uint16((p >> 16) & Mask16);
 		detail::tvec2<detail::float32> Pack(A.i, B.i);
-		
+
 		return clamp(Pack * 1.0f / 32767.0f, -1.0f, 1.0f);
 	}
 
@@ -86,19 +86,19 @@ namespace glm
 	}
 
 	GLM_FUNC_QUALIFIER detail::tvec4<detail::float32> unpackUnorm4x8(detail::uint32 const & p)
-	{	
+	{
 		detail::uint32 Mask8((1 << 8) - 1);
 		detail::uint32 A((p >>  0) & Mask8);
 		detail::uint32 B((p >>  8) & Mask8);
 		detail::uint32 C((p >> 16) & Mask8);
 		detail::uint32 D((p >> 24) & Mask8);
 		return detail::tvec4<detail::float32>(
-			A * 1.0f / 255.0f, 
-			B * 1.0f / 255.0f, 
-			C * 1.0f / 255.0f, 
+			A * 1.0f / 255.0f,
+			B * 1.0f / 255.0f,
+			C * 1.0f / 255.0f,
 			D * 1.0f / 255.0f);
 	}
-	
+
 	GLM_FUNC_QUALIFIER detail::uint32 packSnorm4x8(detail::tvec4<detail::float32> const & v)
 	{
 		union iu
@@ -106,7 +106,7 @@ namespace glm
 			detail::int8 i;
 			detail::uint8 u;
 		} A, B, C, D;
-	
+
 		detail::tvec4<detail::float32> Unpack = clamp(v ,-1.0f, 1.0f) * 127.0f;
 		A.i = detail::int8(round(Unpack.x));
 		B.i = detail::int8(round(Unpack.y));
@@ -115,22 +115,22 @@ namespace glm
 		detail::uint32 Pack = (detail::uint32(D.u) << 24) | (detail::uint32(C.u) << 16) | (detail::uint32(B.u) << 8) | (detail::uint32(A.u) << 0);
 		return Pack;
 	}
-	
+
 	GLM_FUNC_QUALIFIER detail::tvec4<detail::float32> unpackSnorm4x8(detail::uint32 const & p)
-	{	
+	{
 		union iu
 		{
 			detail::int8 i;
 			detail::uint8 u;
 		} A, B, C, D;
-	
+
 		detail::uint32 Mask8((1 << 8) - 1);
 		A.u = detail::uint8((p >>  0) & Mask8);
 		B.u = detail::uint8((p >>  8) & Mask8);
 		C.u = detail::uint8((p >> 16) & Mask8);
 		D.u = detail::uint8((p >> 24) & Mask8);
 		detail::tvec4<detail::float32> Pack(A.i, B.i, C.i, D.i);
-	
+
 		return clamp(Pack * 1.0f / 127.0f, -1.0f, 1.0f);
 	}
 
@@ -147,31 +147,31 @@ namespace glm
 	GLM_FUNC_QUALIFIER uint packHalf2x16(detail::tvec2<float> const & v)
 	{
         union helper
-        { 
-            uint other; 
-            struct 
-            { 
-                detail::hdata a, b; 
-            } orig; 
-        } Pack; 
+        {
+            uint other;
+            struct
+            {
+                detail::hdata a, b;
+            } orig;
+        } Pack;
 
-        Pack.orig.a = detail::toFloat16(v.x); 
-        Pack.orig.b = detail::toFloat16(v.y); 
+        Pack.orig.a = detail::toFloat16(v.x);
+        Pack.orig.b = detail::toFloat16(v.y);
 		return *(uint*)&Pack;
 	}
 
 	GLM_FUNC_QUALIFIER vec2 unpackHalf2x16(uint const & v)
 	{
         union helper
-        { 
-            uint other; 
-            struct 
-            { 
-                detail::hdata a, b; 
-            } orig; 
-        } Unpack; 
+        {
+            uint other;
+            struct
+            {
+                detail::hdata a, b;
+            } orig;
+        } Unpack;
         Unpack.other = v;
-        
+
 		return vec2(detail::toFloat32(Unpack.orig.a), detail::toFloat32(Unpack.orig.b));
 	}
 }//namespace glm

@@ -12,8 +12,8 @@ namespace glm
 	template <typename genType>
 	genType extend
 	(
-		genType const & Origin, 
-		genType const & Source, 
+		genType const & Origin,
+		genType const & Source,
 		genType const & Distance
 	)
 	{
@@ -23,8 +23,8 @@ namespace glm
 	template <typename valType>
 	detail::tvec2<valType> extend
 	(
-		detail::tvec2<valType> const & Origin, 
-		detail::tvec2<valType> const & Source, 
+		detail::tvec2<valType> const & Origin,
+		detail::tvec2<valType> const & Source,
 		valType const & Distance
 	)
 	{
@@ -34,8 +34,8 @@ namespace glm
 	template <typename valType>
 	detail::tvec3<valType> extend
 	(
-		detail::tvec3<valType> const & Origin, 
-		detail::tvec3<valType> const & Source, 
+		detail::tvec3<valType> const & Origin,
+		detail::tvec3<valType> const & Source,
 		valType const & Distance
 	)
 	{
@@ -45,8 +45,8 @@ namespace glm
 	template <typename valType>
 	detail::tvec4<valType> extend
 	(
-		detail::tvec4<valType> const & Origin, 
-		detail::tvec4<valType> const & Source, 
+		detail::tvec4<valType> const & Origin,
+		detail::tvec4<valType> const & Source,
 		valType const & Distance
 	)
 	{

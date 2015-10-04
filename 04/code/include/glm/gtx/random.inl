@@ -58,7 +58,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> signedRand4()
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> normalizedRand2(
-	T Min, 
+	T Min,
 	T Max)
 {
     return normalizedRand2<T>() * compRand1(Min, Max);
@@ -73,7 +73,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> normalizedRand2()
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> normalizedRand3(
-	T Min, 
+	T Min,
 	T Max)
 {
     return normalizedRand3<T>() * compRand1(Min, Max);
@@ -106,21 +106,21 @@ GLM_FUNC_QUALIFIER double compRand1()
 }
 
 GLM_FUNC_QUALIFIER detail::half compRand1(
-	detail::half Min, 
+	detail::half Min,
 	detail::half Max)
 {
 	return compRand1<detail::half>() * (Max - Min) + Min;
 }
 
 GLM_FUNC_QUALIFIER float compRand1(
-	float Min, 
+	float Min,
 	float Max)
 {
 	return compRand1<float>() * (Max - Min) + Min;
 }
 
 GLM_FUNC_QUALIFIER double compRand1(
-	double Min, 
+	double Min,
 	double Max)
 {
 	return compRand1<double>() * (Max - Min) + Min;
@@ -128,7 +128,7 @@ GLM_FUNC_QUALIFIER double compRand1(
 
 template <typename T>
 GLM_FUNC_QUALIFIER T compRand1(
-	T Min, 
+	T Min,
 	T Max)
 {
 	return T(compRand1<double>() * double(Max - Min) + double(Min));
@@ -136,7 +136,7 @@ GLM_FUNC_QUALIFIER T compRand1(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
-	T Min, 
+	T Min,
 	T Max)
 {
 	return detail::tvec2<T>(
@@ -146,7 +146,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
-	T Min, 
+	T Min,
 	T Max)
 {
 	return detail::tvec3<T>(
@@ -157,7 +157,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> compRand4(
-	T Min, 
+	T Min,
 	T Max)
 {
 	return detail::tvec4<T>(
@@ -169,7 +169,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> compRand4(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
-	T Min, 
+	T Min,
 	const detail::tvec2<T>& Max)
 {
 	return detail::tvec2<T>(
@@ -179,7 +179,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
-	T Min, 
+	T Min,
 	const detail::tvec3<T>& Max)
 {
 	return detail::tvec3<T>(
@@ -190,7 +190,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> compRand4(
-	T Min, 
+	T Min,
 	const detail::tvec4<T>& Max)
 {
 	return detail::tvec4<T>(
@@ -202,7 +202,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> compRand4(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
-	const detail::tvec2<T>& Min, 
+	const detail::tvec2<T>& Min,
 	T Max)
 {
 	return detail::tvec2<T>(
@@ -212,7 +212,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
-	const detail::tvec3<T>& Min, 
+	const detail::tvec3<T>& Min,
 	T Max)
 {
 	return detail::tvec3<T>(
@@ -223,7 +223,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> compRand4(
-	const detail::tvec4<T>& Min, 
+	const detail::tvec4<T>& Min,
 	T Max)
 {
 	return detail::tvec4<T>(
@@ -235,7 +235,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> compRand4(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
-	const detail::tvec2<T>& Min, 
+	const detail::tvec2<T>& Min,
 	const detail::tvec2<T>& Max)
 {
 	return detail::tvec2<T>(
@@ -245,7 +245,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> compRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
-	const detail::tvec3<T>& Min, 
+	const detail::tvec3<T>& Min,
 	const detail::tvec3<T>& Max)
 {
 	return detail::tvec3<T>(
@@ -256,7 +256,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> compRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> compRand4(
-	const detail::tvec4<T>& Min, 
+	const detail::tvec4<T>& Min,
 	const detail::tvec4<T>& Max)
 {
 	return detail::tvec4<T>(
@@ -292,7 +292,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<double> vecRand2()
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> vecRand2(
-	T MinRadius, 
+	T MinRadius,
 	T MaxRadius)
 {
 	assert(MinRadius <= MaxRadius);
@@ -325,7 +325,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> vecRand3()
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> vecRand3(
-	T MinRadius, 
+	T MinRadius,
 	T MaxRadius)
 {
 	assert(MinRadius <= MaxRadius);
@@ -369,7 +369,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<double> vecRand4()
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> vecRand4(
-	T MinRadius, 
+	T MinRadius,
 	T MaxRadius)
 {
 	assert(MinRadius <= MaxRadius);
@@ -389,7 +389,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> vecRand4(
 
 template <typename T>
 GLM_FUNC_QUALIFIER T gaussRand1(
-	T mean, 
+	T mean,
 	T std_deviation)
 {
     T w, x1, x2;
@@ -407,7 +407,7 @@ GLM_FUNC_QUALIFIER T gaussRand1(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
-	T mean, 
+	T mean,
 	T std_deviation)
 {
     return detail::tvec2<T>(
@@ -417,7 +417,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
-	T mean, 
+	T mean,
 	T std_deviation)
 {
     return detail::tvec3<T>(
@@ -428,7 +428,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> gaussRand4(
-	T mean, 
+	T mean,
 	T std_deviation)
 {
     return detail::tvec4<T>(
@@ -440,7 +440,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> gaussRand4(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
-	T mean, 
+	T mean,
 	const detail::tvec2<T>& std_deviation)
 {
     return detail::tvec2<T>(
@@ -450,7 +450,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
-	T mean, 
+	T mean,
 	const detail::tvec3<T>& std_deviation)
 {
     return detail::tvec3<T>(
@@ -461,7 +461,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> gaussRand4(
-	T mean, 
+	T mean,
 	const detail::tvec4<T>& std_deviation)
 {
     return detail::tvec4<T>(
@@ -473,7 +473,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> gaussRand4(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
-	const detail::tvec2<T>& mean, 
+	const detail::tvec2<T>& mean,
 	T std_deviation)
 {
     return detail::tvec2<T>(
@@ -483,7 +483,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
-	const detail::tvec3<T>& mean, 
+	const detail::tvec3<T>& mean,
 	T std_deviation)
 {
     return detail::tvec3<T>(
@@ -494,7 +494,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> gaussRand4(
-	const detail::tvec4<T>& mean, 
+	const detail::tvec4<T>& mean,
 	T std_deviation)
 {
     return detail::tvec4<T>(
@@ -506,7 +506,7 @@ GLM_FUNC_QUALIFIER detail::tvec4<T> gaussRand4(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
-	const detail::tvec2<T>& mean, 
+	const detail::tvec2<T>& mean,
 	const detail::tvec2<T>& std_deviation)
 {
     return detail::tvec2<T>(
@@ -516,7 +516,7 @@ GLM_FUNC_QUALIFIER detail::tvec2<T> gaussRand2(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
-	const detail::tvec3<T>& mean, 
+	const detail::tvec3<T>& mean,
 	const detail::tvec3<T>& std_deviation)
 {
     return detail::tvec3<T>(
@@ -527,7 +527,7 @@ GLM_FUNC_QUALIFIER detail::tvec3<T> gaussRand3(
 
 template <typename T>
 GLM_FUNC_QUALIFIER detail::tvec4<T> gaussRand4(
-	const detail::tvec4<T>& mean, 
+	const detail::tvec4<T>& mean,
 	const detail::tvec4<T>& std_deviation)
 {
     return detail::tvec4<T>(

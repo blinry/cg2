@@ -12,11 +12,11 @@
 
 namespace glm
 {
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<valType> closestPointOnLine
 	(
-		detail::tvec3<valType> const & point, 
-		detail::tvec3<valType> const & a, 
+		detail::tvec3<valType> const & point,
+		detail::tvec3<valType> const & a,
 		detail::tvec3<valType> const & b
 	)
 	{

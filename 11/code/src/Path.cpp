@@ -14,7 +14,7 @@ Path::Path(ControlPoint start, ControlPoint end, bool looped) {
   setLastControlPoint(end);
   mIsLooped = looped;
 }
-    
+
 void Path::setFirstControlPoint(ControlPoint point) {
   point.time = -1;
   mControlPoints.front() = point;
@@ -52,12 +52,12 @@ bool Path::isLooped() {
 ControlPoint Path::getPositionForTime(float t) {
   // init return value //
   ControlPoint P(0,0,0,t);
-  
+
   // TODO: if path is not looped -> clamp given time value t to minimum and maximum time defined by control points //
-  
-  
+
+
   // TODO: get correct set of control point segment for given time value t //
-  
+
   // return interpolated position //
   return P;
 }

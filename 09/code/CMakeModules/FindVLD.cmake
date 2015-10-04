@@ -1,11 +1,11 @@
-# 
+#
 # Try to find Visual Leak Debugger librarry (VDL)
 # See http://www.codeproject.com/tools/visualleakdetector.asp for details
 ##
-# Once run this will define: 
-# 
+# Once run this will define:
+#
 # VLD_FOUND
-# VLD_INCLUDE_DIR 
+# VLD_INCLUDE_DIR
 ##
 # Jan Woetzel 08/2005
 # www.mip.informatik.uni-kiel.de/~jw
@@ -29,10 +29,10 @@ FIND_PATH(VLD_INCLUDE_DIR vld.h
  )
 #MESSAGE("VLD_INCLUDE_DIR=${VLD_INCLUDE_DIR}")
 
-# this is just required for runtim enabling/disabling: 
+# this is just required for runtim enabling/disabling:
 FIND_PATH(VLD_INCLUDE_DIR_API vldapi.h
   $ENV{VLD_DIR}/include
-  $ENV{VLD_DIR}  
+  $ENV{VLD_DIR}
   $ENV{VLD_HOME}/include
   $ENV{VLD_HOME}
   "$ENV{ProgramFiles}/Microsoft Visual Studio .NET 2003/Vc7/include"
@@ -43,7 +43,7 @@ FIND_PATH(VLD_INCLUDE_DIR_API vldapi.h
 
 FIND_LIBRARY(VLD_LIBRARY_VLD
   NAMES vld
-  PATHS 
+  PATHS
   $ENV{VLD_DIR}/lib
   $ENV{VLD_DIR}
   $ENV{VLD_HOME}/lib
@@ -56,7 +56,7 @@ FIND_LIBRARY(VLD_LIBRARY_VLD
 
 FIND_LIBRARY(VLD_LIBRARY_VLDMT
   NAMES vldmt
-  PATHS 
+  PATHS
   $ENV{VLD_DIR}/lib
   $ENV{VLD_DIR}
   $ENV{VLD_HOME}/lib
@@ -68,7 +68,7 @@ FIND_LIBRARY(VLD_LIBRARY_VLDMT
 
 FIND_LIBRARY(VLD_LIBRARY_VLDMTDLL
   NAMES vldmtdll
-  PATHS 
+  PATHS
   $ENV{VLD_DIR}/lib
   $ENV{VLD_DIR}
   $ENV{VLD_HOME}/lib

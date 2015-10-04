@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,9 +29,9 @@
 ///
 /// @defgroup gtx_simd_mat4 GLM_GTX_simd_mat4: SIMD mat4 type and functions
 /// @ingroup gtx
-/// 
+///
 /// @brief SIMD implementation of mat4 type.
-/// 
+///
 /// <glm/gtx/simd_mat4.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -93,7 +93,7 @@ namespace detail
 			tmat4x4<float> const & m);
 
 		// Conversions
-		//template <typename U> 
+		//template <typename U>
 		//explicit tmat4x4(tmat4x4<U> const & m);
 
 		//explicit tmat4x4(tmat2x2<T> const & x);
@@ -127,7 +127,7 @@ namespace detail
 	fmat4x4SIMD operator+ (fmat4x4SIMD const & m, float const & s);
 	fmat4x4SIMD operator+ (float const & s, fmat4x4SIMD const & m);
 	fmat4x4SIMD operator+ (fmat4x4SIMD const & m1, fmat4x4SIMD const & m2);
-	    
+
 	fmat4x4SIMD operator- (fmat4x4SIMD const & m, float const & s);
 	fmat4x4SIMD operator- (float const & s, fmat4x4SIMD const & m);
 	fmat4x4SIMD operator- (fmat4x4SIMD const & m1, fmat4x4SIMD const & m2);

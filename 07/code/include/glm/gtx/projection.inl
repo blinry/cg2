@@ -9,10 +9,10 @@
 
 namespace glm
 {
-	template <typename vecType> 
+	template <typename vecType>
 	GLM_FUNC_QUALIFIER vecType proj
 	(
-		vecType const & x, 
+		vecType const & x,
 		vecType const & Normal
 	)
 	{

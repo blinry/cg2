@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,7 +29,7 @@
 ///
 /// @defgroup gtc_half_float GLM_GTC_half_float: Half-precision floating-point based types and functions
 /// @ingroup gtc
-/// 
+///
 /// Defines the half-precision floating-point type, along with various typedefs for vectors and matrices.
 /// <glm/gtc/half_float.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ namespace detail
 		explicit tvec2(
 			half const & s);
 		explicit tvec2(
-			half const & s1, 
+			half const & s1,
 			half const & s2);
 
 		//////////////////////////////////////
@@ -97,23 +97,23 @@ namespace detail
 		// Convertion scalar constructors
 
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec2(U const & x);
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U, typename V> 
-		explicit tvec2(U const & x, V const & y);			
+		template <typename U, typename V>
+		explicit tvec2(U const & x, V const & y);
 
 		//////////////////////////////////////
 		// Convertion vector constructors
 
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec2(tvec2<U> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec2(tvec3<U> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec2(tvec4<U> const & v);
 
 		//////////////////////////////////////
@@ -178,8 +178,8 @@ namespace detail
 		explicit tvec3(
 			half const & s);
 		explicit tvec3(
-			half const & s1, 
-			half const & s2, 
+			half const & s1,
+			half const & s2,
 			half const & s3);
 
 		//////////////////////////////////////
@@ -191,26 +191,26 @@ namespace detail
 		// Convertion scalar constructors
 
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec3(U const & x);
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U, typename V, typename W> 
-		explicit tvec3(U const & x, V const & y, W const & z);			
+		template <typename U, typename V, typename W>
+		explicit tvec3(U const & x, V const & y, W const & z);
 
 		//////////////////////////////////////
 		// Convertion vector constructors
 
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		explicit tvec3(tvec2<A> const & v, B const & s);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		explicit tvec3(A const & s, tvec2<B> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec3(tvec3<U> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec3(tvec4<U> const & v);
 
 		//////////////////////////////////////
@@ -275,9 +275,9 @@ namespace detail
 		explicit tvec4(
 			half const & s);
 		explicit tvec4(
-			half const & s0, 
-			half const & s1, 
-			half const & s2, 
+			half const & s0,
+			half const & s1,
+			half const & s2,
 			half const & s3);
 
 		//////////////////////////////////////
@@ -289,35 +289,35 @@ namespace detail
 		// Convertion scalar constructors
 
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec4(U const & x);
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B, typename C, typename D> 
-		explicit tvec4(A const & x, B const & y, C const & z, D const & w);			
+		template <typename A, typename B, typename C, typename D>
+		explicit tvec4(A const & x, B const & y, C const & z, D const & w);
 
 		//////////////////////////////////////
 		// Convertion vector constructors
 
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B, typename C> 
+		template <typename A, typename B, typename C>
 		explicit tvec4(tvec2<A> const & v, B const & s1, C const & s2);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B, typename C> 
+		template <typename A, typename B, typename C>
 		explicit tvec4(A const & s1, tvec2<B> const & v, C const & s2);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B, typename C> 
+		template <typename A, typename B, typename C>
 		explicit tvec4(A const & s1, B const & s2, tvec2<C> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		explicit tvec4(tvec3<A> const & v, B const & s);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		explicit tvec4(A const & s, tvec3<B> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		explicit tvec4(tvec2<A> const & v1, tvec2<B> const & v2);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		explicit tvec4(tvec4<U> const & v);
 
 		//////////////////////////////////////
@@ -352,11 +352,11 @@ namespace detail
 	/// @addtogroup gtc_half_float
 	/// @{
 
-	/// Type for half-precision floating-point numbers. 
+	/// Type for half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::half					half;
 
-	/// Vector of 2 half-precision floating-point numbers. 
+	/// Vector of 2 half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tvec2<detail::half>	hvec2;
 
@@ -364,14 +364,14 @@ namespace detail
 	/// @see gtc_half_float
 	typedef detail::tvec3<detail::half>	hvec3;
 
-	/// Vector of 4 half-precision floating-point numbers. 
+	/// Vector of 4 half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tvec4<detail::half>	hvec4;
 
 	/// 2 * 2 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat2x2<detail::half>	hmat2;
-    
+
 	/// 3 * 3 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat3x3<detail::half>	hmat3;
@@ -383,11 +383,11 @@ namespace detail
 	/// 2 * 2 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat2x2<detail::half>	hmat2x2;
-    
+
 	/// 2 * 3 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat2x3<detail::half>	hmat2x3;
-    
+
 	/// 2 * 4 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat2x4<detail::half>	hmat2x4;
@@ -395,27 +395,27 @@ namespace detail
 	/// 3 * 2 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat3x2<detail::half>	hmat3x2;
-    
+
 	/// 3 * 3 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat3x3<detail::half>	hmat3x3;
-    
+
 	/// 3 * 4 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat3x4<detail::half>	hmat3x4;
 
 	/// 4 * 2 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
-	typedef detail::tmat4x2<detail::half>	hmat4x2;    
+	typedef detail::tmat4x2<detail::half>	hmat4x2;
 
 	/// 4 * 3 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat4x3<detail::half>	hmat4x3;
-    
+
 	/// 4 * 4 matrix of half-precision floating-point numbers.
 	/// @see gtc_half_float
 	typedef detail::tmat4x4<detail::half>	hmat4x4;
-    
+
 	/// @}
 }// namespace glm
 

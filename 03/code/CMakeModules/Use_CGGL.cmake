@@ -1,13 +1,13 @@
-# 
+#
 # This convenience include finds if Cg for OpenGL is installed
-# and set the appropriate libs, incdirs, flags etc. 
-# 
+# and set the appropriate libs, incdirs, flags etc.
+#
 # -----------------------------------------------------
-# USAGE: 
-#      just include Use_CGGL.cmake 
+# USAGE:
+#      just include Use_CGGL.cmake
 #      in your projects CMakeLists.txt
 # INCLUDE( ${CMAKE_MODULE_PATH}/Use_CGGL.cmake)
-# 
+#
 # ------------------------------------------------------------------
 # @author Jan Woetzel <http://www.mip.informatik.uni-kiel.de/~jw> (09/2003)
 # ------------------------------------------------------------------

@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,14 +28,14 @@
 
 namespace glm
 {
-    template <typename T, template <typename> class vecType> 
+    template <typename T, template <typename> class vecType>
 	GLM_FUNC_QUALIFIER typename vecType<T>::bool_type lessThan
 	(
-		vecType<T> const & x, 
+		vecType<T> const & x,
 		vecType<T> const & y
 	)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES,
 			"Invalid template instantiation of 'lessThan', GLM vector types required");
 		GLM_STATIC_ASSERT(detail::is_bool<T>::_NO,
 			"Invalid template instantiation of 'lessThan', GLM vector types required floating-point or integer value types vectors");
@@ -48,16 +48,16 @@ namespace glm
 		return Result;
 	}
 
-	template <typename T, template <typename> class vecType> 
+	template <typename T, template <typename> class vecType>
 	GLM_FUNC_QUALIFIER typename vecType<T>::bool_type lessThanEqual
 	(
-		vecType<T> const & x, 
+		vecType<T> const & x,
 		vecType<T> const & y
 	)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES,
 			"Invalid template instantiation of 'lessThanEqual', GLM vector types required");
-		GLM_STATIC_ASSERT(detail::is_bool<T>::_NO, 
+		GLM_STATIC_ASSERT(detail::is_bool<T>::_NO,
 			"Invalid template instantiation of 'lessThanEqual', GLM vector types required floating-point or integer value types vectors");
 		assert(x.length() == y.length());
 
@@ -67,16 +67,16 @@ namespace glm
 		return Result;
 	}
 
-	template <typename T, template <typename> class vecType> 
+	template <typename T, template <typename> class vecType>
 	GLM_FUNC_QUALIFIER typename vecType<T>::bool_type greaterThan
 	(
-		vecType<T> const & x, 
+		vecType<T> const & x,
 		vecType<T> const & y
 	)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES,
 			"Invalid template instantiation of 'greaterThan', GLM vector types required");
-		GLM_STATIC_ASSERT(detail::is_bool<T>::_NO, 
+		GLM_STATIC_ASSERT(detail::is_bool<T>::_NO,
 			"Invalid template instantiation of 'greaterThan', GLM vector types required floating-point or integer value types vectors");
 		assert(x.length() == y.length());
 
@@ -86,16 +86,16 @@ namespace glm
 		return Result;
 	}
 
-	template <typename T, template <typename> class vecType> 
+	template <typename T, template <typename> class vecType>
 	GLM_FUNC_QUALIFIER typename vecType<T>::bool_type greaterThanEqual
 	(
-		vecType<T> const & x, 
+		vecType<T> const & x,
 		vecType<T> const & y
 	)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES,
 			"Invalid template instantiation of 'greaterThanEqual', GLM vector types required");
-		GLM_STATIC_ASSERT(detail::is_bool<T>::_NO, 
+		GLM_STATIC_ASSERT(detail::is_bool<T>::_NO,
 			"Invalid template instantiation of 'greaterThanEqual', GLM vector types required floating-point or integer value types vectors");
 		assert(x.length() == y.length());
 
@@ -105,14 +105,14 @@ namespace glm
 		return Result;
 	}
 
-	template <typename T, template <typename> class vecType> 
+	template <typename T, template <typename> class vecType>
 	GLM_FUNC_QUALIFIER typename vecType<T>::bool_type equal
 	(
-		vecType<T> const & x, 
+		vecType<T> const & x,
 		vecType<T> const & y
 	)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES,
 			"Invalid template instantiation of 'equal', GLM vector types required");
 		assert(x.length() == y.length());
 
@@ -122,14 +122,14 @@ namespace glm
 		return Result;
 	}
 
-	template <typename T, template <typename> class vecType> 
+	template <typename T, template <typename> class vecType>
 	GLM_FUNC_QUALIFIER typename vecType<T>::bool_type notEqual
 	(
-		vecType<T> const & x, 
+		vecType<T> const & x,
 		vecType<T> const & y
 	)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<T> >::_YES,
 			"Invalid template instantiation of 'notEqual', GLM vector types required");
 		assert(x.length() == y.length());
 
@@ -139,10 +139,10 @@ namespace glm
 		return Result;
 	}
 
-	template <template <typename> class vecType> 
+	template <template <typename> class vecType>
 	GLM_FUNC_QUALIFIER bool any(vecType<bool> const & v)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<bool> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<bool> >::_YES,
 			"Invalid template instantiation of 'any', GLM boolean vector types required");
 
 		bool Result = false;
@@ -151,10 +151,10 @@ namespace glm
 		return Result;
 	}
 
-	template <template <typename> class vecType> 
+	template <template <typename> class vecType>
 	GLM_FUNC_QUALIFIER bool all(vecType<bool> const & v)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<bool> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<bool> >::_YES,
 			"Invalid template instantiation of 'all', GLM boolean vector types required");
 
 		bool Result = true;
@@ -163,10 +163,10 @@ namespace glm
 		return Result;
 	}
 
-	template <template <typename> class vecType> 
+	template <template <typename> class vecType>
 	GLM_FUNC_QUALIFIER vecType<bool> not_(vecType<bool> const & v)
 	{
-		GLM_STATIC_ASSERT(detail::is_vector<vecType<bool> >::_YES, 
+		GLM_STATIC_ASSERT(detail::is_vector<vecType<bool> >::_YES,
 			"Invalid template instantiation of 'not_', GLM vector types required");
 
 		typename vecType<bool>::bool_type Result(vecType<bool>::null);

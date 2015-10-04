@@ -2,20 +2,20 @@
 #
 # See http://www.wolfram.com/solutions/mathlink/
 #
-# Once run this will define: 
+# Once run this will define:
 #
 # MATHLINK_FOUND
 # MATHLINK_INCLUDE_DIR
 # MATHLINK_LIBRARIES
 # MATHLINK_MPREP_BINARY
-# 
+#
 # NOTES
 # tested with Mathematica 5.1 (on Windows XP)
 #
 # AUTHOR
 # Jan Woetzel <http://www.mip.informatik.uni-kiel.de/~jw> (03/2006)
 
-# the precompiled MathLink library name depends on 
+# the precompiled MathLink library name depends on
 # - version (1 or 2) - we always use 2
 # - compiler/linker  - MS Visual studio, mingw, borland, cygwin ...
 
@@ -39,7 +39,7 @@ FIND_PATH(MATHLINK_INCLUDE_DIR mathlink.h
 
   FIND_LIBRARY(MATHLINK_LIBRARY
     NAMES ml32i2m
-    PATHS 
+    PATHS
   $ENV{MATHLINK_DIR}/lib
   $ENV{MATHLINK_DIR}
   $ENV{MATHLINK_HOME}/lib
@@ -51,12 +51,12 @@ FIND_PATH(MATHLINK_INCLUDE_DIR mathlink.h
 #MESSAGE("DBG MATHLINK_LIBRARY=${MATHLINK_LIBRARY}")
 
 
-FIND_PROGRAM(MATHLINK_MPREP_BINARY 
- NAMES mprep 
- PATHS 
+FIND_PROGRAM(MATHLINK_MPREP_BINARY
+ NAMES mprep
+ PATHS
  "$ENV{ProgramFiles}/Wolfram Research/Mathematica/5.1/AddOns/MathLink/DeveloperKit/Windows/CompilerAdditions/mldev32/bin"
  DOC "Mathematica Mathlink mprep binary" )
-  
+
 # --------------------------------
 
 IF(MATHLINK_LIBRARY)
@@ -76,7 +76,7 @@ ENDIF(NOT MATHLINK_MPREP_BINARY)
 IF   (MATHLINK_LIBRARIES AND MATHLINK_INCLUDE_DIR)
   SET(MATHLINK_FOUND TRUE)
 ENDIF(MATHLINK_LIBRARIES AND MATHLINK_INCLUDE_DIR)
-  
+
 
 MARK_AS_ADVANCED(
   MATHLINK_LIBRARY

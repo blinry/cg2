@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,9 +29,9 @@
 ///
 /// @defgroup gtx_color_space GLM_GTX_color_space: RGB to HSV conversion
 /// @ingroup gtx
-/// 
+///
 /// @brief Related to RGB to HSV conversions and operations.
-/// 
+///
 /// <glm/gtx/color_space.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -52,39 +52,39 @@ namespace glm
 
 	/// Converts a color from HSV color space to its color in RGB color space.
 	/// @see gtx_color_space
-    template <typename valType> 
+    template <typename valType>
 	detail::tvec3<valType> rgbColor(
 		detail::tvec3<valType> const & hsvValue);
 
 	/// Converts a color from RGB color space to its color in HSV color space.
 	/// @see gtx_color_space
-    template <typename valType> 
+    template <typename valType>
 	detail::tvec3<valType> hsvColor(
 		detail::tvec3<valType> const & rgbValue);
-		
+
 	/// Build a saturation matrix.
 	/// @see gtx_color_space
-    template <typename valType> 
+    template <typename valType>
 	detail::tmat4x4<valType> saturation(
 		valType const s);
 
     /// Modify the saturation of a color.
 	/// @see gtx_color_space
-	template <typename valType> 
+	template <typename valType>
 	detail::tvec3<valType> saturation(
-		valType const s, 
+		valType const s,
 		detail::tvec3<valType> const & color);
-		
+
 	/// Modify the saturation of a color.
 	/// @see gtx_color_space
-    template <typename valType> 
+    template <typename valType>
 	detail::tvec4<valType> saturation(
-		valType const s, 
+		valType const s,
 		detail::tvec4<valType> const & color);
-		
+
 	/// Compute color luminosity associating ratios (0.33, 0.59, 0.11) to RGB canals.
 	/// @see gtx_color_space
-	template <typename valType> 
+	template <typename valType>
 	valType luminosity(
 		detail::tvec3<valType> const & color);
 

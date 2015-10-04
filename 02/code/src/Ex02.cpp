@@ -87,7 +87,7 @@ void initShader() {
 
 
 	// TODO: create new shader program "shaderProgram" //
-	shaderProgram = glCreateProgram();		
+	shaderProgram = glCreateProgram();
 
 	// check if operation failed //
 	if (shaderProgram == 0) {
@@ -216,7 +216,7 @@ GLuint loadShaderFile(const char* fileName, GLenum shaderType) {
 	return shader;
 }
 
-void initScene() { 
+void initScene() {
 	GLfloat data[NUM_POINTS * 3 * 2];
 	memcpy(data, bunny, NUM_POINTS * 3 * sizeof(GLfloat));
 	memcpy(data+NUM_POINTS*3, normals, NUM_POINTS*3*sizeof(GLfloat));

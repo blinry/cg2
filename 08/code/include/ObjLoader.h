@@ -16,7 +16,7 @@ class ObjLoader {
     MeshObj* getMeshObj(std::string ID);
   private:
     std::map<std::string, MeshObj*> mMeshMap;
-    
+
     void computeTangentSpace(MeshData &meshData);
 };
 

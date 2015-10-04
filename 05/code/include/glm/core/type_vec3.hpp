@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -48,7 +48,7 @@ namespace detail
 	// \ingroup core_template
 	template <typename T>
 	struct tvec3
-	{	
+	{
 		enum ctor{null};
 
 		typedef T value_type;
@@ -62,7 +62,7 @@ namespace detail
 		// Data
 
 #	if(GLM_COMPONENT == GLM_COMPONENT_CXX11)
-		union 
+		union
 		{
 #		if(defined(GLM_SWIZZLE))
 			_GLM_SWIZZLE3_2_MEMBERS(value_type, glm::detail::tvec2<value_type>, x, y, z)
@@ -120,38 +120,38 @@ namespace detail
 		GLM_FUNC_DECL explicit tvec3(
 			value_type const & s);
 		GLM_FUNC_DECL explicit tvec3(
-			value_type const & s1, 
-			value_type const & s2, 
+			value_type const & s1,
+			value_type const & s2,
 			value_type const & s3);
 
 		//////////////////////////////////////
 		// Convertion scalar constructors
 
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL explicit tvec3(
 			U const & x);
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U, typename V, typename W> 
+		template <typename U, typename V, typename W>
 		GLM_FUNC_DECL explicit tvec3(
-			U const & x, 
-			V const & y, 
-			W const & z);			
+			U const & x,
+			V const & y,
+			W const & z);
 
 		//////////////////////////////////////
 		// Convertion vector constructors
 
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		GLM_FUNC_DECL explicit tvec3(tvec2<A> const & v, B const & s);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		GLM_FUNC_DECL explicit tvec3(A const & s, tvec2<B> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL explicit tvec3(tvec3<U> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL explicit tvec3(tvec4<U> const & v);
 
 		//////////////////////////////////////
@@ -159,10 +159,10 @@ namespace detail
 
 		GLM_FUNC_DECL tvec3(tref3<T> const & r);
 
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		GLM_FUNC_DECL explicit tvec3(tref2<A> const & v, B const & s);
 
-		template <typename A, typename B> 
+		template <typename A, typename B>
 		GLM_FUNC_DECL explicit tvec3(A const & s, tref2<B> const & v);
 
         template <int E0, int E1, int E2>
@@ -187,24 +187,24 @@ namespace detail
 		// Unary arithmetic operators
 
 		GLM_FUNC_DECL tvec3<T> & operator= (tvec3<T> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator= (tvec3<U> const & v);
 
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator+=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator+=(tvec3<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator-=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator-=(tvec3<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator*=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator*=(tvec3<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator/=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec3<T> & operator/=(tvec3<U> const & v);
 		GLM_FUNC_DECL tvec3<T> & operator++();
 		GLM_FUNC_DECL tvec3<T> & operator--();
@@ -271,65 +271,65 @@ namespace detail
 	/// @addtogroup core_precision
 	/// @{
 
-	/// 3 components vector of high precision floating-point numbers. 
+	/// 3 components vector of high precision floating-point numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<highp_float>		highp_vec3;
 
-	/// 3 components vector of medium precision floating-point numbers. 
+	/// 3 components vector of medium precision floating-point numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<mediump_float>	mediump_vec3;
 
-	/// 3 components vector of low precision floating-point numbers. 
+	/// 3 components vector of low precision floating-point numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<lowp_float>		lowp_vec3;
 
-	/// 3 components vector of high precision signed integer numbers. 
+	/// 3 components vector of high precision signed integer numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<highp_int>		highp_ivec3;
 
-	/// 3 components vector of medium precision signed integer numbers. 
+	/// 3 components vector of medium precision signed integer numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<mediump_int>		mediump_ivec3;
 
-	/// 3 components vector of low precision signed integer numbers. 
+	/// 3 components vector of low precision signed integer numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<lowp_int>			lowp_ivec3;
 
-	/// 3 components vector of high precision unsigned integer numbers. 
+	/// 3 components vector of high precision unsigned integer numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<highp_uint>		highp_uvec3;
 
-	/// 3 components vector of medium precision unsigned integer numbers. 
+	/// 3 components vector of medium precision unsigned integer numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<mediump_uint>		mediump_uvec3;
 
-	/// 3 components vector of low precision unsigned integer numbers. 
+	/// 3 components vector of low precision unsigned integer numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.5 Vectors</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef detail::tvec3<lowp_uint>		lowp_uvec3;

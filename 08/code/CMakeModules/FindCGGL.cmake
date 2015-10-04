@@ -1,10 +1,10 @@
-# 
-# Try to find CG from Nvidia 
-# Once run this will define: 
-# 
+#
+# Try to find CG from Nvidia
+# Once run this will define:
+#
 # CGGL_FOUND
 # CGGL_INCLUDE_DIR
-# CGGL_LIBRARIES    
+# CGGL_LIBRARIES
 #
 #  (CGGL_LINK_DIRECTORIES: not yet...)
 #
@@ -13,9 +13,9 @@
 # Jan Woetzel 2003-2005
 # www.mip.informatik.uni-kiel.de/~jw
 #
-# TODO: 
+# TODO:
 # -add paths from registry for WIN32
-# 
+#
 
 SET(CGGL_POSSIBLE_INCDIRS
   $ENV{CGGL_DIR}/include
@@ -35,13 +35,13 @@ SET(CGGL_POSSIBLE_LIBDIRS
   /usr/local/lib
   )
 
-FIND_PATH(CG_CORE_INCLUDE_DIR 
-  NAMES Cg/cg.h  
+FIND_PATH(CG_CORE_INCLUDE_DIR
+  NAMES Cg/cg.h
   PATHS ${CGGL_POSSIBLE_INCDIRS} )
 #MESSAGE("DBG CG_CORE_INCLUDE_DIR=${CG_CORE_INCLUDE_DIR}")
 
-FIND_PATH(CG_GL_INCLUDE_DIR 
-  NAMES Cg/cgGL.h   
+FIND_PATH(CG_GL_INCLUDE_DIR
+  NAMES Cg/cgGL.h
   PATHS ${CGGL_POSSIBLE_INCDIRS} )
 #MESSAGE("DBG CG_GL_INCLUDE_DIR=${CG_GL_INCLUDE_DIR}")
 

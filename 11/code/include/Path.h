@@ -18,14 +18,14 @@ class Path {
   public:
     Path();
     Path(ControlPoint start, ControlPoint end, bool looped = false);
-    
+
     void setFirstControlPoint(ControlPoint point);
     void setLastControlPoint(ControlPoint point);
     void addIntermediateControlPoint(ControlPoint point);
-    
+
     void setLooped(bool looped);
     bool isLooped();
-    
+
     ControlPoint getPositionForTime(float t);
   private:
     bool mIsLooped;

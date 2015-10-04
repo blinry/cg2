@@ -10,7 +10,7 @@ find_path(OpenVRML_INCLUDE_DIR openvrml/vrml97_grammar.h
 )
 
 find_library(OpenVRML_LIBRARY
- names openvrml 
+ names openvrml
  paths /usr/lib /usr/lib64 /usr/local/lib /usr/local/lib64
 )
 

@@ -1,13 +1,13 @@
 
-# 
+#
 # This convenience include finds if GLUT (gl utils) is installed
-# and set the appropriate libs, incdirs, flags etc. 
+# and set the appropriate libs, incdirs, flags etc.
 
 # @author Jan Woetzel <jw -at- mip.informatik.uni-kiel.de> (07/2003)
 ##
 # -----------------------------------------------------
-# USAGE: 
-# # just include this file in your projects CMakeLists.txt: 
+# USAGE:
+# # just include this file in your projects CMakeLists.txt:
 # INCLUDE( ${CMAKE_MODULE_PATH}/Use_GLUT.cmake)
 ##
 # ------------------------------------------------------------------

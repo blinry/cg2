@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -44,7 +44,7 @@ namespace detail
 {
 	template
 	<
-		typename VALTYPE, 
+		typename VALTYPE,
 		template <typename> class TYPE
 	>
 	struct genType
@@ -61,7 +61,7 @@ namespace detail
 		typedef sizeType size_type;
 		static bool is_vector();
 		static bool is_matrix();
-		
+
 		typedef TYPE<VALTYPE> type;
 		typedef TYPE<VALTYPE> * pointer;
 		typedef TYPE<VALTYPE> const * const_pointer;
@@ -90,7 +90,7 @@ namespace detail
 
 	template
 	<
-		typename VALTYPE, 
+		typename VALTYPE,
 		template <typename> class TYPE
 	>
 	bool genType<VALTYPE, TYPE>::is_vector()
@@ -123,8 +123,8 @@ namespace detail
 		static bool									is_matrix();
 
 	private:
-		// Data 
-		col_type value[colT];		
+		// Data
+		col_type value[colT];
 
 	public:
 		//////////////////////////////////////

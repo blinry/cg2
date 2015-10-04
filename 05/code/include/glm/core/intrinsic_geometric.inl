@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -124,7 +124,7 @@ GLM_FUNC_QUALIFIER __m128 sse_rfa_ps(__m128 I, __m128 N, __m128 eta)
 	__m128 sub0 = _mm_sub_ps(glm::detail::one, mul0);
 	__m128 sub1 = _mm_sub_ps(glm::detail::one, mul1);
 	__m128 mul2 = _mm_mul_ps(sub0, sub1);
-	
+
 	if(_mm_movemask_ps(_mm_cmplt_ss(mul2, glm::detail::zero)) == 0)
 		return glm::detail::zero;
 

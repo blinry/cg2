@@ -1,7 +1,7 @@
-# 
-# Try to find GLEW library  
-# Once run this will define: 
-# 
+#
+# Try to find GLEW library
+# Once run this will define:
+#
 # GLEW_FOUND
 # GLEW_INCLUDE_DIR
 # GLEW_DEFINITIONS
@@ -11,7 +11,7 @@
 #
 #  (GLEW_LINK_DIRECTORIES: not yet...)
 #
-# Jan Woetzel 09/2003. 
+# Jan Woetzel 09/2003.
 # www.mip.informatik.uni-kiel.de/~jw
 # --------------------------------
 
@@ -30,9 +30,9 @@ FIND_PATH(GLEW_INCLUDE_DIR GL/glew.h
   /usr/include
   /usr/local/include
   /opt/net/gcc41/glew/include
-  /opt/net/gcc33/glew/include  
+  /opt/net/gcc33/glew/include
   )
-#MESSAGE("DBG GLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}")  
+#MESSAGE("DBG GLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}")
 
 SET(GLEW_POSSIBLE_LIBPATHS
   ${GLEW_DIR}/lib
@@ -49,11 +49,11 @@ SET(GLEW_POSSIBLE_LIBPATHS
   /usr/lib
   /usr/local/lib
   /opt/net/gcc41/glew/lib
-  /opt/net/gcc33/glew/lib  
+  /opt/net/gcc33/glew/lib
   )
 
 FIND_LIBRARY(GLEW_STATIC_LIBRARY
-  NAMES glew32s glews GLEW 
+  NAMES glew32s glews GLEW
   PATHS ${GLEW_POSSIBLE_LIBPATHS}
   )
 #MESSAGE("DBG GLEW_STATIC_LIBRARY=${GLEW_LIBRARY}")
@@ -89,15 +89,15 @@ IF(GLEW_LIBRARIES AND GLEW_INCLUDE_DIR)
   #IF   (BUILD_SHARED_LIBS)
   #  SET (GLEW_DEFINITIONS "-DGLEW_BUILD")
   #ELSE (BUILD_SHARED_LIBS)
-  
-  # we use only static glew for now    
+
+  # we use only static glew for now
   SET (GLEW_DEFINITIONS "-DGLEW_STATIC")
-  
+
   #ENDIF(BUILD_SHARED_LIBS)
 
-  # get the link directory for rpath to be used with LINK_DIRECTORIES: 	 
-  GET_FILENAME_COMPONENT(GLEW_LINK_DIRECTORIES ${GLEW_LIBRARIES} PATH)  
-  
+  # get the link directory for rpath to be used with LINK_DIRECTORIES:
+  GET_FILENAME_COMPONENT(GLEW_LINK_DIRECTORIES ${GLEW_LIBRARIES} PATH)
+
 ELSE(GLEW_LIBRARIES AND GLEW_INCLUDE_DIR)
   SET(GLEW_FOUND FALSE)
 ENDIF(GLEW_LIBRARIES AND GLEW_INCLUDE_DIR)

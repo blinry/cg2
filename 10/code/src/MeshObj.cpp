@@ -204,7 +204,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
 
     // TODO: project 8 (6 sides + 2 caps) shadow triangles for each mesh triangle //
     // - process every geometry face and create 6 (or 8) new faces from it        //
-    // - be sure to check the face orientation and flip back facing triangles     //  
+    // - be sure to check the face orientation and flip back facing triangles     //
     //   when creating the shadow volume
     //
     glm::vec3 a,b,c,a1,b1,c1;
@@ -267,10 +267,10 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     unsigned int vertexDataSize = shadows.vertex_position.size();
     GLfloat* vertexPosition = new GLfloat[vertexDataSize];
     std::copy(shadows.vertex_position.begin(),shadows.vertex_position.end(),vertexPosition);
-    
+
     GLuint* vertexIndices = new GLuint[mIndexCount_shadow];
     std::copy(shadows.indices.begin(),shadows.indices.end(),vertexIndices);
-    
+
     if(mVAO_shadow == 0 ){
         glGenVertexArrays(1, &mVAO_shadow);
     }
@@ -279,7 +279,7 @@ void MeshObj::initShadowVolume(glm::vec3 lightPos) {
     if(mVBO_shadow_position == 0){
         glGenBuffers(1,&mVBO_shadow_position);
     }
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, mVBO_shadow_position);
     glBufferData(GL_ARRAY_BUFFER, vertexDataSize*sizeof(GLfloat),&vertexPosition[0],GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);

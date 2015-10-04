@@ -41,19 +41,19 @@ void main() {
   vec3 emissive_color = texture2D(emissive_tex, textureCoord).xyz;
   vec3 sky_alph = texture2D(sky_alpha, textureCoord).xyz;
   vec3 sky_color = texture2D(sky_tex, textureCoord).xyz;
-  
+
   // light computation //
   int lightCount = max(min(usedLightCount, maxLightCount), 0);
   // normalize the vectors passed from your vertex program //
   vec3 E = normalize(eyeDir);
   vec3 N = normalize(vertexNormal);
-  
+
   // compute the ambient, diffuse and specular color terms //
   vec3 ambientTerm = vec3(0);
   vec3 diffuseTerm = vec3(0);
   vec3 specularTerm = vec3(0);
   vec3 emissiveTerm = vec3(0);
-  
+
   vec3 L, H;
   for (int i = 0; i < lightCount; ++i) {
     L = normalize(lightDir[i]);
@@ -69,7 +69,7 @@ void main() {
   specularTerm *= material.specular_color;
   // TODO: compute how much to use of the emissive color map //
   emissiveTerm /= lightCount;
-  
+
   // TODO: assign the final color to the fragment output variable //
   color = vec4(emissiveTerm*emissive_color + (ambientTerm + diffuseTerm  + specularTerm)*(diff_color+sky_alph*sky_color), 1);
 }

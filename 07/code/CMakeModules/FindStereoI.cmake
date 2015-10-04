@@ -1,8 +1,8 @@
-# 
-# Try to find StereoI library  
-# which is an interface for the NVidia consumer stereo driver. 
-# Once run this will define: 
-# 
+#
+# Try to find StereoI library
+# which is an interface for the NVidia consumer stereo driver.
+# Once run this will define:
+#
 # STEREOI_FOUND
 # STEREOI_INCLUDE_DIR
 # STEREOI_LIBRARIES
@@ -29,7 +29,7 @@ FIND_PATH(STEREOI_INCLUDE_DIR StereoI.h
 
 FIND_LIBRARY(STEREOI_LIBRARY_Release
   NAMES StereoI
-  PATHS 
+  PATHS
   "$ENV{STEREOI_DIR}/lib/Release"
   "$ENV{STEREOI_DIR}/lib"
   "$ENV{STEREOI_DIR}/"
@@ -42,8 +42,8 @@ FIND_LIBRARY(STEREOI_LIBRARY_Release
 )
 
 FIND_LIBRARY(STEREOI_LIBRARY_Debug
-  NAMES StereoId StereoI_d StereoI 
-  PATHS 
+  NAMES StereoId StereoI_d StereoI
+  PATHS
   "$ENV{STEREOI_DIR}/lib/Debug"
   "$ENV{STEREOI_DIR}/lib"
   "$ENV{STEREOI_DIR}/"
@@ -61,30 +61,30 @@ FIND_LIBRARY(STEREOI_LIBRARY_Debug
 ##
 IF (STEREOI_INCLUDE_DIR)
   # found header
-  IF   (STEREOI_LIBRARY_Debug OR STEREOI_LIBRARY_Release)  
-  
+  IF   (STEREOI_LIBRARY_Debug OR STEREOI_LIBRARY_Release)
+
     # found lib(s), now choose Debug/Release or both
     SET(STEREOI_FOUND TRUE)
-    
+
     IF   (STEREOI_LIBRARY_Debug AND STEREOI_LIBRARY_Release)
       # both, Debug+Release available
-      SET (STEREOI_LIBRARIES 
-        debug     ${STEREOI_LIBRARY_Debug} 
+      SET (STEREOI_LIBRARIES
+        debug     ${STEREOI_LIBRARY_Debug}
         optimized ${STEREOI_LIBRARY_Release} )
-      GET_FILENAME_COMPONENT(STEREOI_LINK_DIRECTORIES ${STEREOI_LIBRARY_Debug} PATH)  
+      GET_FILENAME_COMPONENT(STEREOI_LINK_DIRECTORIES ${STEREOI_LIBRARY_Debug} PATH)
     ELSE (STEREOI_LIBRARY_Debug AND STEREOI_LIBRARY_Release)
       # found only one of both to be used for both builds
       IF    (STEREOI_LIBRARY_Debug)
         # only Debug
-        SET (STEREOI_LIBRARIES  ${STEREOI_LIBRARY_Debug} )        
+        SET (STEREOI_LIBRARIES  ${STEREOI_LIBRARY_Debug} )
         GET_FILENAME_COMPONENT(STEREOI_LINK_DIRECTORIES ${STEREOI_LIBRARY_Debug} PATH)
       ELSEIF(STEREOI_LIBRARY_Debug)
         # only Release
         SET (STEREOI_LIBRARIES  ${STEREOI_LIBRARY_Release} )
-        GET_FILENAME_COMPONENT(STEREOI_LINK_DIRECTORIES ${STEREOI_LIBRARY_Release} PATH)            
-      ENDIF (STEREOI_LIBRARY_Debug)      
+        GET_FILENAME_COMPONENT(STEREOI_LINK_DIRECTORIES ${STEREOI_LIBRARY_Release} PATH)
+      ENDIF (STEREOI_LIBRARY_Debug)
     ENDIF(STEREOI_LIBRARY_Debug AND STEREOI_LIBRARY_Release)
-    
+
   ELSE (STEREOI_LIBRARY_Debug OR STEREOI_LIBRARY_Release)
     MESSAGE("STEREOI libraries not found.")
   ENDIF(STEREOI_LIBRARY_Debug OR STEREOI_LIBRARY_Release)

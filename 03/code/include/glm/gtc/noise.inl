@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // OpenGL Mathematics Copyright (c) 2005 - 2012 G-Truc Creation (www.g-truc.net)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Based on the work of Stefan Gustavson and Ashima Arts on "webgl-noise": 
-// https://github.com/ashima/webgl-noise 
-// Following Stefan Gustavson's paper "Simplex noise demystified": 
+// Based on the work of Stefan Gustavson and Ashima Arts on "webgl-noise":
+// https://github.com/ashima/webgl-noise
+// Following Stefan Gustavson's paper "Simplex noise demystified":
 // http://www.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Created : 2011-04-21
@@ -34,7 +34,7 @@ namespace glm
 	{
 		return mod289(((x * T(34)) + T(1)) * x);
 	}
-  
+
 	template <typename T>
 	GLM_FUNC_QUALIFIER T taylorInvSqrt(T const & r)
 	{
@@ -47,8 +47,8 @@ namespace glm
 		return T(1.79284291400159) - T(0.85373472095314) * r;
 	}
 
-	template <typename T, template <typename> class vecType> 
-	GLM_FUNC_QUALIFIER vecType<T> fade(vecType<T> const & t) 
+	template <typename T, template <typename> class vecType>
+	GLM_FUNC_QUALIFIER vecType<T> fade(vecType<T> const & t)
 	{
 		return t * t * t * (t * (t * T(6) - T(15)) + T(10));
 	}
@@ -59,7 +59,7 @@ namespace glm
 		detail::tvec3<T> pXYZ = floor(fract(detail::tvec3<T>(j) * detail::tvec3<T>(ip)) * T(7)) * ip[2] - T(1);
 		T pW = T(1.5) - dot(abs(pXYZ), detail::tvec3<T>(1));
 		detail::tvec4<T> s = detail::tvec4<T>(lessThan(detail::tvec4<T>(pXYZ, pW), detail::tvec4<T>(0.0)));
-		pXYZ = pXYZ + (detail::tvec3<T>(s) * T(2) - T(1)) * s.w; 
+		pXYZ = pXYZ + (detail::tvec3<T>(s) * T(2) - T(1)) * s.w;
 		return detail::tvec4<T>(pXYZ, pW);
 	}
 
@@ -88,10 +88,10 @@ namespace glm
 		detail::tvec2<T> g11(gx.w, gy.w);
 
 		detail::tvec4<T> norm = taylorInvSqrt(detail::tvec4<T>(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11)));
-		g00 *= norm.x;  
-		g01 *= norm.y;  
-		g10 *= norm.z;  
-		g11 *= norm.w;  
+		g00 *= norm.x;
+		g01 *= norm.y;
+		g10 *= norm.z;
+		g11 *= norm.w;
 
 		T n00 = dot(g00, detail::tvec2<T>(fx.x, fy.x));
 		T n10 = dot(g10, detail::tvec2<T>(fx.y, fy.y));
@@ -171,7 +171,7 @@ namespace glm
 		detail::tvec3<T> fade_xyz = fade(Pf0);
 		detail::tvec4<T> n_z = mix(detail::tvec4<T>(n000, n100, n010, n110), detail::tvec4<T>(n001, n101, n011, n111), fade_xyz.z);
 		detail::tvec2<T> n_yz = mix(detail::tvec2<T>(n_z.x, n_z.y), detail::tvec2<T>(n_z.z, n_z.w), fade_xyz.y);
-		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
 		return T(2.2) * n_xyz;
 	}
 	/*
@@ -242,9 +242,9 @@ namespace glm
 		detail::tvec3<T> fade_xyz = fade(Pf0);
 		detail::tvec4<T> n_z = mix(detail::tvec4<T>(n000, n100, n010, n110), detail::tvec4<T>(n001, n101, n011, n111), fade_xyz.z);
 		detail::tvec2<T> n_yz = mix(
-			detail::tvec2<T>(n_z.x, n_z.y), 
+			detail::tvec2<T>(n_z.x, n_z.y),
 			detail::tvec2<T>(n_z.z, n_z.w), fade_xyz.y);
-		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
 		return T(2.2) * n_xyz;
 	}
 	*/
@@ -410,10 +410,10 @@ namespace glm
 		detail::tvec2<T> g11(gx.w, gy.w);
 
 		detail::tvec4<T> norm = taylorInvSqrt(detail::tvec4<T>(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11)));
-		g00 *= norm.x;  
-		g01 *= norm.y;  
-		g10 *= norm.z;  
-		g11 *= norm.w;  
+		g00 *= norm.x;
+		g01 *= norm.y;
+		g10 *= norm.z;
+		g11 *= norm.w;
 
 		T n00 = dot(g00, detail::tvec2<T>(fx.x, fy.x));
 		T n10 = dot(g10, detail::tvec2<T>(fx.y, fy.y));
@@ -493,7 +493,7 @@ namespace glm
 		detail::tvec3<T> fade_xyz = fade(Pf0);
 		detail::tvec4<T> n_z = mix(detail::tvec4<T>(n000, n100, n010, n110), detail::tvec4<T>(n001, n101, n011, n111), fade_xyz.z);
 		detail::tvec2<T> n_yz = mix(detail::tvec2<T>(n_z.x, n_z.y), detail::tvec2<T>(n_z.z, n_z.w), fade_xyz.y);
-		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
 		return T(2.2) * n_xyz;
 	}
 
@@ -661,8 +661,8 @@ namespace glm
 			+ i.x + detail::tvec3<T>(T(0), i1.x, T(1)));
 
 		detail::tvec3<T> m = max(T(0.5) - detail::tvec3<T>(
-			dot(x0, x0), 
-			dot(detail::tvec2<T>(x12.x, x12.y), detail::tvec2<T>(x12.x, x12.y)), 
+			dot(x0, x0),
+			dot(detail::tvec2<T>(x12.x, x12.y), detail::tvec2<T>(x12.x, x12.y)),
 			dot(detail::tvec2<T>(x12.z, x12.w), detail::tvec2<T>(x12.z, x12.w))), T(0));
 		m = m * m ;
 		m = m * m ;
@@ -690,7 +690,7 @@ namespace glm
 
 	template <typename T>
 	GLM_FUNC_QUALIFIER T simplex(detail::tvec3<T> const & v)
-	{ 
+	{
 		detail::tvec2<T> const C(1.0 / 6.0, 1.0 / 3.0);
 		detail::tvec4<T> const D(0.0, 0.5, 1.0, 2.0);
 
@@ -713,10 +713,10 @@ namespace glm
 		detail::tvec3<T> x3(x0 - D.y);      // -1.0+3.0*C.x = -0.5 = -D.y
 
 		// Permutations
-		i = mod289(i); 
-		detail::tvec4<T> p(permute(permute(permute( 
-			i.z + detail::tvec4<T>(T(0), i1.z, i2.z, T(1))) + 
-			i.y + detail::tvec4<T>(T(0), i1.y, i2.y, T(1))) + 
+		i = mod289(i);
+		detail::tvec4<T> p(permute(permute(permute(
+			i.z + detail::tvec4<T>(T(0), i1.z, i2.z, T(1))) +
+			i.y + detail::tvec4<T>(T(0), i1.y, i2.y, T(1))) +
 			i.x + detail::tvec4<T>(T(0), i1.x, i2.x, T(1))));
 
 		// Gradients: 7x7 points over a square, mapped onto an octahedron.
@@ -813,7 +813,7 @@ namespace glm
 		detail::tvec4<T> x4 = x0 + C.w;
 
 		// Permutations
-		i = mod(i, T(289)); 
+		i = mod(i, T(289));
 		T j0 = permute(permute(permute(permute(i.w) + i.z) + i.y) + i.x);
 		detail::tvec4<T> j1 = permute(permute(permute(permute(
 					i.w + detail::tvec4<T>(i1.w, i2.w, i3.w, T(1)))
@@ -844,8 +844,8 @@ namespace glm
 		detail::tvec2<T> m1 = max(T(0.6) - detail::tvec2<T>(dot(x3, x3), dot(x4, x4)             ), T(0));
 		m0 = m0 * m0;
 		m1 = m1 * m1;
-		return T(49) * 
-			(dot(m0 * m0, detail::tvec3<T>(dot(p0, x0), dot(p1, x1), dot(p2, x2))) + 
+		return T(49) *
+			(dot(m0 * m0, detail::tvec3<T>(dot(p0, x0), dot(p1, x1), dot(p2, x2))) +
 			dot(m1 * m1, detail::tvec2<T>(dot(p3, x3), dot(p4, x4))));
 	}
 }//namespace glm

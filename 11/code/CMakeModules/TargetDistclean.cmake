@@ -9,7 +9,7 @@
 IF (UNIX)
   ADD_CUSTOM_TARGET(distclean)
   ADD_DEPENDENCIES (distclean clean)
-  
+
   SET(DISTCLEAN_FILES
     cmake.depends
     cmake.check_depends
@@ -18,7 +18,7 @@ IF (UNIX)
     CMakeOutput.log
     core core.*
     gmon.out bb.out
-    *~ 
+    *~
     *%
     SunWS_cache
     ii_files
@@ -28,8 +28,8 @@ IF (UNIX)
     CopyOfCMakeCache.txt
     CMakeCCompiler.cmake
     CMakeCXXCompiler.cmake
-    CMakeSystem.cmake 
-    html latex Doxyfile 
+    CMakeSystem.cmake
+    html latex Doxyfile
     )
 
   SET(DISTCLEAN_DIRS
@@ -52,7 +52,7 @@ SET(DISTCLEAN_RECURSIVE_FILES
    COMMENT
     )
 
-  
+
   FOREACH(RMTARGET ${DISTCLEAN_RECURSIVE_FILES})
     ADD_CUSTOM_COMMAND(
       TARGET distclean
@@ -62,6 +62,6 @@ SET(DISTCLEAN_RECURSIVE_FILES
       COMMENT
       )
   ENDFOREACH(RMTARGET ${DISTCLEAN_RECURSIVE_FILES})
-  
-  
+
+
 ENDIF(UNIX)

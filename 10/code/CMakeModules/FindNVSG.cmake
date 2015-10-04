@@ -2,12 +2,12 @@
 #
 # See http://developer.nvidia.com/object/nvsg_home.html
 #
-# Once run this will define: 
+# Once run this will define:
 #
 # NVSG_FOUND
 # NVSG_INCLUDE_DIR
 # NVSG_LIBRARIES
-# 
+#
 # NOTES
 # tested with NVSGSDK and 2.1.0.9 and 2.1.1.7  on Windows XP with MSVS .net 2003 7.1
 #
@@ -34,7 +34,7 @@ SET(POSSIBLE_INCDIRS
   /opt/net/gcc41/nvsg-sdk/inc
   /opt/net/gcc41/nvsg-sdk/inc/nvsg
 )
-FIND_PATH(NVSG_INCLUDE_DIR_NVSG 
+FIND_PATH(NVSG_INCLUDE_DIR_NVSG
   NAMES nvsg/nvsgapi.h
   PATHS
   ${POSSIBLE_INCDIRS} )
@@ -49,7 +49,7 @@ FIND_PATH(NVSG_INCLUDE_DIR_WIN64
 
 FIND_LIBRARY(NVSG_LIBRARY_NVSG
   NAMES nvsg
-  PATHS 
+  PATHS
   $ENV{NVSG_DIR}/lib
   $ENV{NVSG_DIR}
   $ENV{EXTRA}/include
@@ -72,7 +72,7 @@ FIND_LIBRARY(NVSG_LIBRARY_NVSG
 )
 
 
- 
+
 # --------------------------------
 
 IF(NVSG_LIBRARY_NVSG)
@@ -97,7 +97,7 @@ SET(NVSG_FOUND FALSE)
 IF   (NVSG_LIBRARIES AND NVSG_INCLUDE_DIR)
   SET(NVSG_FOUND TRUE)
 ENDIF(NVSG_LIBRARIES AND NVSG_INCLUDE_DIR)
-  
+
 
 MARK_AS_ADVANCED(
   NVSG_LIBRARY_NVSG

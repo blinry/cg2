@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -43,11 +43,11 @@ namespace detail
 	/// @ingroup gtc_half_float
 	class half
 	{
-	public: 
+	public:
 		// Constructors
 		GLM_FUNC_DECL half();
 		GLM_FUNC_DECL half(half const & s);
-			
+
 		template <typename U>
 		GLM_FUNC_DECL explicit half(U const & s);
 
@@ -63,7 +63,7 @@ namespace detail
 		GLM_FUNC_DECL half& operator/=(half const & s);
 		GLM_FUNC_DECL half& operator++();
 		GLM_FUNC_DECL half& operator--();
-	
+
 		GLM_FUNC_DECL float toFloat() const{return toFloat32(data);}
 
 		GLM_FUNC_DECL hdata _data() const{return data;}
@@ -88,27 +88,27 @@ namespace detail
 	half operator++ (half const & s, int);
 
 	bool operator==(
-		detail::half const & x, 
+		detail::half const & x,
 		detail::half const & y);
 
 	bool operator!=(
-		detail::half const & x, 
+		detail::half const & x,
 		detail::half const & y);
 
 	bool operator<(
-		detail::half const & x, 
+		detail::half const & x,
 		detail::half const & y);
 
 	bool operator<=(
-		detail::half const & x, 
+		detail::half const & x,
 		detail::half const & y);
 
 	bool operator>(
-		detail::half const & x, 
+		detail::half const & x,
 		detail::half const & y);
 
 	bool operator>=(
-		detail::half const & x, 
+		detail::half const & x,
 		detail::half const & y);
 
 }//namespace detail

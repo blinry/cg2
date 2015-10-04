@@ -1,14 +1,14 @@
-# -Try to find Lapack library  
-# Once run this will define: 
-# 
+# -Try to find Lapack library
+# Once run this will define:
+#
 # LAPACK_FOUND
 # LAPACK_LIBRARIES
 # LAPACK_LINK_DIRECTORIES
 # LAPCK_INCLUDE_DIRECTORIES
-# 
+#
 # Friso, Jan Woetzel 05/2004
 # www.mip.informatik.uni-kiel.de/~jw
-# 
+#
 # --------------------------------
 
 SET(LAPACK_POSSIBLE_LIBRARY_PATHS
@@ -48,7 +48,7 @@ ENDIF (WIN32)
 
 
 FIND_LIBRARY(LAPACK_LIBRARY
-  NAMES lapack LAPACK 
+  NAMES lapack LAPACK
   # mkl_lapack
   PATHS ${LAPACK_POSSIBLE_LIBRARY_PATHS}
   )
@@ -80,10 +80,10 @@ ENDIF(WIN32)
 
 IF(LAPACK_LIBRARY)
 
-  # OK, we've got the main" library"  
+  # OK, we've got the main" library"
   GET_FILENAME_COMPONENT(LAPACK_LINK_DIRECTORIES ${LAPACK_LIBRARY} PATH)
   # TODO: add link directory of f2/g2 for Linux here, too? (JW)
-  
+
   IF (UNIX AND LAPACK_FORTRAN_TO_C_LIBRARY)
     # additional g2c/f2c/... is required  on Unix (see above)
     SET(LAPACK_FOUND TRUE)

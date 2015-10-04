@@ -9,11 +9,11 @@
 
 namespace glm
 {
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec3<T> triangleNormal
 	(
-		detail::tvec3<T> const & p1, 
-		detail::tvec3<T> const & p2, 
+		detail::tvec3<T> const & p1,
+		detail::tvec3<T> const & p2,
 		detail::tvec3<T> const & p3
 	)
 	{

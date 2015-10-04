@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,9 @@
 ///
 /// @defgroup gtx_random GLM_GTX_random: Random
 /// @ingroup gtx
-/// 
+///
 /// @brief Generate random number from various distribution methods
-/// 
+///
 /// <glm/gtx/random.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -55,13 +55,13 @@ namespace glm
 	/// Generate a random number in the interval [-1, 1], according a linear distribution.
 	/// From GLM_GTX_random extension.
     template <typename T> T signedRand1();
-	
+
 	template <> float signedRand1(); //!< \brief Generate a random number in the interval [-1, 1], according a linear distribution (From GLM_GTX_random extension)
     template <> double signedRand1(); //!< \brief Generate a random number in the interval [-1, 1], according a linear distribution (From GLM_GTX_random extension)
     template <typename T> detail::tvec2<T> signedRand2(); //!< \brief Generate 2 random numbers in the interval [-1, 1], according a linear distribution (From GLM_GTX_random extension)
     template <typename T> detail::tvec3<T> signedRand3(); //!< \brief Generate 3 random numbers in the interval [-1, 1], according a linear distribution (From GLM_GTX_random extension)
     template <typename T> detail::tvec4<T> signedRand4(); //!< \brief Generate 4 random numbers in the interval [-1, 1], according a linear distribution (From GLM_GTX_random extension)
-    
+
 	template <typename T> detail::tvec2<T> normalizedRand2(); //!< \brief Generate a normalized 2D vector regulary distribute on a circle (From GLM_GTX_random extension)
 	template <typename T> detail::tvec2<T> normalizedRand2(T Min, T Max); //!< \brief Generate a scaled and normalized 2D vector regulary distribute on a circle (From GLM_GTX_random extension)
 	template <typename T> detail::tvec3<T> normalizedRand3(); //!< \brief Generate a normalized 3D vector regulary distribute on a sphere (From GLM_GTX_random extension)

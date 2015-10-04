@@ -22,12 +22,12 @@ SET(XML2_POSSIBLE_INCLUDE_PATHS
   $ENV{XML2_DIR}
   $ENV{XML2_DIR}/include
   $ENV{XML2_DIR}/include/libxml2
-  ${XML2_HOME}  
+  ${XML2_HOME}
   $ENV{XML2_HOME}
   $ENV{XML2_HOME}/include
   $ENV{XML2_HOME}/include/libxml2
   $ENV{EXTRA}/include
-  $ENV{EXTRA}  
+  $ENV{EXTRA}
   ENV{ICONV_DIR}/include
   ENV{ICONV_DIR}
   ENV{ICONV_HOME}}/include
@@ -56,7 +56,7 @@ SET(XML2_POSSIBLE_LIBRARY_PATHS
 
 
 #
-# Find key files to determine all settings: 
+# Find key files to determine all settings:
 #
 FIND_PATH(XML2_INCLUDE_DIR libxml/parser.h
   ${XML2_POSSIBLE_INCLUDE_PATHS}
@@ -68,7 +68,7 @@ FIND_LIBRARY(XML2_LIBRARY
   )
 
 
-IF(WIN32) 
+IF(WIN32)
   # On WIN32 XML2 need an additional ..._a lib and iconv (JW 12/2004)
   FIND_LIBRARY(XML2_A_LIBRARY
     NAMES libxml2_a
@@ -87,7 +87,7 @@ ENDIF(WIN32)
 # init with OK and reset to false of any error is detected
 SET (XML2_FOUND TRUE)
 
-# lib found ? 
+# lib found ?
 IF(NOT XML2_LIBRARY)
   SET (XML2_FOUND FALSE)
   #  MESSAGE(STATUS "XML2_LIBRARY not found.  Please set XML2_DIR to find it. XML2_LIBRARY=${XML2_LIBRARY}")
@@ -116,18 +116,18 @@ ENDIF(NOT XML2_INCLUDE_DIR)
 # second _a lib for Win32 ?
 #IF(WIN32 AND NOT XML2_A_LIBRARY)
 #  SET(XML2_FOUND FALSE)
-#  MESSAGE(STATUS "XML2:  XML2_A_LIBRARY not found but required on WIN32.") 
-#  FILE(APPEND ${PROJECT_BINARY_DIR}/CMakeOutput.log 
-  #    "XML2:  XML2_A_LIBRARY not found but required on WIN32.")    
+#  MESSAGE(STATUS "XML2:  XML2_A_LIBRARY not found but required on WIN32.")
+#  FILE(APPEND ${PROJECT_BINARY_DIR}/CMakeOutput.log
+  #    "XML2:  XML2_A_LIBRARY not found but required on WIN32.")
 #ENDIF(WIN32 AND NOT XML2_A_LIBRARY)
 
 
 
 # try to compile a small example
 # to check for function "xmlValidateName"
-# which is available only in newer libxml2 versions >= 2.5.10 
+# which is available only in newer libxml2 versions >= 2.5.10
 # THIS test shoudl usually tbe the last because it is using all obove headers/libs.
-# TODO: use thsi test on WIN32, too. 
+# TODO: use thsi test on WIN32, too.
 # TODO HACK FIXME: this does not work fw
 #IF (UNIX AND XML2_FOUND)
 #  MESSAGE(STATUS "Looking for xmlValidateName in xml2 library=${XML2_LIBRARY}")
@@ -139,11 +139,11 @@ ENDIF(NOT XML2_INCLUDE_DIR)
   #    )
 #  #MESSAGE("DGB compile: XML2_VALIDATE_NAME_FOUND=${XML2_VALIDATE_NAME_FOUND} output:\n ${XML2_VALIDATE_NAME_OUT}")
 #  IF(XML2_VALIDATE_NAME_FOUND)
-#    MESSAGE(STATUS "Looking for xmlValidateName in xml2 library=${XML2_LIBRARY} - found")    
+#    MESSAGE(STATUS "Looking for xmlValidateName in xml2 library=${XML2_LIBRARY} - found")
 #  ELSE(XML2_VALIDATE_NAME_FOUND)
 #    MESSAGE(STATUS "Looking for xmlValidateName in xml2 library=${XML2_LIBRARY} - not found")
-#  ENDIF(XML2_VALIDATE_NAME_FOUND)      
-#ENDIF(UNIX AND XML2_FOUND) 
+#  ENDIF(XML2_VALIDATE_NAME_FOUND)
+#ENDIF(UNIX AND XML2_FOUND)
 #
 #
 #
@@ -161,20 +161,20 @@ ENDIF(NOT XML2_INCLUDE_DIR)
 #
 IF (XML2_FOUND)
   # collect all libs we need, which is usually only one
-  SET (XML2_LIBRARIES ${XML2_LIBRARY} )  
-  # extract main link directory, useful for rpath and runtime loading of libraries 
+  SET (XML2_LIBRARIES ${XML2_LIBRARY} )
+  # extract main link directory, useful for rpath and runtime loading of libraries
   GET_FILENAME_COMPONENT(XML2_LINK_DIRECTORIES ${XML2_LIBRARY} PATH)
-  
+
   ## we need ICONV on WIN32, too.
   IF (WIN32)
     SET (XML2_INCLUDE_DIR ${XML2_INCLUDE_DIR} ${ICONV_INCLUDE_DIR} )
-    SET (XML2_LIBRARIES   ${XML2_LIBRARIES} ${XML2_A_LIBRARY} )  
+    SET (XML2_LIBRARIES   ${XML2_LIBRARIES} ${XML2_A_LIBRARY} )
   ENDIF(WIN32)
 
-  
+
   # JW: The following was disabled and shouldn't be done, because
-  # (1) it's dirty and not required, 
-  # (2) rpath is handled automatically through LINK_DIRECTORIES unless user disbales it through SKIP_RPATH 
+  # (1) it's dirty and not required,
+  # (2) rpath is handled automatically through LINK_DIRECTORIES unless user disbales it through SKIP_RPATH
   #SET(XML2_EXE_LINKER_FLAGS "-Wl,-rpath,${XML2_PREFIX}")
 ENDIF(XML2_FOUND)
 
@@ -191,7 +191,7 @@ ENDIF(XML2_FOUND)
 MARK_AS_ADVANCED(
   XML2_INCLUDE_DIR
   XML2_LIBRARIES
-  XML2_LIBRARY  
+  XML2_LIBRARY
   XML2_A_LIBRARY
   ICONV_INCLUDE_DIR
   )

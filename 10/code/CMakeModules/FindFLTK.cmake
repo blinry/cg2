@@ -1,5 +1,5 @@
-# -Try to find FLTK 
-# 
+# -Try to find FLTK
+#
 #
 # The following are set after configuration is done:
 # FLTK_INCLUDE_DIR

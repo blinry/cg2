@@ -22,19 +22,19 @@ class MeshObj {
   public:
     MeshObj();
     ~MeshObj();
-    
+
     void setData(const MeshData &data);
     void render(void);
-    
+
   private:
     GLuint mVAO;
-    
+
     GLuint mVBO_position;
     GLuint mVBO_normal;
     GLuint mVBO_texcoord;
     GLuint mVBO_tangent;
     GLuint mVBO_binormal;
-    
+
     GLuint mIBO;
     GLuint mIndexCount;
 };

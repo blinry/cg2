@@ -574,7 +574,7 @@ mark_as_advanced(CUDA_CUT_INCLUDE_DIR)
 # to get these confused, so we are setting the name based on the word size of
 # the build.
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-  set(cuda_cutil_name cutil64 cutil_x86_64) 
+  set(cuda_cutil_name cutil64 cutil_x86_64)
 else(CMAKE_SIZEOF_VOID_P EQUAL 8)
   set(cuda_cutil_name cutil32 cutil_x86_32)
 endif(CMAKE_SIZEOF_VOID_P EQUAL 8)

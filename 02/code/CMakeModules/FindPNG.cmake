@@ -8,7 +8,7 @@ FIND_PATH(PNG_INCLUDE_DIR png.h
   /usr/local/include
 )
 
-FIND_LIBRARY(PNG_LIBRARY 
+FIND_LIBRARY(PNG_LIBRARY
   NAMES libpng png
   PATHS /usr/lib /usr/local/lib /usr/lib64 /usr/local/lib64
 )

@@ -13,7 +13,7 @@
 #                            (e.g., msw, mswd, mswu, mswunivud, etc.)
 #  wxWidgets_USE_LIBS      - Libraries to use besides the common
 #                            required ones; set to base and core by
-#                            default. You couls also list them in 
+#                            default. You couls also list them in
 #                            FIND_PACKAGE(wxWidgets REQUIRED <components> )
 #
 #  HAVE_ISYSTEM            - if true wx warnings are suppressed on g++
@@ -22,14 +22,14 @@
 # The following are set after configuration is done:
 #
 #  wxWidgets_FOUND            - Set to TRUE if wxWidgets was found.
-#  wxWidgets_INCLUDE_DIRS     - Include directories for WIN32 
+#  wxWidgets_INCLUDE_DIRS     - Include directories for WIN32
 #                               i.e., where to find "wx/wx.h" and
 #                               "wx/setup.h"; possibly empty for unices.
 #  wxWidgets_LIBRARIES        - Path to the wxWidgets libraries.
 #  wxWidgets_LIBRARY_DIRS     - compile time link dirs, useful for rpath on UNIX.
 #                               Typically an empty string in WIN32 environment.
-#  wxWidgets_DEFINITIONS      - Contains defines required to compile/link 
-#                               against WX, e.g. -DWXUSINGDLL 
+#  wxWidgets_DEFINITIONS      - Contains defines required to compile/link
+#                               against WX, e.g. -DWXUSINGDLL
 #  wxWidgets_CXX_FLAGS        - Include dirs and ompiler flags for
 #                               unices, empty on WIN32. Esentially
 #                               "`wx-config --cxxflags`".
@@ -44,7 +44,7 @@
 #     # and for each of your dependant executable/library targets:
 #     TARGET_LINK_LIBRARIES(<YourTarget> ${wxWidgets_LIBRARIES})
 #   ENDIF(wxWidgets_FOUND)
-# 
+#
 # Sample usage with monolithic wx build:
 #   SET(wxWidgets_USE_LIBS msw26 expat jpeg gl png regex tiff zlib)
 #   ...
@@ -100,35 +100,35 @@ MACRO(DBG_MSG _MSG)
 ENDMACRO(DBG_MSG)
 
 # for compatibility with CMake 2.4.2
-# emulate wxWidgets_FIND_COMPONENTS 
+# emulate wxWidgets_FIND_COMPONENTS
 IF (NOT wxWidgets_FIND_COMPONENTS)
   SET(wxWidgets_FIND_COMPONENTS "")
   FOREACH(COMPONENT
-      base 
+      base
       core
       adv
-      dbgrid  
-      expat 
+      dbgrid
+      expat
       gl
-      jpeg 
-      html 
+      jpeg
+      html
       media
       msw msw26 msw27 msw28
       mono
-      net 
-      odbc 
-      png 
+      net
+      odbc
+      png
       qa
-      regex 
+      regex
       tiff
       # std # no true lib/component - list for compatibility with _USE_LIBS ?
-      xml 
+      xml
       xrc
       zlib
       )
     IF   (${wxWidgets_FIND_REQUIRED_${COMPONENT}})
-      SET(wxWidgets_FIND_COMPONENTS ${wxWidgets_FIND_COMPONENTS} ${COMPONENT})  
-    ENDIF(${wxWidgets_FIND_REQUIRED_${COMPONENT}})    
+      SET(wxWidgets_FIND_COMPONENTS ${wxWidgets_FIND_COMPONENTS} ${COMPONENT})
+    ENDIF(${wxWidgets_FIND_REQUIRED_${COMPONENT}})
   ENDFOREACH(COMPONENT)
 ENDIF (NOT wxWidgets_FIND_COMPONENTS)
 
@@ -168,10 +168,10 @@ IF(WIN32_STYLE_FIND)
   ELSE (wxWidgets_USE_MONOLITHIC)
     SET(wxWidgets_STD_LIBRARIES base core ) # this is default
   ENDIF(wxWidgets_USE_MONOLITHIC)
-  
+
   #useful common wx libs needed by almost all components
   SET(wxWidgets_COMMON_LIBRARIES  png tiff jpeg zlib regex expat)
-  
+
   #---------------------------------------------------------------------
   # WIN32: Helper MACROS
   #---------------------------------------------------------------------
@@ -257,7 +257,7 @@ IF(WIN32_STYLE_FIND)
   # Clear a lib, reset its found flag, and mark as advanced.
   MACRO(WX_CLEAR_LIB _LIB)
     SET(${_LIB} "${_LIB}-NOTFOUND" CACHE FILEPATH "Cleared." FORCE)
-    SET(${_LIB}_FOUND FALSE)    
+    SET(${_LIB}_FOUND FALSE)
     MARK_AS_ADVANCED(${_LIB})
   ENDMACRO(WX_CLEAR_LIB)
   # Clear all debug or release library paths (arguments are "d" or "").
@@ -418,13 +418,13 @@ IF(WIN32_STYLE_FIND)
 
     IF(WX_LIB_DIR)
       SET(wxWidgets_FOUND TRUE)
-      
+
       IF(WX_LIB_DIR MATCHES ".*[dD][lL][lL].*")
         DBG_MSG("detected SHARED/DLL tree WX_LIB_DIR=${WX_LIB_DIR}")
         # add define for correct dllimport to link against WX DLL
         SET(wxWidgets_DEFINITIONS "-DWXUSINGDLL")
       ENDIF(WX_LIB_DIR MATCHES ".*[dD][lL][lL].*")
-      
+
       #---------------------------------------------------------------------
       # WIN32: ???
       #---------------------------------------------------------------------
@@ -493,30 +493,30 @@ IF(WIN32_STYLE_FIND)
         IF(WX_USE_REL_AND_DBG)
           WX_FIND_LIBS("${UNV}" "${UCD}" "d")
         ENDIF(WX_USE_REL_AND_DBG)
-        
+
         # we support adding components by _USE_LIBS or REQUIRED _COMPONENTS
         IF   (wxWidgets_FIND_COMPONENTS)
           LIST(APPEND wxWidgets_USE_LIBS ${wxWidgets_FIND_COMPONENTS})
         ENDIF(wxWidgets_FIND_COMPONENTS)
-        
-        
-        
+
+
+
         # Libraries we are interested in.
         IF(NOT wxWidgets_USE_LIBS)
           # Default minimal use setting (i.e., link to only core,base).
           SET(wxWidgets_USE_LIBS ${wxWidgets_STD_LIBRARIES} )
         ENDIF(NOT wxWidgets_USE_LIBS)
-        
+
         IF (wxWidgets_USE_LIBS MATCHES std)
-          # replace std by the list of STD libs 
+          # replace std by the list of STD libs
           LIST(APPEND wxWidgets_USE_LIBS ${wxWidgets_STD_LIBRARIES} )
 	  LIST(REMOVE_ITEM wxWidgets_USE_LIBS std)
           # TODO: check that "mono"  and base,core aren't added together
         ENDIF (wxWidgets_USE_LIBS MATCHES std)
-        
+
         # Always add the common required libs.
         LIST(APPEND wxWidgets_USE_LIBS ${wxWidgets_COMMON_LIBRARIES} )
-	
+
         # Settings for requested libs (i.e., include dir, libraries, etc.).
         WX_SET_LIBRARIES(wxWidgets_USE_LIBS "${DBG}")
 
@@ -554,25 +554,25 @@ ELSE(WIN32_STYLE_FIND)
 
         # drop -I* from CXXFLAGS - postponed until -isystem is available to INCLUDE_DIRECTORIES to avoid pedantic warnings
         #STRING(REGEX REPLACE "-I[^ ;]*" ""  wxWidgets_CXX_FLAGS  ${wxWidgets_CXX_FLAGS})
-	
+
         IF (HAVE_ISYSTEM) # does the compiler support -isystem ?
           IF (NOT APPLE)  # -isystem seem unsuppored on Mac
-            IF(CMAKE_COMPILER_IS_GNUCC AND CMAKE_COMPILER_IS_GNUCXX ) 	  
+            IF(CMAKE_COMPILER_IS_GNUCC AND CMAKE_COMPILER_IS_GNUCXX )
               IF   (CMAKE_CXX_COMPILER MATCHES g\\+\\+) # just to be sure
                 # handle WX include dirs as system directories - ignores pedantic warnings with gcc
                 # replace -I by -isystem
                 STRING(REGEX REPLACE "-I" "-isystem" wxWidgets_CXX_FLAGS  ${wxWidgets_CXX_FLAGS})
               ENDIF(CMAKE_CXX_COMPILER MATCHES g\\+\\+)
-            ENDIF(CMAKE_COMPILER_IS_GNUCC AND CMAKE_COMPILER_IS_GNUCXX ) 
+            ENDIF(CMAKE_COMPILER_IS_GNUCC AND CMAKE_COMPILER_IS_GNUCXX )
           ENDIF(NOT APPLE)
         ENDIF(HAVE_ISYSTEM)
-	
+
       ELSE(RET EQUAL 0)
         DBG_MSG("${wxWidgets_CONFIG_EXECUTABLE} --cxxflags FAILED with RET=${RET}")
         SET(wxWidgets_FOUND FALSE)
       ENDIF(RET EQUAL 0)
-      
-      
+
+
       # run the wx-config program to get the libs
       # - NOTE: wx-config doesn't verify that the libs requested exist
       #         it just produces the names. Maybe a TRY_COMPILE would
@@ -602,7 +602,7 @@ ELSE(WIN32_STYLE_FIND)
         SET(wxWidgets_FOUND FALSE)
       ENDIF(RET EQUAL 0)
     ENDIF(wxWidgets_CONFIG_EXECUTABLE)
-    
+
   ELSE(UNIX_STYLE_FIND)
     IF(NOT wxWidgets_FIND_QUIETLY)
       MESSAGE(STATUS "${CMAKE_CURRENT_LIST_FILE}(${CMAKE_CURRENT_LIST_LINE}): \n"
@@ -614,7 +614,7 @@ ENDIF(WIN32_STYLE_FIND)
 
 # add convenience use file
 IF  (wxWidgets_FOUND)
-  # get dir of this file which may reside in 
+  # get dir of this file which may reside in
   # - CMAKE_MAKE_ROOT/Modules  on CMake installation
   # - CMAKE_MODULE_PATH if user prefers his own specialized version
   GET_FILENAME_COMPONENT(wxWidgets_CURRENT_LIST_DIR ${CMAKE_CURRENT_LIST_FILE} PATH)

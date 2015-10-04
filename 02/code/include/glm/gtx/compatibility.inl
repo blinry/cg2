@@ -10,7 +10,7 @@
 namespace glm
 {
 	// isfinite
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER bool isfinite(
 		genType const & x)
 	{
@@ -21,7 +21,7 @@ namespace glm
 	#endif
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec2<bool> isfinite(
 		detail::tvec2<valType> const & x)
 	{
@@ -30,7 +30,7 @@ namespace glm
 			isfinite(x.y));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<bool> isfinite(
 		detail::tvec3<valType> const & x)
 	{
@@ -40,7 +40,7 @@ namespace glm
 			isfinite(x.z));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec4<bool> isfinite(
 		detail::tvec4<valType> const & x)
 	{
@@ -52,7 +52,7 @@ namespace glm
 	}
 
 	// isinf
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER bool isinf(
 		genType const & x)
 	{
@@ -63,7 +63,7 @@ namespace glm
 	#endif
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec2<bool> isinf(
 		detail::tvec2<valType> const & x)
 	{
@@ -72,7 +72,7 @@ namespace glm
 			isinf(x.y));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<bool> isinf(
 		detail::tvec3<valType> const & x)
 	{
@@ -82,7 +82,7 @@ namespace glm
 			isinf(x.z));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec4<bool> isinf(
 		detail::tvec4<valType> const & x)
 	{
@@ -94,7 +94,7 @@ namespace glm
 	}
 
 	// isnan
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER bool isnan(genType const & x)
 	{
 	#if(GLM_COMPILER & GLM_COMPILER_VC)
@@ -104,7 +104,7 @@ namespace glm
 	#endif
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec2<bool> isnan(
 		detail::tvec2<valType> const & x)
 	{
@@ -113,7 +113,7 @@ namespace glm
 			isnan(x.y));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<bool> isnan(
 		detail::tvec3<valType> const & x)
 	{
@@ -123,7 +123,7 @@ namespace glm
 			isnan(x.z));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec4<bool> isnan(
 		detail::tvec4<valType> const & x)
 	{

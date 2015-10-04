@@ -37,12 +37,12 @@ void main() {
   // normalize the vectors passed from your vertex program here //
   vec3 E = normalize(eyeDir);
   vec3 N = normalize(vertexNormal);
-  
+
   // init the ambient, diffuse and specular color terms //
   vec3 ambientTerm = vec3(0);
   vec3 diffuseTerm = vec3(0);
   vec3 specularTerm = vec3(0);
-  
+
   // TODO: compute the ambient, diffuse and specular color terms for every used light source //
   for(int i = 0; i < activeLightSources; i++)
   {
@@ -51,7 +51,7 @@ void main() {
 	  vec3 halfway = normalize(E + normalize(lightVec[i]));
 	  specularTerm += ls[i].specular_color * material.specular_color * pow(clamp(dot(halfway, N), 0, 1), material.specular_shininess);
   }
-  
+
   // assign the final color to the fragment output variable //
   color = vec4(ambientTerm + diffuseTerm + specularTerm, 1);
 }

@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,7 +28,7 @@
 
 namespace glm
 {
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> affineInverse
 	(
 		detail::tmat3x3<T> const & m
@@ -42,7 +42,7 @@ namespace glm
 		return Result;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> affineInverse
 	(
 		detail::tmat4x4<T> const & m
@@ -56,7 +56,7 @@ namespace glm
 		return Result;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat2x2<valType> inverseTranspose
 	(
 		detail::tmat2x2<valType> const & m
@@ -67,19 +67,19 @@ namespace glm
 		detail::tmat2x2<valType> Inverse(
 			+ m[1][1] / Determinant,
 			- m[0][1] / Determinant,
-			- m[1][0] / Determinant, 
+			- m[1][0] / Determinant,
 			+ m[0][0] / Determinant);
 
 		return Inverse;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<valType> inverseTranspose
 	(
 		detail::tmat3x3<valType> const & m
 	)
 	{
-		valType Determinant = 
+		valType Determinant =
 			+ m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1])
 			- m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0])
 			+ m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
@@ -99,7 +99,7 @@ namespace glm
 		return Inverse;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> inverseTranspose
 	(
 		detail::tmat4x4<valType> const & m
@@ -146,14 +146,14 @@ namespace glm
 		Inverse[3][2] = - (m[0][0] * SubFactor14 - m[0][1] * SubFactor16 + m[0][3] * SubFactor18);
 		Inverse[3][3] = + (m[0][0] * SubFactor15 - m[0][1] * SubFactor17 + m[0][2] * SubFactor18);
 
-		valType Determinant = 
-			+ m[0][0] * Inverse[0][0] 
-			+ m[0][1] * Inverse[0][1] 
-			+ m[0][2] * Inverse[0][2] 
+		valType Determinant =
+			+ m[0][0] * Inverse[0][0]
+			+ m[0][1] * Inverse[0][1]
+			+ m[0][2] * Inverse[0][2]
 			+ m[0][3] * Inverse[0][3];
 
 		Inverse /= Determinant;
-    
+
 		return Inverse;
 	}
 }//namespace glm

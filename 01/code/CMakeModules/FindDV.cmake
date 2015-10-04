@@ -1,10 +1,10 @@
-# 
-# Try to find DV  library  
+#
+# Try to find DV  library
 # (see www.fftw.org)
-# Once run this will define: 
-# 
+# Once run this will define:
+#
 # DV_FOUND
-# DV_INCLUDE_DIR 
+# DV_INCLUDE_DIR
 # DV_LIBRARIES
 # DV_LINK_DIRECTORIES
 #
@@ -18,11 +18,11 @@
    /usr/include/libdv
    /usr/local/include/libdv
  )
-MESSAGE("DBG DV_INCLUDE_DIR=${DV_INCLUDE_DIR}")  
-  
+MESSAGE("DBG DV_INCLUDE_DIR=${DV_INCLUDE_DIR}")
+
 FIND_LIBRARY(DV_LIBRARIES
   NAMES dv
-  PATHS 
+  PATHS
   ${DV_HOME}/lib
   $ENV{DV_HOME}/lib
   /usr/lib
@@ -38,7 +38,7 @@ IF(DV_LIBRARIES)
     # OK, found all we need
     SET(DV_FOUND TRUE)
     GET_FILENAME_COMPONENT(DV_LINK_DIRECTORIES ${DV_LIBRARIES} PATH)
-    
+
   ELSE (DV_INCLUDE_DIR)
     MESSAGE("DV include dir not found. Set DV_HOME to find it.")
   ENDIF(DV_INCLUDE_DIR)

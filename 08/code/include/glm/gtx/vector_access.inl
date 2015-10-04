@@ -9,11 +9,11 @@
 
 namespace glm
 {
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER void set
 	(
-		detail::tvec2<valType>& v, 
-		valType const & x, 
+		detail::tvec2<valType>& v,
+		valType const & x,
 		valType const & y
 	)
 	{
@@ -21,12 +21,12 @@ namespace glm
 		v.y = y;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER void set
 	(
-		detail::tvec3<valType>& v, 
-		valType const & x, 
-		valType const & y, 
+		detail::tvec3<valType>& v,
+		valType const & x,
+		valType const & y,
 		valType const & z
 	)
 	{
@@ -38,10 +38,10 @@ namespace glm
 	template <typename valType>
 	GLM_FUNC_QUALIFIER void set
 	(
-		detail::tvec4<valType>& v, 
-		valType const & x, 
-		valType const & y, 
-		valType const & z, 
+		detail::tvec4<valType>& v,
+		valType const & x,
+		valType const & y,
+		valType const & z,
 		valType const & w
 	)
 	{

@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -97,44 +97,44 @@ namespace detail
 		// Convertion scalar constructors
 
 		//! Explicit converions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL explicit tvec1(U const & s);
 
 		//////////////////////////////////////
 		// Convertion vector constructors
 
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL explicit tvec1(tvec2<U> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL explicit tvec1(tvec3<U> const & v);
 		//! Explicit conversions (From section 5.4.1 Conversion and scalar constructors of GLSL 1.30.08 specification)
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL explicit tvec1(tvec4<U> const & v);
 
 		//////////////////////////////////////
 		// Unary arithmetic operators
 
 		GLM_FUNC_DECL tvec1<T> & operator= (tvec1<T> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator= (tvec1<U> const & v);
 
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator+=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator+=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator-=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator-=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator*=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator*=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator/=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator/=(tvec1<U> const & v);
 		GLM_FUNC_DECL tvec1<T> & operator++();
 		GLM_FUNC_DECL tvec1<T> & operator--();
@@ -142,29 +142,29 @@ namespace detail
 		//////////////////////////////////////
 		// Unary bit operators
 
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator%=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator%=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator&=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator&=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator|=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator|=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator^=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator^=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator<<=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator<<=(tvec1<U> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator>>=(U const & s);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec1<T> & operator>>=(tvec1<U> const & v);
 
 		//////////////////////////////////////

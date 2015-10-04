@@ -1,6 +1,6 @@
 # -Try to find FlowLib from TU Graz
 #
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  FlowLib_FOUND
 #  FlowLib_INCLUDE_DIR
 #  FlowLib_LIBRARIES
@@ -21,8 +21,8 @@ ENDIF(NOT FlowLib_ARCHITECTURE)
 
 
 # Search all available major versions of the GPU lib
-EXEC_PROGRAM(find 
-  ARGS "/afs/cg.cs.tu-bs.de/lib/linux/c++/${FlowLib_ARCHITECTURE}/" "-name flowlib" 
+EXEC_PROGRAM(find
+  ARGS "/afs/cg.cs.tu-bs.de/lib/linux/c++/${FlowLib_ARCHITECTURE}/" "-name flowlib"
   OUTPUT_VARIABLE FlowLib_ROOT_DIR)
 
 
@@ -33,9 +33,9 @@ SET(FlowLibREQCOMP flow common vm)
 # Usual stuff to setup the library
 
 FIND_PATH(FlowLib_INCLUDE_DIR FlowLib.h "${FlowLib_ROOT_DIR}/include/")
-FIND_LIBRARY(FlowLib_flow  NAMES flow PATHS "${FlowLib_ROOT_DIR}/lib/") 
-FIND_LIBRARY(FlowLib_vm  NAMES vm PATHS "${FlowLib_ROOT_DIR}/lib/") 
-FIND_LIBRARY(FlowLib_common  NAMES common PATHS "${FlowLib_ROOT_DIR}/lib/") 
+FIND_LIBRARY(FlowLib_flow  NAMES flow PATHS "${FlowLib_ROOT_DIR}/lib/")
+FIND_LIBRARY(FlowLib_vm  NAMES vm PATHS "${FlowLib_ROOT_DIR}/lib/")
+FIND_LIBRARY(FlowLib_common  NAMES common PATHS "${FlowLib_ROOT_DIR}/lib/")
 DBG_MSG("Include: ${FlowLib_INCLUDE_DIR}")
 DBG_MSG("Lib: ${FlowLib_flow} ${FlowLib_vm} ${FlowLib_common}")
 

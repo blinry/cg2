@@ -1,5 +1,5 @@
 ##
-# Try to find pthreads library 
+# Try to find pthreads library
 # useful for WIN32
 # Once run this will define:
 ##

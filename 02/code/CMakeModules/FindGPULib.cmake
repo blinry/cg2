@@ -4,7 +4,7 @@
 # The follwoing variables are optionally searched for defaults
 # GPULib_MAJOR_VERSION : Use this version instead of the latest
 #
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  GPULib_FOUND
 #  GPULib_INCLUDE_DIR
 #  GPULib_LIBRARY
@@ -24,24 +24,24 @@ IF( NOT GPULib_ARCHITECTURE)
 ENDIF(NOT GPULib_ARCHITECTURE)
 
 IF(NOT GPULib_UBUNTU)
-  EXEC_PROGRAM(cat 
+  EXEC_PROGRAM(cat
                ARGS "/etc/issue | sed 's/\\(.*\\)\\\\n.*/\\1/' | sed 's/ //g'"
 	       OUTPUT_VARIABLE GPULib_UBUNTU)
-  DBG_MSG(${GPULib_UBUNTU})	     
+  DBG_MSG(${GPULib_UBUNTU})
 ENDIF(NOT GPULib_UBUNTU)
 
 # Figure out all available major versions and use the latest or use the one specified as optional input
 IF (NOT GPULib_MAJOR_VERSION)
    # Search all available major versions of the GPU lib
-   EXEC_PROGRAM(find 
-		  ARGS "/afs/cg.cs.tu-bs.de/lib/linux/c++/${GPULib_ARCHITECTURE}/${GPULib_UBUNTU}/" "-name gpulib-*" 
+   EXEC_PROGRAM(find
+		  ARGS "/afs/cg.cs.tu-bs.de/lib/linux/c++/${GPULib_ARCHITECTURE}/${GPULib_UBUNTU}/" "-name gpulib-*"
 		  OUTPUT_VARIABLE GPULib_POSSIBLE_DIRS)
 
    DBG_MSG("Possible dirs: ${GPULib_POSSIBLE_DIRS}")
    DBG_MSG("Available versions: ${GPULib_AVAILABLE_VERSIONS}")
 
    STRING(REGEX MATCHALL "-[0-9]+" GPULib_AVAILABLE_VERSIONS "${GPULib_POSSIBLE_DIRS}")
- DBG_MSG("Available versions: ${GPULib_AVAILABLE_VERSIONS}")	
+ DBG_MSG("Available versions: ${GPULib_AVAILABLE_VERSIONS}")
    LIST(SORT GPULib_AVAILABLE_VERSIONS)
 
    LIST(GET GPULib_AVAILABLE_VERSIONS -1 GPULib_MAJOR_VERSION)
@@ -57,7 +57,7 @@ DBG_MSG("Root: ${GPULib_ROOT_DIR}")
 # Usual stuff to setup the library
 
 FIND_PATH(GPULib_INCLUDE_DIR OpenGLState.h "${GPULib_ROOT_DIR}/include/")
-FIND_LIBRARY(GPULib_LIBRARY gpu "${GPULib_ROOT_DIR}/lib/") 
+FIND_LIBRARY(GPULib_LIBRARY gpu "${GPULib_ROOT_DIR}/lib/")
 DBG_MSG("Include: ${GPULib_INCLUDE_DIR}")
 DBG_MSG("Lib: ${GPULib_LIBRARY}")
 
@@ -92,9 +92,9 @@ MACRO(GPULib_ShaderDBFromDir)
 
     FILE(GLOB _shader_files_ RELATIVE ${_shaderdb_abs_path_} "${_shaderdb_abs_path_}*.frag" "${_shaderdb_abs_path_}*.vert" "${_shaderdb_abs_path_}*.geom" "${_shaderdb_abs_path_}*.glsl")
     FILE(GLOB _abs_shader_files_ "${_shaderdb_abs_path_}*.frag" "${_shaderdb_abs_path_}*.vert" "${_shaderdb_abs_path_}*.geom" "${_shaderdb_abs_path_}*.glsl")
-    
+
 #    DBG_MSG("${GPULib_SHADERDB_GENERATOR} ${_shaderdb_name_} ${CMAKE_CURRENT_SOURCE_DIR} ${GPULib_SHADERDB_BOILERPLATE} ${_shaderdb_abs_path_} ${_shader_files_}")
-    
+
     ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${_shaderdb_name_}.cpp ${CMAKE_CURRENT_SOURCE_DIR}/${_shaderdb_name_}.h
     COMMAND ${GPULib_SHADERDB_GENERATOR} ${_shaderdb_name_} ${CMAKE_CURRENT_SOURCE_DIR} ${GPULib_SHADERDB_BOILERPLATE} ${_shaderdb_abs_path_} ${_shader_files_}
     DEPENDS ${_abs_shader_files_}

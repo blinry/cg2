@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,7 +30,7 @@
 ///
 /// @defgroup gtx_transform2 GLM_GTX_transform2: Extra transformation matrices
 /// @ingroup gtx
-/// 
+///
 /// @brief Add extra transformation matrices
 ///
 /// <glm/gtx/transform2.hpp> need to be included to use these functionalities.
@@ -54,40 +54,40 @@ namespace glm
 
 	//! Transforms a matrix with a shearing on X axis.
 	//! From GLM_GTX_transform2 extension.
-	template <typename T> 
+	template <typename T>
 	detail::tmat3x3<T> shearX2D(
-		detail::tmat3x3<T> const & m, 
+		detail::tmat3x3<T> const & m,
 		T y);
 
 	//! Transforms a matrix with a shearing on Y axis.
 	//! From GLM_GTX_transform2 extension.
-	template <typename T> 
+	template <typename T>
 	detail::tmat3x3<T> shearY2D(
-		detail::tmat3x3<T> const & m, 
+		detail::tmat3x3<T> const & m,
 		T x);
 
 	//! Transforms a matrix with a shearing on X axis
 	//! From GLM_GTX_transform2 extension.
-	template <typename T> 
+	template <typename T>
 	detail::tmat4x4<T> shearX3D(
 		const detail::tmat4x4<T> & m,
-		T y, 
+		T y,
 		T z);
-		
+
 	//! Transforms a matrix with a shearing on Y axis.
 	//! From GLM_GTX_transform2 extension.
-	template <typename T> 
+	template <typename T>
 	detail::tmat4x4<T> shearY3D(
-		const detail::tmat4x4<T> & m, 
-		T x, 
+		const detail::tmat4x4<T> & m,
+		T x,
 		T z);
-		
-	//! Transforms a matrix with a shearing on Z axis. 
+
+	//! Transforms a matrix with a shearing on Z axis.
 	//! From GLM_GTX_transform2 extension.
-	template <typename T> 
+	template <typename T>
 	detail::tmat4x4<T> shearZ3D(
-		const detail::tmat4x4<T> & m, 
-		T x, 
+		const detail::tmat4x4<T> & m,
+		T x,
 		T y);
 
 	//template <typename T> GLM_FUNC_QUALIFIER detail::tmat4x4<T> shear(const detail::tmat4x4<T> & m, shearPlane, planePoint, angle)
@@ -97,34 +97,34 @@ namespace glm
 	// Reflect functions seem to don't work
 	//template <typename T> detail::tmat3x3<T> reflect2D(const detail::tmat3x3<T> & m, const detail::tvec3<T>& normal){return reflect2DGTX(m, normal);}									//!< \brief Build a reflection matrix (from GLM_GTX_transform2 extension)
 	//template <typename T> detail::tmat4x4<T> reflect3D(const detail::tmat4x4<T> & m, const detail::tvec3<T>& normal){return reflect3DGTX(m, normal);}									//!< \brief Build a reflection matrix (from GLM_GTX_transform2 extension)
-		
+
 	//! Build planar projection matrix along normal axis.
 	//! From GLM_GTX_transform2 extension.
-	template <typename T> 
+	template <typename T>
 	detail::tmat3x3<T> proj2D(
-		const detail::tmat3x3<T> & m, 
-		const detail::tvec3<T>& normal);
-				
-	//! Build planar projection matrix along normal axis.
-	//! From GLM_GTX_transform2 extension.
-	template <typename T> 
-	detail::tmat4x4<T> proj3D(
-		const detail::tmat4x4<T> & m, 
+		const detail::tmat3x3<T> & m,
 		const detail::tvec3<T>& normal);
 
-	//! Build a scale bias matrix. 
+	//! Build planar projection matrix along normal axis.
 	//! From GLM_GTX_transform2 extension.
-	template <typename valType> 
+	template <typename T>
+	detail::tmat4x4<T> proj3D(
+		const detail::tmat4x4<T> & m,
+		const detail::tvec3<T>& normal);
+
+	//! Build a scale bias matrix.
+	//! From GLM_GTX_transform2 extension.
+	template <typename valType>
 	detail::tmat4x4<valType> scaleBias(
-		valType scale, 
+		valType scale,
 		valType bias);
 
 	//! Build a scale bias matrix.
 	//! From GLM_GTX_transform2 extension.
-	template <typename valType> 
+	template <typename valType>
 	detail::tmat4x4<valType> scaleBias(
-		detail::tmat4x4<valType> const & m, 
-		valType scale, 
+		detail::tmat4x4<valType> const & m,
+		valType scale,
 		valType bias);
 
 	/// @}

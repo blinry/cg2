@@ -12,7 +12,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> boxInertia3
 	(
-		T const & Mass, 
+		T const & Mass,
 		detail::tvec3<T> const & Scale
 	)
 	{
@@ -26,7 +26,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> boxInertia4
 	(
-		T const & Mass, 
+		T const & Mass,
 		detail::tvec3<T> const & Scale
 	)
 	{
@@ -40,7 +40,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> diskInertia3
 	(
-		T const & Mass, 
+		T const & Mass,
 		T const & Radius
 	)
 	{
@@ -53,7 +53,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> diskInertia4
 	(
-		T const & Mass, 
+		T const & Mass,
 		T const & Radius
 	)
 	{
@@ -67,7 +67,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> ballInertia3
 	(
-		T const & Mass, 
+		T const & Mass,
 		T const & Radius
 	)
 	{
@@ -78,7 +78,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> ballInertia4
 	(
-		T const & Mass, 
+		T const & Mass,
 		T const & Radius
 	)
 	{
@@ -91,7 +91,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> sphereInertia3
 	(
-		T const & Mass, 
+		T const & Mass,
 		T const & Radius
 	)
 	{
@@ -102,7 +102,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> sphereInertia4
 	(
-		T const & Mass, 
+		T const & Mass,
 		T const & Radius
 	)
 	{

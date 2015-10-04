@@ -4,7 +4,7 @@
 # The follwoing variables are optionally searched for defaults
 # GPULib_MAJOR_VERSION : Use this version instead of the latest
 #
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  GPULib_FOUND
 #  GPULib_INCLUDE_DIR
 #  GPULib_LIBRARY
@@ -17,8 +17,8 @@ ENDMACRO(DBG_MSG)
 # Figure out all available major versions and use the latest or use the one specified as optional input
 IF (NOT GPULib_MAJOR_VERSION)
    # Search all available major versions of the GPU lib
-   EXEC_PROGRAM(find 
-		  ARGS "/afs/cg.cs.tu-bs.de/lib/linux/c++/" "-name gpulib-*" 
+   EXEC_PROGRAM(find
+		  ARGS "/afs/cg.cs.tu-bs.de/lib/linux/c++/" "-name gpulib-*"
 		  OUTPUT_VARIABLE GPULib_POSSIBLE_DIRS)
 
    DBG_MSG(${GPULib_POSSIBLE_DIRS})
@@ -39,7 +39,7 @@ DBG_MSG(${GPULib_ROOT_DIR})
 # Usual stuff to setup the library
 
 FIND_PATH(GPULib_INCLUDE_DIR OpenGLState.h "${GPULib_ROOT_DIR}/include/")
-FIND_LIBRARY(GPULib_LIBRARY gpu "${GPULib_ROOT_DIR}/lib/") 
+FIND_LIBRARY(GPULib_LIBRARY gpu "${GPULib_ROOT_DIR}/lib/")
 
 FIND_FILE(GPULib_SHADERDB_GENERATOR create_shaderdb "${GPULib_ROOT_DIR}/bin/")
 FIND_FILE(GPULib_SHADERDB_BOILERPLATE BoilerplateShaderDB ${GPULib_INCLUDE_DIR})

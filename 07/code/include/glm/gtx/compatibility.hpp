@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,9 @@
 ///
 /// @defgroup gtx_compatibility GLM_GTX_compatibility: Cg and HLSL compatibility
 /// @ingroup gtx
-/// 
+///
 /// @brief Provide functions to increase the compatibility with Cg and HLSL languages
-/// 
+///
 /// <glm/gtx/compatibility.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@
 #define GLM_GTX_compatibility GLM_VERSION
 
 // Dependency:
-#include "../glm.hpp"  
+#include "../glm.hpp"
 #include "../gtc/half_float.hpp"
 
 #if(defined(GLM_MESSAGES) && !defined(glm_ext))
@@ -81,10 +81,10 @@ namespace glm
 	template <typename valType> detail::tvec3<bool> isfinite(const detail::tvec3<valType>& x);				//!< \brief Test whether or not a scalar or each vector component is a finite value. (From GLM_GTX_compatibility)
 	template <typename valType> detail::tvec4<bool> isfinite(const detail::tvec4<valType>& x);				//!< \brief Test whether or not a scalar or each vector component is a finite value. (From GLM_GTX_compatibility)
 
-	template <typename genType> bool isinf(genType const & x);														//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension) 
-	template <typename genType> detail::tvec2<bool> isinf(const detail::tvec2<genType>& x);					//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension) 
-	template <typename genType> detail::tvec3<bool> isinf(const detail::tvec3<genType>& x);					//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension) 
-	template <typename genType> detail::tvec4<bool> isinf(const detail::tvec4<genType>& x);					//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension) 
+	template <typename genType> bool isinf(genType const & x);														//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension)
+	template <typename genType> detail::tvec2<bool> isinf(const detail::tvec2<genType>& x);					//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension)
+	template <typename genType> detail::tvec3<bool> isinf(const detail::tvec3<genType>& x);					//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension)
+	template <typename genType> detail::tvec4<bool> isinf(const detail::tvec4<genType>& x);					//!< \brief Determines whether the given floating-point value is infinite. (From GLM_GTX_compatibility extension)
 
 	template <typename genType> bool isnan(genType const & x);														//!< \brief Checks given floating-point value for not a number (NAN) (From GLM_GTX_compatibility extension)
 	template <typename genType> detail::tvec2<bool> isnan(const detail::tvec2<genType>& x);					//!< \brief Checks given floating-point value for not a number (NAN) (From GLM_GTX_compatibility extension)
@@ -175,6 +175,6 @@ namespace glm
 }//namespace glm
 
 #include "compatibility.inl"
-    
+
 #endif//GLM_GTX_compatibility
 

@@ -89,7 +89,7 @@ namespace glm
 	template <typename genType>
 	GLM_FUNC_QUALIFIER genType fastDistance
 	(
-		genType const & x, 
+		genType const & x,
 		genType const & y
 	)
 	{
