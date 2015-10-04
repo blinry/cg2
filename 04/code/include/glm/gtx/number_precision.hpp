@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,9 +31,9 @@
 ///
 /// @defgroup gtx_number_precision GLM_GTX_number_precision: Number precision
 /// @ingroup gtx
-/// 
+///
 /// @brief Defined size types.
-/// 
+///
 /// <glm/gtx/number_precision.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -52,7 +52,7 @@ namespace glm{
 namespace gtx
 {
 	/////////////////////////////
-	// Unsigned int vector types 
+	// Unsigned int vector types
 
 	/// @addtogroup gtx_number_precision
 	/// @{
@@ -63,14 +63,14 @@ namespace gtx
 	typedef u64			u64vec1;    //!< \brief 64bit unsigned integer scalar. (from GLM_GTX_number_precision extension)
 
 	//////////////////////
-	// Float vector types 
+	// Float vector types
 
 	typedef f16			f16vec1;    //!< \brief Half-precision floating-point scalar. (from GLM_GTX_number_precision extension)
 	typedef f32			f32vec1;    //!< \brief Single-precision floating-point scalar. (from GLM_GTX_number_precision extension)
 	typedef f64			f64vec1;    //!< \brief Single-precision floating-point scalar. (from GLM_GTX_number_precision extension)
 
 	//////////////////////
-	// Float matrix types 
+	// Float matrix types
 
 	typedef f16			f16mat1;    //!< \brief Half-precision floating-point scalar. (from GLM_GTX_number_precision extension)
 	typedef f16			f16mat1x1;	//!< \brief Half-precision floating-point scalar. (from GLM_GTX_number_precision extension)

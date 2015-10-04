@@ -1,9 +1,9 @@
 #
-# This module looks for Doxygen executable 
-# and the Graphviz dot executable 
-# which could be used to generate html 
-# and graphical documentaton from source code. 
-# 
+# This module looks for Doxygen executable
+# and the Graphviz dot executable
+# which could be used to generate html
+# and graphical documentaton from source code.
+#
 # It will set the following variables:
 #
 #  DOXYGEN_FOUND
@@ -20,14 +20,14 @@
 # see:
 #  www.doxygen.org
 #  www.research.att.com/sw/tools/graphviz/
-# 
+#
 # updates:
 # - use variable names consistent with Modules/readme.txt (Jan Woetzel, 06/2004)
 
 FIND_PROGRAM(DOXYGEN_EXECUTABLE
   NAMES doxygen
   DOC "where is the doxygen executable?"
-  PATHS 
+  PATHS
   $ENV{DOXYGEN_HOME}
   "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\doxygen_is1;Inno Setup: App Path]/bin"
   "C:/Program Files/doxygen/bin"
@@ -38,7 +38,7 @@ FIND_PROGRAM(DOXYGEN_EXECUTABLE
 FIND_PROGRAM(DOXYGEN_DOT_EXECUTABLE
   NAMES dot
   DOC "where is dot executable from Graphiz (for doxygen)?"
-  PATHS  
+  PATHS
   $ENV{DOT_HOME}
   "[HKEY_LOCAL_MACHINE\\SOFTWARE\\ATT\\Graphviz;InstallPath]/bin"
   "C:/Program Files/ATT/Graphviz/bin"
@@ -56,7 +56,7 @@ IF (DOXYGEN_EXECUTABLE)
 ENDIF (DOXYGEN_EXECUTABLE)
 
 IF (DOXYGEN_DOT_EXECUTABLE)
-  SET (DOXYGEN_DOT_FOUND TRUE)  
+  SET (DOXYGEN_DOT_FOUND TRUE)
   # the directory of dot is required in doxygen.config: DOT_PATH
   GET_FILENAME_COMPONENT (DOXYGEN_DOT_EXECUTABLE_PATH ${DOXYGEN_DOT_EXECUTABLE} PATH)
 

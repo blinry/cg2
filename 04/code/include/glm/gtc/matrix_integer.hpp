@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,7 +29,7 @@
 ///
 /// @defgroup gtc_matrix_integer GLM_GTC_matrix_integer: Integer matrix types
 /// @ingroup gtc
-/// 
+///
 /// Defines a number of matrices with integer types.
 /// <glm/gtc/matrix_integer.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ namespace glm
 
 	/// High-precision signed integer 2x2 matrix.
 	/// @see gtc_matrix_integer
-	typedef detail::tmat2x2<highp_int>				highp_imat2;	
+	typedef detail::tmat2x2<highp_int>				highp_imat2;
 
 	/// High-precision signed integer 3x3 matrix.
 	/// @see gtc_matrix_integer
@@ -151,7 +151,7 @@ namespace glm
 	/// Low-precision signed integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef detail::tmat2x2<lowp_int>				lowp_imat2;
-	
+
 	/// Low-precision signed integer 3x3 matrix.
 	/// @see gtc_matrix_integer
 	typedef detail::tmat3x3<lowp_int>				lowp_imat3;
@@ -200,7 +200,7 @@ namespace glm
 
 	/// High-precision unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
-	typedef detail::tmat2x2<highp_uint>				highp_umat2;	
+	typedef detail::tmat2x2<highp_uint>				highp_umat2;
 
 	/// High-precision unsigned integer 3x3 matrix.
 	/// @see gtc_matrix_integer
@@ -300,7 +300,7 @@ namespace glm
 	/// Low-precision unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef detail::tmat2x2<lowp_uint>				lowp_umat2;
-	
+
 	/// Low-precision unsigned integer 3x3 matrix.
 	/// @see gtc_matrix_integer
 	typedef detail::tmat3x3<lowp_uint>				lowp_umat3;
@@ -450,7 +450,7 @@ namespace glm
 	typedef lowp_umat4x3							umat4x3;
 	typedef lowp_umat4x4							umat4x4;
 #else //if(defined(GLM_PRECISION_MEDIUMP_UINT))
-	
+
     /// Unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef mediump_umat2							umat2;

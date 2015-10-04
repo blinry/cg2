@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,7 +27,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 
 namespace glm
-{ 
+{
 	/// @addtogroup gtc_type_ptr
 	/// @{
 
@@ -74,12 +74,12 @@ namespace glm
 	{
 		return &(vec.x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
 	GLM_FUNC_QUALIFIER T const * value_ptr
-	(	
+	(
 		detail::tvec4<T> const & vec
 	)
 	{
@@ -90,7 +90,7 @@ namespace glm
 	//! From GLM_GTC_type_ptr extension.
 	template<typename T>
 	GLM_FUNC_QUALIFIER T * value_ptr
-	(	
+	(
 		detail::tvec4<T> & vec
 	)
 	{
@@ -118,7 +118,7 @@ namespace glm
 	{
 		return &(mat[0].x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -140,7 +140,7 @@ namespace glm
 	{
 		return &(mat[0].x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -184,7 +184,7 @@ namespace glm
 	{
 		return &(mat[0].x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -206,7 +206,7 @@ namespace glm
 	{
 		return &(mat[0].x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -228,7 +228,7 @@ namespace glm
 	{
 		return &(mat[0].x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -244,13 +244,13 @@ namespace glm
 	/// @see gtc_type_ptr
 	template<typename T>
 	GLM_FUNC_QUALIFIER T * value_ptr
-	(	
+	(
 		detail::tmat4x2<T> & mat
 	)
 	{
 		return &(mat[0].x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -272,7 +272,7 @@ namespace glm
 	{
 		return &(mat[0].x);
 	}
-		
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -283,7 +283,7 @@ namespace glm
 	{
 		return &(mat[0].x);
 	}
-    
+
 	//! Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -294,7 +294,7 @@ namespace glm
 	{
 		return &(q[0]);
 	}
-    
+
 	//! Get the address of the matrix content.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -342,7 +342,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat2x2<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -352,7 +352,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat2x3<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -362,7 +362,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat2x4<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -372,7 +372,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat3x2<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -392,7 +392,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat3x4<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -402,7 +402,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat4x2<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -412,7 +412,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat4x3<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -422,7 +422,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tmat4x4<T>));
 		return Result;
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -430,7 +430,7 @@ namespace glm
 	{
 		return make_mat2x2(ptr);
 	}
-        
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -438,7 +438,7 @@ namespace glm
 	{
 		return make_mat3x3(ptr);
 	}
-		
+
 	//! Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -446,7 +446,7 @@ namespace glm
 	{
 		return make_mat4x4(ptr);
 	}
- 
+
 	//! Build a quaternion from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -456,7 +456,7 @@ namespace glm
 		memcpy(value_ptr(Result), ptr, sizeof(detail::tquat<T>));
 		return Result;
 	}
-    
+
 	/// @}
 }//namespace glm
 

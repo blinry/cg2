@@ -61,7 +61,7 @@ namespace glm
 	)
 	{
 		GLM_STATIC_ASSERT(detail::type<genType>::is_float, "'asec' only accept floating-point values");
-	
+
 		return acos(genType(1) / x);
 	}
 

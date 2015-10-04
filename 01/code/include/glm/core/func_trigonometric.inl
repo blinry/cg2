@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -44,7 +44,7 @@ namespace glm
 	}
 
 	VECTORIZE_VEC(radians)
-	
+
 	// degrees
 	template <typename genType>
 	GLM_FUNC_QUALIFIER genType degrees
@@ -131,7 +131,7 @@ namespace glm
 	template <typename genType>
 	GLM_FUNC_QUALIFIER genType atan
 	(
-		genType const & y, 
+		genType const & y,
 		genType const & x
 	)
 	{
@@ -156,7 +156,7 @@ namespace glm
 	VECTORIZE_VEC(atan)
 
 	// sinh
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER genType sinh
 	(
 		genType const & angle
@@ -170,7 +170,7 @@ namespace glm
 	VECTORIZE_VEC(sinh)
 
 	// cosh
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER genType cosh
 	(
 		genType const & angle
@@ -198,21 +198,21 @@ namespace glm
 	VECTORIZE_VEC(tanh)
 
 	// asinh
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER genType asinh
 	(
 		genType const & x
 	)
 	{
 		GLM_STATIC_ASSERT(detail::type<genType>::is_float, "'asinh' only accept floating-point input");
-		
+
 		return (x < genType(0) ? genType(-1) : (x > genType(0) ? genType(1) : genType(0))) * log(abs(x) + sqrt(genType(1) + x * x));
 	}
 
 	VECTORIZE_VEC(asinh)
 
 	// acosh
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER genType acosh
 	(
 		genType const & x
@@ -235,7 +235,7 @@ namespace glm
 	)
 	{
 		GLM_STATIC_ASSERT(detail::type<genType>::is_float, "'atanh' only accept floating-point input");
-		
+
 		if(abs(x) >= genType(1))
 			return 0;
 		return genType(0.5) * log((genType(1) + x) / (genType(1) - x));

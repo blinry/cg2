@@ -11,7 +11,7 @@
 
 # cmakes default entries should be overridden exactly once
 # to allow interactuve user changes. (JW)
-# Avoid FORCE because user will not be able to change cvalues, then. 
+# Avoid FORCE because user will not be able to change cvalues, then.
 
 # allow gcc compilation on Windows (jw)
 IF(WIN32)
@@ -23,7 +23,7 @@ IF(MINGW)
 ENDIF(MINGW)
 IF(UNIX)
   SET(WIN32_STYLE_FLAGS 0)
-  SET(UNIX_STYLE_FLAGS  1)  
+  SET(UNIX_STYLE_FLAGS  1)
 ENDIF(UNIX)
 
 
@@ -43,10 +43,10 @@ MACRO(CLEAN_LINE VARNAME)
 
   # remove (multiple) spaces at beginning of line  which may remain
   STRING(REGEX REPLACE "^[ ]+"   ""
-    ${VARNAME}  "${${VARNAME}}" )  
+    ${VARNAME}  "${${VARNAME}}" )
 
   # remove spaces at end of line which may remain
-  # this is required because the string 
+  # this is required because the string
   # would get an extra escapement if it ends with space
   STRING(REGEX REPLACE "[ ]+$"   ""
     ${VARNAME}  "${${VARNAME}}" )
@@ -62,9 +62,9 @@ ENDMACRO(CLEAN_LINE VARNAME)
 # ---------------------------------------------------
 
 #
-# shows args of compiler run 
+# shows args of compiler run
 # (cmake internal function)
-# 
+#
 OPTION(CMAKE_VERBOSE_MAKEFILE "create verbose compiling information?" TRUE)
 MARK_AS_ADVANCED(CMAKE_VERBOSE_MAKEFILE)
 
@@ -88,10 +88,10 @@ ENDIF (CMAKE_BUILD_TOOL MATCHES "(msdev|devenv)")
 
 
 
-# build ADD_LIBRARY taret shared (or static) ? 
-# should be default on Linux for faster turnaround 
+# build ADD_LIBRARY taret shared (or static) ?
+# should be default on Linux for faster turnaround
 # but not on Windows because of complex dllexport
-# cmake inetrnal function 
+# cmake inetrnal function
 IF (WIN32_STYLE_FLAGS)
   OPTION(BUILD_SHARED_LIBS "enable building shared(.dll) instead of static libs?" OFF)
 ELSE (WIN32_STYLE_FLAGS)
@@ -102,7 +102,7 @@ ENDIF (WIN32_STYLE_FLAGS)
 
 IF (WIN32_STYLE_FLAGS)
   # useful for debugging include hierarchy: (jw)
-  # implemented by JW at the end of thsi file as substitution 
+  # implemented by JW at the end of thsi file as substitution
   OPTION(SHOW_INCLUDES "show includes hierarchy - verbose but slow (/showIncludes)?" OFF )
   MARK_AS_ADVANCED(SHOW_INCLUDES)
 
@@ -128,7 +128,7 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
 
   MESSAGE(STATUS "  DefineFlags is overriding cache values (should appear only once)")
 
-  # determines the build flags used for compilation 
+  # determines the build flags used for compilation
   # use Debug build as default
   IF (NOT CMAKE_BUILD_TYPE)
     #MESSAGE(STATUS "DBG setting CMAKE_BUILD_TYPE (once) because it does not exits.")
@@ -145,20 +145,20 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
   # override CMake initialized flags once forced
   # other values should be added to cache for persistency
   #
-  # ---------------------------------------------------  
+  # ---------------------------------------------------
 
   IF (UNIX_STYLE_FLAGS)
 
-    # shall we save fullpath information in (shared) libs 
+    # shall we save fullpath information in (shared) libs
     # to find the corresponding lib during rutime (or use LD_RUNPATH)
-    SET(CMAKE_SKIP_RPATH OFF 
+    SET(CMAKE_SKIP_RPATH OFF
       CACHE STRING "if set, runtime paths are NOT added when using shared libaries" FORCE)
-     
+
     # cmakes default debug build does not include -Wall, unfortunately.
     # edit "standard build" flags provided by cmake:
     # -do not warn on "long long" type (int64) although it's not ISO ++ standard. (JW)
-    # see http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html 
-    SET(CMAKE_CXX_FLAGS_DEBUG 
+    # see http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
+    SET(CMAKE_CXX_FLAGS_DEBUG
       "-g -Wall -pedantic -g3 -ggdb -gdwarf-2 -Wunused-variable -Wno-long-long -Wno-unknown-pragmas -Wno-system-headers"
       #"-g -Wall -pedantic -Wunused-variable -Wno-long-long -Wno-unknown-pragmas"
       #"-g -Wall -pedantic -Wno-long-long -Wuninitialized -Wunreachable-code -Wunused -Wunused-function -Wunused-variable -Wunused-parameter -Wunreachable-code -O0"
@@ -167,79 +167,79 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
       CACHE STRING "Flags used by the compiler during Debug builds." FORCE )
 
     # debug without pedantic
-    SET(CMAKE_CXX_FLAGS_DEBUG2 "-g -Wall" 
+    SET(CMAKE_CXX_FLAGS_DEBUG2 "-g -Wall"
       CACHE STRING "Debug2 builds CMAKE CXX flags" FORCE )
-    SET(CMAKE_C_FLAGS_DEBUG2 "-g -Wall" 
+    SET(CMAKE_C_FLAGS_DEBUG2 "-g -Wall"
       CACHE STRING "Flags used by the compiler during Debug2 builds." FORCE )
 
-    SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -pedantic -Wno-long-long" 
+    SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -pedantic -Wno-long-long"
       CACHE STRING "Flags used by the compiler during release builds." FORCE )
-    SET(CMAKE_C_FLAGS_RELEASE "-O3 -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_RELEASE "-O3 -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during release builds." FORCE )
 
-    SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -g -Wall -pedantic -Wno-long-long" 
+    SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -g -Wall -pedantic -Wno-long-long"
       CACHE STRING "Flags used by the compiler during release builds." FORCE )
-    SET(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -g -Wall -pedantic" 
-      CACHE STRING "Flags used by the compiler during release builds." FORCE )  
+    SET(CMAKE_C_FLAGS_RELWITHDEBINFO "-O3 -g -Wall -pedantic"
+      CACHE STRING "Flags used by the compiler during release builds." FORCE )
 
-    SET(CMAKE_CXX_FLAGS_RELEASEO2 "-O2 -Wall -pedantic -Wno-long-long" 
+    SET(CMAKE_CXX_FLAGS_RELEASEO2 "-O2 -Wall -pedantic -Wno-long-long"
       CACHE STRING "Flags used by the compiler during release builds." FORCE )
-    SET(CMAKE_C_FLAGS_RELEASEO2 "-O2 -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_RELEASEO2 "-O2 -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during release builds." FORCE )
 
     #
     # our own architecture optimized builds:
     #
 
-    # Intel Pentium4 
-    SET(CMAKE_CXX_FLAGS_P4 "-O3 -march=pentium4 -Wall -pedantic -Wno-long-long " 
+    # Intel Pentium4
+    SET(CMAKE_CXX_FLAGS_P4 "-O3 -march=pentium4 -Wall -pedantic -Wno-long-long "
       CACHE STRING "Flags used by the compiler during release builds.")
-    SET(CMAKE_C_FLAGS_P4 "-O3 -march=pentium4 -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_P4 "-O3 -march=pentium4 -Wall -pedantic"
       CACHE STRING "Flags used by the compiler." )
 
-    SET(CMAKE_CXX_FLAGS_P4SSE "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -Wall -pedantic -Wno-long-long " 
+    SET(CMAKE_CXX_FLAGS_P4SSE "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -Wall -pedantic -Wno-long-long "
       CACHE STRING "Flags used by the compiler during P$SSE builds.")
-    SET(CMAKE_C_FLAGS_P4SSE "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_P4SSE "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during P4SSE builds." )
 
-    SET(CMAKE_CXX_FLAGS_P4DEB "-O3 -march=pentium4 -g -Wall -pedantic -Wno-long-long " 
+    SET(CMAKE_CXX_FLAGS_P4DEB "-O3 -march=pentium4 -g -Wall -pedantic -Wno-long-long "
       CACHE STRING "Flags used by the compiler during P4DEB builds.")
-    SET(CMAKE_C_FLAGS_P4DEB "-O3 -march=pentium4 -g -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_P4DEB "-O3 -march=pentium4 -g -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during P4DEB builds." )
 
     SET(CMAKE_CXX_FLAGS_P4PROF "-O3 -march=pentium4 -g -pg -Wall -pedantic -Wno-long-long"
       CACHE STRING "Flags used by the compiler during P4PROF builds.")
-    SET(CMAKE_C_FLAGS_P4PROF "-O3 -march=pentium4 -g -pg -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_P4PROF "-O3 -march=pentium4 -g -pg -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during P4PROF builds.")
-    SET(CMAKE_EXE_LINKER_FLAGS_P4PROF "-pg" 
+    SET(CMAKE_EXE_LINKER_FLAGS_P4PROF "-pg"
       CACHE STRING "Flags used by the linker during P4PROF builds.")
-    SET(CMAKE_MODULE_LINKER_FLAGS_P4PROF "-pg" 
+    SET(CMAKE_MODULE_LINKER_FLAGS_P4PROF "-pg"
       CACHE STRING "Flags used by the linker during P4PROF builds.")
 
-    SET(CMAKE_CXX_FLAGS_P4SSEPROF "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -pg -Wall -pedantic -Wno-long-long" 
+    SET(CMAKE_CXX_FLAGS_P4SSEPROF "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -pg -Wall -pedantic -Wno-long-long"
       CACHE STRING "Flags used by the compiler during profiling builds.")
-    SET(CMAKE_C_FLAGS_P4SSEPROF "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -pg -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_P4SSEPROF "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -pg -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during profiling builds.")
-    SET(CMAKE_EXE_LINKER_FLAGS_P4SSEPROF "-pg" 
+    SET(CMAKE_EXE_LINKER_FLAGS_P4SSEPROF "-pg"
       CACHE STRING "Flags used by the linker during profiling builds.")
-    SET(CMAKE_MODULE_LINKER_FLAGS_P4SSEPROF "-pg" 
+    SET(CMAKE_MODULE_LINKER_FLAGS_P4SSEPROF "-pg"
       CACHE STRING "Flags used by the linker during profiling builds.")
 
-    SET(CMAKE_CXX_FLAGS_P4SSEDEB "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -Wall -pedantic -Wno-long-long " 
+    SET(CMAKE_CXX_FLAGS_P4SSEDEB "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -Wall -pedantic -Wno-long-long "
       CACHE STRING "Flags used by the compiler during P4SSEDEB builds.")
-    SET(CMAKE_C_FLAGS_P4SSEDEB "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_P4SSEDEB "-O3 -march=pentium4 -mcpu=pentium4 -msse -msse2 -mfpmath=sse -minline-all-stringops -g -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during P4SSEDEB builds.")
 
     # Pentium4 with prescott core that supports sse3  JW
-    SET(CMAKE_CXX_FLAGS_PRESCOTT "-O3 -march=prescott -mcpu=prescott -mmmx -msse -msse2 -msse3 -mfpmath=sse -minline-all-stringops -Wall -Wno-long-long" 
+    SET(CMAKE_CXX_FLAGS_PRESCOTT "-O3 -march=prescott -mcpu=prescott -mmmx -msse -msse2 -msse3 -mfpmath=sse -minline-all-stringops -Wall -Wno-long-long"
       CACHE STRING "Flags used by the compiler during PRESCOTT optimized builds.")
-    SET(CMAKE_C_FLAGS_PRESCOTT   "-O3 -march=prescott -mcpu=prescott -mmmx -msse -msse2 -msse3 -mfpmath=sse -minline-all-stringops -Wall" 
+    SET(CMAKE_C_FLAGS_PRESCOTT   "-O3 -march=prescott -mcpu=prescott -mmmx -msse -msse2 -msse3 -mfpmath=sse -minline-all-stringops -Wall"
       CACHE STRING "Flags used by the compiler during PRESCOTT optimized builds." )
 
     # AMD Athlon JW
-    SET(CMAKE_CXX_FLAGS_ATHLON "-O3 -march=athlon -Wall -pedantic -Wno-long-long " 
+    SET(CMAKE_CXX_FLAGS_ATHLON "-O3 -march=athlon -Wall -pedantic -Wno-long-long "
       CACHE STRING "Flags used by the compiler during ATHLON builds.")
-    SET(CMAKE_C_FLAGS_ATHLON "-O3 -march=athlon -Wall -pedantic" 
+    SET(CMAKE_C_FLAGS_ATHLON "-O3 -march=athlon -Wall -pedantic"
       CACHE STRING "Flags used by the compiler during ATHLON builds.")
 
     # Pentium-M
@@ -291,16 +291,16 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
     #
     IF(CMAKE_BUILD_TOOL MATCHES "(msdev|devenv|nmake)")
       # TODO: only msdev supports the CMAKE_CXX_WARNING_LEVEL, others rely on CXX flags
-      # set C++/C compilation warning level 
+      # set C++/C compilation warning level
       # 4 = highest(pedantic)
-      SET(CMAKE_CXX_WARNING_LEVEL 4 
+      SET(CMAKE_CXX_WARNING_LEVEL 4
         CACHE STRING "compiler warning level for CPP" FORCE)
 
       SET(CMAKE_C_WARNING_LEVEL 3
         CACHE STRING "compiler warning level for C" FORCE)
 
       MARK_AS_ADVANCED(CMAKE_CXX_WARNING_LEVEL CMAKE_C_WARNING_LEVEL)
-    ENDIF(CMAKE_BUILD_TOOL MATCHES "(msdev|devenv|nmake)")    
+    ENDIF(CMAKE_BUILD_TOOL MATCHES "(msdev|devenv|nmake)")
 
     # disable warnings taht are too pedantic (for us actually)
     # 4100 : unreferenced paramter
@@ -312,16 +312,16 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
     SET(CMAKE_CXX_FLAGS_DEBUG
       "${CMAKE_CXX_FLAGS_DEBUG} ${FLAGS_WARN_OFF}"
       CACHE STRING "Debug builds CMAKE CXX flags " FORCE )
-    
+
     SET(CMAKE_CXX_FLAGS_RELEASE
       "${CMAKE_CXX_FLAGS_RELEASE} ${FLAGS_WARN_OFF}"
       CACHE STRING "Release builds CMAKE CXX flags " FORCE )
-    
+
 
     #IF(NODEFAULTLIBS_OVERRIDE)
     #
     # handle system defaultlibs
-    # 
+    #
     # Do not mix  debug/release  x  static/shared  x  single/multithreaded
     # version of defaultlib system libraries, e.g. libc/libcd/msvcrt
     # They are part of the Microsoft C Runtime Library
@@ -330,7 +330,7 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
     #
     # (1) Check the /ML, /MT or /MD settings of your project
     # (2) --> use Debug/Release/Static/Shared/Threaded specific linking
-    #  
+    #
     # You should really know what you do if you change something here,
     # at least know teh exatc differnces between:
     # libc  libcmt  libcd libcmtd...
@@ -367,10 +367,10 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
     #        SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcd.lib\"")
     #        # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcmt.lib\"")
     #        SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcmtd.lib\"")
-    #        # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrt.lib\"")    
+    #        # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrt.lib\"")
     #        SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrtd.lib\"")
     #
-    #      ELSE  (CMAKE_BUILD_TYPE MATCHES ".*[rR][eE][lL].*") 
+    #      ELSE  (CMAKE_BUILD_TYPE MATCHES ".*[rR][eE][lL].*")
     #
     #        MESSAGE(STATUS "DBG initializing for Debug multithreaded DLL defaultlibs ")
     #
@@ -381,12 +381,12 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
     #        SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcd.lib\"")
     #        # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcmtd.lib\"")
     #        SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrt.lib\"")
-    #        # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrtd.lib\"")  
+    #        # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrtd.lib\"")
     #
     #      ENDIF (CMAKE_BUILD_TYPE MATCHES ".*[rR][eE][lL].*")
 
     # Debug Single-threaded static (libcd.lib)
-    # ignore: libc.lib, libcmt.lib, msvcrt.lib, libcmtd.lib, msvcrtd.lib  
+    # ignore: libc.lib, libcmt.lib, msvcrt.lib, libcmtd.lib, msvcrtd.lib
     #LINK_LIBRARIES(debug libcd optimized libc)
     #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libc.lib\"")
     #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcmt.lib\"")
@@ -409,7 +409,7 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
     #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcd.lib\"")
     #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libcmt.lib\"")
     #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"libmscmtd.lib\"")
-    #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrt.lib\"")    
+    #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrt.lib\"")
     #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:\"msvcrtd.lib\"")
 
     # Release Multithreaded static (libcmt.lib)
@@ -434,25 +434,25 @@ IF (NOT  DEFINEFLAGS_HAS_RUN)
   SET(DEFINEFLAGS_HAS_RUN  ON  CACHE INTERNAL "override cache entries on first run of DefineFalgs done? (jw)" FORCE)
 ELSE (NOT  DEFINEFLAGS_HAS_RUN)
   # be verbose on build type for now
-  #MESSAGE(STATUS "DBG DefineFlags is skipping force") 
+  #MESSAGE(STATUS "DBG DefineFlags is skipping force")
   IF (BUILD_SHARED_LIBS)
     #MESSAGE(STATUS "DBG DefineFlags.cmake:  CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}  SHARED")
   ELSE (BUILD_SHARED_LIBS)
     #MESSAGE(STATUS "DBG DefineFlags.cmake:  CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}  STATIC")
   ENDIF (BUILD_SHARED_LIBS)
   #
-  # do *NOT* override the cache values with FORCE here because they were already forced once. 
+  # do *NOT* override the cache values with FORCE here because they were already forced once.
   # We do not want to override changes a user may has done by hand intentionally.
   #
   # Feel free to ask Jan Woetzel for details
-  # 
+  #
 ENDIF (NOT  DEFINEFLAGS_HAS_RUN)
 
 
 
 # #######################
-# 
-# always section 
+#
+# always section
 #
 # #######################
 
@@ -465,7 +465,7 @@ IF (WIN32_STYLE_FLAGS)
 
   #
   # SHOWINCLUDES setting
-  # 
+  #
   # useful for debugging include hierarchy: (jw)
   # JW
 
@@ -473,12 +473,12 @@ IF (WIN32_STYLE_FLAGS)
   # /showIncludes
   STRING(REGEX REPLACE "[/][sS][hH][oO][wW][iI][nN][cC][lL][uU][dD][eE][sS]" "\ " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" )
 
-  # add pattern (again) if option specified 
+  # add pattern (again) if option specified
   IF (SHOW_INCLUDES)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /showIncludes")
   ENDIF (SHOW_INCLUDES)
 
-  # remove space and end or beginning of line to avoid double brackets  
+  # remove space and end or beginning of line to avoid double brackets
   CLEAN_LINE(CMAKE_CXX_FLAGS)
 
   # make changes persistent
@@ -493,10 +493,10 @@ IF (WIN32_STYLE_FLAGS)
   # JW
 
   # remove all existing warnignlevels, in particular multiple ones
-  STRING(REGEX REPLACE "/W[0-9]"  "\ " 
+  STRING(REGEX REPLACE "/W[0-9]"  "\ "
     CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
-  STRING(REGEX REPLACE "/W[0-9]"  "\ " 
+  STRING(REGEX REPLACE "/W[0-9]"  "\ "
     CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 
@@ -517,9 +517,9 @@ IF (WIN32_STYLE_FLAGS)
   CLEAN_LINE(CMAKE_C_FLAGS)
 
   # make changes persistent
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" 
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}"
     CACHE STRING "CXX flags used by the C++ commpiler for all builds in addition to build specific ones" FORCE)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}" 
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}"
     CACHE STRING "C flags used by the C++ commpiler for all builds in addition to build specific ones" FORCE)
 
   # distinguish between Debug and Release - for install

@@ -32,35 +32,35 @@ uniform mat4 projection;
 
 void main() {
   int lightCount = max(min(usedLightCount, maxLightCount), 0);
-  
+
   // normal matrix //
   mat4 normalMatrix = transpose(inverse(modelview));
-  
+
   vec3 tangent = (normalMatrix * vec4(vertex_tangent, 0)).xyz;
   vec3 binormal = (normalMatrix * vec4(vertex_binormal, 0)).xyz;
   vec3 normal = (normalMatrix * vec4(vertex_normal, 0)).xyz;
-  
+
   vertexNormal = normal;
   gl_Position = projection * modelview * vec4(vertex, 1.0);
-  
+
   // compute tangent space conversion matrix //
   // use transpose of matrix //
   mat3 World2TangentSpace = mat3(tangent.x, binormal.x, normal.x,
                                  tangent.y, binormal.y, normal.y,
                                  tangent.z, binormal.z, normal.z);
-  
+
   // compute per vertex camera direction //
   vec3 vertexInCamSpace = (modelview * vec4(vertex, 1.0)).xyz;
-  
+
   // vector from vertex to camera and from vertex to light //
   eyeDir = World2TangentSpace * -vertexInCamSpace;
-  
+
   // vertex to light for every light source! //
   for (int i = 0; i < lightCount; ++i) {
     vec3 lightInCamSpace = (view * vec4(lightSource[i].position, 1.0)).xyz;
     lightDir[i] = World2TangentSpace * (lightInCamSpace - vertexInCamSpace);
   }
-  
+
   // write texcoord //
   textureCoord = vertex_texcoord;
 }

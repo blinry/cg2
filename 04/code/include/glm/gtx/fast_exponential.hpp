@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,9 @@
 ///
 /// @defgroup gtx_fast_exponential GLM_GTX_fast_exponential: Fast exponentiation functions
 /// @ingroup gtx
-/// 
+///
 /// @brief Fast but less accurate implementations of exponential based functions.
-/// 
+///
 /// <glm/gtx/fast_exponential.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -54,41 +54,41 @@ namespace glm
 
 	/// Faster than the common pow function but less accurate.
 	/// @see gtx_fast_exponential
-	template <typename genType> 
+	template <typename genType>
 	genType fastPow(
-		genType const & x, 
+		genType const & x,
 		genType const & y);
 
 	/// Faster than the common pow function but less accurate.
 	/// @see gtx_fast_exponential
-	template <typename genTypeT, typename genTypeU> 
+	template <typename genTypeT, typename genTypeU>
 	genTypeT fastPow(
-		genTypeT const & x, 
+		genTypeT const & x,
 		genTypeU const & y);
-		
+
 	/// Faster than the common exp function but less accurate.
 	/// @see gtx_fast_exponential
-	template <typename T> 
+	template <typename T>
 	T fastExp(const T& x);
-		
+
 	/// Faster than the common log function but less accurate.
 	/// @see gtx_fast_exponential
-	template <typename T> 
+	template <typename T>
 	T fastLog(const T& x);
 
 	/// Faster than the common exp2 function but less accurate.
 	/// @see gtx_fast_exponential
-	template <typename T> 
+	template <typename T>
 	T fastExp2(const T& x);
-		
+
 	/// Faster than the common log2 function but less accurate.
 	/// @see gtx_fast_exponential
-	template <typename T> 
+	template <typename T>
 	T fastLog2(const T& x);
 
 	/// Faster than the common ln function but less accurate.
 	/// @see gtx_fast_exponential
-	template <typename T> 
+	template <typename T>
 	T fastLn(const T& x);
 
 	/// @}

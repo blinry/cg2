@@ -1,7 +1,7 @@
 # -Try to find g2c
 #
 #
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  g2c_FOUND
 #  g2c_LIBRARIES
 
@@ -12,7 +12,7 @@ SET(g2c_POSSIBLE_LIBPATHS
   /usr/local/lib64
 )
 
-FIND_LIBRARY(g2c_LIBRARIES 
+FIND_LIBRARY(g2c_LIBRARIES
   NAMES  g2c
   PATHS ${g2c_POSSIBLE_LIBPATHS}
 )

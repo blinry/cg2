@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,9 @@
 ///
 /// @defgroup gtx_matrix_query GLM_GTX_matrix_query: Query matrix properties
 /// @ingroup gtx
-/// 
+///
 /// @brief Query to evaluate matrix properties
-/// 
+///
 /// <glm/gtx/matrix_query.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -55,58 +55,58 @@ namespace glm
 
 	/// Return whether a matrix a null matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename T> 
+	template<typename T>
 	bool isNull(
-		detail::tmat2x2<T> const & m, 
+		detail::tmat2x2<T> const & m,
 		T const & epsilon/* = std::numeric_limits<T>::epsilon()*/);
-		
+
 	/// Return whether a matrix a null matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename T> 
+	template<typename T>
 	bool isNull(
-		detail::tmat3x3<T> const & m, 
+		detail::tmat3x3<T> const & m,
 		T const & epsilon/* = std::numeric_limits<T>::epsilon()*/);
-		
+
 	/// Return whether a matrix is a null matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename T> 
+	template<typename T>
 	bool isNull(
-		detail::tmat4x4<T> const & m, 
+		detail::tmat4x4<T> const & m,
 		T const & epsilon/* = std::numeric_limits<T>::epsilon()*/);
-			
-	/// Return whether a matrix is an identity matrix. 
+
+	/// Return whether a matrix is an identity matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename genType> 
+	template<typename genType>
 	bool isIdentity(
-		genType const & m, 
+		genType const & m,
 		typename genType::value_type const & epsilon/* = std::numeric_limits<typename genType::value_type>::epsilon()*/);
 
 	/// Return whether a matrix is a normalized matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename valType>   
+	template<typename valType>
 	bool isNormalized(
-		detail::tmat2x2<valType> const & m, 
+		detail::tmat2x2<valType> const & m,
 		valType const & epsilon/* = std::numeric_limits<valType>::epsilon()*/);
 
 	/// Return whether a matrix is a normalized matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename valType>   
+	template<typename valType>
 	bool isNormalized(
-		detail::tmat3x3<valType> const & m, 
+		detail::tmat3x3<valType> const & m,
 		valType const & epsilon/* = std::numeric_limits<valType>::epsilon()*/);
 
 	/// Return whether a matrix is a normalized matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename valType>   
+	template<typename valType>
 	bool isNormalized(
-		detail::tmat4x4<valType> const & m, 
+		detail::tmat4x4<valType> const & m,
 		valType const & epsilon/* = std::numeric_limits<valType>::epsilon()*/);
 
 	/// Return whether a matrix is an orthonormalized matrix.
 	/// From GLM_GTX_matrix_query extension.
-	template<typename valType, template <typename> class matType> 
+	template<typename valType, template <typename> class matType>
 	bool isOrthogonal(
-		matType<valType> const & m, 
+		matType<valType> const & m,
 		valType const & epsilon/* = std::numeric_limits<genType>::epsilon()*/);
 
 	/// @}

@@ -9,9 +9,9 @@
 
 namespace glm
 {
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> shearX2D(
-		const detail::tmat3x3<T>& m, 
+		const detail::tmat3x3<T>& m,
 		T s)
 	{
 		detail::tmat3x3<T> r(1);
@@ -19,9 +19,9 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> shearY2D(
-		const detail::tmat3x3<T>& m, 
+		const detail::tmat3x3<T>& m,
 		T s)
 	{
 		detail::tmat3x3<T> r(1);
@@ -29,10 +29,10 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> shearX3D(
-		const detail::tmat4x4<T>& m, 
-		T s, 
+		const detail::tmat4x4<T>& m,
+		T s,
 		T t)
 	{
 		detail::tmat4x4<T> r(1);
@@ -41,10 +41,10 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> shearY3D(
-		const detail::tmat4x4<T>& m, 
-		T s, 
+		const detail::tmat4x4<T>& m,
+		T s,
 		T t)
 	{
 		detail::tmat4x4<T> r(1);
@@ -53,10 +53,10 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T>     
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> shearZ3D(
-		const detail::tmat4x4<T>& m, 
-		T s, 
+		const detail::tmat4x4<T>& m,
+		T s,
 		T t)
 	{
 		detail::tmat4x4<T> r(1);
@@ -65,9 +65,9 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> reflect2D(
-		const detail::tmat3x3<T>& m, 
+		const detail::tmat3x3<T>& m,
 		const detail::tvec3<T>& normal)
 	{
 		detail::tmat3x3<T> r(1);
@@ -78,9 +78,9 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> reflect3D(
-		const detail::tmat4x4<T>& m, 
+		const detail::tmat4x4<T>& m,
 		const detail::tvec3<T>& normal)
 	{
 		detail::tmat4x4<T> r(1);
@@ -98,9 +98,9 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> proj2D(
-		const detail::tmat3x3<T>& m, 
+		const detail::tmat3x3<T>& m,
 		const detail::tvec3<T>& normal)
 	{
 		detail::tmat3x3<T> r(1);
@@ -111,9 +111,9 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> proj3D(
-		const detail::tmat4x4<T>& m, 
+		const detail::tmat4x4<T>& m,
 		const detail::tvec3<T>& normal)
 	{
 		detail::tmat4x4<T> r(1);
@@ -129,9 +129,9 @@ namespace glm
 		return m * r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> scaleBias(
-		T scale, 
+		T scale,
 		T bias)
 	{
 		detail::tmat4x4<T> result;
@@ -142,10 +142,10 @@ namespace glm
 		return result;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> scaleBias(
-		const detail::tmat4x4<T>& m, 
-		T scale, 
+		const detail::tmat4x4<T>& m,
+		T scale,
 		T bias)
 	{
 		return m * scaleBias(scale, bias);

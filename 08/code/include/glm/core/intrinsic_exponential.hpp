@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -48,13 +48,13 @@ GLM_FUNC_QUALIFIER __m128 sse_rsqrt_nr_ss(__m128 const x)
 	__m128 threeminus_xrr = _mm_sub_ss( three, _mm_mul_ss( x, _mm_mul_ss ( recip, recip ) ) );
 	return _mm_mul_ss( halfrecip, threeminus_xrr );
 }
- 
+
 GLM_FUNC_QUALIFIER __m128 sse_normalize_fast_ps(  float * RESTRICT vOut, float * RESTRICT vIn )
 {
         __m128 x = _mm_load_ss(&vIn[0]);
         __m128 y = _mm_load_ss(&vIn[1]);
         __m128 z = _mm_load_ss(&vIn[2]);
- 
+
         const __m128 l =  // compute x*x + y*y + z*z
                 _mm_add_ss(
                  _mm_add_ss( _mm_mul_ss(x,x),
@@ -62,13 +62,13 @@ GLM_FUNC_QUALIFIER __m128 sse_normalize_fast_ps(  float * RESTRICT vOut, float *
                             ),
                  _mm_mul_ss( z, z )
                 );
- 
- 
+
+
         const __m128 rsqt = _mm_rsqrt_nr_ss( l );
         _mm_store_ss( &vOut[0] , _mm_mul_ss( rsqt, x ) );
         _mm_store_ss( &vOut[1] , _mm_mul_ss( rsqt, y ) );
         _mm_store_ss( &vOut[2] , _mm_mul_ss( rsqt, z ) );
- 
+
         return _mm_mul_ss( l , rsqt );
 }
 */

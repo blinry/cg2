@@ -25,16 +25,16 @@ IF (WIN32)
       /usr/local/lib
       /usr/X11R6/lib
     )
-    
+
   ELSE(CYGWIN)
-	
+
 	# set from environment variable
 	# if not set (Jan Woetzel Feb/2004)
 	IF(NOT GLUT_ROOT_PATH)
 	  SET(GLUT_ROOT_PATH $ENV{GLUT_ROOT_PATH})
 	ENDIF(NOT GLUT_ROOT_PATH)
-	
-	# added ${GLUT_ROOT_PATH} (Jan Woetzel Feb/2004)	
+
+	# added ${GLUT_ROOT_PATH} (Jan Woetzel Feb/2004)
     FIND_PATH( GLUT_INCLUDE_DIR GL/glut.h
       "${GLUT_ROOT_PATH}/include"
       ${GLUT_ROOT_PATH}
@@ -46,10 +46,10 @@ IF (WIN32)
       $ENV{ProgramFiles}\\Microsoft\ Visual\ Studio\ .NET\ 2003\\Vc7\\PlatformSDK\\Include\\gl
       DOC "directory where glut header GL/glut.h can be found."
     )
-    
+
 	# added glut32 in addition to glut
 	# added NAMES PATHS syntax (Jan Woetzel Feb/2004)
-    FIND_LIBRARY( GLUT_glut_LIBRARY 
+    FIND_LIBRARY( GLUT_glut_LIBRARY
       NAMES glut glut32
       PATHS
       ${GLUT_ROOT_PATH}/Release
@@ -68,9 +68,9 @@ IF (WIN32)
     # MESSAGE("GLUT_ROOT_PATH=${GLUT_ROOT_PATH}")
     # MESSAGE("GLUT_INCLUDE_DIR=${GLUT_INCLUDE_DIR}")
     # MESSAGE("GLUT_glut_LIBRARY=${GLUT_glut_LIBRARY}")
-    
+
   ENDIF(CYGWIN)
-  
+
 ELSE (WIN32)
 
   IF (APPLE)
@@ -126,7 +126,7 @@ IF(GLUT_INCLUDE_DIR)
     SET( GLUT_LIBRARIES
       ${GLUT_glut_LIBRARY}
       ${GLUT_Xmu_LIBRARY}
-      ${GLUT_Xi_LIBRARY} 
+      ${GLUT_Xi_LIBRARY}
     )
     SET( GLUT_FOUND "YES" )
 

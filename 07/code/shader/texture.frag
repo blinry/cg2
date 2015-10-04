@@ -40,7 +40,7 @@ void main() {
   // normalize the vectors passed from your vertex program //
   vec3 E = normalize(eyeDir);
   vec3 N = normalize(vertexNormal);
-  
+
   // compute the ambient, diffuse and specular color terms //
   vec3 ambientTerm = vec3(0);
   vec3 diffuseTerm = vec3(0);
@@ -56,10 +56,10 @@ void main() {
   ambientTerm *= material.ambient_color;
   diffuseTerm *= material.diffuse_color;
   specularTerm *= material.specular_color;
-  
+
   // assign the final color to the fragment output variable //
   // combine the light/material color and the texture color properly //
-  
+
   color = vec4((ambientTerm+diffuseTerm+specularTerm)*texture_color,1);
   //color = vec4(ambientTerm+diffuseTerm+specularTerm, 1);
 }

@@ -19,7 +19,7 @@ FIND_PATH(TIFF_INCLUDE_DIR tiff.h
     /usr/local/include
 )
 
-FIND_LIBRARY(TIFF_LIBRARY 
+FIND_LIBRARY(TIFF_LIBRARY
     NAMES libtiff tiff
     PATHS
     $ENV{TIFF_DIR}

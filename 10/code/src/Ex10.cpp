@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-#include <glm/gtx/string_cast.hpp> 
+#include <glm/gtx/string_cast.hpp>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -21,8 +21,8 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
-std::stack<glm::mat4> glm_ProjectionMatrix; 
-std::stack<glm::mat4> glm_ModelViewMatrix; 
+std::stack<glm::mat4> glm_ProjectionMatrix;
+std::stack<glm::mat4> glm_ModelViewMatrix;
 
 // OpenGL and GLSL stuff //
 void initGL();
@@ -501,7 +501,7 @@ void renderShadow() {
     glm_ModelViewMatrix.top() *= glm::scale(glm::vec3(10));
     glUniformMatrix4fv(uniformLocations["modelview"], 1, false, glm::value_ptr(glm_ModelViewMatrix.top()));
     glUniform1i(uniformLocations["drawShadows"], 1);
-    
+
 
     MeshObj *mesh = objLoader.getMeshObj("sceneObject");
     mesh->renderShadowVolume();

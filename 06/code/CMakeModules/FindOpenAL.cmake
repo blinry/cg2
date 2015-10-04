@@ -1,14 +1,14 @@
-# 
-# Try to find OpenAL library  
-# Once run this will define: 
-# 
+#
+# Try to find OpenAL library
+# Once run this will define:
+#
 # OPENAL_FOUND
 # OPENAL_INCLUDE_DIR
 # OPENAL_LIBRARIES
 # OPENAL_LINK_DIRECTORIES
 ##
 # 2004-08
-# Daniel Grest 
+# Daniel Grest
 # --------------------------------
 
 
@@ -26,7 +26,7 @@ SET(OPENAL_POSSIBLE_LIBRARY_PATHS
   $ENV{$HOME}/cvs/OpenAL/
   /usr/lib
   /usr/local/lib
-  /opt/net/gcc41/OpenAL/lib  
+  /opt/net/gcc41/OpenAL/lib
   /opt/net/gcc33/OpenAL/lib
   )
 #MESSAGE("DBG (OPENAL_POSSIBLE_LIBRARY_PATHS=${OPENAL_POSSIBLE_LIBRARY_PATHS}")
@@ -42,12 +42,12 @@ IF(OPENAL_LIBRARY)
     # OK - all found
     SET(OPENAL_FOUND TRUE)
     SET(OPENAL_LIBRARIES ${OPENAL_LIBRARY})
-    # get the link directory for rpath to be used with LINK_DIRECTORIES: 
+    # get the link directory for rpath to be used with LINK_DIRECTORIES:
     GET_FILENAME_COMPONENT(OPENAL_LINK_DIRECTORIES ${OPENAL_LIBRARY} PATH)
   ELSE  (OPENAL_INCLUDE_DIR)
     MESSAGE("OPENAL_INCLUDE_DIR not found.")
   ENDIF (OPENAL_INCLUDE_DIR)
-  
+
 ELSE(OPENAL_LIBRARY)
   MESSAGE("OpenAL_LIBRAY not found.")
 ENDIF(OPENAL_LIBRARY)

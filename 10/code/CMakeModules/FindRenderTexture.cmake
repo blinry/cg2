@@ -1,6 +1,6 @@
 ##
-# Try to find RENDERTEXTURE library  
-# Once run this will define: 
+# Try to find RENDERTEXTURE library
+# Once run this will define:
 ##
 # RENDERTEXTURE_FOUND
 # RENDERTEXTURE_INCLUDE_DIR
@@ -15,7 +15,7 @@
 
 FIND_PATH(RENDERTEXTURE_INCLUDE_DIR RenderTexture.h
   $ENV{RENDERTEXTURE_DIR}/include
-  $ENV{RENDERTEXTURE_DIR}  
+  $ENV{RENDERTEXTURE_DIR}
   $ENV{RENDERTEXTURE_HOME}/include
   $ENV{RENDERTEXTURE_HOME}
   $ENV{SOURCE_DIR}/RenderTexture
@@ -28,14 +28,14 @@ FILE(APPEND ${CMAKE_BINARY_DIR}/CMakeOutput.log
 
 FIND_LIBRARY(RENDERTEXTURE_LIBRARY
   NAMES RenderTexture
-  PATHS 
+  PATHS
   $ENV{RENDERTEXTURE_DIR}
   $ENV{RENDERTEXTURE_DIR}/Debug
   $ENV{RENDERTEXTURE_DIR}/Release
   $ENV{RENDERTEXTURE_HOME}/lib
   $ENV{RENDERTEXTURE_HOME}
   $ENV{BUILD_DIR}/RenderTexture
-  $ENV{BUILD_DIR}/RenderTexture/Debug  
+  $ENV{BUILD_DIR}/RenderTexture/Debug
   $ENV{BUILD_DIR}/RenderTexture/Release
   /usr/lib
   /usr/local/lib

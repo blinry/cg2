@@ -28,7 +28,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     return meshObj;
   }
   // ID is not known yet -> try to load mesh from file //
-  
+
   // import mesh from given file //
   // setup variables used for parsing //
   std::string key;
@@ -41,7 +41,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
   std::vector<glm::vec3> localVertexNormal;
   std::vector<glm::vec2> localVertexTexcoord;
   std::vector<std::vector<glm::vec3> > localFace;
-  
+
   // setup tools for parsing a line correctly //
   std::string line;
   std::stringstream sstr;
@@ -91,7 +91,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
 	int vi[4];
 	int ni[4];
 	int ti[4];
-  
+
         sstr.peek();
         while (sstr.good() && vCount < 4) {
           sstr >> vi[vCount];
@@ -117,7 +117,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
             ++vCount;
           }
         }
-        
+
         // insert index data into face //
         if (vCount < 3) {
           std::cout << "(ObjLoader::loadObjFile) - WARNING: Malformed face in line " << lineNumber << std::endl;
@@ -146,9 +146,9 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
       ++lineNumber;
     }
     file.close();
-    
+
     std::cout << "Imported " << localFace.size() << " faces from \"" << fileName << "\"" << std::endl;
-    
+
     // create an indexed vertex for every triplet of vertexId, normalId and texCoordId //
     //  every face is able to use a different set of vertex normals and texture coordinates
     //  when using a single vertex for multiple faces, however, this conflicts multiple normals
@@ -205,18 +205,18 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
         }
       }
     }
-    
+
     // compute tangent space //
     computeTangentSpace(meshData);
-    
+
     // create new MeshObj and set imported geoemtry data //
     meshObj = new MeshObj();
     // assign imported data to this new MeshObj //
     meshObj->setData(meshData);
-    
+
     // insert MeshObj into map //
     mMeshMap.insert(std::make_pair(ID, meshObj));
-    
+
     // return newly created MeshObj //
     return meshObj;
   } else {
@@ -242,7 +242,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
   // reserve memory for tangents and binormals -> same count as vertices //
   meshData.vertex_tangent.resize(meshData.vertex_position.size(), 0);
   meshData.vertex_binormal.resize(meshData.vertex_position.size(), 0);
-  
+
   // iterator over faces (given by index triplets) and calculate tangents for each incident vertex //
   unsigned int indexCount = meshData.indices.size();
   for (unsigned int i = 0; i < (indexCount - 2); i += 3) {
@@ -260,20 +260,20 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
       t[j] = glm::vec2(meshData.vertex_texcoord[textureIndex[j]],
 		       meshData.vertex_texcoord[textureIndex[j] + 1]);
     }
-    
+
     // compute traingle edges Q1, Q2 //
     glm::vec3 Q1 = v[1] - v[0];
     glm::vec3 Q2 = v[2] - v[0];
-    
+
     // compute dU and dV //
     GLfloat du1 = t[1].x - t[0].x;
     GLfloat dv1 = t[1].y - t[0].y;
     GLfloat du2 = t[2].x - t[0].x;
     GLfloat dv2 = t[2].y - t[0].y;
-                     
+
     // compute determinant //
     GLfloat det = du1 * dv2 - dv1 * du2;
-    
+
     // compute the tangent for this triangle //
     glm::vec3 tangent(1, 0, 0);
     if (det != 0) {
@@ -289,7 +289,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
       meshData.vertex_tangent[positionIndex[j] + 2] += tangent.z;
     }
   }
-  
+
   // use gram-schmidt approach to reorthogonalize tangent to normal //
   unsigned int vertexCount = meshData.vertex_position.size();
   for (unsigned int i = 0; i < (vertexCount - 2); i += 3) {
@@ -297,22 +297,22 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
 				  meshData.vertex_tangent[i + 1],
 				  meshData.vertex_tangent[i + 2]);
     tangent = glm::normalize(tangent);
-    
+
     glm::vec3 normal = glm::vec3(meshData.vertex_normal[i],
 				 meshData.vertex_normal[i + 1],
 				 meshData.vertex_normal[i + 2]);
-    
+
     GLfloat NdotT = glm::dot(normal, tangent);
-    
+
     for (unsigned int j = 0; j < 3; ++j) {
       tangent[j] = tangent[j] - NdotT * normal[j];
     }
     tangent = glm::normalize(tangent);
-    
+
     // cross product of tangent and normal yields binormal //
     glm::vec3 binormal = glm::cross(tangent, normal);
     binormal = glm::normalize(binormal);
-    
+
     // set values back into meshData //
     for (int j = 0; j < 3; ++j) {
       meshData.vertex_tangent[i+j] = tangent[j];

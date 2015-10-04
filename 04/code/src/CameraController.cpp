@@ -5,7 +5,7 @@ CameraController::CameraController(float theta, float phi, float dist) {
 }
 
 CameraController::~CameraController() {}
-    
+
 void CameraController::updateMousePos(int x, int y) {
   switch (mState) {
     case LEFT_BTN : {
@@ -62,7 +62,7 @@ void CameraController::updateMouseBtn(MouseState state, int x, int y) {
 void CameraController::move(Motion motion) {
   // init direction multiplicator (forward/backward, left/right are SYMMETRIC!) //
 
-  int dir = 1; // not used :-) 
+  int dir = 1; // not used :-)
 
   // compute look and right direction of the camera
   glm::vec3 lookDir(-sin(mTheta) * cos(mPhi),
@@ -101,7 +101,7 @@ glm::mat4 CameraController::getProjectionMat(void) {
   // see slides!
   projectionMat = glm::perspective(mOpenAngle, mAspect, mNear, mFar);
   return projectionMat;
-  
+
 }
 
 glm::mat4 CameraController::getModelViewMat(void) {
@@ -117,7 +117,7 @@ glm::mat4 CameraController::getModelViewMat(void) {
 
   glm::vec3 rightDir = glm::cross(lookDir, otherVec);
 
- 
+
 
   glm::vec3 upDir = glm::cross((glm::vec3)rightDir,(glm::vec3)lookDir);
 

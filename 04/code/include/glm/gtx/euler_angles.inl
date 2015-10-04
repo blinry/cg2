@@ -9,7 +9,7 @@
 
 namespace glm
 {
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleX
 	(
 		valType const & angleX
@@ -17,7 +17,7 @@ namespace glm
 	{
 		valType cosX = glm::cos(angleX);
 		valType sinX = glm::sin(angleX);
-	
+
 		return detail::tmat4x4<valType>(
 			valType(1), valType(0), valType(0), valType(0),
 			valType(0), cosX,		sinX,		valType(0),
@@ -25,7 +25,7 @@ namespace glm
 			valType(0), valType(0), valType(0), valType(1));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleY
 	(
 		valType const & angleY
@@ -41,13 +41,13 @@ namespace glm
 			valType(0),	valType(0),	valType(0), valType(1));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleZ
 	(
 		valType const & angleZ
 	)
 	{
-		valType cosZ = glm::cos(angleZ); 
+		valType cosZ = glm::cos(angleZ);
 		valType sinZ = glm::sin(angleZ);
 
 		return detail::tmat4x4<valType>(
@@ -57,10 +57,10 @@ namespace glm
 			valType(0),	valType(0),	valType(0), valType(1));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleXY
 	(
-		valType const & angleX, 
+		valType const & angleX,
 		valType const & angleY
 	)
 	{
@@ -76,16 +76,16 @@ namespace glm
 			valType(0), valType(0),     valType(0),		valType(1));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleYX
 	(
-		valType const & angleY, 
+		valType const & angleY,
 		valType const & angleX
 	)
 	{
-		valType cosX = glm::cos(angleX); 
-		valType sinX = glm::sin(angleX); 
-		valType cosY = glm::cos(angleY); 
+		valType cosX = glm::cos(angleX);
+		valType sinX = glm::sin(angleX);
+		valType cosY = glm::cos(angleY);
 		valType sinY = glm::sin(angleY);
 
 		return detail::tmat4x4<valType>(
@@ -95,31 +95,31 @@ namespace glm
 			valType(0),		valType(0),		valType(0),		valType(1));
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleXZ
 	(
-		valType const & angleX, 
+		valType const & angleX,
 		valType const & angleZ
 	)
 	{
 		return eulerAngleX(angleX) * eulerAngleZ(angleZ);
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleZX
 	(
-		valType const & angleZ, 
+		valType const & angleZ,
 		valType const & angleX
 	)
 	{
 		return eulerAngleZ(angleZ) * eulerAngleX(angleX);
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> eulerAngleYXZ
 	(
-		valType const & yaw, 
-		valType const & pitch, 
+		valType const & yaw,
+		valType const & pitch,
 		valType const & roll
 	)
 	{
@@ -150,11 +150,11 @@ namespace glm
 		return Result;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<valType> yawPitchRoll
 	(
-		valType const & yaw, 
-		valType const & pitch, 
+		valType const & yaw,
+		valType const & pitch,
 		valType const & roll
 	)
 	{

@@ -44,7 +44,7 @@ void main() {
     // TODO: import normal in tangent space from normal map//
     vec3 N;
     N = texture2D(normal_tex, textureCoord).rgb;
-    N = normalize((2 * N) - vec3(1)); 
+    N = normalize((2 * N) - vec3(1));
 
     // compute lighting uwing ambient, diffuse and specular color terms //
     vec3 ambientTerm = vec3(0);

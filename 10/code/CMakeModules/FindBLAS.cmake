@@ -1,6 +1,6 @@
-# -Try to find Lapack library  
-# Once run this will define: 
-# 
+# -Try to find Lapack library
+# Once run this will define:
+#
 # BLAS_FOUND
 # BLAS_LIBRARIES
 #
@@ -10,7 +10,7 @@
 
 FIND_LIBRARY(BLAS_LIBRARY
   NAMES BLAS blas
-  PATHS 
+  PATHS
   ${BLAS_DIR}
   ${BLAS_DIR}/lib
   $ENV{BLAS_DIR}
@@ -27,7 +27,7 @@ FIND_LIBRARY(BLAS_LIBRARY
   $ENV{LAPACK_HOME}
   $ENV{LAPACK_HOME}/lib
   $ENV{EXTRA}/lib
-  $ENV{EXTRA}  
+  $ENV{EXTRA}
   /usr/lib
   /usr/lib/atlas # ATLAS - Automatically Tuned Linear Algebra Software
   /usr/local/lib

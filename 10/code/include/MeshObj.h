@@ -12,7 +12,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-#include <glm/gtx/string_cast.hpp> 
+#include <glm/gtx/string_cast.hpp>
 
 struct MeshData {
   // data vectors //
@@ -29,29 +29,29 @@ class MeshObj {
   public:
     MeshObj();
     ~MeshObj();
-    
+
     void setData(const MeshData &data);
     void render(void);
-    
+
     void initShadowVolume(glm::vec3 lightPos);
     void renderShadowVolume();
-    
+
   private:
     GLuint mVAO;
-    
+
     GLuint mVBO_position;
     GLuint mVBO_normal;
     GLuint mVBO_texcoord;
     GLuint mVBO_tangent;
     GLuint mVBO_binormal;
-    
+
     GLuint mIBO;
     GLuint mIndexCount;
-    
+
     // #INFO# local copy of the original mesh data    //
     //  - needed to compute shadow volumes on the fly //
     MeshData mMeshData;
-    
+
     // #INFO# vertex buffer object for shadow volume //
     GLuint mVAO_shadow;
     GLuint mVBO_shadow_position;

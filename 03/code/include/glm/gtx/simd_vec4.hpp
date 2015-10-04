@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,9 +29,9 @@
 ///
 /// @defgroup gtx_simd_vec4 GLM_GTX_simd_vec4: SIMD vec4 type and functions
 /// @ingroup gtx
-/// 
+///
 /// @brief SIMD implementation of vec4 type.
-/// 
+///
 /// <glm/gtx/simd_vec4.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -86,9 +86,9 @@ namespace detail
 		explicit fvec4SIMD(
 			float const & s);
 		explicit fvec4SIMD(
-			float const & x, 
-			float const & y, 
-			float const & z, 
+			float const & x,
+			float const & y,
+			float const & z,
 			float const & w);
 		explicit fvec4SIMD(
 			tvec4<float> const & v);
@@ -147,39 +147,39 @@ namespace detail
 	detail::tvec4<float> vec4_cast(
 		detail::fvec4SIMD const & x);
 
-	//! Returns x if x >= 0; otherwise, it returns -x. 
+	//! Returns x if x >= 0; otherwise, it returns -x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD abs(detail::fvec4SIMD const & x);
 
-	//! Returns 1.0 if x > 0, 0.0 if x = 0, or -1.0 if x < 0. 
+	//! Returns 1.0 if x > 0, 0.0 if x = 0, or -1.0 if x < 0.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD sign(detail::fvec4SIMD const & x);
 
-	//! Returns a value equal to the nearest integer that is less then or equal to x. 
+	//! Returns a value equal to the nearest integer that is less then or equal to x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD floor(detail::fvec4SIMD const & x);
 
-	//! Returns a value equal to the nearest integer to x 
-	//! whose absolute value is not larger than the absolute value of x. 
+	//! Returns a value equal to the nearest integer to x
+	//! whose absolute value is not larger than the absolute value of x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD trunc(detail::fvec4SIMD const & x);
 
-	//! Returns a value equal to the nearest integer to x. 
-	//! The fraction 0.5 will round in a direction chosen by the 
-	//! implementation, presumably the direction that is fastest. 
-	//! This includes the possibility that round(x) returns the 
-	//! same value as roundEven(x) for all values of x. 
+	//! Returns a value equal to the nearest integer to x.
+	//! The fraction 0.5 will round in a direction chosen by the
+	//! implementation, presumably the direction that is fastest.
+	//! This includes the possibility that round(x) returns the
+	//! same value as roundEven(x) for all values of x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD round(detail::fvec4SIMD const & x);
 
 	//! Returns a value equal to the nearest integer to x.
 	//! A fractional part of 0.5 will round toward the nearest even
-	//! integer. (Both 3.5 and 4.5 for x will return 4.0.) 
+	//! integer. (Both 3.5 and 4.5 for x will return 4.0.)
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	//detail::fvec4SIMD roundEven(detail::fvec4SIMD const & x);
 
-	//! Returns a value equal to the nearest integer 
-	//! that is greater than or equal to x. 
+	//! Returns a value equal to the nearest integer
+	//! that is greater than or equal to x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD ceil(detail::fvec4SIMD const & x);
 
@@ -187,18 +187,18 @@ namespace detail
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD fract(detail::fvec4SIMD const & x);
 
-	//! Modulus. Returns x - y * floor(x / y) 
+	//! Modulus. Returns x - y * floor(x / y)
 	//! for each component in x using the floating point value y.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD mod(
-		detail::fvec4SIMD const & x, 
+		detail::fvec4SIMD const & x,
 		detail::fvec4SIMD const & y);
 
-	//! Modulus. Returns x - y * floor(x / y) 
+	//! Modulus. Returns x - y * floor(x / y)
 	//! for each component in x using the floating point value y.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD mod(
-		detail::fvec4SIMD const & x, 
+		detail::fvec4SIMD const & x,
 		float const & y);
 
 	//! Returns the fractional part of x and sets i to the integer
@@ -207,48 +207,48 @@ namespace detail
 	//! sign as x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	//detail::fvec4SIMD modf(
-	//	detail::fvec4SIMD const & x, 
+	//	detail::fvec4SIMD const & x,
 	//	detail::fvec4SIMD & i);
 
 	//! Returns y if y < x; otherwise, it returns x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD min(
-		detail::fvec4SIMD const & x, 
+		detail::fvec4SIMD const & x,
 		detail::fvec4SIMD const & y);
 
 	detail::fvec4SIMD min(
-		detail::fvec4SIMD const & x, 
+		detail::fvec4SIMD const & x,
 		float const & y);
 
 	//! Returns y if x < y; otherwise, it returns x.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD max(
-		detail::fvec4SIMD const & x, 
+		detail::fvec4SIMD const & x,
 		detail::fvec4SIMD const & y);
 
 	detail::fvec4SIMD max(
-		detail::fvec4SIMD const & x, 
+		detail::fvec4SIMD const & x,
 		float const & y);
 
-	//! Returns min(max(x, minVal), maxVal) for each component in x 
+	//! Returns min(max(x, minVal), maxVal) for each component in x
 	//! using the floating-point values minVal and maxVal.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD clamp(
-		detail::fvec4SIMD const & x, 
-		detail::fvec4SIMD const & minVal, 
-		detail::fvec4SIMD const & maxVal); 
+		detail::fvec4SIMD const & x,
+		detail::fvec4SIMD const & minVal,
+		detail::fvec4SIMD const & maxVal);
 
 	detail::fvec4SIMD clamp(
-		detail::fvec4SIMD const & x, 
-		float const & minVal, 
-		float const & maxVal); 
+		detail::fvec4SIMD const & x,
+		float const & minVal,
+		float const & maxVal);
 
-	//! \return If genTypeU is a floating scalar or vector: 
-	//! Returns x * (1.0 - a) + y * a, i.e., the linear blend of 
-	//! x and y using the floating-point value a. 
+	//! \return If genTypeU is a floating scalar or vector:
+	//! Returns x * (1.0 - a) + y * a, i.e., the linear blend of
+	//! x and y using the floating-point value a.
 	//! The value for a is not restricted to the range [0, 1].
 	//!
-	//! \return If genTypeU is a boolean scalar or vector: 
+	//! \return If genTypeU is a boolean scalar or vector:
 	//! Selects which vector each returned component comes
 	//! from. For a component of a that is false, the
 	//! corresponding component of x is returned. For a
@@ -259,9 +259,9 @@ namespace detail
 	//! provides different functionality than
 	//! genType mix(genType x, genType y, genType(a))
 	//! where a is a Boolean vector.
-	//! 
+	//!
 	//! From GLSL 1.30.08 specification, section 8.3
-	//! 
+	//!
 	//! \param[in]  x Floating point scalar or vector.
 	//! \param[in]  y Floating point scalar or vector.
 	//! \param[in]  a Floating point or boolean scalar or vector.
@@ -269,18 +269,18 @@ namespace detail
 	// \todo Test when 'a' is a boolean.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD mix(
-		detail::fvec4SIMD const & x, 
-		detail::fvec4SIMD const & y, 
+		detail::fvec4SIMD const & x,
+		detail::fvec4SIMD const & y,
 		detail::fvec4SIMD const & a);
 
 	//! Returns 0.0 if x < edge, otherwise it returns 1.0.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD step(
-		detail::fvec4SIMD const & edge, 
+		detail::fvec4SIMD const & edge,
 		detail::fvec4SIMD const & x);
 
 	detail::fvec4SIMD step(
-		float const & edge, 
+		float const & edge,
 		detail::fvec4SIMD const & x);
 
 	//! Returns 0.0 if x <= edge0 and 1.0 if x >= edge1 and
@@ -289,18 +289,18 @@ namespace detail
 	//! you would want a threshold function with a smooth
 	//! transition. This is equivalent to:
 	//! genType t;
-	//! t = clamp ((x – edge0) / (edge1 – edge0), 0, 1);
-	//! return t * t * (3 – 2 * t);
+	//! t = clamp ((x  edge0) / (edge1  edge0), 0, 1);
+	//! return t * t * (3  2 * t);
 	//! Results are undefined if edge0 >= edge1.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD smoothstep(
-		detail::fvec4SIMD const & edge0, 
-		detail::fvec4SIMD const & edge1, 
+		detail::fvec4SIMD const & edge0,
+		detail::fvec4SIMD const & edge1,
 		detail::fvec4SIMD const & x);
 
 	detail::fvec4SIMD smoothstep(
-		float const & edge0, 
-		float const & edge1, 
+		float const & edge0,
+		float const & edge1,
 		detail::fvec4SIMD const & x);
 
 	//! Returns true if x holds a NaN (not a number)
@@ -336,8 +336,8 @@ namespace detail
 	//! Computes and returns a * b + c.
 	//! (From GLM_GTX_simd_vec4 extension, common function)
 	detail::fvec4SIMD fma(
-		detail::fvec4SIMD const & a, 
-		detail::fvec4SIMD const & b, 
+		detail::fvec4SIMD const & a,
+		detail::fvec4SIMD const & b,
 		detail::fvec4SIMD const & c);
 
 	//! Splits x into a floating-point significand in the range

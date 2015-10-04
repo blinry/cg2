@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,10 +34,10 @@
 namespace glm{
 namespace detail
 {
-	//template 
+	//template
 	//<
-	//	typename T, 
-	//	template <typename> class C, 
+	//	typename T,
+	//	template <typename> class C,
 	//	template <typename> class R
 	//>
 	//struct matType
@@ -51,22 +51,22 @@ namespace detail
 	//	static size_type const row_size;
 	//};
 
-	//template 
+	//template
 	//<
-	//	typename T, 
-	//	template <typename> class C, 
+	//	typename T,
+	//	template <typename> class C,
 	//	template <typename> class R
 	//>
-	//typename matType<T, C, R>::size_type const 
+	//typename matType<T, C, R>::size_type const
 	//matType<T, C, R>::col_size = matType<T, C, R>::col_type::value_size;
 
-	//template 
+	//template
 	//<
-	//	typename T, 
-	//	template <typename> class C, 
+	//	typename T,
+	//	template <typename> class C,
 	//	template <typename> class R
 	//>
-	//typename matType<T, C, R>::size_type const 
+	//typename matType<T, C, R>::size_type const
 	//matType<T, C, R>::row_size = matType<T, C, R>::row_type::value_size;
 
 }//namespace detail

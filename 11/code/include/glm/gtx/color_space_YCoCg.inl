@@ -9,7 +9,7 @@
 
 namespace glm
 {
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<valType> rgb2YCoCg
 	(
 		detail::tvec3<valType> const & rgbColor
@@ -22,7 +22,7 @@ namespace glm
 		return result;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<valType> rgb2YCoCgR
 	(
 		detail::tvec3<valType> const & rgbColor
@@ -35,7 +35,7 @@ namespace glm
 		return result;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<valType> YCoCg2rgb
 	(
 		detail::tvec3<valType> const & YCoCgColor
@@ -48,7 +48,7 @@ namespace glm
 		return result;
 	}
 
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER detail::tvec3<valType> YCoCgR2rgb
 	(
 		detail::tvec3<valType> const & YCoCgRColor

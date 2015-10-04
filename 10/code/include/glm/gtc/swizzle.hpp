@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,12 +26,12 @@
 /// @author Christophe Riccio
 ///
 /// @see core (dependence)
-/// 
+///
 /// @defgroup gtc_swizzle GLM_GTC_swizzle: Swizzle 'operator' implementation
 /// @ingroup gtc
-/// 
+///
 /// @brief Provide functions to emulate GLSL swizzle operator fonctionalities.
-/// 
+///
 /// <glm/gtc/swizzle.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -50,19 +50,19 @@ namespace glm
 {
 	/// @addtogroup gtc_swizzle
 	/// @{
-	
+
 
 	template <typename T, template <typename> class vecType>
-	T const & swizzle(	
+	T const & swizzle(
 		vecType<T> const & v,
 		comp x);
 
-    /// 
-	/// 
-	/// @param v Vector source   
-	/// @param x 
-	/// @tparam T  
-    /// @tparam vecType 
+    ///
+	///
+	/// @param v Vector source
+	/// @param x
+	/// @tparam T
+    /// @tparam vecType
 	/// @see gtc_swizzle
 	template <typename T, template <typename> class vecType>
 	detail::tvec2<T> const & swizzle(
@@ -102,8 +102,8 @@ namespace glm
 #	define static_swizzle1_const(TYPE, SIZE)							\
 		template <comp x>										\
 		GLM_FUNC_QUALIFIER TYPE swizzle(detail::tvec##SIZE<TYPE> const & v)	\
-		{return v[x];}											
-																
+		{return v[x];}
+
 #	define static_swizzle1_ref(TYPE, SIZE)									\
 		template <comp x>													\
 		GLM_FUNC_QUALIFIER TYPE& swizzle(detail::tvec##SIZE<TYPE> & v)		\
@@ -288,17 +288,17 @@ namespace glm
 #	define static_swizzle2_ref(TYPE, SIZE) \
 		template <glm::comp x, glm::comp y> \
 		GLM_FUNC_QUALIFIER glm::detail::tref2<TYPE> swizzle(detail::tvec##SIZE<TYPE> & v) \
-		{return glm::detail::tref2<TYPE>(v[x], v[y]);}	
+		{return glm::detail::tref2<TYPE>(v[x], v[y]);}
 
 #	define static_swizzle3_ref(TYPE, SIZE) \
 		template <glm::comp x, glm::comp y, glm::comp z> \
 		GLM_FUNC_QUALIFIER glm::detail::tref3<TYPE> swizzle(detail::tvec##SIZE<TYPE> & v) \
-		{return glm::detail::tref3<TYPE>(v[x], v[y], v[z]);}	
+		{return glm::detail::tref3<TYPE>(v[x], v[y], v[z]);}
 
 #	define static_swizzle4_ref(TYPE, SIZE) \
 		template <glm::comp x, glm::comp y, glm::comp z, glm::comp w> \
 		GLM_FUNC_QUALIFIER glm::detail::tref4<TYPE> swizzle(detail::tvec##SIZE<TYPE> & v) \
-		{return glm::detail::tref4<TYPE>(v[x], v[y], v[z], v[w]);}	
+		{return glm::detail::tref4<TYPE>(v[x], v[y], v[z], v[w]);}
 
 	static_swizzle2_ref(glm::f16, 2)
 	static_swizzle2_ref(glm::f16, 3)

@@ -29,7 +29,7 @@ void MeshObj::setData(const MeshData &meshData) {
 	vert = (GLfloat*) malloc(sizeof(GLfloat) * meshData.vertex_position.size());
 	norms = (GLfloat*) malloc(sizeof(GLfloat) * meshData.vertex_normal.size());
 	ind = (GLuint*) malloc(sizeof(GLuint) * mIndexCount);
-	
+
 	// copy data into local arrays //
 	memcpy(vert, meshData.vertex_position.data(), sizeof(GLfloat) * meshData.vertex_position.size());
 	memcpy(norms, meshData.vertex_normal.data(), sizeof(GLfloat) * meshData.vertex_normal.size());

@@ -1,7 +1,7 @@
 # -Try to find Arpack++
 #
 #
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  Arpack++_FOUND
 #  Arpack++_INCLUDE_DIR
 

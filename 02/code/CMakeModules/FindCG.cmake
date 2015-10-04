@@ -1,7 +1,7 @@
 # -Try to find NVIDIA CG library
 #
 
-# The following are set after configuration is done: 
+# The following are set after configuration is done:
 #  CG_FOUND
 #  CG_INCLUDE_DIR
 #  CG_LIBRARIES
@@ -15,8 +15,8 @@ ENDMACRO(DBG_MSG)
 # Usual stuff to setup the library
 
 FIND_PATH(CG_INCLUDE_DIR cg.h /usr/include/Cg)
-FIND_LIBRARY(CG_BASE_LIBRARY Cg /usr/lib64) 
-FIND_LIBRARY(CG_OPENGL_LIBRARY CgGL /usr/lib64) 
+FIND_LIBRARY(CG_BASE_LIBRARY Cg /usr/lib64)
+FIND_LIBRARY(CG_OPENGL_LIBRARY CgGL /usr/lib64)
 
 LIST(APPEND CG_LIBRARIES ${CG_BASE_LIBRARY})
 LIST(APPEND CG_LIBRARIES ${CG_OPENGL_LIBRARY})

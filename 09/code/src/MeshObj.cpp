@@ -25,18 +25,18 @@ MeshObj::~MeshObj() {
 
 void MeshObj::setData(const MeshData &meshData) {
   mIndexCount = meshData.indices.size();
-  
+
   // extend this method to upload tangent and binormal as VBOs //
   // - tangents are at location 3 within the shader code
   // - binormals are at location 4 within the shader code
-  
+
   // create local storage arrays for vertices, normals and indices //
   unsigned int vertexDataSize = meshData.vertex_position.size();
   unsigned int vertexNormalSize = meshData.vertex_normal.size();
   unsigned int vertexTexcoordSize = meshData.vertex_texcoord.size();
   unsigned int vertexTangentSize = meshData.vertex_tangent.size();
   unsigned int vertexBinormalSize = meshData.vertex_binormal.size();
-  
+
   GLfloat *vertex_position = new GLfloat[vertexDataSize]();
   std::copy(meshData.vertex_position.begin(), meshData.vertex_position.end(), vertex_position);
   GLfloat *vertex_normal = NULL;
@@ -61,13 +61,13 @@ void MeshObj::setData(const MeshData &meshData) {
   }
   GLuint *indices = new GLuint[mIndexCount]();
   std::copy(meshData.indices.begin(), meshData.indices.end(), indices);
-  
+
   // create VAO //
   if (mVAO == 0) {
     glGenVertexArrays(1, &mVAO);
   }
   glBindVertexArray(mVAO);
-  
+
   // create and bind VBOs and upload data (one VBO per available vertex attribute -> position, normal) //
   if (mVBO_position == 0) {
     glGenBuffers(1, &mVBO_position);
@@ -76,7 +76,7 @@ void MeshObj::setData(const MeshData &meshData) {
   glBufferData(GL_ARRAY_BUFFER, vertexDataSize * sizeof(GLfloat), &vertex_position[0], GL_STATIC_DRAW);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
   glEnableVertexAttribArray(0);
-  
+
   if (vertexNormalSize > 0) {
     if (mVBO_normal == 0) {
       glGenBuffers(1, &mVBO_normal);
@@ -86,7 +86,7 @@ void MeshObj::setData(const MeshData &meshData) {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     glEnableVertexAttribArray(1);
   }
-  
+
   if (vertexTexcoordSize > 0) {
     if (mVBO_texcoord == 0) {
       glGenBuffers(1, &mVBO_texcoord);
@@ -96,7 +96,7 @@ void MeshObj::setData(const MeshData &meshData) {
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
     glEnableVertexAttribArray(2);
   }
-  
+
   if (vertexTangentSize > 0) {
     if (mVBO_tangent == 0) {
       glGenBuffers(1, &mVBO_tangent);
@@ -106,7 +106,7 @@ void MeshObj::setData(const MeshData &meshData) {
     glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     glEnableVertexAttribArray(3);
   }
-  
+
   if (vertexBinormalSize > 0) {
     if (mVBO_binormal == 0) {
       glGenBuffers(1, &mVBO_binormal);
@@ -116,17 +116,17 @@ void MeshObj::setData(const MeshData &meshData) {
     glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     glEnableVertexAttribArray(4);
   }
-  
+
   // init and bind a IBO //
   if (mIBO == 0) {
     glGenBuffers(1, &mIBO);
   }
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexCount * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
-  
+
   // unbind buffers //
   glBindVertexArray(0);
-  
+
   // make sure to clean up temporarily allocated data, if neccessary //
   delete[] vertex_position;
   if (vertexNormalSize > 0) {

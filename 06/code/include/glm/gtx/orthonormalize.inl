@@ -31,10 +31,10 @@ namespace glm
 		return r;
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec3<T> orthonormalize
 	(
-		const detail::tvec3<T>& x, 
+		const detail::tvec3<T>& x,
 		const detail::tvec3<T>& y
 	)
 	{

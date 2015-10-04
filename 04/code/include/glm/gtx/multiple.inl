@@ -17,10 +17,10 @@ namespace glm
 	//////////////////////
 	// higherMultiple
 
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER genType higherMultiple
 	(
-		genType const & Source, 
+		genType const & Source,
 		genType const & Multiple
 	)
 	{
@@ -28,10 +28,10 @@ namespace glm
 		return Tmp ? Source + Multiple - Tmp : Source;
 	}
 
-	template <> 
+	template <>
 	GLM_FUNC_QUALIFIER detail::half higherMultiple
 	(
-		detail::half const & SourceH, 
+		detail::half const & SourceH,
 		detail::half const & MultipleH
 	)
 	{
@@ -42,10 +42,10 @@ namespace glm
 		return detail::half(Tmp ? Source + Multiple - float(Tmp) : Source);
 	}
 
-	template <> 
+	template <>
 	GLM_FUNC_QUALIFIER float higherMultiple
-	(	
-		float const & Source, 
+	(
+		float const & Source,
 		float const & Multiple
 	)
 	{
@@ -53,10 +53,10 @@ namespace glm
 		return Tmp ? Source + Multiple - float(Tmp) : Source;
 	}
 
-	template <> 
+	template <>
 	GLM_FUNC_QUALIFIER double higherMultiple
 	(
-		double const & Source, 
+		double const & Source,
 		double const & Multiple
 	)
 	{
@@ -69,10 +69,10 @@ namespace glm
 	//////////////////////
 	// lowerMultiple
 
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER genType lowerMultiple
 	(
-		genType const & Source, 
+		genType const & Source,
 		genType const & Multiple
 	)
 	{
@@ -80,10 +80,10 @@ namespace glm
 		return Tmp ? Source - Tmp : Source;
 	}
 
-	template <> 
+	template <>
 	GLM_FUNC_QUALIFIER detail::half lowerMultiple
 	(
-		detail::half const & SourceH, 
+		detail::half const & SourceH,
 		detail::half const & MultipleH
 	)
 	{
@@ -94,10 +94,10 @@ namespace glm
 		return detail::half(Tmp ? Source - float(Tmp) : Source);
 	}
 
-	template <> 
+	template <>
 	GLM_FUNC_QUALIFIER float lowerMultiple
 	(
-		float const & Source, 
+		float const & Source,
 		float const & Multiple
 	)
 	{
@@ -105,10 +105,10 @@ namespace glm
 		return Tmp ? Source - float(Tmp) : Source;
 	}
 
-	template <> 
+	template <>
 	GLM_FUNC_QUALIFIER double lowerMultiple
 	(
-		double const & Source, 
+		double const & Source,
 		double const & Multiple
 	)
 	{

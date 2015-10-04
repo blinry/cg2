@@ -19,10 +19,10 @@ class MeshObj {
   public:
     MeshObj();
     ~MeshObj();
-    
+
     void setData(const MeshData &data);
     void render(void);
-    
+
   private:
     GLuint mVAO;
     GLuint mVBO_position;

@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -88,7 +88,7 @@ namespace detail
 
 	GLM_FUNC_QUALIFIER tvec2<half>::tvec2
 	(
-		half const & s1, 
+		half const & s1,
 		half const & s2
 	) :
 		x(s1),
@@ -109,7 +109,7 @@ namespace detail
 	//////////////////////////////////////
 	// Convertion scalar constructors
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec2<half>::tvec2
 	(
 		U const & x
@@ -118,10 +118,10 @@ namespace detail
 		y(half(x))
 	{}
 
-	template <typename U, typename V> 
+	template <typename U, typename V>
 	GLM_FUNC_QUALIFIER tvec2<half>::tvec2
 	(
-		U const & x, 
+		U const & x,
 		V const & y
 	) :
 		x(half(x)),
@@ -131,7 +131,7 @@ namespace detail
 	//////////////////////////////////////
 	// Convertion vector constructors
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec2<half>::tvec2
 	(
 		tvec2<U> const & v
@@ -140,16 +140,16 @@ namespace detail
 		y(half(v.y))
 	{}
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec2<half>::tvec2
-	(	
+	(
 		tvec3<U> const & v
 	) :
 		x(half(v.x)),
 		y(half(v.y))
 	{}
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec2<half>::tvec2
 	(
 		tvec4<U> const & v
@@ -161,7 +161,7 @@ namespace detail
 	//////////////////////////////////////
 	// Unary arithmetic operators
 
-	GLM_FUNC_QUALIFIER tvec2<half> & tvec2<half>::operator= 
+	GLM_FUNC_QUALIFIER tvec2<half> & tvec2<half>::operator=
 	(
 		tvec2<half> const & v
 	)
@@ -372,8 +372,8 @@ namespace detail
 
 	GLM_FUNC_QUALIFIER tvec3<half>::tvec3
 	(
-		half const & s0, 
-		half const & s1, 
+		half const & s0,
+		half const & s1,
 		half const & s2
 	) :
 		x(s0),
@@ -396,7 +396,7 @@ namespace detail
 	//////////////////////////////////////
 	// Convertion scalar constructors
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec3<half>::tvec3
 	(
 		U const & x
@@ -406,11 +406,11 @@ namespace detail
 		z(half(x))
 	{}
 
-	template <typename A, typename B, typename C> 
+	template <typename A, typename B, typename C>
 	GLM_FUNC_QUALIFIER tvec3<half>::tvec3
 	(
-		A const & x, 
-		B const & y, 
+		A const & x,
+		B const & y,
 		C const & z
 	) :
 		x(half(x)),
@@ -421,10 +421,10 @@ namespace detail
 	//////////////////////////////////////
 	// Convertion vector constructors
 
-	template <typename A, typename B> 
+	template <typename A, typename B>
 	GLM_FUNC_QUALIFIER tvec3<half>::tvec3
 	(
-		tvec2<A> const & v, 
+		tvec2<A> const & v,
 		B const & s
 	) :
 		x(half(v.x)),
@@ -432,10 +432,10 @@ namespace detail
 		z(half(s))
 	{}
 
-	template <typename A, typename B> 
+	template <typename A, typename B>
 	GLM_FUNC_QUALIFIER tvec3<half>::tvec3
 	(
-		A const & s, 
+		A const & s,
 		tvec2<B> const & v
 	) :
 		x(half(s)),
@@ -443,7 +443,7 @@ namespace detail
 		z(half(v.y))
 	{}
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec3<half>::tvec3
 	(
 		tvec3<U> const & v
@@ -453,7 +453,7 @@ namespace detail
 		z(half(v.z))
 	{}
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec3<half>::tvec3
 	(
 		tvec4<U> const & v
@@ -466,7 +466,7 @@ namespace detail
 	//////////////////////////////////////
 	// Unary arithmetic operators
 
-	GLM_FUNC_QUALIFIER tvec3<half> & tvec3<half>::operator= 
+	GLM_FUNC_QUALIFIER tvec3<half> & tvec3<half>::operator=
 	(
 		tvec3<half> const & v
 	)
@@ -633,7 +633,7 @@ namespace detail
 	{
 		return 4;
 	}
-	
+
 	//////////////////////////////////////
 	// Accesses
 
@@ -692,9 +692,9 @@ namespace detail
 
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		half const & s1, 
-		half const & s2, 
-		half const & s3, 
+		half const & s1,
+		half const & s2,
+		half const & s3,
 		half const & s4
 	) :
 		x(s1),
@@ -719,7 +719,7 @@ namespace detail
 	//////////////////////////////////////
 	// Convertion scalar constructors
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
 		U const & x
@@ -730,12 +730,12 @@ namespace detail
 		w(half(x))
 	{}
 
-	template <typename A, typename B, typename C, typename D> 
+	template <typename A, typename B, typename C, typename D>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		A const & x, 
-		B const & y, 
-		C const & z, 
+		A const & x,
+		B const & y,
+		C const & z,
 		D const & w
 	) :
 		x(half(x)),
@@ -747,11 +747,11 @@ namespace detail
 	//////////////////////////////////////
 	// Convertion vector constructors
 
-	template <typename A, typename B, typename C> 
+	template <typename A, typename B, typename C>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		tvec2<A> const & v, 
-		B const & s1, 
+		tvec2<A> const & v,
+		B const & s1,
 		C const & s2
 	) :
 		x(half(v.x)),
@@ -760,11 +760,11 @@ namespace detail
 		w(half(s2))
 	{}
 
-	template <typename A, typename B, typename C> 
+	template <typename A, typename B, typename C>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		A const & s1, 
-		tvec2<B> const & v, 
+		A const & s1,
+		tvec2<B> const & v,
 		C const & s2
 	) :
 		x(half(s1)),
@@ -773,11 +773,11 @@ namespace detail
 		w(half(s2))
 	{}
 
-	template <typename A, typename B, typename C> 
+	template <typename A, typename B, typename C>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		A const & s1, 
-		B const & s2, 
+		A const & s1,
+		B const & s2,
 		tvec2<C> const & v
 	) :
 		x(half(s1)),
@@ -786,10 +786,10 @@ namespace detail
 		w(half(v.y))
 	{}
 
-	template <typename A, typename B> 
+	template <typename A, typename B>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		tvec3<A> const & v, 
+		tvec3<A> const & v,
 		B const & s
 	) :
 		x(half(v.x)),
@@ -798,10 +798,10 @@ namespace detail
 		w(half(s))
 	{}
 
-	template <typename A, typename B> 
+	template <typename A, typename B>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		A const & s, 
+		A const & s,
 		tvec3<B> const & v
 	) :
 		x(half(s)),
@@ -810,10 +810,10 @@ namespace detail
 		w(half(v.z))
 	{}
 
-	template <typename A, typename B> 
+	template <typename A, typename B>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
-		tvec2<A> const & v1, 
+		tvec2<A> const & v1,
 		tvec2<B> const & v2
 	) :
 		x(half(v1.x)),
@@ -822,7 +822,7 @@ namespace detail
 		w(half(v2.y))
 	{}
 
-	template <typename U> 
+	template <typename U>
 	GLM_FUNC_QUALIFIER tvec4<half>::tvec4
 	(
 		tvec4<U> const & v
@@ -836,7 +836,7 @@ namespace detail
 	//////////////////////////////////////
 	// Unary arithmetic operators
 
-	GLM_FUNC_QUALIFIER tvec4<half>& tvec4<half>::operator= 
+	GLM_FUNC_QUALIFIER tvec4<half>& tvec4<half>::operator=
 	(
 		tvec4<half> const & v
 	)

@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,9 +30,9 @@
 ///
 /// @defgroup gtx_bit GLM_GTX_bit: Extended bitwise operations
 /// @ingroup gtx
-/// 
+///
 /// @brief Allow to perform bit operations on integer values
-/// 
+///
 /// <glm/gtx/bit.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -62,48 +62,48 @@ namespace glm
 	/// @see gtx_bit
 	template <typename genIUType, typename sizeType>
 	genIUType extractField(
-		genIUType const & v, 
-		sizeType const & first, 
+		genIUType const & v,
+		sizeType const & first,
 		sizeType const & count);
 
 	//! Find the lowest bit set to 1 in a integer variable.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	int lowestBit(genType const & value);
 
 	//! Find the highest bit set to 1 in a integer variable.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	int highestBit(genType const & value);
 
-	//! Find the highest bit set to 1 in a integer variable and return its value. 
+	//! Find the highest bit set to 1 in a integer variable and return its value.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	genType highestBitValue(genType const & value);
 
-	//! Return true if the value is a power of two number. 
+	//! Return true if the value is a power of two number.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	bool isPowerOfTwo(genType const & value);
 
 	//! Return the power of two number which value is just higher the input value.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	genType powerOfTwoAbove(genType const & value);
 
-	//! Return the power of two number which value is just lower the input value. 
+	//! Return the power of two number which value is just lower the input value.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	genType powerOfTwoBelow(genType const & value);
 
-	//! Return the power of two number which value is the closet to the input value. 
+	//! Return the power of two number which value is the closet to the input value.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	genType powerOfTwoNearest(genType const & value);
 
-	//! Revert all bits of any integer based type. 
+	//! Revert all bits of any integer based type.
 	/// @see gtx_bit
-	template <typename genType> 
+	template <typename genType>
 	genType bitRevert(genType const & value);
 
 	//! Rotate all bits to the right.
@@ -121,7 +121,7 @@ namespace glm
 	template <typename genIUType>
 	genIUType fillBitfieldWithOne(
 		genIUType const & Value,
-		int const & FromBit, 
+		int const & FromBit,
 		int const & ToBit);
 
 	//! Set to 0 a range of bits.
@@ -129,7 +129,7 @@ namespace glm
 	template <typename genIUType>
 	genIUType fillBitfieldWithZero(
 		genIUType const & Value,
-		int const & FromBit, 
+		int const & FromBit,
 		int const & ToBit);
 
 	/// @}

@@ -24,7 +24,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat2x2<T> mul
 	(
-		detail::tmat2x2<T> const & a, 
+		detail::tmat2x2<T> const & a,
 		detail::tmat2x2<T> const & b
 	)
 	{
@@ -34,7 +34,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat3x3<T> mul
 	(
-		detail::tmat3x3<T> const & a, 
+		detail::tmat3x3<T> const & a,
 		detail::tmat3x3<T> const & b
 	)
 	{
@@ -44,7 +44,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tmat4x4<T> mul
 	(
-		detail::tmat4x4<T> const & a, 
+		detail::tmat4x4<T> const & a,
 		detail::tmat4x4<T> const & b
 	)
 	{
@@ -54,7 +54,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec2<T> mul
 	(
-		detail::tmat2x2<T> const & m, 
+		detail::tmat2x2<T> const & m,
 		detail::tvec2<T> const & v
 	)
 	{
@@ -64,7 +64,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec3<T> mul
 	(
-		detail::tmat3x3<T> const & m, 
+		detail::tmat3x3<T> const & m,
 		detail::tvec3<T> const & v)
 	{
 		return m * v;
@@ -73,7 +73,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec4<T> mul
 	(
-		detail::tmat4x4<T> const & m, 
+		detail::tmat4x4<T> const & m,
 		detail::tvec4<T> const & v
 	)
 	{
@@ -83,7 +83,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec2<T> mul
 	(
-		detail::tvec2<T> const & v, 
+		detail::tvec2<T> const & v,
 		detail::tmat2x2<T> const & m
 	)
 	{
@@ -93,7 +93,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec3<T> mul
 	(
-		detail::tvec3<T> const & v, 
+		detail::tvec3<T> const & v,
 		detail::tmat3x3<T> const & m
 	)
 	{
@@ -103,7 +103,7 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_QUALIFIER detail::tvec4<T> mul
 	(
-		detail::tvec4<T> const & v, 
+		detail::tvec4<T> const & v,
 		detail::tmat4x4<T> const & m
 	)
 	{
@@ -116,7 +116,7 @@ namespace glm
 		return a / b;
 	}
 
-	template <typename genTypeT, typename genTypeU, typename genTypeV> 
+	template <typename genTypeT, typename genTypeU, typename genTypeV>
 	GLM_FUNC_QUALIFIER genTypeT mad(genTypeT const & a, genTypeU const & b, genTypeV const & c)
 	{
 		return a * b + c;

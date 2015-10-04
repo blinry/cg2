@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,7 +34,7 @@ namespace glm
     template <typename genType>
     GLM_FUNC_QUALIFIER genType pow
 	(
-		genType const & x, 
+		genType const & x,
 		genType const & y
 	)
     {
@@ -111,7 +111,7 @@ namespace _detail
 			return T(::std::log(Value)) / T(0.69314718055994530941723212145818);
 		}
 	};
-    
+
 }//namespace _detail
 
     // log2, ln2 = 0.69314718055994530941723212145818f

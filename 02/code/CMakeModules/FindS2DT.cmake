@@ -1,6 +1,6 @@
-# 
+#
 # This module finds if S2DT is available and determines where the
-# include files and libraries are. 
+# include files and libraries are.
 ##
 # There are two ways this script tries to find a configured S2DT build.
 # (1) the 'cmake' way trying to find S2DTConfig.cmake script seeting S2DT_CONFIG_CMAKE_SCRIPT
@@ -14,11 +14,11 @@
 # S2DT_FOUND            = system has S2DT lib
 ##
 # S2DT_LIBRARIES        = full path to the libraries
-#                         on Unix/Linux with additional linker flags 
+#                         on Unix/Linux with additional linker flags
 ##
 # S2DT_CXX_FLAGS        = compiler flags for S2DT
 ##
-# S2DT_INCLUDE_DIR      = where to find headers 
+# S2DT_INCLUDE_DIR      = where to find headers
 ##
 # S2DT_LINK_DIRECTORIES = link directories, useful for rpath on Unix
 # S2DT_EXE_LINKER_FLAGS = linker flags (may contain rpath on Unix)
@@ -27,7 +27,7 @@
 ##
 # -------------------------------------------------------
 ##
-# typical USAGE in user projects CMakeLists.txt: 
+# typical USAGE in user projects CMakeLists.txt:
 #   FIND_PACKAGE(S2DT)
 #   IF (S2DT_FOUND)
 #     INCLUDE(${S2DT_USE_FILE})
@@ -44,9 +44,9 @@
 # This should work on Unix and Windows.
 ##
 
-# This is the workaround for FIND_PACKAGE which couldn't be used here 
-# because CMAKE_MODULE_PATH has higher priority than S2DTConfig.cmake path. 
-FIND_FILE(S2DT_CONFIG_CMAKE_SCRIPT S2DTConfig.cmake 
+# This is the workaround for FIND_PACKAGE which couldn't be used here
+# because CMAKE_MODULE_PATH has higher priority than S2DTConfig.cmake path.
+FIND_FILE(S2DT_CONFIG_CMAKE_SCRIPT S2DTConfig.cmake
   ${S2DT_DIR}
   $ENV{S2DT_DIR}
   "${CMAKE_CURRENT_BINARY_DIR}/../Scan2DTracking"

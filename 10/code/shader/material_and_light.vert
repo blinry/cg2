@@ -33,7 +33,7 @@ void main() {
   // TODO: compute the vectors from the current vertex towards the camera and towards the light source //
   // compute per vertex camera direction //
   vec3 vertexInCamSpace = (modelview * vec4(vertex, 1.0)).xyz;
-  
+
   // vector from vertex to camera and from vertex to light //
   eyeDir = -vertexInCamSpace;
   // vertex to light for every light source! //

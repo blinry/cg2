@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -753,9 +753,9 @@ GLM_FUNC_QUALIFIER void sse_inverse_ps(__m128 const in[4], __m128 out[4])
 	__m128 Row1 = _mm_shuffle_ps(Inv2, Inv3, _MM_SHUFFLE(0, 0, 0, 0));
 	__m128 Row2 = _mm_shuffle_ps(Row0, Row1, _MM_SHUFFLE(2, 0, 2, 0));
 
-	//	valType Determinant = m[0][0] * Inverse[0][0] 
-	//						+ m[0][1] * Inverse[1][0] 
-	//						+ m[0][2] * Inverse[2][0] 
+	//	valType Determinant = m[0][0] * Inverse[0][0]
+	//						+ m[0][1] * Inverse[1][0]
+	//						+ m[0][2] * Inverse[2][0]
 	//						+ m[0][3] * Inverse[3][0];
 	__m128 Det0 = sse_dot_ps(in[0], Row2);
 	__m128 Rcp0 = _mm_div_ps(one, Det0);
@@ -974,9 +974,9 @@ GLM_FUNC_QUALIFIER void sse_inverse_fast_ps(__m128 const in[4], __m128 out[4])
 	__m128 Row1 = _mm_shuffle_ps(Inv2, Inv3, _MM_SHUFFLE(0, 0, 0, 0));
 	__m128 Row2 = _mm_shuffle_ps(Row0, Row1, _MM_SHUFFLE(2, 0, 2, 0));
 
-	//	valType Determinant = m[0][0] * Inverse[0][0] 
-	//						+ m[0][1] * Inverse[1][0] 
-	//						+ m[0][2] * Inverse[2][0] 
+	//	valType Determinant = m[0][0] * Inverse[0][0]
+	//						+ m[0][1] * Inverse[1][0]
+	//						+ m[0][2] * Inverse[2][0]
 	//						+ m[0][3] * Inverse[3][0];
 	__m128 Det0 = sse_dot_ps(in[0], Row2);
 	__m128 Rcp0 = _mm_rcp_ps(Det0);
@@ -1006,7 +1006,7 @@ GLM_FUNC_QUALIFIER void sse_rotate_ps(__m128 const in[4], float Angle, float con
 	// detail::tvec3<valType> temp = (valType(1) - c) * axis;
 	__m128 Temp0 = _mm_sub_ps(one, CosA);
 	__m128 Temp1 = _mm_mul_ps(Temp0, AxisC);
-	
+
 	//Rotate[0][0] = c + temp[0] * axis[0];
 	//Rotate[0][1] = 0 + temp[0] * axis[1] + s * axis[2];
 	//Rotate[0][2] = 0 + temp[0] * axis[2] - s * axis[1];

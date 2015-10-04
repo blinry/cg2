@@ -12,10 +12,10 @@ namespace glm{
 template <typename genType>
 GLM_FUNC_QUALIFIER genType catmullRom
 (
-	genType const & v1, 
-	genType const & v2, 
-	genType const & v3, 
-	genType const & v4, 
+	genType const & v1,
+	genType const & v2,
+	genType const & v3,
+	genType const & v4,
 	typename genType::value_type const & s
 )
 {
@@ -35,10 +35,10 @@ GLM_FUNC_QUALIFIER genType catmullRom
 template <typename genType>
 GLM_FUNC_QUALIFIER genType hermite
 (
-	genType const & v1, 
-	genType const & t1, 
-	genType const & v2, 
-	genType const & t2, 
+	genType const & v1,
+	genType const & t1,
+	genType const & v2,
+	genType const & t2,
 	typename genType::value_type const & s
 )
 {
@@ -57,10 +57,10 @@ GLM_FUNC_QUALIFIER genType hermite
 template <typename genType>
 GLM_FUNC_QUALIFIER genType cubic
 (
-	genType const & v1, 
-	genType const & v2, 
-	genType const & v3, 
-	genType const & v4, 
+	genType const & v1,
+	genType const & v2,
+	genType const & v3,
+	genType const & v4,
 	typename genType::value_type const & s
 )
 {

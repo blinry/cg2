@@ -5,7 +5,7 @@ CameraController::CameraController(float theta, float phi, float dist) {
 }
 
 CameraController::~CameraController() {}
-    
+
 void CameraController::updateMousePos(int x, int y) {
   switch (mState) {
     case LEFT_BTN : {
@@ -52,7 +52,7 @@ void CameraController::move(Motion motion) {
     // move camera along or perpendicular to its viewing direction according to motion state //
     // motion state is one of: (MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT)
     case MOVE_FORWARD : {
-      
+
       dir = -1;
     }
     case MOVE_BACKWARD : {

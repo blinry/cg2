@@ -1,10 +1,10 @@
-# 
+#
 # This convenience include finds if GLEW library is installed
-# and set the appropriate libs, incdirs, flags etc. 
+# and set the appropriate libs, incdirs, flags etc.
 ##
 # -----------------------------------------------------
-# USAGE: 
-#      just include Use_GLEW.cmake 
+# USAGE:
+#      just include Use_GLEW.cmake
 #      in your projects CMakeLists.txt
 # INCLUDE( ${CMAKE_ROOT}/Modules/Use_GLEW.cmake)
 ##
@@ -29,7 +29,7 @@ IF(GLEW_FOUND)
     ADD_DEFINITIONS(${GLEW_DEFINITIONS})
    # MESSAGE("Use_GLEW.cmake: GLEW_DEFINITIONS=${GLEW_DEFINITIONS}")
   ENDIF(GLEW_DEFINITIONS)
-	
+
 ELSE(GLEW_FOUND)
   MESSAGE(SEND_ERROR "GLEW not found by Use_GLEW.cmake")
 ENDIF(GLEW_FOUND)

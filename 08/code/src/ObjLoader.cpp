@@ -29,7 +29,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     return meshObj;
   }
   // ID is not known yet -> try to load mesh from file //
-  
+
   // import mesh from given file //
   // setup variables used for parsing //
   std::string key;
@@ -42,7 +42,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
   std::vector<glm::vec3> localVertexNormal;
   std::vector<glm::vec2> localVertexTexcoord;
   std::vector<std::vector<glm::vec3> > localFace;
-  
+
   // setup tools for parsing a line correctly //
   std::string line;
   std::stringstream sstr;
@@ -92,7 +92,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
 	int vi[4];
 	int ni[4];
 	int ti[4];
-  
+
         sstr.peek();
         while (sstr.good() && vCount < 4) {
           sstr >> vi[vCount];
@@ -118,7 +118,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
             ++vCount;
           }
         }
-        
+
         // insert index data into face //
         if (vCount < 3) {
           std::cout << "(ObjLoader::loadObjFile) - WARNING: Malformed face in line " << lineNumber << std::endl;
@@ -147,9 +147,9 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
       ++lineNumber;
     }
     file.close();
-    
+
     std::cout << "Imported " << localFace.size() << " faces from \"" << fileName << "\"" << std::endl;
-    
+
     // creates an indexed vertex for every triplet of vertexId, normalId and texCoordId //
     MeshData meshData;
     std::map<std::string, unsigned int> vertexIdMap;
@@ -192,18 +192,18 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
         }
       }
     }
-    
+
     // #INFO# compute tangent space //
     computeTangentSpace(meshData);
-    
+
     // create new MeshObj and set imported geoemtry data //
     meshObj = new MeshObj();
     // assign imported data to this new MeshObj //
     meshObj->setData(meshData);
-    
+
     // insert MeshObj into map //
     mMeshMap.insert(std::make_pair(ID, meshObj));
-    
+
     // return newly created MeshObj //
     return meshObj;
   } else {
@@ -287,7 +287,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
             std::cout << "t0: " << t0.x << " " << t0.y <<  std::endl;
             std::cout << "t1: " << t1.x << " " << t1.y <<  std::endl;
             std::cout << "t2: " << t0.x << " " << t0.y <<  std::endl;
-            
+
             std::cout << "e1: " << e1.x << " " << e1.y << " " << e1.z << std::endl;
             std::cout << "e2: " << e2.x << " " << e2.y << " " << e2.z << std::endl;
 
@@ -299,7 +299,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
             std::cout << "firstmat: " << std::endl << firstmat[0][0] << " " << firstmat[0][1] << std::endl << firstmat[1][0] << " " << firstmat[1][1] << std::endl;
             std::cout << "glm::inverse(firstmat): " << std::endl << glm::inverse(firstmat)[0][0] << " " << glm::inverse(firstmat)[0][1] << std::endl << glm::inverse(firstmat)[1][0] << " " << glm::inverse(firstmat)[1][1] << std::endl;
             std::cout << "secondmat: " << std::endl << secondmat[0][0] << " " << secondmat[0][1] << " " << secondmat[0][2] << std::endl << secondmat[1][0] << " " << secondmat[1][1] << " " << secondmat[1][2] << std::endl;
-            
+
             std::cout << "result: " << std::endl << result[0][0] << " " << result[0][1] << " " << result[0][2] << std::endl << result[1][0] << " " << result[1][1] << " " << result[1][2] << std::endl;
 
             std::cout << "t: " << t.x << " " << t.y << " " << t.z << std::endl;
@@ -310,11 +310,11 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
     for (int vertexnr = 0; vertexnr < meshData.indices.size(); vertexnr++) {
         tangents[vertexnr] = glm::normalize(tangents[vertexnr]);
     }
-  
+
   // TODO: iterator over faces (given by index triplets) and calculate tangents for each incident vertex //
   // - this will accumulate tangents for vertices shared by different faces
   // - do not compute the binormal just yet, this will be done, when the final value of the vertex tangent has been computed (see below)
-  
+
   // TODO: iterate over previously computed vertex tangents //
   // - use gram-schmidt approach to reorthogonalize tangent to normal
   // - compute the still missing binormal
@@ -330,7 +330,7 @@ void ObjLoader::computeTangentSpace(MeshData &meshData) {
                 meshData.vertex_normal[index*3+1],
                 meshData.vertex_normal[index*3+2]);
         tangents[vertexnr] = tangents[vertexnr] - glm::dot(normal,tangents[vertexnr])*normal;
-        binormals[vertexnr] = glm::cross(tangents[vertexnr],normal); 
+        binormals[vertexnr] = glm::cross(tangents[vertexnr],normal);
 
         meshData.vertex_tangent[index*3] = tangents[vertexnr][0];
         meshData.vertex_tangent[index*3+1] = tangents[vertexnr][1];

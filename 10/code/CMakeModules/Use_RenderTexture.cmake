@@ -1,10 +1,10 @@
-# 
+#
 # This convenience include finds if RENDERTEXTURE library is installed
-# and set the appropriate libs, incdirs, flags etc. 
+# and set the appropriate libs, incdirs, flags etc.
 ##
 # -----------------------------------------------------
-# USAGE: 
-#      just include Use_RENDERTEXTURE.cmake 
+# USAGE:
+#      just include Use_RENDERTEXTURE.cmake
 #      in your projects CMakeLists.txt
 # INCLUDE( ${CMAKE_MODULE_PATH}/Use_RenderTexture.cmake)
 ##
@@ -18,7 +18,7 @@ IF(RENDERTEXTURE_FOUND)
   IF(RENDERTEXTURE_INCLUDE_DIR)
     INCLUDE_DIRECTORIES(${RENDERTEXTURE_INCLUDE_DIR})
   ENDIF(RENDERTEXTURE_INCLUDE_DIR)
-  
+
   IF(RENDERTEXTURE_LINK_DIRECTORIES)
     LINK_DIRECTORIES(${RENDERTEXTURE_LINK_DIRECTORIES})
   ENDIF(RENDERTEXTURE_LINK_DIRECTORIES)

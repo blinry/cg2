@@ -9,13 +9,13 @@
 
 namespace glm
 {
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER uint8 u8channel_cast(T a)
 	{
 		return static_cast<uint8>(a * T(255));
 	}
 
-	template <typename T> 
+	template <typename T>
 	GLM_FUNC_QUALIFIER uint16 u16channel_cast(T a)
 	{
 		return static_cast<uint16>(a * T(65535));

@@ -46,7 +46,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     return meshObj;
   }
   // ID is not known yet -> try to load mesh from file //
-  
+
   // import mesh from given file //
   // setup variables used for parsing //
   std::string key;
@@ -59,7 +59,7 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
   std::vector<glm::vec3> localVertexNormal;
   std::vector<glm::vec2> localVertexTexcoord;
   std::vector<std::vector<glm::vec3> > localFace;
-  
+
   // setup tools for parsing a line correctly //
   std::string line;
   std::stringstream sstr;
@@ -84,13 +84,13 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
         // read in vertex normal //
 	sstr >> x >> y >> z;
 	localVertexNormal.push_back(glm::vec3(x, y, z));
-        
+
       }
       if (!key.compare("vt")) {
         // read in vertex texcoord //
 	sstr >> x >> y;
 	localVertexTexcoord.push_back(glm::vec2(x, y));
-        
+
       }
       // implement parsing of a face definition //
       // note: faces using normals and tex-coords are defines as "f vi0/ti0/ni0 ... viN/tiN/niN"
@@ -139,14 +139,14 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
               face2.push_back(glm::vec3(ni0-1, ni2-1, ni3-1));
               localFace.push_back(face2);
           }
-        
+
       }
       ++lineNumber;
     }
     file.close();
-    
+
     std::cout << "Imported " << localFace.size() << " faces from \"" << fileName << "\"" << std::endl;
-    
+
     //  create an indexed vertex for every triplet of vertexId, normalId and texCoordId //
     //  every face is able to use a different set of vertex normals and texture coordinates
     //  when using a single vertex for multiple faces, however, this conflicts multiple normals
@@ -165,15 +165,15 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     MeshData meshData;
 
     std::map<glm::vec3, int, Vec3Comparator> used;
-    
+
     unsigned int index = 0;
 
-    for(unsigned int i=0; i<localFace.size(); i++) 
+    for(unsigned int i=0; i<localFace.size(); i++)
     {
-        for (int j=0; j<=2; j++) 
+        for (int j=0; j<=2; j++)
 	{
             glm::vec3 vertex_triple = glm::vec3(localFace[i][0][j], localFace[i][1][j], localFace[i][2][j]);
-            if (used.find(vertex_triple) == used.end()) 
+            if (used.find(vertex_triple) == used.end())
 	    {
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][0]);
                 meshData.vertex_position.push_back(localVertexPosition[vertex_triple[0]][1]);
@@ -195,15 +195,15 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
             meshData.indices.push_back(used[vertex_triple]);
         }
     }
-    
+
     // create new MeshObj and set imported geoemtry data //
     meshObj = new MeshObj();
     // assign imported data to this new MeshObj //
     meshObj->setData(meshData);
-    
+
     // insert MeshObj into map //
     mMeshMap.insert(std::make_pair(ID, meshObj));
-    
+
     // return newly created MeshObj //
     return meshObj;
   } else {

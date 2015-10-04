@@ -34,7 +34,7 @@ void Timer::start() {
 
 void Timer::stop() {
   if(isRunning()) {
-    gettimeofday(&mEnd, NULL); 
+    gettimeofday(&mEnd, NULL);
     mRunning = false;
   }
 }
@@ -47,7 +47,7 @@ void Timer::reset() {
   mResetted = true;
   mBegin.tv_sec = 0;
   mBegin.tv_usec = 0;
-  gettimeofday(&mEnd, NULL); 
+  gettimeofday(&mEnd, NULL);
   if (wasRunning) {
     start();
   }

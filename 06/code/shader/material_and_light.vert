@@ -32,12 +32,12 @@ void main() {
   // transform vertex position and the vertex normal using the appropriate matrices //
   vertexNormal = (normalMatrix * vec4(vertex_normal, 0)).xyz;
   gl_Position = projection * modelview * vec4(vertex, 1.0);
-  
+
   // compute per vertex camera direction //
   vec3 vertexInCamSpace = (modelview * vec4(vertex, 1.0)).xyz;
   // vector from vertex to camera and from vertex to light //
   eyeDir = -vertexInCamSpace;
-  
+
   // TODO: compute the vectors from the current vertex towards every light source //
   for(int i = 0; i < activeLightSources; i++)
 	  lightVec[i] = ls[i].position - vertexInCamSpace;

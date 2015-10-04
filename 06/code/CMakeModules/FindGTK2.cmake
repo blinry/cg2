@@ -80,7 +80,7 @@ IF(UNIX)
   #
 
   FIND_LIBRARY( GTK_gtk_LIBRARY
-    NAMES  gtk-x11-2.0 
+    NAMES  gtk-x11-2.0
     PATHS /usr/lib
           /usr/local/lib
           /usr/openwin/lib
@@ -115,14 +115,14 @@ IF(UNIX)
            /opt/gnome/lib
   )
 
-  FIND_LIBRARY( GTK_Xi_LIBRARY 
-    NAMES Xi 
-    PATHS /usr/lib 
-    /usr/local/lib 
-    /usr/openwin/lib 
-    /usr/X11R6/lib 
-    /opt/gnome/lib 
-    ) 
+  FIND_LIBRARY( GTK_Xi_LIBRARY
+    NAMES Xi
+    PATHS /usr/lib
+    /usr/local/lib
+    /usr/openwin/lib
+    /usr/X11R6/lib
+    /opt/gnome/lib
+    )
 
   FIND_LIBRARY( GTK_gthread_LIBRARY
     NAMES  gthread-2.0
@@ -135,7 +135,7 @@ IF(UNIX)
 
   FIND_LIBRARY( GTK_gobject_LIBRARY
     NAMES  gobject-2.0
-    PATHS 
+    PATHS
            /opt/gnome/lib
   )
 
@@ -149,11 +149,11 @@ IF(UNIX)
       IF(GTK_cairo_INCLUDE_PATH)
 	# Assume that if gtk and glib were found, the other
 	# supporting libraries have also been found.
-	
+
 	SET( GTK_FOUND "YES" )
 	SET( GTK_INCLUDE_DIR  ${GTK_gtk_INCLUDE_PATH}
           ${GTK_glibconfig_INCLUDE_PATH}
-          ${GTK_glib_INCLUDE_PATH} 
+          ${GTK_glib_INCLUDE_PATH}
 	  ${GTK_pango_INCLUDE_PATH}
 	  ${GTK_gdkconfig_INCLUDE_PATH}
 	  ${GTK_atk_INCLUDE_PATH}
@@ -162,7 +162,7 @@ IF(UNIX)
           ${GTK_gdk_LIBRARY}
           ${GTK_glib_LIBRARY} )
 	#			${GTK_gobject_LIBRARY})
-    
+
       IF(GTK_gmodule_LIBRARY)
 	SET(GTK_LIBRARIES ${GTK_LIBRARIES} ${GTK_gmodule_LIBRARY})
       ENDIF(GTK_gmodule_LIBRARY)
@@ -185,9 +185,9 @@ IF(UNIX)
   ELSE(GTK_gtk_LIBRARY)
        MESSAGE("Can not find gtk lib")
   ENDIF(GTK_gtk_LIBRARY)
-  ELSE(GTK_glib_INCLUDE_PATH) 
+  ELSE(GTK_glib_INCLUDE_PATH)
    MESSAGE("Can not find glib includes")
-  ENDIF(GTK_glib_INCLUDE_PATH) 
+  ENDIF(GTK_glib_INCLUDE_PATH)
   ELSE(GTK_glibconfig_INCLUDE_PATH)
    MESSAGE("Can not find glibconfig")
   ENDIF(GTK_glibconfig_INCLUDE_PATH)
@@ -210,7 +210,7 @@ IF(UNIX)
     GTK_atk_INCLUDE_PATH
     GTK_gdkconfig_INCLUDE_PATH
 #    GTK_gobject_LIBRARY
-    GTK_pango_INCLUDE_PATH 
+    GTK_pango_INCLUDE_PATH
   )
 
 ELSE(UNIX)

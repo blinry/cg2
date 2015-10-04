@@ -29,12 +29,12 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
     return meshObj;
   }
   // ID is not known yet -> try to load mesh from file //
-  
+
   // import mesh from given file //
 
   // setup temporary data container //
   MeshData meshData;
-  
+
   // Öffne die angeforderte Datei
   std::fstream file ;
   file.open(fileName.c_str() , std::fstream::in );
@@ -69,16 +69,16 @@ MeshObj* ObjLoader::loadObjFile(std::string fileName, std::string ID) {
 		meshData.indices.push_back(z);
 	  }
   }
-  
+
   // setup variables used for parsing //
-    
+
   // create new MeshObj and set imported geoemtry data //
   meshObj = new MeshObj();
   // TODO: assign imported data to this new MeshObj //
   meshObj->setData(meshData);
   // insert MeshObj into map //
   mMeshMap.insert(std::make_pair(ID, meshObj));
-  
+
   // return newly created MeshObj //
   return meshObj;
 }

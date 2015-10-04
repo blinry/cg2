@@ -12,10 +12,10 @@
 
 namespace glm
 {
-	template<typename T> 
+	template<typename T>
 	GLM_FUNC_QUALIFIER bool isNull
 	(
-		detail::tmat2x2<T> const & m, 
+		detail::tmat2x2<T> const & m,
 		T const & epsilon)
 	{
 		bool result = true;
@@ -24,10 +24,10 @@ namespace glm
 		return result;
 	}
 
-	template<typename T> 
+	template<typename T>
 	GLM_FUNC_QUALIFIER bool isNull
 	(
-		detail::tmat3x3<T> const & m, 
+		detail::tmat3x3<T> const & m,
 		T const & epsilon
 	)
 	{
@@ -37,10 +37,10 @@ namespace glm
 		return result;
 	}
 
-	template<typename T> 
+	template<typename T>
 	GLM_FUNC_QUALIFIER bool isNull
 	(
-		detail::tmat4x4<T> const & m, 
+		detail::tmat4x4<T> const & m,
 		T const & epsilon
 	)
 	{
@@ -50,10 +50,10 @@ namespace glm
 		return result;
 	}
 
-	template<typename genType> 
+	template<typename genType>
 	GLM_FUNC_QUALIFIER bool isIdentity
 	(
-		genType const & m, 
+		genType const & m,
 		typename genType::value_type const & epsilon
 	)
 	{
@@ -70,10 +70,10 @@ namespace glm
 		return result;
 	}
 
-	template<typename genType>  
+	template<typename genType>
 	GLM_FUNC_QUALIFIER bool isNormalized
 	(
-		detail::tmat2x2<genType> const & m, 
+		detail::tmat2x2<genType> const & m,
 		genType const & epsilon
 	)
 	{
@@ -90,10 +90,10 @@ namespace glm
 		return result;
 	}
 
-	template<typename genType>  
+	template<typename genType>
 	GLM_FUNC_QUALIFIER bool isNormalized
 	(
-		detail::tmat3x3<genType> const & m, 
+		detail::tmat3x3<genType> const & m,
 		genType const & epsilon
 	)
 	{
@@ -110,10 +110,10 @@ namespace glm
 		return result;
 	}
 
-	template<typename genType>  
+	template<typename genType>
 	GLM_FUNC_QUALIFIER bool isNormalized
 	(
-		detail::tmat4x4<genType> const & m, 
+		detail::tmat4x4<genType> const & m,
 		genType const & epsilon
 	)
 	{
@@ -130,10 +130,10 @@ namespace glm
 		return result;
 	}
 
-	template<typename genType, template <typename> class matType>  
+	template<typename genType, template <typename> class matType>
 	GLM_FUNC_QUALIFIER bool isOrthogonal
 	(
-		matType<genType> const & m, 
+		matType<genType> const & m,
 		genType const & epsilon
 	)
 	{

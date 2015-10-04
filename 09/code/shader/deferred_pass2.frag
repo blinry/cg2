@@ -42,16 +42,16 @@ void main() {
   //discard pixels not covered by any geometry
   if(length(def_vertex) < 0.000001)
 	  discard;
-  
+
   // TODO?: get texture coordinates //
   vec2 textureCoord = texture2D(def_texCoordMap, io_texCoord).xy;
-  
+
   // TODO?: eye vector //
   vec3 E = normalize(-def_vertex);
-  
+
   // TODO?: normal in camera space normal //
   vec3 N = normalize(texture2D(def_normalMap, io_texCoord).xyz);
-  
+
   // light computation //
   int lightCount = max(min(usedLightCount, maxLightCount), 0);
   // compute the ambient, diffuse and specular color terms //
@@ -71,10 +71,10 @@ void main() {
   ambientTerm *= material.ambient_color;
   diffuseTerm *= material.diffuse_color;
   specularTerm *= material.specular_color;
-  
+
   // TODO?: get diffuse texture color //
   vec3 diffuse = texture2D(diffuseTexture, textureCoord).xyz;
-  
+
   // TODO?: assign the final color to the fragment output variable //
   color = vec4(diffuse, 1) * vec4(ambientTerm + diffuseTerm + specularTerm, 1);
 }

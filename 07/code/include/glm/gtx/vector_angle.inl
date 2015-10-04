@@ -9,10 +9,10 @@
 
 namespace glm
 {
-	template <typename genType> 
+	template <typename genType>
 	GLM_FUNC_QUALIFIER typename genType::value_type angle
 	(
-		genType const & x, 
+		genType const & x,
 		genType const & y
 	)
 	{
@@ -20,10 +20,10 @@ namespace glm
 	}
 
 	//! \todo epsilon is hard coded to 0.01
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER valType orientedAngle
 	(
-		detail::tvec2<valType> const & x, 
+		detail::tvec2<valType> const & x,
 		detail::tvec2<valType> const & y
 	)
 	{

@@ -9,11 +9,11 @@
 
 namespace glm
 {
-	template <typename valType> 
+	template <typename valType>
 	GLM_FUNC_QUALIFIER valType mixedProduct
 	(
-		detail::tvec3<valType> const & v1, 
-		detail::tvec3<valType> const & v2, 
+		detail::tvec3<valType> const & v1,
+		detail::tvec3<valType> const & v2,
 		detail::tvec3<valType> const & v3
 	)
 	{

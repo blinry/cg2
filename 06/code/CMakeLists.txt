@@ -1,5 +1,5 @@
 # Name the project you can choose any name you want here
-PROJECT(Exercise06) 
+PROJECT(Exercise06)
 
 # Check requirements
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)

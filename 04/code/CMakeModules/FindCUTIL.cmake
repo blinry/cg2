@@ -1,11 +1,11 @@
-# 
-# Try to find CUTIL header files  
-# Once run this will define: 
-# 
+#
+# Try to find CUTIL header files
+# Once run this will define:
+#
 # CUTIL_FOUND
 # CUTIL_INCLUDE_DIR
 #
-# Martin Eisemann 01/2010. 
+# Martin Eisemann 01/2010.
 # http://www.cg.cs.tu-bs.de/people/eisemann/index.html
 # --------------------------------
 
@@ -16,7 +16,7 @@ FIND_PATH(CUTIL_INCLUDE_DIR cutil.h
   $ENV{HOME}/NVIDIA_CUDA_SDK/C/common/inc
   $ENV{HOME}/lib64/CUDA_SDK/C/common/inc
   )
-#MESSAGE("DBG GLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}")  
+#MESSAGE("DBG GLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}")
 
 # --------------------------------
 

@@ -1,6 +1,6 @@
-# 
+#
 # This convenience include finds if MIP is installed
-# and set the appropriate libs, incdirs, flags etc. 
+# and set the appropriate libs, incdirs, flags etc.
 # @author Jan Woetzel <jw -at- mip.informatik.uni-kiel.de> (07/2003)
 ##
 # -----------------------------------------------------
@@ -8,7 +8,7 @@
 ##
 # This file is DEPRECATED because it's no good idea to add LINK_LIBRARIES to all childs globally.
 # And PackageConfig is supported, now. (JW)
-# 
+#
 # Please use:
 ##
 #   FIND_PACKAGE(MIP REQUIRED)
@@ -26,7 +26,7 @@
 
 
 MESSAGE(
-STATUS 
+STATUS
 "\t*** DEPRECATED WARNING: ${CMAKE_MODULE_PATH} Use_MIP.cmake is deprecated. ***\n"
 "\tPlease use FIND_PACKAGE(MIP) \n"
 "\tINCLUDE($MIP_USE_FILE}) \n"
@@ -46,7 +46,7 @@ IF(MIP_FOUND)
   ELSE (MIP_USE_FILE)
     MESSAGE(SEND_ERROR "MIP found but MIP_USE_FILE not found !!!")
   ENDIF (MIP_USE_FILE)
-  
+
 ELSE(MIP_FOUND)
   MESSAGE(SEND_ERROR "MIP not found by Use_MIP.cmake")
 ENDIF(MIP_FOUND)
